@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Generated version file
+src/torch_measure/_version.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Docs
+docs/_build/
+
+# Data / Models
+*.pt
+*.pth
+*.pkl
+*.parquet
+data/cache/
+
+# Jupyter
+.ipynb_checkpoints/
