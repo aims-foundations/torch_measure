@@ -11,19 +11,29 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
     "sphinx.ext.mathjax",
+    "sphinx_copybutton",
+    "myst_parser",
 ]
 
 templates_path = ["_templates"]
 exclude_patterns = []
 
-html_theme = "sphinx_rtd_theme"
+# -- Theme --
+html_theme = "furo"
 html_static_path = ["_static"]
+html_theme_options = {
+    "source_repository": "https://github.com/aims-foundation/torch_measure",
+    "source_branch": "main",
+    "source_directory": "docs/source/",
+}
 
+# -- Autodoc --
 autodoc_member_order = "bysource"
 autodoc_typehints = "description"
 napoleon_google_docstring = False
 napoleon_numpy_docstring = True
 
+# -- Intersphinx --
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "torch": ("https://pytorch.org/docs/stable", None),
@@ -31,3 +41,6 @@ intersphinx_mapping = {
 }
 
 autosummary_generate = True
+
+# -- Markdown support --
+source_suffix = {".rst": "restructuredtext", ".md": "markdown"}

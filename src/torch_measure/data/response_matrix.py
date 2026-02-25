@@ -21,6 +21,10 @@ class ResponseMatrix:
         Optional identifiers for subjects (rows).
     item_ids : list[str] | None
         Optional identifiers for items (columns).
+    item_contents : list[str] | None
+        Optional text content for each item (e.g., question text).
+    subject_contents : list[str] | None
+        Optional descriptive content for each subject (e.g., model description).
     """
 
     def __init__(
@@ -28,12 +32,16 @@ class ResponseMatrix:
         data: torch.Tensor,
         subject_ids: list[str] | None = None,
         item_ids: list[str] | None = None,
+        item_contents: list[str] | None = None,
+        subject_contents: list[str] | None = None,
     ) -> None:
         if data.ndim != 2:
             raise ValueError(f"Expected 2D tensor, got {data.ndim}D")
         self.data = data.float()
         self.subject_ids = subject_ids
         self.item_ids = item_ids
+        self.item_contents = item_contents
+        self.subject_contents = subject_contents
 
     @property
     def n_rows(self) -> int:
@@ -92,13 +100,15 @@ class ResponseMatrix:
             data=self.data.to(device),
             subject_ids=self.subject_ids,
             item_ids=self.item_ids,
+            item_contents=self.item_contents,
+            subject_contents=self.subject_contents,
         )
 
     def binarize(self, threshold: float = 0.5) -> ResponseMatrix:
         """Convert continuous responses to binary using a threshold."""
         binary = (self.data >= threshold).float()
         binary[~self.observed_mask] = float("nan")
-        return ResponseMatrix(binary, self.subject_ids, self.item_ids)
+        return ResponseMatrix(binary, self.subject_ids, self.item_ids, self.item_contents, self.subject_contents)
 
     @classmethod
     def from_numpy(cls, array, **kwargs) -> ResponseMatrix:

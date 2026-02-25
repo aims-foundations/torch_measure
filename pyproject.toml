@@ -55,8 +55,10 @@ test = [
 ]
 docs = [
     "sphinx>=7.0",
-    "sphinx-rtd-theme>=2.0",
+    "furo",
     "sphinx-autodoc-typehints>=1.23",
+    "sphinx-copybutton",
+    "myst-parser",
 ]
 all = [
     "torch-measure[bayesian,data,viz,dev]",
@@ -79,6 +81,7 @@ testpaths = ["tests"]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "gpu: marks tests that require GPU",
+    "network: marks tests that require network access",
 ]
 addopts = ["--strict-markers", "--color=yes"]
 

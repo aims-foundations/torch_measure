@@ -2,7 +2,7 @@
 
 """torch_measure: PyTorch-native measurement science toolkit for AI evaluation."""
 
-from torch_measure import cat, data, fitting, metrics, models
+from torch_measure import cat, data, datasets, fitting, metrics, models
 
 try:
     from torch_measure._version import version as __version__
@@ -13,6 +13,7 @@ __all__ = [
     "__version__",
     "cat",
     "data",
+    "datasets",
     "fitting",
     "metrics",
     "models",
