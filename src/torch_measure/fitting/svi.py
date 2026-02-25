@@ -33,6 +33,11 @@ def _is_beta_model(model):
     return hasattr(model, "phi")
 
 
+def _is_testlet_model(model):
+    """Check if the model has testlet random effects."""
+    return hasattr(model, "testlet_effect") and hasattr(model, "testlet_map")
+
+
 def svi_fit(
     model,
     response_matrix: torch.Tensor,
@@ -44,14 +49,16 @@ def svi_fit(
 ) -> dict:
     """Fit an IRT model via Stochastic Variational Inference using Pyro.
 
-    Supports Rasch (1PL), 2PL, 3PL, and their Beta variants.
+    Supports Rasch (1PL), 2PL, 3PL, their Beta variants, and Testlet models.
     Uses N(0,1) priors on ability and difficulty, LogNormal(0,0.5) on
-    discrimination, and Beta(1,4) on guessing.
+    discrimination, Beta(1,4) on guessing, and a hierarchical
+    LogNormal/Normal prior on testlet effects.
 
     Parameters
     ----------
     model : IRTModel
-        The IRT model to fit (Rasch, TwoPL, ThreePL, BetaRasch, BetaTwoPL).
+        The IRT model to fit (Rasch, TwoPL, ThreePL, BetaRasch, BetaTwoPL,
+        TestletRasch).
     response_matrix : torch.Tensor
         Response matrix (n_subjects, n_items). Binary for standard IRT,
         continuous in (0,1) for Beta IRT.
@@ -67,7 +74,19 @@ def svi_fit(
     Returns
     -------
     dict
-        Training history with 'losses' key (ELBO values).
+        Training history with 'losses' key (ELBO values) and 'posterior' key
+        containing variational posterior parameters. The posterior dict maps
+        parameter names to dicts with 'loc' and 'scale' tensors:
+
+        - ``"ability"``: loc (N,), scale (N,)
+        - ``"difficulty"``: loc (M,), scale (M,)
+        - ``"discrimination"`` (2PL/3PL only): loc (M,), scale (M,) — in log-space
+        - ``"guessing"`` (3PL only): loc (M,), scale (M,) — in logit-space
+        - ``"testlet_effect"`` (testlet only): loc (N, T), scale (N, T)
+        - ``"testlet_scale"`` (testlet only): loc (T,), scale (T,) — in log-space
+
+        Scales are obtained by applying ``softplus`` to AutoNormal's unconstrained
+        scale parameters.
     """
     try:
         import pyro
@@ -97,6 +116,9 @@ def svi_fit(
     model_type = _detect_model_type(model)
     beta_model = _is_beta_model(model)
     phi = getattr(model, "phi", 10.0) if beta_model else None
+    testlet_model = _is_testlet_model(model)
+    testlet_map = getattr(model, "testlet_map", None)
+    n_testlets = getattr(model, "n_testlets", 0) if testlet_model else 0
 
     pyro.clear_param_store()
 
@@ -113,6 +135,24 @@ def svi_fit(
 
         # Compute logit
         logit = ability[subject_idx] - difficulty[item_idx]
+
+        # Testlet random effects (hierarchical prior)
+        if testlet_model:
+            testlet_scale = pyro.sample(
+                "testlet_scale",
+                dist.LogNormal(
+                    torch.full((n_testlets,), -0.7, device=device),
+                    0.5 * torch.ones(n_testlets, device=device),
+                ).to_event(1),
+            )
+            testlet_effect = pyro.sample(
+                "testlet_effect",
+                dist.Normal(
+                    torch.zeros(n_subjects, n_testlets, device=device),
+                    testlet_scale.unsqueeze(0).expand(n_subjects, -1),
+                ).to_event(2),
+            )
+            logit = logit + testlet_effect[subject_idx, testlet_map[item_idx]]
 
         # 2PL / 3PL: add discrimination prior
         if model_type in ("2pl", "3pl"):
@@ -189,5 +229,55 @@ def svi_fit(
                 # AutoNormal stores unconstrained value; convert back to logit space
                 # The guide samples in unconstrained space, so this is already logit-like
                 model._guessing_raw.copy_(guess_loc)
+
+        if testlet_model:
+            te_loc = pyro.param("AutoNormal.locs.testlet_effect")
+            if hasattr(model, "testlet_effect") and isinstance(model.testlet_effect, torch.nn.Parameter):
+                model.testlet_effect.copy_(te_loc)
+
+    # Extract posterior distributions (loc + scale) from AutoNormal guide
+    with torch.no_grad():
+        posterior = {}
+
+        ability_scale = torch.nn.functional.softplus(pyro.param("AutoNormal.scales.ability"))
+        posterior["ability"] = {
+            "loc": ability_loc.detach().clone(),
+            "scale": ability_scale.detach().clone(),
+        }
+
+        difficulty_scale = torch.nn.functional.softplus(pyro.param("AutoNormal.scales.difficulty"))
+        posterior["difficulty"] = {
+            "loc": difficulty_loc.detach().clone(),
+            "scale": difficulty_scale.detach().clone(),
+        }
+
+        if model_type in ("2pl", "3pl"):
+            disc_scale = torch.nn.functional.softplus(pyro.param("AutoNormal.scales.discrimination"))
+            posterior["discrimination"] = {
+                "loc": disc_loc.detach().clone(),
+                "scale": disc_scale.detach().clone(),
+            }
+
+        if model_type == "3pl":
+            guess_scale = torch.nn.functional.softplus(pyro.param("AutoNormal.scales.guessing"))
+            posterior["guessing"] = {
+                "loc": guess_loc.detach().clone(),
+                "scale": guess_scale.detach().clone(),
+            }
+
+        if testlet_model:
+            te_scale = torch.nn.functional.softplus(pyro.param("AutoNormal.scales.testlet_effect"))
+            posterior["testlet_effect"] = {
+                "loc": te_loc.detach().clone(),
+                "scale": te_scale.detach().clone(),
+            }
+            ts_loc = pyro.param("AutoNormal.locs.testlet_scale")
+            ts_scale = torch.nn.functional.softplus(pyro.param("AutoNormal.scales.testlet_scale"))
+            posterior["testlet_scale"] = {
+                "loc": ts_loc.detach().clone(),
+                "scale": ts_scale.detach().clone(),
+            }
+
+        history["posterior"] = posterior
 
     return history

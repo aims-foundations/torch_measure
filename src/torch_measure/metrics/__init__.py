@@ -11,6 +11,11 @@ from torch_measure.metrics.reliability import (
     outfit_statistics,
 )
 from torch_measure.metrics.scalability import mokken_scalability
+from torch_measure.metrics.uncertainty import (
+    ability_standard_errors,
+    difficulty_standard_errors,
+    discrimination_standard_errors,
+)
 from torch_measure.metrics.validity import differential_item_functioning
 
 __all__ = [
@@ -24,4 +29,7 @@ __all__ = [
     "expected_calibration_error",
     "brier_score",
     "differential_item_functioning",
+    "ability_standard_errors",
+    "difficulty_standard_errors",
+    "discrimination_standard_errors",
 ]

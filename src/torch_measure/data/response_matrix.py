@@ -23,8 +23,10 @@ class ResponseMatrix:
         Optional identifiers for items (columns).
     item_contents : list[str] | None
         Optional text content for each item (e.g., question text).
-    subject_contents : list[str] | None
-        Optional descriptive content for each subject (e.g., model description).
+    subject_metadata : list[dict[str, str | int | float | bool | None]] | None
+        Optional structured metadata for each subject (one dict per row).
+        For HELM datasets, each dict has keys: ``org``, ``model``,
+        ``param_count``, ``is_instruct``.
     """
 
     def __init__(
@@ -33,7 +35,7 @@ class ResponseMatrix:
         subject_ids: list[str] | None = None,
         item_ids: list[str] | None = None,
         item_contents: list[str] | None = None,
-        subject_contents: list[str] | None = None,
+        subject_metadata: list[dict] | None = None,
     ) -> None:
         if data.ndim != 2:
             raise ValueError(f"Expected 2D tensor, got {data.ndim}D")
@@ -41,7 +43,7 @@ class ResponseMatrix:
         self.subject_ids = subject_ids
         self.item_ids = item_ids
         self.item_contents = item_contents
-        self.subject_contents = subject_contents
+        self.subject_metadata = subject_metadata
 
     @property
     def n_rows(self) -> int:
@@ -101,14 +103,14 @@ class ResponseMatrix:
             subject_ids=self.subject_ids,
             item_ids=self.item_ids,
             item_contents=self.item_contents,
-            subject_contents=self.subject_contents,
+            subject_metadata=self.subject_metadata,
         )
 
     def binarize(self, threshold: float = 0.5) -> ResponseMatrix:
         """Convert continuous responses to binary using a threshold."""
         binary = (self.data >= threshold).float()
         binary[~self.observed_mask] = float("nan")
-        return ResponseMatrix(binary, self.subject_ids, self.item_ids, self.item_contents, self.subject_contents)
+        return ResponseMatrix(binary, self.subject_ids, self.item_ids, self.item_contents, self.subject_metadata)
 
     @classmethod
     def from_numpy(cls, array, **kwargs) -> ResponseMatrix:

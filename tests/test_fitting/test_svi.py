@@ -88,6 +88,78 @@ class TestSVIFitBeta:
         assert len(history["losses"]) == 100
 
 
+class TestSVIPosterior:
+    """Tests for posterior extraction from SVI fitting."""
+
+    def test_rasch_posterior_keys(self, small_response_matrix):
+        model = Rasch(n_subjects=20, n_items=30)
+        history = svi_fit(model, small_response_matrix, max_epochs=100, verbose=False)
+        posterior = history["posterior"]
+        assert "ability" in posterior
+        assert "difficulty" in posterior
+        assert "discrimination" not in posterior
+        assert "guessing" not in posterior
+
+    def test_twopl_posterior_keys(self, small_response_matrix):
+        model = TwoPL(n_subjects=20, n_items=30)
+        history = svi_fit(model, small_response_matrix, max_epochs=100, verbose=False)
+        posterior = history["posterior"]
+        assert "ability" in posterior
+        assert "difficulty" in posterior
+        assert "discrimination" in posterior
+        assert "guessing" not in posterior
+
+    def test_threepl_posterior_keys(self, small_response_matrix):
+        model = ThreePL(n_subjects=20, n_items=30)
+        history = svi_fit(model, small_response_matrix, max_epochs=100, verbose=False)
+        posterior = history["posterior"]
+        assert "ability" in posterior
+        assert "difficulty" in posterior
+        assert "discrimination" in posterior
+        assert "guessing" in posterior
+
+    def test_beta_rasch_posterior_keys(self, small_beta_response_matrix):
+        model = BetaRasch(n_subjects=20, n_items=30)
+        history = svi_fit(model, small_beta_response_matrix, max_epochs=100, verbose=False)
+        posterior = history["posterior"]
+        assert "ability" in posterior
+        assert "difficulty" in posterior
+
+    def test_beta_twopl_posterior_keys(self, small_beta_response_matrix):
+        model = BetaTwoPL(n_subjects=20, n_items=30)
+        history = svi_fit(model, small_beta_response_matrix, max_epochs=100, verbose=False)
+        posterior = history["posterior"]
+        assert "discrimination" in posterior
+
+    def test_posterior_shapes(self, small_response_matrix):
+        model = ThreePL(n_subjects=20, n_items=30)
+        history = svi_fit(model, small_response_matrix, max_epochs=100, verbose=False)
+        posterior = history["posterior"]
+        assert posterior["ability"]["loc"].shape == (20,)
+        assert posterior["ability"]["scale"].shape == (20,)
+        assert posterior["difficulty"]["loc"].shape == (30,)
+        assert posterior["difficulty"]["scale"].shape == (30,)
+        assert posterior["discrimination"]["loc"].shape == (30,)
+        assert posterior["discrimination"]["scale"].shape == (30,)
+        assert posterior["guessing"]["loc"].shape == (30,)
+        assert posterior["guessing"]["scale"].shape == (30,)
+
+    def test_scales_positive(self, small_response_matrix):
+        model = TwoPL(n_subjects=20, n_items=30)
+        history = svi_fit(model, small_response_matrix, max_epochs=100, verbose=False)
+        posterior = history["posterior"]
+        assert (posterior["ability"]["scale"] > 0).all()
+        assert (posterior["difficulty"]["scale"] > 0).all()
+        assert (posterior["discrimination"]["scale"] > 0).all()
+
+    def test_locs_match_model_params(self, small_response_matrix):
+        model = Rasch(n_subjects=20, n_items=30)
+        history = svi_fit(model, small_response_matrix, max_epochs=200, verbose=False)
+        posterior = history["posterior"]
+        assert torch.allclose(posterior["ability"]["loc"], model.ability.data)
+        assert torch.allclose(posterior["difficulty"]["loc"], model.difficulty.data)
+
+
 class TestSVIFitWithMask:
     def test_handles_missing_data(self, small_response_matrix):
         data = small_response_matrix.clone()

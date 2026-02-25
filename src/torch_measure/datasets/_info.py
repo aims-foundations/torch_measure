@@ -56,4 +56,5 @@ class DatasetInfo:
     citation: str = ""
     url: str = ""
     license: str = ""
+    n_comparisons: int = 0
     tags: list[str] = field(default_factory=list)

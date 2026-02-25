@@ -16,8 +16,8 @@ The .pt file format (consumed by torch_measure.datasets.load):
         "data": torch.Tensor,        # shape (n_subjects, n_items), float32, NaN for missing
         "subject_ids": list[str],     # model names
         "item_ids": list[str],        # question identifiers (benchmark_name:index)
-        "item_contents": list[str],   # question text
-        "subject_contents": list[str],# model descriptions (org | model | params | type)
+        "item_contents": list[str],          # question text
+        "subject_metadata": list[dict],      # structured model metadata
     }
 """
 
@@ -127,31 +127,25 @@ def _is_instruct_model(name: str) -> bool:
     return bool(parts & _INSTRUCT_KEYWORDS)
 
 
-def build_subject_contents(subject_ids: list[str]) -> list[str]:
-    """Build human-readable description strings for each model.
+def build_subject_metadata(subject_ids: list[str]) -> list[dict]:
+    """Build structured metadata dicts for each model.
 
-    Format: "Org | model-name | 70B | instruct" (fields omitted if unknown).
+    Each dict has keys: org, model, param_count, is_instruct.
     """
-    contents = []
+    metadata = []
     for sid in subject_ids:
-        parts = []
-        # Org
         org_raw = sid.split("/")[0] if "/" in sid else ""
         org = _ORG_DISPLAY.get(org_raw, org_raw)
-        if org:
-            parts.append(org)
-        # Model name (after the slash)
         model = sid.split("/", 1)[1] if "/" in sid else sid
-        parts.append(model)
-        # Param count
-        params = _extract_param_count(sid)
-        if params:
-            parts.append(params)
-        # Instruct flag
-        if _is_instruct_model(sid):
-            parts.append("instruct")
-        contents.append(" | ".join(parts))
-    return contents
+        param_count = _extract_param_count(sid)
+        is_instruct = _is_instruct_model(sid)
+        metadata.append({
+            "org": org,
+            "model": model,
+            "param_count": param_count,
+            "is_instruct": is_instruct,
+        })
+    return metadata
 
 
 def load_source() -> pd.DataFrame:
@@ -187,15 +181,15 @@ def make_payload(df_sub: pd.DataFrame, bench_name: str) -> dict:
     item_ids = [f"{bench_name}:{i}" for i in range(df_sub.shape[1])]
     # Item contents: extract question text from column tuples (question_text, benchmark, split)
     item_contents = [str(col[0]) if isinstance(col, tuple) else str(col) for col in df_sub.columns]
-    # Subject contents: parsed model descriptions
-    subject_contents = build_subject_contents(subject_ids)
+    # Subject metadata: structured model info
+    subject_metadata = build_subject_metadata(subject_ids)
 
     return {
         "data": data,
         "subject_ids": subject_ids,
         "item_ids": item_ids,
         "item_contents": item_contents,
-        "subject_contents": subject_contents,
+        "subject_metadata": subject_metadata,
     }
 
 
@@ -205,14 +199,14 @@ def make_all_payload(df: pd.DataFrame) -> dict:
     subject_ids = list(df.index.astype(str))
     item_ids = [f"{col[1]}:{i}" for i, col in enumerate(df.columns)]
     item_contents = [str(col[0]) if isinstance(col, tuple) else str(col) for col in df.columns]
-    subject_contents = build_subject_contents(subject_ids)
+    subject_metadata = build_subject_metadata(subject_ids)
 
     return {
         "data": data,
         "subject_ids": subject_ids,
         "item_ids": item_ids,
         "item_contents": item_contents,
-        "subject_contents": subject_contents,
+        "subject_metadata": subject_metadata,
     }
 
 

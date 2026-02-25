@@ -5,6 +5,8 @@
 import pytest
 import torch
 
+from torch_measure.data.pairwise import PairwiseComparisons
+
 
 @pytest.fixture
 def seed():
@@ -95,3 +97,53 @@ def known_irt_params(seed):
         "n_subjects": n_subjects,
         "n_items": n_items,
     }
+
+
+@pytest.fixture
+def small_testlet_response_matrix(seed):
+    """Synthetic binary response matrix with testlet structure (20 subjects x 30 items, 6 testlets)."""
+    n_subjects, n_items, n_testlets = 20, 30, 6
+    items_per_testlet = n_items // n_testlets  # 5
+
+    testlet_map = torch.repeat_interleave(torch.arange(n_testlets), items_per_testlet)
+
+    ability = torch.randn(n_subjects)
+    difficulty = torch.randn(n_items)
+
+    testlet_scales = torch.tensor([0.3, 0.5, 0.1, 0.4, 0.2, 0.6])
+    testlet_effect = torch.randn(n_subjects, n_testlets) * testlet_scales.unsqueeze(0)
+
+    logit = ability.unsqueeze(1) - difficulty.unsqueeze(0)
+    logit = logit + testlet_effect[:, testlet_map]
+    probs = torch.sigmoid(logit)
+    responses = torch.bernoulli(probs)
+    return responses, testlet_map
+
+
+@pytest.fixture
+def small_pairwise_comparisons(seed):
+    """Synthetic pairwise comparisons (10 subjects, ~450 comparisons).
+
+    Generated from known Bradley-Terry abilities so that fitted models
+    should recover the ground-truth ranking.
+    """
+    n_subjects = 10
+    ability = torch.linspace(-2, 2, n_subjects)
+
+    # Generate all ordered pairs, sample each once
+    subject_a_list, subject_b_list, outcome_list = [], [], []
+    for i in range(n_subjects):
+        for j in range(i + 1, n_subjects):
+            prob = torch.sigmoid(ability[i] - ability[j])
+            outcome = torch.bernoulli(prob)
+            subject_a_list.append(i)
+            subject_b_list.append(j)
+            outcome_list.append(outcome.item())
+
+    subject_ids = [f"model_{i}" for i in range(n_subjects)]
+    return PairwiseComparisons(
+        subject_a=torch.tensor(subject_a_list, dtype=torch.long),
+        subject_b=torch.tensor(subject_b_list, dtype=torch.long),
+        outcome=torch.tensor(outcome_list, dtype=torch.float32),
+        subject_ids=subject_ids,
+    )
