@@ -86,6 +86,26 @@ class TestListDatasets:
         for name in expected:
             assert name in names, f"{name} missing from registry"
 
+    def test_metr_family_filter(self):
+        result = list_datasets(family="metr")
+        assert len(result) >= 8
+        assert all(name.startswith("metr/") for name in result)
+
+    def test_metr_datasets_present(self):
+        names = list_datasets()
+        expected = [
+            "metr/all",
+            "metr/all_score",
+            "metr/hcast",
+            "metr/rebench",
+            "metr/swaa",
+            "metr/hcast_score",
+            "metr/rebench_score",
+            "metr/swaa_score",
+        ]
+        for name in expected:
+            assert name in names, f"{name} missing from registry"
+
     def test_agentic_family_filter(self):
         result = list_datasets(family="agentic")
         assert len(result) >= 28

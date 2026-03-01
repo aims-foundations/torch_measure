@@ -3,6 +3,12 @@
 """Psychometric metrics for measurement analysis."""
 
 from torch_measure.metrics.calibration import brier_score, expected_calibration_error
+from torch_measure.metrics.network import (
+    betweenness_centrality,
+    closeness_centrality,
+    expected_influence,
+    strength_centrality,
+)
 from torch_measure.metrics.correlation import point_biserial_correlation, tetrachoric_correlation
 from torch_measure.metrics.reliability import (
     cronbach_alpha,
@@ -32,4 +38,8 @@ __all__ = [
     "ability_standard_errors",
     "difficulty_standard_errors",
     "discrimination_standard_errors",
+    "strength_centrality",
+    "expected_influence",
+    "closeness_centrality",
+    "betweenness_centrality",
 ]
