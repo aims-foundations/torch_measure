@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import torch
@@ -15,7 +16,12 @@ if TYPE_CHECKING:
     from torch_measure.data.response_matrix import ResponseMatrix
 
 
-def load(name: str, *, force_download: bool = False) -> ResponseMatrix | PairwiseComparisons:
+def load(
+    name: str,
+    *,
+    force_download: bool = False,
+    local_dir: str | Path | None = None,
+) -> ResponseMatrix | PairwiseComparisons:
     """Load a dataset by name, downloading from HuggingFace Hub if needed.
 
     Parameters
@@ -25,6 +31,13 @@ def load(name: str, *, force_download: bool = False) -> ResponseMatrix | Pairwis
         Use :func:`list_datasets` to see available names.
     force_download : bool
         If ``True``, re-download even if cached locally.
+    local_dir : str | Path | None
+        If provided, look for ``.pt`` files in this directory before
+        downloading from HuggingFace Hub.  Useful for offline use or
+        loading data produced by ``migrate_bench_data.py --no-upload``.
+        The file is expected at ``<local_dir>/<filename>`` where *filename*
+        is the ``filename`` field from the dataset registry (e.g.,
+        ``bench/swebench.pt``).
 
     Returns
     -------
@@ -38,19 +51,29 @@ def load(name: str, *, force_download: bool = False) -> ResponseMatrix | Pairwis
     ValueError
         If *name* is not found in the registry.
     ImportError
-        If ``huggingface_hub`` is not installed.
+        If ``huggingface_hub`` is not installed and no local file is found.
     """
+    dataset_info = _info(name)
+
+    # Determine filename — default convention: ``family/benchmark.pt``
+    filename = dataset_info.filename or f"{name}.pt"
+
+    # ── Try local directory first ──────────────────────────────────────
+    if local_dir is not None:
+        local_path = Path(local_dir) / filename
+        if local_path.exists():
+            payload = torch.load(local_path, weights_only=True)
+            if dataset_info.response_type == "pairwise":
+                return _load_pairwise(payload, filename)
+            return _load_response_matrix(payload, filename)
+
+    # ── Download from HuggingFace Hub ──────────────────────────────────
     try:
         from huggingface_hub import hf_hub_download
     except ImportError as err:
         raise ImportError(
             "Loading datasets requires huggingface_hub. Install with: pip install torch-measure[data]"
         ) from err
-
-    dataset_info = _info(name)
-
-    # Determine filename — default convention: ``family/benchmark.pt``
-    filename = dataset_info.filename or f"{name}.pt"
 
     path = hf_hub_download(
         repo_id=dataset_info.repo_id,
@@ -64,6 +87,55 @@ def load(name: str, *, force_download: bool = False) -> ResponseMatrix | Pairwis
     if dataset_info.response_type == "pairwise":
         return _load_pairwise(payload, filename)
     return _load_response_matrix(payload, filename)
+
+
+def load_csv(
+    path: str | Path,
+    *,
+    index_col: int | str = 0,
+) -> ResponseMatrix:
+    """Load a CSV response matrix into a :class:`ResponseMatrix`.
+
+    This is a convenience function for loading CSV files produced by the
+    benchmark processing scripts (``data/<benchmark>_data/processed/response_matrix.csv``).
+
+    Parameters
+    ----------
+    path : str | Path
+        Path to the CSV file.  Expects rows = subjects (models),
+        columns = items (tasks), with the first column or a named column
+        as the subject index.
+    index_col : int | str
+        Column to use as subject IDs (passed to ``pd.read_csv``).
+
+    Returns
+    -------
+    ResponseMatrix
+
+    Examples
+    --------
+    >>> from torch_measure.datasets import load_csv
+    >>> rm = load_csv("data/bfcl_data/processed/response_matrix.csv")
+    >>> rm.shape
+    (93, 4751)
+    """
+    try:
+        import pandas as pd
+    except ImportError as err:
+        raise ImportError(
+            "load_csv requires pandas. Install with: pip install pandas"
+        ) from err
+
+    from torch_measure.data.response_matrix import ResponseMatrix
+
+    df = pd.read_csv(path, index_col=index_col)
+    data = torch.tensor(df.values, dtype=torch.float32)
+
+    return ResponseMatrix(
+        data=data,
+        subject_ids=list(df.index.astype(str)),
+        item_ids=list(df.columns.astype(str)),
+    )
 
 
 def _load_response_matrix(payload: dict | torch.Tensor, filename: str) -> ResponseMatrix:

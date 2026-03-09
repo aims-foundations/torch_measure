@@ -41,7 +41,14 @@ docs/_build/
 *.pth
 *.pkl
 *.parquet
-data/cache/
+
+# Data artifacts (keep scripts/, ignore raw data and processed outputs)
+data/*/raw/
+data/*/raw_results/
+data/*/processed/
+data/*/figures/
+data/*/traces/
+data/benchmark_papers/
 
 # Jupyter
 .ipynb_checkpoints/
