@@ -23,7 +23,19 @@ from torch_measure.datasets.preference_dissection import _register_preference_di
 from torch_measure.datasets.rewardbench import _register_rewardbench_datasets
 from torch_measure.datasets.rewardbench2 import _register_rewardbench2_datasets
 from torch_measure.datasets.shp2 import _register_shp2_datasets
+from torch_measure.datasets.beavertails import _register_beavertails_datasets
+from torch_measure.datasets.flask import _register_flask_datasets
+from torch_measure.datasets.judgebench import _register_judgebench_datasets
+from torch_measure.datasets.personalllm import _register_personalllm_datasets
+from torch_measure.datasets.pickapic import _register_pickapic_datasets
+from torch_measure.datasets.pku_saferlhf import _register_pku_saferlhf_datasets
+from torch_measure.datasets.prism import _register_prism_datasets
+from torch_measure.datasets.prm800k import _register_prm800k_datasets
+from torch_measure.datasets.prometheus import _register_prometheus_datasets
+from torch_measure.datasets.summeval import _register_summeval_datasets
 from torch_measure.datasets.ultrafeedback import _register_ultrafeedback_datasets
+from torch_measure.datasets.vl_rewardbench import _register_vl_rewardbench_datasets
+from torch_measure.datasets.wmt_mqm import _register_wmt_mqm_datasets
 
 # ---------------------------------------------------------------------------
 # Global registry: name -> DatasetInfo
@@ -49,6 +61,18 @@ _REGISTRY.update(_register_rewardbench_datasets())
 _REGISTRY.update(_register_rewardbench2_datasets())
 _REGISTRY.update(_register_shp2_datasets())
 _REGISTRY.update(_register_ultrafeedback_datasets())
+_REGISTRY.update(_register_beavertails_datasets())
+_REGISTRY.update(_register_flask_datasets())
+_REGISTRY.update(_register_judgebench_datasets())
+_REGISTRY.update(_register_personalllm_datasets())
+_REGISTRY.update(_register_pickapic_datasets())
+_REGISTRY.update(_register_pku_saferlhf_datasets())
+_REGISTRY.update(_register_prism_datasets())
+_REGISTRY.update(_register_prm800k_datasets())
+_REGISTRY.update(_register_prometheus_datasets())
+_REGISTRY.update(_register_summeval_datasets())
+_REGISTRY.update(_register_vl_rewardbench_datasets())
+_REGISTRY.update(_register_wmt_mqm_datasets())
 
 
 # ---------------------------------------------------------------------------

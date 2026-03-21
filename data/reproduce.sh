@@ -88,6 +88,25 @@ BENCHMARKS=(
     nectar
     biggen
     preference_dissection
+    rewardbench
+    indeterminacy
+    hh_rlhf
+    oasst
+    helpsteer2
+    shp2
+    rewardbench2
+    summeval
+    flask
+    prometheus
+    judgebench
+    prm800k
+    beavertails
+    pku_saferlhf
+    prism
+    personalllm
+    wmt_mqm
+    pickapic
+    vl_rewardbench
 )
 
 if [[ "${1:-}" == "--list" ]]; then
@@ -975,6 +994,215 @@ print(f'DPAI matrix: {len(tasks_sorted)} tasks x {len(agents_list)} agents')
         mkdir -p "$DIR/raw" "$DIR/processed"
 
         log_info "Building Preference Dissection response matrix (requires HF_TOKEN with gated access)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 47. RewardBench (151 judges x 2,985 items)
+    # ─────────────────────────────────────────────────────────────────────
+    rewardbench)
+        DIR="$BASE_DIR/rewardbench_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building RewardBench response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 48. LLM Judge Indeterminacy (9 judges x 800 items)
+    # ─────────────────────────────────────────────────────────────────────
+    indeterminacy)
+        DIR="$BASE_DIR/indeterminacy_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building Indeterminacy response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 49. HH-RLHF (169K pairwise preferences)
+    # ─────────────────────────────────────────────────────────────────────
+    hh_rlhf)
+        DIR="$BASE_DIR/hh_rlhf_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building HH-RLHF comparison data (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 50. OpenAssistant Conversations (16 rank tiers x 18,922 prompts)
+    # ─────────────────────────────────────────────────────────────────────
+    oasst)
+        DIR="$BASE_DIR/oasst_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building OpenAssistant response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 51. HelpSteer2 (2 responses x 10,679 prompts x 6 attributes)
+    # ─────────────────────────────────────────────────────────────────────
+    helpsteer2)
+        DIR="$BASE_DIR/helpsteer2_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building HelpSteer2 response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 52. SHP-2 (100K sampled pairwise preferences across 124 domains)
+    # ─────────────────────────────────────────────────────────────────────
+    shp2)
+        DIR="$BASE_DIR/shp2_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building SHP-2 comparison data (streams from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 53. RewardBench 2 (188 judges x 1,865 items, 6 domains)
+    # ─────────────────────────────────────────────────────────────────────
+    rewardbench2)
+        DIR="$BASE_DIR/rewardbench2_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building RewardBench 2 response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 54. SummEval (16 models x 100 docs x 4 quality dimensions)
+    # ─────────────────────────────────────────────────────────────────────
+    summeval)
+        DIR="$BASE_DIR/summeval_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building SummEval response matrices (downloads from GCS)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 55. FLASK (15 models x 1,700 instructions x 12 skills)
+    # ─────────────────────────────────────────────────────────────────────
+    flask)
+        DIR="$BASE_DIR/flask_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building FLASK response matrices (downloads from GitHub)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 56. Prometheus (rubric-based multi-judge evaluation)
+    # ─────────────────────────────────────────────────────────────────────
+    prometheus)
+        DIR="$BASE_DIR/prometheus_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building Prometheus response matrices (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 57. JudgeBench (33 judges x 350 pairs)
+    # ─────────────────────────────────────────────────────────────────────
+    judgebench)
+        DIR="$BASE_DIR/judgebench_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building JudgeBench response matrix (downloads from GitHub)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 58. PRM800K (step-level math verification, 75K solutions)
+    # ─────────────────────────────────────────────────────────────────────
+    prm800k)
+        DIR="$BASE_DIR/prm800k_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building PRM800K response matrices (clones from GitHub)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 59. BeaverTails (safety annotations, 330K+ QA pairs, 14 harm categories)
+    # ─────────────────────────────────────────────────────────────────────
+    beavertails)
+        DIR="$BASE_DIR/beavertails_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building BeaverTails response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 60. PKU-SafeRLHF (dual safety+helpfulness preference, 330K+ pairs)
+    # ─────────────────────────────────────────────────────────────────────
+    pku_saferlhf)
+        DIR="$BASE_DIR/pku_saferlhf_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building PKU-SafeRLHF comparison data (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 61. PRISM (personalized preferences, 1,500 participants x 68K utterances)
+    # ─────────────────────────────────────────────────────────────────────
+    prism)
+        DIR="$BASE_DIR/prism_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building PRISM response matrices (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 62. PersonalLLM (10 reward models x 83K prompt-response pairs)
+    # ─────────────────────────────────────────────────────────────────────
+    personalllm)
+        DIR="$BASE_DIR/personalllm_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building PersonalLLM response matrices (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 63. WMT MQM (expert MT evaluation, multi-rater segment scores)
+    # ─────────────────────────────────────────────────────────────────────
+    wmt_mqm)
+        DIR="$BASE_DIR/wmt_mqm_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building WMT MQM response matrices (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 64. Pick-a-Pic (text-to-image preference, 500K+ judgments)
+    # ─────────────────────────────────────────────────────────────────────
+    pickapic)
+        DIR="$BASE_DIR/pickapic_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building Pick-a-Pic comparison data (streams from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 65. VL-RewardBench (vision-language reward model evaluation)
+    # ─────────────────────────────────────────────────────────────────────
+    vl_rewardbench)
+        DIR="$BASE_DIR/vl_rewardbench_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building VL-RewardBench response matrix (downloads from HuggingFace)..."
         python3 "$DIR/scripts/01_build_response_matrix.py"
         ;;
 
