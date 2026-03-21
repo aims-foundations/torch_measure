@@ -11,11 +11,18 @@ from torch_measure.datasets.arena_hard import _register_arena_hard_datasets
 from torch_measure.datasets.bench import _register_bench_datasets
 from torch_measure.datasets.biggen import _register_biggen_datasets
 from torch_measure.datasets.helm import _register_helm_datasets
+from torch_measure.datasets.helpsteer2 import _register_helpsteer2_datasets
+from torch_measure.datasets.indeterminacy import _register_indeterminacy_datasets
+from torch_measure.datasets.hh_rlhf import _register_hh_rlhf_datasets
 from torch_measure.datasets.metr import _register_metr_datasets
 from torch_measure.datasets.mtbench import _register_mtbench_datasets
 from torch_measure.datasets.nectar import _register_nectar_datasets
+from torch_measure.datasets.oasst import _register_oasst_datasets
 from torch_measure.datasets.openllm import _register_openllm_datasets
 from torch_measure.datasets.preference_dissection import _register_preference_dissection_datasets
+from torch_measure.datasets.rewardbench import _register_rewardbench_datasets
+from torch_measure.datasets.rewardbench2 import _register_rewardbench2_datasets
+from torch_measure.datasets.shp2 import _register_shp2_datasets
 from torch_measure.datasets.ultrafeedback import _register_ultrafeedback_datasets
 
 # ---------------------------------------------------------------------------
@@ -32,8 +39,15 @@ _REGISTRY.update(_register_bench_datasets())
 _REGISTRY.update(_register_biggen_datasets())
 _REGISTRY.update(_register_mtbench_datasets())
 _REGISTRY.update(_register_nectar_datasets())
+_REGISTRY.update(_register_oasst_datasets())
 _REGISTRY.update(_register_arena_hard_datasets())
+_REGISTRY.update(_register_helpsteer2_datasets())
+_REGISTRY.update(_register_indeterminacy_datasets())
+_REGISTRY.update(_register_hh_rlhf_datasets())
 _REGISTRY.update(_register_preference_dissection_datasets())
+_REGISTRY.update(_register_rewardbench_datasets())
+_REGISTRY.update(_register_rewardbench2_datasets())
+_REGISTRY.update(_register_shp2_datasets())
 _REGISTRY.update(_register_ultrafeedback_datasets())
 
 
