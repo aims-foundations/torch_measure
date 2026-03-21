@@ -81,6 +81,13 @@ BENCHMARKS=(
     toolbench
     wildbench
     workarena
+    arena_140k
+    arena_hard
+    mtbench
+    ultrafeedback
+    nectar
+    biggen
+    preference_dissection
 )
 
 if [[ "${1:-}" == "--list" ]]; then
@@ -891,6 +898,83 @@ print(f'DPAI matrix: {len(tasks_sorted)} tasks x {len(agents_list)} agents')
         mkdir -p "$DIR/raw" "$DIR/processed"
 
         log_info "Building WorkArena response matrix..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 40. Arena 140K (pairwise human preferences from Chatbot Arena)
+    # ─────────────────────────────────────────────────────────────────────
+    arena_140k)
+        DIR="$BASE_DIR/arena_140k_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building Arena 140K comparison summary (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 41. Arena-Hard-Auto (GPT-4 judgments, 72 models x 500 prompts)
+    # ─────────────────────────────────────────────────────────────────────
+    arena_hard)
+        DIR="$BASE_DIR/arena_hard_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building Arena-Hard-Auto response matrix (clones HuggingFace Space)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 42. MT-Bench (GPT-4 single-answer judgments, 34 models x 80 questions)
+    # ─────────────────────────────────────────────────────────────────────
+    mtbench)
+        DIR="$BASE_DIR/mtbench_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building MT-Bench response matrix (downloads JSONL from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 43. UltraFeedback (GPT-4 multi-aspect ratings, 17 models x 64K prompts)
+    # ─────────────────────────────────────────────────────────────────────
+    ultrafeedback)
+        DIR="$BASE_DIR/ultrafeedback_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building UltraFeedback response matrix (streams from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 44. Nectar (GPT-4 rankings, 40 models x 183K prompts)
+    # ─────────────────────────────────────────────────────────────────────
+    nectar)
+        DIR="$BASE_DIR/nectar_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building Nectar response matrix (streams from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 45. BiGGen-Bench (multi-judge, 99 models x 695 items x 5 judges)
+    # ─────────────────────────────────────────────────────────────────────
+    biggen)
+        DIR="$BASE_DIR/biggen_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building BiGGen-Bench response matrices (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # 46. Preference Dissection (gated, 33 judges x 5,240 pairs)
+    # ─────────────────────────────────────────────────────────────────────
+    preference_dissection)
+        DIR="$BASE_DIR/preference_dissection_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building Preference Dissection response matrix (requires HF_TOKEN with gated access)..."
         python3 "$DIR/scripts/01_build_response_matrix.py"
         ;;
 
