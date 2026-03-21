@@ -1181,4 +1181,147 @@ def _register_bench_datasets() -> dict[str, DatasetInfo]:
         tags=["coding", "agentic", "software-engineering", "java"],
     )
 
+    # ── Global South: SIB-200 ────────────────────────────────────────
+    d["bench/sib200"] = DatasetInfo(
+        name="bench/sib200",
+        family="bench",
+        description="SIB-200 — Topic classification in 205 languages (GPT-4, GPT-3.5)",
+        response_type="binary",
+        n_subjects=2,
+        n_items=41820,
+        subject_entity="model",
+        item_entity="item",
+        repo_id=_BENCH_REPO,
+        filename="bench/sib200.pt",
+        url="https://github.com/dadelani/sib-200",
+        tags=["multilingual", "global-south", "topic-classification", "205-languages"],
+    )
+
+    # ── Global South: AfriMed-QA ─────────────────────────────────────
+    d["bench/afrimedqa"] = DatasetInfo(
+        name="bench/afrimedqa",
+        family="bench",
+        description="AfriMed-QA — Pan-African medical QA across 30 models, 20 specialties",
+        response_type="binary",
+        n_subjects=30,
+        n_items=6910,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/afrimedqa.pt",
+        url="https://github.com/intron-innovation/AfriMed-QA",
+        tags=["global-south", "africa", "medical", "qa"],
+    )
+
+    # ── Global South: Bridging-the-Gap ───────────────────────────────
+    d["bench/bridging_gap"] = DatasetInfo(
+        name="bench/bridging_gap",
+        family="bench",
+        description="Bridging-the-Gap — Winogrande in 12 languages (English + 11 African)",
+        response_type="binary",
+        n_subjects=36,
+        n_items=1767,
+        subject_entity="model_language",
+        item_entity="item",
+        repo_id=_BENCH_REPO,
+        filename="bench/bridging_gap.pt",
+        url="https://github.com/InstituteforDiseaseModeling/Bridging-the-Gap-Low-Resource-African-Languages",
+        tags=["global-south", "africa", "multilingual", "commonsense-reasoning"],
+    )
+
+    d["bench/bridging_gap_continuous"] = DatasetInfo(
+        name="bench/bridging_gap_continuous",
+        family="bench",
+        description="Bridging-the-Gap — Winogrande continuous scores (mean of 3 runs)",
+        response_type="continuous",
+        n_subjects=36,
+        n_items=1767,
+        subject_entity="model_language",
+        item_entity="item",
+        repo_id=_BENCH_REPO,
+        filename="bench/bridging_gap_continuous.pt",
+        url="https://github.com/InstituteforDiseaseModeling/Bridging-the-Gap-Low-Resource-African-Languages",
+        tags=["global-south", "africa", "multilingual", "commonsense-reasoning"],
+    )
+
+    # ── Global South: La Leaderboard ─────────────────────────────────
+    d["bench/la_leaderboard"] = DatasetInfo(
+        name="bench/la_leaderboard",
+        family="bench",
+        description="La Leaderboard — 69 models × 108 tasks in Spanish, Catalan, Basque, Galician",
+        response_type="continuous",
+        n_subjects=69,
+        n_items=108,
+        subject_entity="model",
+        item_entity="task",
+        repo_id=_BENCH_REPO,
+        filename="bench/la_leaderboard.pt",
+        url="https://huggingface.co/datasets/la-leaderboard/results",
+        tags=["global-south", "iberian", "multilingual", "leaderboard"],
+    )
+
+    # ── Global South: Portuguese LLM Leaderboard ─────────────────────
+    d["bench/pt_leaderboard"] = DatasetInfo(
+        name="bench/pt_leaderboard",
+        family="bench",
+        description="Portuguese LLM Leaderboard — 1,148 models × 10 Portuguese NLP tasks",
+        response_type="continuous",
+        n_subjects=1148,
+        n_items=10,
+        subject_entity="model",
+        item_entity="task",
+        repo_id=_BENCH_REPO,
+        filename="bench/pt_leaderboard.pt",
+        url="https://huggingface.co/datasets/eduagarcia-temp/llm_pt_leaderboard_raw_results",
+        tags=["global-south", "portuguese", "leaderboard"],
+    )
+
+    # ── Global South: Korean LLM Leaderboard ─────────────────────────
+    d["bench/ko_leaderboard"] = DatasetInfo(
+        name="bench/ko_leaderboard",
+        family="bench",
+        description="Open Ko-LLM Leaderboard — 1,159 models × 9 Korean benchmark tasks",
+        response_type="continuous",
+        n_subjects=1159,
+        n_items=9,
+        subject_entity="model",
+        item_entity="task",
+        repo_id=_BENCH_REPO,
+        filename="bench/ko_leaderboard.pt",
+        url="https://huggingface.co/datasets/open-ko-llm-leaderboard/results",
+        tags=["east-asia", "korean", "leaderboard"],
+    )
+
+    # ── Global South: Thai LLM Leaderboard ───────────────────────────
+    d["bench/thai_leaderboard"] = DatasetInfo(
+        name="bench/thai_leaderboard",
+        family="bench",
+        description="ThaiLLM Leaderboard — 72 models × 19 Thai benchmark tasks",
+        response_type="continuous",
+        n_subjects=72,
+        n_items=19,
+        subject_entity="model",
+        item_entity="task",
+        repo_id=_BENCH_REPO,
+        filename="bench/thai_leaderboard.pt",
+        url="https://huggingface.co/datasets/ThaiLLM-Leaderboard/results",
+        tags=["southeast-asia", "thai", "leaderboard"],
+    )
+
+    # ── Global South: KMMLU (Korean, human baseline) ─────────────────
+    d["bench/kmmlu"] = DatasetInfo(
+        name="bench/kmmlu",
+        family="bench",
+        description="KMMLU — Korean MMLU, 35,030 items with per-item human accuracy baseline",
+        response_type="continuous",
+        n_subjects=1,
+        n_items=35030,
+        subject_entity="annotator_group",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/kmmlu.pt",
+        url="https://huggingface.co/datasets/HAERAE-HUB/KMMLU",
+        tags=["east-asia", "korean", "knowledge", "human-baseline"],
+    )
+
     return d

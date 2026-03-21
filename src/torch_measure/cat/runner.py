@@ -103,6 +103,9 @@ class AdaptiveTester:
         budget = min(budget, n_items)
 
         administered = torch.zeros(n_items, dtype=torch.bool)
+        administered[torch.isnan(responses)] = True  # skip missing responses
+        n_available = int((~administered).sum().item())
+        budget = min(budget, n_available)
         ability = torch.tensor(0.0, requires_grad=True)
 
         admin_order = []

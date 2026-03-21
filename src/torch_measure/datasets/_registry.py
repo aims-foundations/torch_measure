@@ -7,10 +7,16 @@ from __future__ import annotations
 from torch_measure.datasets._info import DatasetInfo
 from torch_measure.datasets.agentic import _register_agentic_datasets
 from torch_measure.datasets.arena import _register_arena_datasets
+from torch_measure.datasets.arena_hard import _register_arena_hard_datasets
 from torch_measure.datasets.bench import _register_bench_datasets
+from torch_measure.datasets.biggen import _register_biggen_datasets
 from torch_measure.datasets.helm import _register_helm_datasets
 from torch_measure.datasets.metr import _register_metr_datasets
+from torch_measure.datasets.mtbench import _register_mtbench_datasets
+from torch_measure.datasets.nectar import _register_nectar_datasets
 from torch_measure.datasets.openllm import _register_openllm_datasets
+from torch_measure.datasets.preference_dissection import _register_preference_dissection_datasets
+from torch_measure.datasets.ultrafeedback import _register_ultrafeedback_datasets
 
 # ---------------------------------------------------------------------------
 # Global registry: name -> DatasetInfo
@@ -23,6 +29,12 @@ _REGISTRY.update(_register_arena_datasets())
 _REGISTRY.update(_register_agentic_datasets())
 _REGISTRY.update(_register_metr_datasets())
 _REGISTRY.update(_register_bench_datasets())
+_REGISTRY.update(_register_biggen_datasets())
+_REGISTRY.update(_register_mtbench_datasets())
+_REGISTRY.update(_register_nectar_datasets())
+_REGISTRY.update(_register_arena_hard_datasets())
+_REGISTRY.update(_register_preference_dissection_datasets())
+_REGISTRY.update(_register_ultrafeedback_datasets())
 
 
 # ---------------------------------------------------------------------------

@@ -48,4 +48,21 @@ def _register_arena_datasets() -> dict[str, DatasetInfo]:
         tags=["nlp", "pairwise", "preference", "human-evaluation", "chatbot"],
     )
 
+    datasets["arena/chatbot_arena_140k"] = DatasetInfo(
+        name="arena/chatbot_arena_140k",
+        family="arena",
+        description="LMSYS Chatbot Arena 140K human preference comparisons (pairwise A/B tests, 53 models)",
+        response_type="pairwise",
+        n_subjects=53,
+        n_items=0,
+        n_comparisons=135634,
+        subject_entity="LLM",
+        item_entity="prompt",
+        filename="arena/chatbot_arena_140k.pt",
+        citation=_ARENA_CITATION,
+        url=_ARENA_URL,
+        license="CC-BY-4.0",
+        tags=["nlp", "pairwise", "preference", "human-evaluation", "chatbot"],
+    )
+
     return datasets
