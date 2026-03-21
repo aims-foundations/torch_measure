@@ -1280,6 +1280,77 @@ SPECS: list[BenchmarkSpec] = [
         content_key="item_id",
         content_col="content",
     ),
+    # ── Global South: HELM African MMLU+Winogrande ───────────────────
+    BenchmarkSpec(
+        benchmark="helm_multilingual",
+        csv_file="response_matrix_afr.csv",
+        registry_name="bench/helm_african",
+        response_type="binary",
+        orientation="items_as_rows",
+        description="HELM African MMLU+Winogrande — 23 models × 33,880 items in 11 African languages",
+        url="https://crfm.stanford.edu/helm/mmlu-winogrande-afr/latest/",
+        tags=["global-south", "africa", "multilingual", "knowledge", "commonsense-reasoning"],
+        index_col="question_id",
+    ),
+    # ── Global South: HELM ThaiExam ──────────────────────────────────
+    BenchmarkSpec(
+        benchmark="helm_multilingual",
+        csv_file="response_matrix_thaiexam.csv",
+        registry_name="bench/helm_thaiexam",
+        response_type="binary",
+        orientation="items_as_rows",
+        description="HELM ThaiExam — 42 models × 565 Thai exam items (A-Level, IC, ONET, TGAT, TPAT1)",
+        url="https://crfm.stanford.edu/helm/thaiexam/latest/",
+        tags=["southeast-asia", "thai", "knowledge", "exams"],
+        index_col="question_id",
+    ),
+    # ── Global South: HELM CLEVA (Chinese) ───────────────────────────
+    BenchmarkSpec(
+        benchmark="helm_multilingual",
+        csv_file="response_matrix_cleva.csv",
+        registry_name="bench/helm_cleva",
+        response_type="binary",
+        orientation="items_as_rows",
+        description="HELM CLEVA — 4 models × 5,828 items across 21 Chinese NLP tasks",
+        url="https://crfm.stanford.edu/helm/cleva/latest/",
+        tags=["east-asia", "chinese", "multilingual", "knowledge"],
+        index_col="question_id",
+    ),
+    # ── Global South: OALL Arabic EXAMS ──────────────────────────────
+    BenchmarkSpec(
+        benchmark="culturaleval",
+        csv_file="response_matrix_oall_arabic_exams.csv",
+        registry_name="bench/oall_arabic_exams",
+        response_type="binary",
+        orientation="models_as_rows",
+        description="OALL Arabic EXAMS — 144 models × 537 Arabic exam items",
+        url="https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
+        tags=["global-south", "mena", "arabic", "exams"],
+        index_col="model",
+    ),
+    # ── Global South: OALL Arabic MMLU ───────────────────────────────
+    BenchmarkSpec(
+        benchmark="culturaleval",
+        csv_file="response_matrix_oall_arabic_mmlu.csv",
+        registry_name="bench/oall_arabic_mmlu",
+        response_type="binary",
+        orientation="models_as_rows",
+        description="OALL Arabic MMLU — 142 models × 14,042 Arabic-translated MMLU items",
+        url="https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
+        tags=["global-south", "mena", "arabic", "knowledge"],
+        index_col="model",
+    ),
+    # ── Global South: MasakhaNER v2 (sentence-level) ─────────────────
+    BenchmarkSpec(
+        benchmark="afrieval",
+        csv_file="response_matrix_masakhaner_v2_sentence.csv",
+        registry_name="bench/masakhaner_v2",
+        response_type="binary",
+        orientation="items_as_rows",
+        description="MasakhaNER v2 — 7 models × 27,559 sentences in 19 African languages (NER correctness)",
+        url="https://github.com/masakhane-io/masakhane-ner",
+        tags=["global-south", "africa", "multilingual", "ner"],
+    ),
 ]
 
 
@@ -1522,6 +1593,65 @@ def main() -> None:
     print(f"\nTotal: {len(payloads)} datasets")
     print(f"Files saved to: {TMP_DIR}")
 
+
+# --- Newly curated benchmarks (2026-03-21) ---
+
+SPECS_NEW = [
+    BenchmarkSpec(
+        benchmark="rewardbench",
+        csv_file="response_matrix.csv",
+        registry_name="bench/rewardbench",
+        response_type="binary",
+        orientation="models_as_rows",
+        description="RewardBench — reward model evaluation (chosen vs rejected)",
+        url="https://github.com/allenai/reward-bench",
+        tags=["preference", "reward-model"],
+        content_file="item_content.csv",
+        content_key="item_id",
+        content_col="content",
+    ),
+    BenchmarkSpec(
+        benchmark="lawbench",
+        csv_file="response_matrix.csv",
+        registry_name="bench/lawbench",
+        response_type="binary",
+        orientation="models_as_rows",
+        description="LawBench — Chinese legal reasoning (51 models, 20 tasks, zero-shot)",
+        url="https://github.com/open-compass/LawBench",
+        tags=["legal", "chinese", "domain-specific"],
+        content_file="item_content.csv",
+        content_key="item_id",
+        content_col="content",
+    ),
+    BenchmarkSpec(
+        benchmark="ultrafeedback",
+        csv_file="response_matrix.csv",
+        registry_name="bench/ultrafeedback",
+        response_type="continuous",
+        orientation="models_as_rows",
+        description="UltraFeedback — multi-model instruction following (overall scores, 64K prompts)",
+        url="https://github.com/OpenBMB/UltraFeedback",
+        tags=["preference", "instruction-following"],
+        content_file="item_content.csv",
+        content_key="item_id",
+        content_col="content",
+    ),
+    BenchmarkSpec(
+        benchmark="financebench",
+        csv_file="response_matrix.csv",
+        registry_name="bench/financebench",
+        response_type="binary",
+        orientation="models_as_rows",
+        description="FinanceBench — financial QA over SEC filings (16 configs, 150 items)",
+        url="https://github.com/patronus-ai/financebench",
+        tags=["finance", "domain-specific", "qa"],
+        content_file="item_content.csv",
+        content_key="item_id",
+        content_col="content",
+    ),
+]
+
+SPECS.extend(SPECS_NEW)
 
 if __name__ == "__main__":
     main()
