@@ -48,7 +48,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 SRC_REPO = "RicardoRei/wmt-mqm-human-evaluation"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_wmt_mqm_migration"
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")

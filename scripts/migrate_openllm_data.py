@@ -38,7 +38,7 @@ print = lambda *a, **kw: (sys.stdout.write(" ".join(str(x) for x in a) + kw.get(
 # ---------------------------------------------------------------------------
 
 SRC_REPO = "stair-lab/zero_shot_open_llm_leaderboard"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path("/tmp/torch_measure_migration")
 
 # All parquet files across all splits

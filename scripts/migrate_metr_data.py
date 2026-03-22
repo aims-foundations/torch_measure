@@ -52,7 +52,7 @@ METR_JSONL_URL = (
     "https://raw.githubusercontent.com/METR/eval-analysis-public/"
     "main/reports/time-horizon-1-0/data/raw/runs.jsonl"
 )
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_metr_migration"
 
 # Task source names as they appear in the data.

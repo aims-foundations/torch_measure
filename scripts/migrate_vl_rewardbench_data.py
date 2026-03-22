@@ -44,7 +44,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 SRC_REPO = "MMInstruction/VL-RewardBench"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_vl_rewardbench_migration"
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")

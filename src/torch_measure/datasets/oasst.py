@@ -15,7 +15,7 @@ Each response matrix follows the standard torch_measure convention:
   1.0 = best (rank 0) and 0.0 = worst.  NaN for missing entries
   (not every rank tier is present for every prompt).
 
-Data files live on HuggingFace Hub at ``sangttruong/torch-measure-data``
+Data files live on HuggingFace Hub at ``aims-foundation/torch-measure-data``
 under the ``oasst/`` prefix.
 """
 

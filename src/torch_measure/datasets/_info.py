@@ -51,7 +51,7 @@ class DatasetInfo:
     n_items: int
     subject_entity: str = "LLM"
     item_entity: str = "question"
-    repo_id: str = "sangttruong/torch-measure-data"
+    repo_id: str = "aims-foundation/torch-measure-data"
     filename: str = ""
     citation: str = ""
     url: str = ""

@@ -54,7 +54,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 HF_DATASET = "stanfordnlp/SHP-2"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_shp2_migration"
 
 # Number of raw pairs to sample for the sampled_pairs dataset

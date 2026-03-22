@@ -54,7 +54,7 @@ from huggingface_hub import upload_file
 
 SRC_HF_REPO = "ScalerLab/JudgeBench"
 SRC_GH_REPO = "ScalerLab/JudgeBench"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_judgebench_migration"
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")
@@ -194,10 +194,31 @@ def score_judge_on_pair(pair: dict, reverse_order: bool = True) -> float | None:
     if not judgments:
         return None
 
+    def _get_response(j):
+        """Extract response string from a judgment entry (handles dict, list, str, None)."""
+        if j is None:
+            return ""
+        jud = j.get("judgment", None) if isinstance(j, dict) else None
+        if jud is None:
+            return ""
+        if isinstance(jud, str):
+            return jud
+        if isinstance(jud, dict):
+            return jud.get("response", "")
+        if isinstance(jud, list):
+            # Take first element's response if it's a list of dicts
+            for elem in jud:
+                if isinstance(elem, dict):
+                    return elem.get("response", "")
+                if isinstance(elem, str):
+                    return elem
+            return ""
+        return str(jud)
+
     if reverse_order and len(judgments) >= 2:
         # Two judgments: original order + swapped order
-        decision_1 = extract_decision(judgments[0].get("judgment", {}).get("response", ""))
-        decision_2_raw = extract_decision(judgments[1].get("judgment", {}).get("response", ""))
+        decision_1 = extract_decision(_get_response(judgments[0]))
+        decision_2_raw = extract_decision(_get_response(judgments[1]))
 
         # The second judgment was made with swapped order, so flip its decision
         decision_2 = flip_decision(decision_2_raw) if decision_2_raw else None
@@ -222,7 +243,7 @@ def score_judge_on_pair(pair: dict, reverse_order: bool = True) -> float | None:
             return None  # tie / inconclusive
     else:
         # Single judgment
-        decision = extract_decision(judgments[0].get("judgment", {}).get("response", ""))
+        decision = extract_decision(_get_response(judgments[0]))
         if decision is None:
             return None
         return 1.0 if decision == label else 0.0

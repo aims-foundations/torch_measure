@@ -54,8 +54,8 @@ from huggingface_hub import upload_file
 # Config
 # ---------------------------------------------------------------------------
 
-SRC_REPO = "yuvalkirstain/pickapic_v2_no_images"
-DST_REPO = "sangttruong/torch-measure-data"
+SRC_REPO = "liuhuohuo2/pick-a-pic-v2"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_pickapic_migration"
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")
@@ -69,32 +69,45 @@ RANDOM_SEED = 42
 # ---------------------------------------------------------------------------
 
 
-def load_pickapic_data():
-    """Download Pick-a-Pic v2 (no images) from HuggingFace and return a DataFrame."""
+def load_pickapic_data(n_sample: int = 100_000, seed: int = 42):
+    """Stream Pick-a-Pic v2 from HuggingFace, sampling text-only columns.
+
+    We stream to avoid downloading 322GB of embedded images.
+    """
+    import random
     from datasets import load_dataset
 
-    print("Downloading Pick-a-Pic v2 (no images) from HuggingFace ...")
-    ds = load_dataset(SRC_REPO, split="train", token=HF_TOKEN)
-    print(f"  Total rows: {len(ds):,}")
-    print(f"  Columns: {ds.column_names}")
-    return ds
+    TEXT_COLS = [
+        "ranking_id", "caption", "model_0", "model_1",
+        "label_0", "label_1", "has_label", "user_id", "best_image_uid",
+    ]
 
+    print("Streaming Pick-a-Pic v2 from HuggingFace (text columns only) ...")
+    ds = load_dataset(SRC_REPO, split="train", streaming=True, token=HF_TOKEN)
+    ds = ds.select_columns(TEXT_COLS)
 
-def filter_labeled(ds) -> "Dataset":  # noqa: F821
-    """Keep only rows that have a valid preference label."""
-    print("\nFiltering to labeled comparisons ...")
-    # Keep rows where has_label is True and label_0 is not null
-    ds_labeled = ds.filter(lambda x: x["has_label"] is True)
-    print(f"  Labeled rows: {len(ds_labeled):,}")
-    return ds_labeled
+    # Reservoir sample labeled rows
+    rng = random.Random(seed)
+    reservoir: list[dict] = []
+    n_seen = 0
 
+    for row in ds:
+        if not row.get("has_label"):
+            continue
+        item = {k: row[k] for k in TEXT_COLS if k in row}
+        n_seen += 1
+        if len(reservoir) < n_sample:
+            reservoir.append(item)
+        else:
+            j = rng.randint(0, n_seen - 1)
+            if j < n_sample:
+                reservoir[j] = item
+        if n_seen % 100_000 == 0:
+            print(f"  Streamed {n_seen:,} labeled rows ...")
 
-def reservoir_sample(ds, n: int, seed: int) -> "Dataset":  # noqa: F821
-    """Reservoir-sample n rows from the dataset."""
-    print(f"\nReservoir-sampling {n:,} comparisons (seed={seed}) ...")
-    ds_sampled = ds.shuffle(seed=seed).select(range(min(n, len(ds))))
-    print(f"  Sampled rows: {len(ds_sampled):,}")
-    return ds_sampled
+    print(f"  Total labeled rows streamed: {n_seen:,}")
+    print(f"  Sampled: {len(reservoir):,}")
+    return reservoir
 
 
 # ---------------------------------------------------------------------------
@@ -204,33 +217,21 @@ def build_pairwise_payload(ds) -> dict:
 def main() -> None:
     TMP_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Step 1: Download
+    # Step 1: Stream, filter, and sample
     print("=" * 60)
-    print("Step 1: Downloading Pick-a-Pic v2 ...")
+    print("Step 1: Streaming Pick-a-Pic v2 (filter + sample) ...")
     print("=" * 60)
-    ds = load_pickapic_data()
+    rows = load_pickapic_data(n_sample=SAMPLE_SIZE, seed=RANDOM_SEED)
 
-    # Step 2: Filter to labeled rows
+    # Step 2: Build payload
     print("\n" + "=" * 60)
-    print("Step 2: Filtering to labeled comparisons ...")
+    print("Step 2: Building pairwise payload ...")
     print("=" * 60)
-    ds_labeled = filter_labeled(ds)
+    payload = build_pairwise_payload(rows)
 
-    # Step 3: Sample
+    # Step 3: Save and upload
     print("\n" + "=" * 60)
-    print("Step 3: Sampling ...")
-    print("=" * 60)
-    ds_sampled = reservoir_sample(ds_labeled, SAMPLE_SIZE, RANDOM_SEED)
-
-    # Step 4: Build payload
-    print("\n" + "=" * 60)
-    print("Step 4: Building pairwise payload ...")
-    print("=" * 60)
-    payload = build_pairwise_payload(ds_sampled)
-
-    # Step 5: Save and upload
-    print("\n" + "=" * 60)
-    print("Step 5: Saving and uploading ...")
+    print("Step 3: Saving and uploading ...")
     print("=" * 60)
 
     filename = "pickapic/sampled_100k.pt"

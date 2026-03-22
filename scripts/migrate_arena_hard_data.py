@@ -54,7 +54,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 SRC_REPO = "lmarena-ai/arena-hard-auto"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_arena_hard_migration"
 
 # We use the gpt-4-1106-preview judge — the primary/default judge for v0.1.

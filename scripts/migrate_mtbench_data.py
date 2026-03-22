@@ -59,7 +59,7 @@ QUESTION_URL = (
     "https://huggingface.co/spaces/lmsys/mt-bench/resolve/main/"
     "data/mt_bench/question.jsonl"
 )
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_mtbench_migration"
 
 # ---------------------------------------------------------------------------

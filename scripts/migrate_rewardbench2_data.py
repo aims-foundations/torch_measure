@@ -46,7 +46,7 @@ from huggingface_hub import HfApi, hf_hub_download, upload_file
 
 SRC_RESULTS_REPO = "allenai/reward-bench-2-results"
 SRC_ITEMS_REPO = "allenai/reward-bench-2"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_rewardbench2_migration"
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")

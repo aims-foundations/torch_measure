@@ -47,7 +47,7 @@ from huggingface_hub import upload_file
 # Config
 # ---------------------------------------------------------------------------
 
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_ultrafeedback_migration"
 
 ASPECTS = ["helpfulness", "honesty", "instruction_following", "truthfulness"]

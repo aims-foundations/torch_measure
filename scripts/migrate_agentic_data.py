@@ -46,7 +46,7 @@ from huggingface_hub import HfApi, hf_hub_download, upload_file
 # ---------------------------------------------------------------------------
 
 SRC_REPO = "aims-foundation/eval_response_matrix"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path("/tmp/torch_measure_migration")
 
 # Pre-revision benchmarks and their available score files.

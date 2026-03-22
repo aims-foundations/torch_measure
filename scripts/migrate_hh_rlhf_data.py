@@ -50,7 +50,7 @@ from huggingface_hub import hf_hub_download, upload_file
 # ---------------------------------------------------------------------------
 
 HF_SOURCE = "Anthropic/hh-rlhf"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_hh_rlhf_migration"
 
 # Mapping from subset name to the list of JSONL.gz file prefixes in the HF repo.

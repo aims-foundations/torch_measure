@@ -43,7 +43,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 HF_RESULTS_REPO = "allenai/reward-bench-results"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_rewardbench_migration"
 
 # HuggingFace API endpoints

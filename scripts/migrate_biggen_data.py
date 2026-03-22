@@ -64,7 +64,7 @@ from huggingface_hub import upload_file
 
 SRC_REPO = "prometheus-eval/BiGGen-Bench-Results"
 SRC_SPLIT = "llm_as_a_judge"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_biggen_migration"
 
 # Judge columns -> short names and display names

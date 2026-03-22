@@ -61,7 +61,7 @@ ANNOTATIONS_URL = (
     "https://storage.googleapis.com/sfr-summarization-repo-research/"
     "model_annotations.aligned.jsonl"
 )
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_summeval_migration"
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")

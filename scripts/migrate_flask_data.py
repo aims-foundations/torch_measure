@@ -52,7 +52,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 SRC_BASE_URL = "https://raw.githubusercontent.com/kaistAI/FLASK/main"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_flask_migration"
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")

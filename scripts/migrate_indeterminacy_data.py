@@ -55,7 +55,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 HF_SOURCE = "lguerdan/indeterminacy-experiments"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_indeterminacy_migration"
 
 N_JUDGES = 9

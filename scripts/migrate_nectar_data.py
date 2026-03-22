@@ -53,7 +53,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 SRC_DATASET = "berkeley-nest/Nectar"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_nectar_migration"
 
 # Maximum number of prompts to process (None = all).

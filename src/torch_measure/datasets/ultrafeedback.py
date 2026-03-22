@@ -14,7 +14,7 @@ Each response matrix follows the standard torch_measure convention:
 - **Values**: GPT-4 ratings normalized to [0, 1] (from original 1-5 scale).
   NaN for missing entries (each prompt has responses from only 4 of 17 models).
 
-Data files live on HuggingFace Hub at ``sangttruong/torch-measure-data``
+Data files live on HuggingFace Hub at ``aims-foundation/torch-measure-data``
 under the ``ultrafeedback/`` prefix.
 """
 

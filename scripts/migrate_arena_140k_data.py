@@ -45,7 +45,7 @@ from huggingface_hub import HfApi, upload_file
 # ---------------------------------------------------------------------------
 
 SRC_REPO = "lmarena-ai/arena-human-preference-140k"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path("/tmp/torch_measure_migration")
 
 # Winner string → outcome float

@@ -49,7 +49,7 @@ from huggingface_hub import upload_file
 # ---------------------------------------------------------------------------
 
 SRC_DATASET = "OpenAssistant/oasst1"
-DST_REPO = "sangttruong/torch-measure-data"
+DST_REPO = "aims-foundation/torch-measure-data"
 TMP_DIR = Path(tempfile.gettempdir()) / "torch_measure_oasst_migration"
 
 # We also build a subset with prompts that have >= 3 ranked alternatives.
