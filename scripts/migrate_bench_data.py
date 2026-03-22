@@ -1351,6 +1351,39 @@ SPECS: list[BenchmarkSpec] = [
         url="https://github.com/masakhane-io/masakhane-ner",
         tags=["global-south", "africa", "multilingual", "ner"],
     ),
+    # ── Domain: LawBench (Chinese Legal) ─────────────────────────────
+    BenchmarkSpec(
+        benchmark="legaleval",
+        csv_file="lawbench_response_matrix.csv",
+        registry_name="bench/lawbench",
+        response_type="continuous",
+        orientation="items_as_rows",
+        description="LawBench — 51 models × 9,000 items across 18 Chinese legal tasks (EMNLP 2024)",
+        url="https://github.com/open-compass/LawBench",
+        tags=["domain-specific", "legal", "chinese"],
+    ),
+    # ── Domain: LexEval (Chinese Legal) ──────────────────────────────
+    BenchmarkSpec(
+        benchmark="legaleval",
+        csv_file="lexeval_response_matrix.csv",
+        registry_name="bench/lexeval",
+        response_type="continuous",
+        orientation="items_as_rows",
+        description="LexEval — 38 models × 14,147 items across 23 Chinese legal tasks (NeurIPS 2024)",
+        url="https://github.com/CSHaitao/LexEval",
+        tags=["domain-specific", "legal", "chinese"],
+    ),
+    # ── Domain: IgakuQA (Japanese Medical) ───────────────────────────
+    BenchmarkSpec(
+        benchmark="medeval",
+        csv_file="igakuqa/response_matrix.csv",
+        registry_name="bench/igakuqa",
+        response_type="binary",
+        orientation="items_as_rows",
+        description="IgakuQA — 5 models × 2,000 Japanese medical licensing exam questions",
+        url="https://github.com/jungokasai/IgakuQA",
+        tags=["domain-specific", "medical", "japanese"],
+    ),
 ]
 
 

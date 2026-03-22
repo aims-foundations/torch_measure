@@ -1324,4 +1324,148 @@ def _register_bench_datasets() -> dict[str, DatasetInfo]:
         tags=["east-asia", "korean", "knowledge", "human-baseline"],
     )
 
+    # ── Global South: HELM African MMLU+Winogrande ───────────────────
+    d["bench/helm_african"] = DatasetInfo(
+        name="bench/helm_african",
+        family="bench",
+        description="HELM African MMLU+Winogrande — 23 models × 33,880 items in 11 African languages",
+        response_type="binary",
+        n_subjects=23,
+        n_items=33880,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/helm_african.pt",
+        url="https://crfm.stanford.edu/helm/mmlu-winogrande-afr/latest/",
+        tags=["global-south", "africa", "multilingual", "knowledge", "commonsense-reasoning"],
+    )
+
+    # ── Global South: HELM ThaiExam ──────────────────────────────────
+    d["bench/helm_thaiexam"] = DatasetInfo(
+        name="bench/helm_thaiexam",
+        family="bench",
+        description="HELM ThaiExam — 42 models × 565 Thai exam items",
+        response_type="binary",
+        n_subjects=42,
+        n_items=565,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/helm_thaiexam.pt",
+        url="https://crfm.stanford.edu/helm/thaiexam/latest/",
+        tags=["southeast-asia", "thai", "knowledge", "exams"],
+    )
+
+    # ── Global South: HELM CLEVA (Chinese) ───────────────────────────
+    d["bench/helm_cleva"] = DatasetInfo(
+        name="bench/helm_cleva",
+        family="bench",
+        description="HELM CLEVA — 4 models × 5,828 items across 21 Chinese NLP tasks",
+        response_type="binary",
+        n_subjects=4,
+        n_items=5828,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/helm_cleva.pt",
+        url="https://crfm.stanford.edu/helm/cleva/latest/",
+        tags=["east-asia", "chinese", "multilingual", "knowledge"],
+    )
+
+    # ── Global South: OALL Arabic EXAMS ──────────────────────────────
+    d["bench/oall_arabic_exams"] = DatasetInfo(
+        name="bench/oall_arabic_exams",
+        family="bench",
+        description="OALL Arabic EXAMS — 144 models × 537 Arabic exam items",
+        response_type="binary",
+        n_subjects=144,
+        n_items=537,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/oall_arabic_exams.pt",
+        url="https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
+        tags=["global-south", "mena", "arabic", "exams"],
+    )
+
+    # ── Global South: OALL Arabic MMLU ───────────────────────────────
+    d["bench/oall_arabic_mmlu"] = DatasetInfo(
+        name="bench/oall_arabic_mmlu",
+        family="bench",
+        description="OALL Arabic MMLU — 142 models × 14,042 Arabic-translated MMLU items",
+        response_type="binary",
+        n_subjects=142,
+        n_items=14042,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/oall_arabic_mmlu.pt",
+        url="https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
+        tags=["global-south", "mena", "arabic", "knowledge"],
+    )
+
+    # ── Global South: MasakhaNER v2 (sentence-level) ─────────────────
+    d["bench/masakhaner_v2"] = DatasetInfo(
+        name="bench/masakhaner_v2",
+        family="bench",
+        description="MasakhaNER v2 — 7 models × 27,559 sentences in 19 African languages",
+        response_type="binary",
+        n_subjects=7,
+        n_items=27559,
+        subject_entity="model",
+        item_entity="sentence",
+        repo_id=_BENCH_REPO,
+        filename="bench/masakhaner_v2.pt",
+        url="https://github.com/masakhane-io/masakhane-ner",
+        tags=["global-south", "africa", "multilingual", "ner"],
+    )
+
+    # ── Domain: LawBench (Chinese Legal) ────────────────────────────
+    d["bench/lawbench"] = DatasetInfo(
+        name="bench/lawbench",
+        family="bench",
+        description="LawBench — 51 models × 9,000 items across 18 Chinese legal tasks (EMNLP 2024)",
+        response_type="continuous",
+        n_subjects=51,
+        n_items=9000,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/lawbench.pt",
+        url="https://github.com/open-compass/LawBench",
+        tags=["domain-specific", "legal", "chinese"],
+    )
+
+    # ── Domain: LexEval (Chinese Legal) ──────────────────────────────
+    d["bench/lexeval"] = DatasetInfo(
+        name="bench/lexeval",
+        family="bench",
+        description="LexEval — 38 models × 14,147 items across 23 Chinese legal tasks (NeurIPS 2024)",
+        response_type="continuous",
+        n_subjects=38,
+        n_items=14147,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/lexeval.pt",
+        url="https://github.com/CSHaitao/LexEval",
+        tags=["domain-specific", "legal", "chinese"],
+    )
+
+    # ── Domain: IgakuQA (Japanese Medical) ───────────────────────────
+    d["bench/igakuqa"] = DatasetInfo(
+        name="bench/igakuqa",
+        family="bench",
+        description="IgakuQA — 5 models × 2,000 Japanese medical licensing exam questions",
+        response_type="binary",
+        n_subjects=5,
+        n_items=2000,
+        subject_entity="model",
+        item_entity="question",
+        repo_id=_BENCH_REPO,
+        filename="bench/igakuqa.pt",
+        url="https://github.com/jungokasai/IgakuQA",
+        tags=["domain-specific", "medical", "japanese"],
+    )
+
     return d
