@@ -1995,5 +1995,46 @@ SPECS_MONITORING = [
 
 SPECS.extend(SPECS_MONITORING)
 
+# ---------------------------------------------------------------------------
+# CoT monitoring / behavioral trace datasets (tabular subsets)
+# ---------------------------------------------------------------------------
+
+SPECS_COT = [
+    BenchmarkSpec(
+        benchmark="alignment_faking", csv_file="alignment_faking_sample.csv",
+        registry_name="cot/alignment_faking", response_type="binary",
+        orientation="models_as_rows",
+        description="Anthropic alignment faking: 100K RL transcripts with alignment_faking labels",
+        url="https://huggingface.co/datasets/Anthropic/alignment-faking-rl",
+        tags=["cot", "scheming", "alignment-faking", "rl"],
+    ),
+    BenchmarkSpec(
+        benchmark="atbench", csv_file="atbench_data.csv",
+        registry_name="cot/atbench", response_type="binary",
+        orientation="models_as_rows",
+        description="ATBench: 500 agent trajectories with safe/unsafe labels",
+        url="https://huggingface.co/datasets/AI45Research/ATBench",
+        tags=["cot", "agent-safety", "trajectory"],
+    ),
+    BenchmarkSpec(
+        benchmark="llmail_inject", csv_file="llmail_inject_combined.csv",
+        registry_name="cot/llmail_inject", response_type="binary",
+        orientation="models_as_rows",
+        description="LLMail-Inject: 462K prompt injection attacks across 40 levels",
+        url="https://huggingface.co/datasets/microsoft/llmail-inject-challenge",
+        tags=["cot", "prompt-injection", "adversarial"],
+    ),
+    BenchmarkSpec(
+        benchmark="cot_safety_behaviors", csv_file="cot_safety_train.csv",
+        registry_name="cot/safety_behaviors", response_type="binary",
+        orientation="models_as_rows",
+        description="CoT Safety Behaviors: 22K sentence-level safety annotations in reasoning chains",
+        url="https://huggingface.co/datasets/AISafety-Student/reasoning-safety-behaviours",
+        tags=["cot", "faithfulness", "safety-labels"],
+    ),
+]
+
+SPECS.extend(SPECS_COT)
+
 if __name__ == "__main__":
     main()
