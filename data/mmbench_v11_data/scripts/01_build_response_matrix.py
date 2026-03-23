@@ -1,0 +1,203 @@
+"""
+Build MMBench_V11 response matrix from VLMEval/OpenVLMRecords.
+
+Data source:
+  - HuggingFace dataset: VLMEval/OpenVLMRecords
+  - Per-model xlsx files at mmeval/{model}/{model}_MMBench_V11.xlsx
+  - MCQ vision understanding benchmark (dev split, has ground truth)
+
+Score format:
+  - Binary 0/1: whether extracted answer letter matches ground truth
+  - NaN if answer cannot be parsed from model prediction
+
+Outputs:
+  - raw/{model}_MMBench_V11.xlsx: Downloaded xlsx files
+  - processed/response_matrix.csv: Models (rows) x items (columns)
+  - processed/item_content.csv: Per-item metadata
+"""
+
+import os
+import re
+import sys
+
+import numpy as np
+import pandas as pd
+from huggingface_hub import hf_hub_download, list_repo_tree
+
+# Paths
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(SCRIPT_DIR)
+RAW_DIR = os.path.join(BASE_DIR, "raw")
+PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
+os.makedirs(RAW_DIR, exist_ok=True)
+os.makedirs(PROCESSED_DIR, exist_ok=True)
+
+REPO_ID = "VLMEval/OpenVLMRecords"
+BENCHMARK_SUFFIX = "MMBench_V11"
+SPLIT_FILTER = "dev"
+SPLIT_COL = "split"
+
+
+def list_all_models():
+    """List all model directories in the repo."""
+    items = list(list_repo_tree(REPO_ID, path_in_repo="mmeval", repo_type="dataset"))
+    models = []
+    for item in items:
+        name = item.path.replace("mmeval/", "")
+        if "/" not in name:
+            models.append(name)
+    return sorted(models)
+
+
+def find_models_for_benchmark(all_models):
+    """Find which models have results for this benchmark."""
+    models_with_bench = []
+    for model in all_models:
+        try:
+            items = list(list_repo_tree(REPO_ID, path_in_repo=f"mmeval/{model}", repo_type="dataset"))
+            filenames = [item.path.split("/")[-1] for item in items]
+            target = f"{model}_{BENCHMARK_SUFFIX}.xlsx"
+            if target in filenames:
+                models_with_bench.append(model)
+        except Exception:
+            pass
+    return models_with_bench
+
+
+def extract_answer_letter(prediction_text, choices=("A", "B", "C", "D")):
+    """Extract the answer letter from a model's free-text prediction."""
+    if pd.isna(prediction_text):
+        return None
+    pred = str(prediction_text).strip()
+
+    if pred.upper() in choices:
+        return pred.upper()
+
+    m = re.search(r"(?:answer\s*(?:is|:)\s*)([A-D])\b", pred, re.IGNORECASE)
+    if m:
+        return m.group(1).upper()
+
+    m = re.search(r"\*\*([A-D])\b", pred)
+    if m:
+        return m.group(1).upper()
+
+    m = re.match(r"^[(\s]*([A-D])[.):\s]", pred)
+    if m:
+        return m.group(1).upper()
+
+    m = re.search(r"\b([A-D])\b", pred)
+    if m:
+        return m.group(1).upper()
+
+    return None
+
+
+def score_mcq(row):
+    """Score a multiple choice question."""
+    pred_letter = extract_answer_letter(str(row["prediction"]))
+    if pred_letter is None:
+        return np.nan
+    return 1 if pred_letter == row["answer"] else 0
+
+
+def main():
+    print(f"MMBench_V11 Response Matrix Builder")
+    print("=" * 60)
+    print(f"  Raw data dir:       {RAW_DIR}")
+    print(f"  Processed data dir: {PROCESSED_DIR}")
+    print()
+
+    print("Listing all models in VLMEval/OpenVLMRecords...")
+    all_models = list_all_models()
+    print(f"Found {len(all_models)} models total")
+
+    print(f"Scanning for {BENCHMARK_SUFFIX}...")
+    models_with_bench = find_models_for_benchmark(all_models)
+    print(f"Found {len(models_with_bench)} models with {BENCHMARK_SUFFIX}")
+
+    if not models_with_bench:
+        print("No models found, exiting.")
+        sys.exit(1)
+
+    all_scores = {}
+    item_info = None
+    failed_models = []
+
+    for i, model in enumerate(models_with_bench):
+        if (i + 1) % 20 == 0 or i == 0:
+            print(f"  Downloading {i + 1}/{len(models_with_bench)}: {model}")
+
+        try:
+            fpath = f"mmeval/{model}/{model}_{BENCHMARK_SUFFIX}.xlsx"
+            local_path = hf_hub_download(REPO_ID, fpath, repo_type="dataset")
+
+            # Cache raw file
+            raw_dest = os.path.join(RAW_DIR, f"{model}_{BENCHMARK_SUFFIX}.xlsx")
+            if not os.path.exists(raw_dest):
+                import shutil
+                shutil.copy2(local_path, raw_dest)
+
+            df = pd.read_excel(local_path)
+
+            # Apply split filter
+            if SPLIT_COL in df.columns:
+                df = df[df[SPLIT_COL] == SPLIT_FILTER].copy()
+
+            if len(df) == 0:
+                failed_models.append((model, "empty after split filter"))
+                continue
+
+            if "index" not in df.columns:
+                df["index"] = range(len(df))
+
+            df["score"] = df.apply(score_mcq, axis=1)
+            scores = df.set_index("index")["score"]
+            all_scores[model] = scores
+
+            if item_info is None:
+                item_cols = ["index", "question"]
+                for c in ["category", "l2-category", "answer", "A", "B", "C", "D"]:
+                    if c in df.columns:
+                        item_cols.append(c)
+                item_info = df[item_cols].copy()
+
+        except Exception as e:
+            failed_models.append((model, str(e)[:100]))
+
+    if not all_scores:
+        print("No successful downloads")
+        sys.exit(1)
+
+    # Build response matrix (models x items)
+    response_matrix = pd.DataFrame(all_scores).sort_index().T
+    response_matrix.index.name = "model"
+
+    n_models = len(response_matrix)
+    n_items = len(response_matrix.columns)
+    model_acc = response_matrix.mean(axis=1)
+    item_acc = response_matrix.mean(axis=0)
+    missing_rate = response_matrix.isna().mean().mean()
+
+    print(f"\n{'=' * 60}")
+    print(f"  Models: {n_models}")
+    print(f"  Items: {n_items}")
+    print(f"  Missing rate: {missing_rate:.3f}")
+    print(f"  Model accuracy range: {model_acc.min():.3f} - {model_acc.max():.3f}")
+    print(f"  Item accuracy range: {item_acc.min():.3f} - {item_acc.max():.3f}")
+
+    response_matrix.to_csv(os.path.join(PROCESSED_DIR, "response_matrix.csv"))
+    print(f"  Saved response_matrix.csv")
+
+    if item_info is not None:
+        item_info = item_info.drop_duplicates(subset=["index"]).sort_values("index")
+        item_info.to_csv(os.path.join(PROCESSED_DIR, "item_content.csv"), index=False)
+        print(f"  Saved item_content.csv")
+
+    if failed_models:
+        print(f"\n  Failed models ({len(failed_models)}):")
+        for m, e in failed_models[:10]:
+            print(f"    {m}: {e}")
+
+
+if __name__ == "__main__":
+    main()

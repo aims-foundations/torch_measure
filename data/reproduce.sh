@@ -107,6 +107,16 @@ BENCHMARKS=(
     wmt_mqm
     pickapic
     vl_rewardbench
+    ai2d_test
+    hallusionbench
+    mathvista_mini
+    mmbench_v11
+    mme
+    mmmu_dev_val
+    financebench
+    igakuqa
+    lawbench
+    tumlu
 )
 
 if [[ "${1:-}" == "--list" ]]; then
@@ -1203,6 +1213,92 @@ print(f'DPAI matrix: {len(tasks_sorted)} tasks x {len(agents_list)} agents')
         mkdir -p "$DIR/raw" "$DIR/processed"
 
         log_info "Building VL-RewardBench response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # VLM Benchmarks (from VLMEval/OpenVLMRecords on HuggingFace)
+    # ─────────────────────────────────────────────────────────────────────
+    ai2d_test)
+        DIR="$BASE_DIR/ai2d_test_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building AI2D_TEST response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    hallusionbench)
+        DIR="$BASE_DIR/hallusionbench_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building HallusionBench response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    mathvista_mini)
+        DIR="$BASE_DIR/mathvista_mini_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building MathVista_MINI response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    mmbench_v11)
+        DIR="$BASE_DIR/mmbench_v11_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building MMBench_V11 response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    mme)
+        DIR="$BASE_DIR/mme_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building MME response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    mmmu_dev_val)
+        DIR="$BASE_DIR/mmmu_dev_val_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building MMMU_DEV_VAL response matrix (downloads from HuggingFace)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # Ported benchmarks (from textbook curation scripts)
+    # ─────────────────────────────────────────────────────────────────────
+    financebench)
+        DIR="$BASE_DIR/financebench_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building FinanceBench response matrix (clones from GitHub)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    igakuqa)
+        DIR="$BASE_DIR/igakuqa_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building IgakuQA response matrix (clones from GitHub)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    lawbench)
+        DIR="$BASE_DIR/lawbench_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building LawBench response matrix (clones from GitHub)..."
+        python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    tumlu)
+        DIR="$BASE_DIR/tumlu_data"
+        mkdir -p "$DIR/raw" "$DIR/processed"
+
+        log_info "Building TUMLU response matrix (clones from GitHub)..."
         python3 "$DIR/scripts/01_build_response_matrix.py"
         ;;
 
