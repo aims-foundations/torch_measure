@@ -1946,5 +1946,54 @@ SPECS_SAFETY = [
 
 SPECS.extend(SPECS_SAFETY)
 
+# ---------------------------------------------------------------------------
+# Monitoring / post-deployment datasets
+# ---------------------------------------------------------------------------
+
+SPECS_MONITORING = [
+    BenchmarkSpec(
+        benchmark="nhtsa_sgo", csv_file="make_x_crash_type_combined.csv",
+        registry_name="monitoring/nhtsa_sgo", response_type="continuous",
+        orientation="models_as_rows",
+        description="NHTSA SGO: manufacturer x crash type counts (self-driving incidents)",
+        url="https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting",
+        tags=["monitoring", "autonomous-vehicles", "incidents"],
+    ),
+    BenchmarkSpec(
+        benchmark="ca_dmv_disengagement", csv_file="response_matrix_binary.csv",
+        registry_name="monitoring/ca_dmv_disengagement", response_type="binary",
+        orientation="models_as_rows",
+        description="CA DMV: manufacturer x location type disengagement binary matrix",
+        url="https://www.dmv.ca.gov/portal/vehicle-industry-services/autonomous-vehicles/disengagement-reports/",
+        tags=["monitoring", "autonomous-vehicles", "disengagement"],
+    ),
+    BenchmarkSpec(
+        benchmark="chatgpt_drift", csv_file="model_x_task_accuracy.csv",
+        registry_name="monitoring/chatgpt_drift", response_type="continuous",
+        orientation="models_as_rows",
+        description="ChatGPT drift: model-version x task accuracy over time",
+        url="https://arxiv.org/abs/2307.09009",
+        tags=["monitoring", "drift", "llm", "temporal"],
+    ),
+    BenchmarkSpec(
+        benchmark="aegis", csv_file="response_matrix.csv",
+        registry_name="monitoring/aegis", response_type="binary",
+        orientation="models_as_rows",
+        description="NVIDIA Aegis 2.0: interaction x hazard category binary safety matrix",
+        url="https://huggingface.co/datasets/nvidia/Aegis-AI-Content-Safety-Dataset-2.0",
+        tags=["monitoring", "content-safety", "hazard"],
+    ),
+    BenchmarkSpec(
+        benchmark="prism", csv_file="response_matrix.csv",
+        registry_name="monitoring/prism", response_type="continuous",
+        orientation="models_as_rows",
+        description="PRISM: 1396 participants x 21 models, mean rating (0-100)",
+        url="https://huggingface.co/datasets/HannahRoseKirk/prism-alignment",
+        tags=["monitoring", "preference", "alignment", "human-evaluation"],
+    ),
+]
+
+SPECS.extend(SPECS_MONITORING)
+
 if __name__ == "__main__":
     main()
