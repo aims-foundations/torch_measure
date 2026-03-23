@@ -117,6 +117,12 @@ BENCHMARKS=(
     igakuqa
     lawbench
     tumlu
+    # Intervention / treatment-response datasets
+    collab_cxr
+    metr_early2025
+    metr_late2025
+    haiid
+    genai_learning
 )
 
 if [[ "${1:-}" == "--list" ]]; then
@@ -1300,6 +1306,64 @@ print(f'DPAI matrix: {len(tasks_sorted)} tasks x {len(agents_list)} agents')
 
         log_info "Building TUMLU response matrix (clones from GitHub)..."
         python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # Intervention / Treatment-Response Datasets
+    # ─────────────────────────────────────────────────────────────────────
+    collab_cxr)
+        DIR="$BASE_DIR/collab_cxr_data"
+        mkdir -p "$DIR/raw" "$DIR/processed" "$DIR/scripts" "$DIR/figures"
+
+        log_info "Downloading Collab-CXR data from OSF..."
+        bash "$DIR/scripts/01_download_raw.sh"
+
+        log_info "Building Collab-CXR intervention matrices..."
+        python3 "$DIR/scripts/02_build_response_matrix.py"
+        ;;
+
+    metr_early2025)
+        DIR="$BASE_DIR/metr_early2025_data"
+        mkdir -p "$DIR/raw" "$DIR/processed" "$DIR/scripts" "$DIR/figures"
+
+        log_info "Downloading METR Early-2025 data from GitHub..."
+        bash "$DIR/scripts/01_download_raw.sh"
+
+        log_info "Building METR Early-2025 intervention matrices..."
+        python3 "$DIR/scripts/02_build_response_matrix.py"
+        ;;
+
+    metr_late2025)
+        DIR="$BASE_DIR/metr_late2025_data"
+        mkdir -p "$DIR/raw" "$DIR/processed" "$DIR/scripts" "$DIR/figures"
+
+        log_info "Downloading METR Late-2025 data from GitHub..."
+        bash "$DIR/scripts/01_download_raw.sh"
+
+        log_info "Building METR Late-2025 intervention matrices..."
+        python3 "$DIR/scripts/02_build_response_matrix.py"
+        ;;
+
+    haiid)
+        DIR="$BASE_DIR/haiid_data"
+        mkdir -p "$DIR/raw" "$DIR/processed" "$DIR/scripts" "$DIR/figures"
+
+        log_info "Downloading HAIID data from GitHub..."
+        bash "$DIR/scripts/01_download_raw.sh"
+
+        log_info "Building HAIID intervention matrices..."
+        python3 "$DIR/scripts/02_build_response_matrix.py"
+        ;;
+
+    genai_learning)
+        DIR="$BASE_DIR/genai_learning_data"
+        mkdir -p "$DIR/raw" "$DIR/processed" "$DIR/scripts" "$DIR/figures"
+
+        log_info "Downloading GenAICanHarmLearning data from GitHub..."
+        bash "$DIR/scripts/01_download_raw.sh"
+
+        log_info "Building GenAI Learning intervention matrices..."
+        python3 "$DIR/scripts/02_build_response_matrix.py"
         ;;
 
     *)

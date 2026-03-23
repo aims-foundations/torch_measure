@@ -35,6 +35,7 @@ from torch_measure.datasets.prometheus import _register_prometheus_datasets
 from torch_measure.datasets.summeval import _register_summeval_datasets
 from torch_measure.datasets.ultrafeedback import _register_ultrafeedback_datasets
 from torch_measure.datasets.vl_rewardbench import _register_vl_rewardbench_datasets
+from torch_measure.datasets.intervention import _register_intervention_datasets
 from torch_measure.datasets.wmt_mqm import _register_wmt_mqm_datasets
 
 # ---------------------------------------------------------------------------
@@ -73,6 +74,7 @@ _REGISTRY.update(_register_prometheus_datasets())
 _REGISTRY.update(_register_summeval_datasets())
 _REGISTRY.update(_register_vl_rewardbench_datasets())
 _REGISTRY.update(_register_wmt_mqm_datasets())
+_REGISTRY.update(_register_intervention_datasets())
 
 
 # ---------------------------------------------------------------------------
