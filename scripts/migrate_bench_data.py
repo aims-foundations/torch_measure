@@ -1823,5 +1823,93 @@ SPECS_NEW = [
 
 SPECS.extend(SPECS_NEW)
 
+# ---------------------------------------------------------------------------
+# Intervention / treatment-response datasets
+# ---------------------------------------------------------------------------
+
+SPECS_INTERVENTION = [
+    # ── Collab-CXR ──
+    BenchmarkSpec(
+        benchmark="collab_cxr", csv_file="response_matrix_image_only.csv",
+        registry_name="intervention/collab_cxr_image_only", response_type="continuous",
+        orientation="models_as_rows", description="Collab-CXR: radiologists x cases, image only (no AI)",
+        url="https://osf.io/z7apq/", tags=["intervention", "radiology", "no-ai"],
+    ),
+    BenchmarkSpec(
+        benchmark="collab_cxr", csv_file="response_matrix_image_ai.csv",
+        registry_name="intervention/collab_cxr_image_ai", response_type="continuous",
+        orientation="models_as_rows", description="Collab-CXR: radiologists x cases, with AI",
+        url="https://osf.io/z7apq/", tags=["intervention", "radiology", "with-ai"],
+    ),
+    BenchmarkSpec(
+        benchmark="collab_cxr", csv_file="accuracy_matrix_image_only.csv",
+        registry_name="intervention/collab_cxr_accuracy_no_ai", response_type="continuous",
+        orientation="models_as_rows", description="Collab-CXR: binary accuracy, no AI",
+        url="https://osf.io/z7apq/", tags=["intervention", "radiology", "accuracy"],
+    ),
+    BenchmarkSpec(
+        benchmark="collab_cxr", csv_file="accuracy_matrix_image_ai.csv",
+        registry_name="intervention/collab_cxr_accuracy_with_ai", response_type="continuous",
+        orientation="models_as_rows", description="Collab-CXR: binary accuracy, with AI",
+        url="https://osf.io/z7apq/", tags=["intervention", "radiology", "accuracy"],
+    ),
+    # ── METR Early-2025 ──
+    BenchmarkSpec(
+        benchmark="metr_early2025", csv_file="response_matrix_ai.csv",
+        registry_name="intervention/metr_dev_early_ai", response_type="continuous",
+        orientation="models_as_rows", description="METR Early-2025: devs x issues, AI-allowed",
+        url="https://github.com/METR/Measuring-Early-2025-AI-on-Exp-OSS-Devs",
+        tags=["intervention", "coding", "ai-allowed"],
+    ),
+    BenchmarkSpec(
+        benchmark="metr_early2025", csv_file="response_matrix_no_ai.csv",
+        registry_name="intervention/metr_dev_early_no_ai", response_type="continuous",
+        orientation="models_as_rows", description="METR Early-2025: devs x issues, AI-disallowed",
+        url="https://github.com/METR/Measuring-Early-2025-AI-on-Exp-OSS-Devs",
+        tags=["intervention", "coding", "ai-disallowed"],
+    ),
+    # ── METR Late-2025 ──
+    BenchmarkSpec(
+        benchmark="metr_late2025", csv_file="response_matrix_ai-allowed.csv",
+        registry_name="intervention/metr_dev_late_ai", response_type="continuous",
+        orientation="models_as_rows", description="METR Late-2025: devs x issues, AI-allowed",
+        url="https://github.com/METR/Measuring-Late-2025-AI-on-OSS-Devs",
+        tags=["intervention", "coding", "ai-allowed"],
+    ),
+    BenchmarkSpec(
+        benchmark="metr_late2025", csv_file="response_matrix_ai-disallowed.csv",
+        registry_name="intervention/metr_dev_late_no_ai", response_type="continuous",
+        orientation="models_as_rows", description="METR Late-2025: devs x issues, AI-disallowed",
+        url="https://github.com/METR/Measuring-Late-2025-AI-on-OSS-Devs",
+        tags=["intervention", "coding", "ai-disallowed"],
+    ),
+    # ── GenAI Learning ──
+    *[
+        BenchmarkSpec(
+            benchmark="genai_learning", csv_file=f"response_matrix_{phase}_{arm}.csv",
+            registry_name=f"intervention/genai_learning_{phase}_{arm}", response_type="binary",
+            orientation="models_as_rows", description=f"GenAI Learning: {phase} phase, {arm} arm",
+            url="https://github.com/obastani/GenAICanHarmLearning",
+            tags=["intervention", "education", phase, arm],
+        )
+        for phase in ("practice", "exam")
+        for arm in ("control", "augmented", "vanilla")
+    ],
+    # ── HAIID ──
+    *[
+        BenchmarkSpec(
+            benchmark="haiid", csv_file=f"response_matrix_{domain}_{stage}.csv",
+            registry_name=f"intervention/haiid_{domain}_{stage}", response_type="binary",
+            orientation="models_as_rows", description=f"HAIID {domain}: {stage} binary accuracy",
+            url="https://github.com/kailas-v/human-ai-interactions",
+            tags=["intervention", "classification", domain],
+        )
+        for domain in ("art", "census", "cities", "dermatology", "sarcasm")
+        for stage in ("pre", "post_ai", "post_human")
+    ],
+]
+
+SPECS.extend(SPECS_INTERVENTION)
+
 if __name__ == "__main__":
     main()
