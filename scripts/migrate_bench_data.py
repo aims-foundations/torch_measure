@@ -1911,5 +1911,40 @@ SPECS_INTERVENTION = [
 
 SPECS.extend(SPECS_INTERVENTION)
 
+# ---------------------------------------------------------------------------
+# Safety / red teaming datasets
+# ---------------------------------------------------------------------------
+
+SPECS_SAFETY = [
+    BenchmarkSpec(
+        benchmark="bbq", csv_file="response_matrix.csv",
+        registry_name="safety/bbq", response_type="binary",
+        orientation="models_as_rows", description="BBQ: 7 models x 58K bias QA items",
+        url="https://github.com/nyu-mll/BBQ",
+        tags=["safety", "bias", "fairness"],
+    ),
+    *[
+        BenchmarkSpec(
+            benchmark="jailbreakbench", csv_file=f"response_matrix_{method}.csv",
+            registry_name=f"safety/jailbreakbench_{method}", response_type="binary",
+            orientation="models_as_rows",
+            description=f"JailbreakBench {method.upper()}: models x 100 behaviors",
+            url="https://github.com/JailbreakBench/jailbreakbench",
+            tags=["safety", "red-teaming", "jailbreak"],
+        )
+        for method in ["pair", "gcg", "dsn", "jbc", "prompt_with_random_search"]
+    ],
+    BenchmarkSpec(
+        benchmark="jailbreakbench", csv_file="response_matrix_all.csv",
+        registry_name="safety/jailbreakbench_all", response_type="binary",
+        orientation="models_as_rows",
+        description="JailbreakBench all methods combined: 18 x 100 behaviors",
+        url="https://github.com/JailbreakBench/jailbreakbench",
+        tags=["safety", "red-teaming", "jailbreak"],
+    ),
+]
+
+SPECS.extend(SPECS_SAFETY)
+
 if __name__ == "__main__":
     main()

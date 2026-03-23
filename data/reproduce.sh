@@ -117,6 +117,9 @@ BENCHMARKS=(
     igakuqa
     lawbench
     tumlu
+    # Safety / red teaming datasets
+    bbq
+    jailbreakbench
     # Intervention / treatment-response datasets
     collab_cxr
     metr_early2025
@@ -1306,6 +1309,31 @@ print(f'DPAI matrix: {len(tasks_sorted)} tasks x {len(agents_list)} agents')
 
         log_info "Building TUMLU response matrix (clones from GitHub)..."
         python3 "$DIR/scripts/01_build_response_matrix.py"
+        ;;
+
+    # ─────────────────────────────────────────────────────────────────────
+    # Safety / Red Teaming Datasets
+    # ─────────────────────────────────────────────────────────────────────
+    bbq)
+        DIR="$BASE_DIR/bbq_data"
+        mkdir -p "$DIR/raw" "$DIR/processed" "$DIR/scripts" "$DIR/figures"
+
+        log_info "Downloading BBQ data from GitHub..."
+        bash "$DIR/scripts/01_download_raw.sh"
+
+        log_info "Building BBQ response matrix..."
+        python3 "$DIR/scripts/02_build_response_matrix.py"
+        ;;
+
+    jailbreakbench)
+        DIR="$BASE_DIR/jailbreakbench_data"
+        mkdir -p "$DIR/raw" "$DIR/processed" "$DIR/scripts" "$DIR/figures"
+
+        log_info "Downloading JailbreakBench data from GitHub..."
+        bash "$DIR/scripts/01_download_raw.sh"
+
+        log_info "Building JailbreakBench response matrices..."
+        python3 "$DIR/scripts/02_build_response_matrix.py"
         ;;
 
     # ─────────────────────────────────────────────────────────────────────
