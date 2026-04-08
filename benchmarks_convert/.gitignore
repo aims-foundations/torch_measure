@@ -1,0 +1,9 @@
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.npy
+_compiled/
+_original_tests/
+
+# Override root .gitignore — allow .pt files in benchmarks/
+!*.pt

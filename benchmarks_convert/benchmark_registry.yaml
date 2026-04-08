@@ -1,0 +1,95 @@
+# Benchmark Registry
+# Maps each benchmark to its response matrix and metadata sources.
+# All paths are relative to data_root. Each benchmark's files live
+# together in _source/{name}/.
+
+data_root: benchmarks
+
+benchmarks:
+
+  - name: mmlupro
+    url: https://github.com/TIGER-AI-Lab/MMLU-Pro
+    response_matrix: _source/mmlupro/response_matrix.csv
+    model_column: question_id       # becomes item after transpose
+    transposed: true
+    metadata:
+      file: _source/mmlupro/question_metadata.csv
+      item_key: question_id
+      category_column: category
+      item_text_columns: [question_text]
+
+  - name: bbq
+    url: https://github.com/nyu-mll/BBQ
+    response_matrix: _source/bbq/response_matrix.csv
+    model_column: model
+    transposed: false
+    category_pattern: "^(.+)_\\d+$"
+    metadata:
+      file: _source/bbq/item_metadata.csv
+      item_key: example_id
+      positional_join: true
+      test_condition_column: context_condition
+      item_text_columns: [question, context]
+
+  - name: bigcodebench
+    url: https://huggingface.co/datasets/bigcode/bigcodebench-perf
+    response_matrix: _source/bigcodebench/response_matrix.csv
+    model_column: Model
+    transposed: false
+    metadata:
+      file: _source/bigcodebench/item_content.csv
+      item_key: item_id
+      item_text_columns: [instruct_prompt]
+
+  - name: jailbreakbench
+    url: https://github.com/JailbreakBench/artifacts
+    response_matrix: _source/jailbreakbench/response_matrix.csv
+    model_column: model
+    transposed: false
+    metadata:
+      file: _source/jailbreakbench/item_metadata.csv
+      item_key: behavior_index
+      category_column: category
+      item_text_columns: [goal, behavior]
+
+  - name: lawbench
+    url: https://github.com/open-compass/LawBench
+    response_matrix: _source/lawbench/response_matrix.csv
+    model_column: model
+    transposed: false
+    category_pattern: "^([^_]+)_\\d+$"
+    metadata:
+      file: _source/lawbench/item_content.csv
+      item_key: item_id
+      item_text_columns: [content]
+
+  - name: mathvista_mini
+    url: https://mathvista.github.io/
+    response_matrix: _source/mathvista_mini/response_matrix.csv
+    model_column: model
+    transposed: false
+    metadata:
+      file: _source/mathvista_mini/item_content.csv
+      item_key: index
+      item_text_columns: [question]
+      category_column: category
+
+  - name: swebench
+    url: https://github.com/SWE-bench/experiments
+    response_matrix: _source/swebench/response_matrix.csv
+    model_column: model
+    transposed: false
+    metadata:
+      file: _source/swebench/item_content.csv
+      item_key: item_id
+      item_text_columns: [problem_statement]
+
+  - name: swebench_full
+    url: https://github.com/SWE-bench/experiments
+    response_matrix: _source/swebench_full/response_matrix.csv
+    model_column: model
+    transposed: false
+    metadata:
+      file: _source/swebench_full/item_content.csv
+      item_key: item_id
+      item_text_columns: [problem_statement]
