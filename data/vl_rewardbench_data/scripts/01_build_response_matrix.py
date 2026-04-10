@@ -324,8 +324,12 @@ def main():
     print(f"\n  Per-category accuracy (across all judges):")
     for cat in CATEGORIES:
         cat_items = merged[merged["category"] == cat]
-        mean_acc = cat_items["mean_accuracy"].mean()
-        print(f"    {cat:20s}  n={len(cat_items):4d}  mean_acc={mean_acc:.4f}")
+        acc_col = pd.to_numeric(cat_items["mean_accuracy"], errors="coerce")
+        mean_acc = acc_col.mean()
+        if pd.notna(mean_acc):
+            print(f"    {cat:20s}  n={len(cat_items):4d}  mean_acc={mean_acc:.4f}")
+        else:
+            print(f"    {cat:20s}  n={len(cat_items):4d}  mean_acc=N/A")
 
     # Final summary
     print(f"\n{'='*60}")

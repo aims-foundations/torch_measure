@@ -1620,3 +1620,924 @@ FINAL REPORT
     open_llm_leaderboard     :  4576 models, accuracy range: 0.1000 - 0.7303
 
 Done!
+Found 2 response matrices across 1 benchmarks.
+
+  [mmlupro]  mmlupro_data/processed/response_matrix.csv
+    heatmap  (12257 x 48)
+    model_accuracy  (12257 models)
+    item_difficulty  (48 items)
+    model_correlation  (12257 models)
+  [mmlupro / category]  mmlupro_data/processed/response_matrix_category.csv
+    heatmap  (14 x 247)
+    model_accuracy  (14 models)
+    item_difficulty  (247 items)
+    model_correlation  (14 models)
+
+Done.
+======================================================================
+CRUXEval Response Matrix Builder
+======================================================================
+
+[1/5] Loading ground truth dataset...
+  Loaded 800 samples from /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/raw/cruxeval/data/cruxeval.jsonl
+
+[2/5] Discovering evaluation result files...
+  WARNING: Skipping corrupt file deepseek-base-6.7b_temp0.8_output.json: Expecting value: line 1 column 1 (char 0)
+  Found 38 model configurations with evaluation results
+    codellama-13b+cot_temp0.2_input -> model=codellama-13b+cot, temp=temp0.2, task=input
+    codellama-13b+cot_temp0.2_output -> model=codellama-13b+cot, temp=temp0.2, task=output
+    codellama-13b+cot_temp0.8_output -> model=codellama-13b+cot, temp=temp0.8, task=output
+    codellama-13b_temp0.2_input -> model=codellama-13b, temp=temp0.2, task=input
+    codellama-13b_temp0.8_output -> model=codellama-13b, temp=temp0.8, task=output
+    codellama-34b+cot_temp0.2_output -> model=codellama-34b+cot, temp=temp0.2, task=output
+    codellama-7b_temp0.2_input -> model=codellama-7b, temp=temp0.2, task=input
+    codellama-7b_temp0.2_output -> model=codellama-7b, temp=temp0.2, task=output
+    codellama-7b_temp0.8_input -> model=codellama-7b, temp=temp0.8, task=input
+    codellama-python-13b_temp0.2_input -> model=codellama-python-13b, temp=temp0.2, task=input
+    codellama-python-13b_temp0.8_output -> model=codellama-python-13b, temp=temp0.8, task=output
+    codetulu-2-34b_temp0.2_input -> model=codetulu-2-34b, temp=temp0.2, task=input
+    codetulu-2-34b_temp0.2_output -> model=codetulu-2-34b, temp=temp0.2, task=output
+    deepseek-base-1.3b_temp0.2_input -> model=deepseek-base-1.3b, temp=temp0.2, task=input
+    deepseek-base-1.3b_temp0.8_output -> model=deepseek-base-1.3b, temp=temp0.8, task=output
+    deepseek-base-6.7b_temp0.2_input -> model=deepseek-base-6.7b, temp=temp0.2, task=input
+    deepseek-base-6.7b_temp0.8_input -> model=deepseek-base-6.7b, temp=temp0.8, task=input
+    deepseek-instruct-1.3b_temp0.2_input -> model=deepseek-instruct-1.3b, temp=temp0.2, task=input
+    deepseek-instruct-1.3b_temp0.8_output -> model=deepseek-instruct-1.3b, temp=temp0.8, task=output
+    deepseek-instruct-33b_temp0.2_input -> model=deepseek-instruct-33b, temp=temp0.2, task=input
+    deepseek-instruct-6.7b_temp0.2_input -> model=deepseek-instruct-6.7b, temp=temp0.2, task=input
+    gpt-3.5-turbo-0613+cot_temp0.8_input -> model=gpt-3.5-turbo-0613+cot, temp=temp0.8, task=input
+    gpt-3.5-turbo-0613+cot_temp0.8_output -> model=gpt-3.5-turbo-0613+cot, temp=temp0.8, task=output
+    gpt-3.5-turbo-0613_temp0.2_output -> model=gpt-3.5-turbo-0613, temp=temp0.2, task=output
+    gpt-3.5-turbo-0613_temp0.8_input -> model=gpt-3.5-turbo-0613, temp=temp0.8, task=input
+    gpt-4-0613_temp0.8_input -> model=gpt-4-0613, temp=temp0.8, task=input
+    gpt-4-0613_temp0.8_output -> model=gpt-4-0613, temp=temp0.8, task=output
+    magicoder-ds-7b_temp0.8_input -> model=magicoder-ds-7b, temp=temp0.8, task=input
+    magicoder-ds-7b_temp0.8_output -> model=magicoder-ds-7b, temp=temp0.8, task=output
+    mistral-7b_temp0.8_output -> model=mistral-7b, temp=temp0.8, task=output
+    mixtral-8x7b_temp0.2_input -> model=mixtral-8x7b, temp=temp0.2, task=input
+    phi-2_temp0.8_input -> model=phi-2, temp=temp0.8, task=input
+    phi-2_temp0.8_output -> model=phi-2, temp=temp0.8, task=output
+    phind_temp0.8_output -> model=phind, temp=temp0.8, task=output
+    starcoderbase-16b_temp0.2_input -> model=starcoderbase-16b, temp=temp0.2, task=input
+    starcoderbase-7b_temp0.2_output -> model=starcoderbase-7b, temp=temp0.2, task=output
+    wizard-34b_temp0.8_input -> model=wizard-34b, temp=temp0.8, task=input
+    wizard-34b_temp0.8_output -> model=wizard-34b, temp=temp0.8, task=output
+
+[3/5] Building response matrices...
+  CRUXEval-I: 800 samples x 20 models
+  CRUXEval-O: 800 samples x 18 models
+  Combined:   800 samples x 38 models
+
+[4/5] Building model summary...
+  Summary: 38 model configurations
+
+[5/5] Saving outputs...
+  Saved CRUXEval-I response matrix to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/processed/response_matrix_input.csv
+  Saved CRUXEval-O response matrix to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/processed/response_matrix_output.csv
+  Saved combined response matrix to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/processed/response_matrix.csv
+  Saved CRUXEval-I binary matrix to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/processed/response_matrix_input_binary.csv
+  Saved CRUXEval-O binary matrix to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/processed/response_matrix_output_binary.csv
+  Saved combined binary matrix to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/processed/response_matrix_binary.csv
+  Saved model summary to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/processed/model_summary.csv
+
+======================================================================
+SUMMARY
+======================================================================
+
+Benchmark: CRUXEval (800 Python functions)
+Tasks:     CRUXEval-I (input prediction) + CRUXEval-O (output prediction)
+Models:    38 configurations across 22 unique models
+
+Response matrices (pass@1 fraction, 0.0-1.0):
+  CRUXEval-I: (800, 20)
+  CRUXEval-O: (800, 18)
+  Combined:   (800, 38)
+
+Binary response matrices (any generation correct):
+  CRUXEval-I: (800, 20)
+  CRUXEval-O: (800, 18)
+  Combined:   (800, 38)
+
+--- Model Summary (sorted by pass@1) ---
+                               config   task  pass_at_1  pass_at_5  accuracy_any_pct
+             gpt-4-0613_temp0.8_input  input      68.00      76.81             79.38
+            gpt-4-0613_temp0.8_output output      68.00      72.97             75.12
+gpt-3.5-turbo-0613+cot_temp0.8_output output      56.56      76.74             82.25
+    gpt-3.5-turbo-0613_temp0.2_output output      49.41      52.62             53.87
+         codetulu-2-34b_temp0.2_input  input      49.25      57.88             60.50
+      codellama-13b+cot_temp0.2_input  input      47.43      60.96             65.75
+  deepseek-instruct-33b_temp0.2_input  input      46.50      54.43             57.00
+        codetulu-2-34b_temp0.2_output output      45.79      50.73             52.38
+     gpt-3.5-turbo-0613_temp0.8_input  input      45.66      63.16             69.38
+ gpt-3.5-turbo-0613+cot_temp0.8_input  input      44.30      74.91             83.12
+     codellama-34b+cot_temp0.2_output output      43.61      63.31             69.75
+          codellama-13b_temp0.2_input  input      42.49      52.51             54.87
+     deepseek-base-6.7b_temp0.2_input  input      41.86      51.55             54.37
+       magicoder-ds-7b_temp0.8_output output      41.70      57.50             63.12
+            wizard-34b_temp0.8_output output      41.39      53.78             58.50
+        magicoder-ds-7b_temp0.8_input  input      40.09      62.40             70.25
+   codellama-python-13b_temp0.2_input  input      39.74      50.08             53.12
+           mixtral-8x7b_temp0.2_input  input      39.30      49.93             53.12
+                 phind_temp0.8_output output      38.86      52.84             57.38
+             wizard-34b_temp0.8_input  input      38.69      57.48             63.38
+ deepseek-instruct-6.7b_temp0.2_input  input      37.38      44.19             46.00
+     deepseek-base-6.7b_temp0.8_input  input      36.89      62.69             70.50
+  codellama-python-13b_temp0.8_output output      36.35      52.50             58.13
+         codellama-13b_temp0.8_output output      36.07      53.93             61.00
+     codellama-13b+cot_temp0.2_output output      35.99      57.99             64.88
+           codellama-7b_temp0.2_input  input      35.95      44.99             47.50
+     codellama-13b+cot_temp0.8_output output      34.92      61.77             70.12
+          codellama-7b_temp0.2_output output      34.21      40.29             41.88
+      starcoderbase-7b_temp0.2_output output      32.20      36.74             38.25
+      starcoderbase-16b_temp0.2_input  input      31.33      40.85             44.00
+            mistral-7b_temp0.8_output output      30.10      48.61             55.50
+                 phi-2_temp0.8_output output      29.75      46.65             52.88
+           codellama-7b_temp0.8_input  input      28.35      52.92             63.12
+     deepseek-base-1.3b_temp0.2_input  input      27.77      34.83             37.25
+deepseek-instruct-1.3b_temp0.8_output output      27.43      40.04             45.12
+ deepseek-instruct-1.3b_temp0.2_input  input      27.16      32.84             35.00
+    deepseek-base-1.3b_temp0.8_output output      25.92      43.41             49.38
+                  phi-2_temp0.8_input  input      25.69      51.14             60.75
+
+--- CRUXEval-I: Per-model pass@1 ---
+  gpt-4-0613_temp0.8_input: 68.00%
+  codetulu-2-34b_temp0.2_input: 49.25%
+  codellama-13b+cot_temp0.2_input: 47.43%
+  deepseek-instruct-33b_temp0.2_input: 46.50%
+  gpt-3.5-turbo-0613_temp0.8_input: 45.66%
+  gpt-3.5-turbo-0613+cot_temp0.8_input: 44.30%
+  codellama-13b_temp0.2_input: 42.49%
+  deepseek-base-6.7b_temp0.2_input: 41.86%
+  magicoder-ds-7b_temp0.8_input: 40.09%
+  codellama-python-13b_temp0.2_input: 39.74%
+  mixtral-8x7b_temp0.2_input: 39.30%
+  wizard-34b_temp0.8_input: 38.69%
+  deepseek-instruct-6.7b_temp0.2_input: 37.38%
+  deepseek-base-6.7b_temp0.8_input: 36.89%
+  codellama-7b_temp0.2_input: 35.95%
+  starcoderbase-16b_temp0.2_input: 31.33%
+  codellama-7b_temp0.8_input: 28.35%
+  deepseek-base-1.3b_temp0.2_input: 27.77%
+  deepseek-instruct-1.3b_temp0.2_input: 27.16%
+  phi-2_temp0.8_input: 25.69%
+
+--- CRUXEval-O: Per-model pass@1 ---
+  gpt-4-0613_temp0.8_output: 68.00%
+  gpt-3.5-turbo-0613+cot_temp0.8_output: 56.56%
+  gpt-3.5-turbo-0613_temp0.2_output: 49.41%
+  codetulu-2-34b_temp0.2_output: 45.79%
+  codellama-34b+cot_temp0.2_output: 43.61%
+  magicoder-ds-7b_temp0.8_output: 41.70%
+  wizard-34b_temp0.8_output: 41.39%
+  phind_temp0.8_output: 38.86%
+  codellama-python-13b_temp0.8_output: 36.35%
+  codellama-13b_temp0.8_output: 36.08%
+  codellama-13b+cot_temp0.2_output: 35.99%
+  codellama-13b+cot_temp0.8_output: 34.92%
+  codellama-7b_temp0.2_output: 34.21%
+  starcoderbase-7b_temp0.2_output: 32.20%
+  mistral-7b_temp0.8_output: 30.10%
+  phi-2_temp0.8_output: 29.75%
+  deepseek-instruct-1.3b_temp0.8_output: 27.43%
+  deepseek-base-1.3b_temp0.8_output: 25.92%
+
+--- Task Difficulty (combined, fraction of models that get it right) ---
+  Easiest tasks (all models correct): 40
+  Hardest tasks (no model correct):   15
+  Mean task difficulty (fraction correct): 0.5837
+
+======================================================================
+Done! All files saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/processed
+======================================================================
+Found 6 response matrices across 1 benchmarks.
+
+  [cruxeval]  cruxeval_data/processed/response_matrix.csv
+    heatmap  (800 x 38)
+    model_accuracy  (800 models)
+    item_difficulty  (38 items)
+    model_correlation  (800 models)
+  [cruxeval / binary]  cruxeval_data/processed/response_matrix_binary.csv
+    heatmap  (800 x 38)
+    model_accuracy  (800 models)
+    item_difficulty  (38 items)
+    model_correlation  (800 models)
+  [cruxeval / input]  cruxeval_data/processed/response_matrix_input.csv
+    heatmap  (800 x 20)
+    model_accuracy  (800 models)
+    item_difficulty  (20 items)
+    model_correlation  (800 models)
+  [cruxeval / input_binary]  cruxeval_data/processed/response_matrix_input_binary.csv
+    heatmap  (800 x 20)
+    model_accuracy  (800 models)
+    item_difficulty  (20 items)
+    model_correlation  (800 models)
+  [cruxeval / output]  cruxeval_data/processed/response_matrix_output.csv
+    heatmap  (800 x 18)
+    model_accuracy  (800 models)
+    item_difficulty  (18 items)
+    model_correlation  (800 models)
+  [cruxeval / output_binary]  cruxeval_data/processed/response_matrix_output_binary.csv
+    heatmap  (800 x 18)
+    model_accuracy  (800 models)
+    item_difficulty  (18 items)
+    model_correlation  (800 models)
+
+Done.
+Loading per-task results from all sources...
+
+[1] Loading v2 execution traces...
+  v2 gpt-3.5-turbo-16k_CoT_UAhint: 71 pass / 811 total
+  v2 gpt-3.5-turbo-16k_CoT: 48 pass / 803 total
+  v2 gpt-3.5-turbo-16k_Direct_UAhint: 50 pass / 811 total
+  v2 gpt-3.5-turbo-16k_Direct: 40 pass / 803 total
+  v2 gpt-4-0613_CoT: 100 pass / 810 total
+  v2 text-bison-001_CoT: 37 pass / 781 total
+
+[2] Loading v1 execution traces...
+  v1 gpt-3.5-turbo_Direct_v1: 58 pass / 812 total
+  v1 gpt-3.5-turbo_CoT_v1: 60 pass / 812 total
+
+[3] Loading GPT-4o traces...
+  gpt-4o_CoT: 106 pass / 807 total
+
+[4] Loading STeP agent results...
+  STeP_gpt-4-turbo: 201 pass / 811 total
+
+[5] Loading GUI-API Hybrid Agent results...
+  GUI-API-Hybrid_gpt-4o: 292 pass / 812 total
+
+[6] Loading ColorBrowserAgent results...
+  ColorBrowserAgent: 563 pass / 812 total
+
+[7] Loading WebOperator results...
+  WebOperator_gpt-4o: 443 pass / 812 total
+
+[8] Loading GBOX/Claude Code results...
+  ClaudeCode_GBOX: 552 pass / 812 total
+
+Building response matrix with 14 model configs...
+Saved response matrix to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/webarena_data/processed/webarena_response_matrix.csv
+  Shape: (812, 14)
+  Tasks: 812, Models: 14
+
+Saved summary to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/webarena_data/processed/webarena_response_matrix_summary.csv
+
+================================================================================
+WebArena Response Matrix Summary
+================================================================================
+Model                                     Tasks   Pass   Fail    Rate%   Cover%
+--------------------------------------------------------------------------------
+ColorBrowserAgent                           812    563    249    69.33   100.00
+ClaudeCode_GBOX                             812    552    260    67.98   100.00
+WebOperator_gpt-4o                          812    443    369    54.56   100.00
+GUI-API-Hybrid_gpt-4o                       812    292    520    35.96   100.00
+STeP_gpt-4-turbo                            811    201    610    24.78    99.88
+gpt-4o_CoT                                  807    106    701    13.14    99.38
+gpt-4-0613_CoT                              810    100    710    12.35    99.75
+gpt-3.5-turbo-16k_CoT_UAhint                811     71    740     8.75    99.88
+gpt-3.5-turbo_CoT_v1                        812     60    752     7.39   100.00
+gpt-3.5-turbo_Direct_v1                     812     58    754     7.14   100.00
+gpt-3.5-turbo-16k_Direct_UAhint             811     50    761     6.17    99.88
+gpt-3.5-turbo-16k_CoT                       803     48    755     5.98    98.89
+gpt-3.5-turbo-16k_Direct                    803     40    763     4.98    98.89
+text-bison-001_CoT                          781     37    744     4.74    96.18
+--------------------------------------------------------------------------------
+
+Pairwise coverage (# tasks with data for both models):
+  ClaudeCode_GBOX x STeP_gpt-4-turbo: 811/812
+  ClaudeCode_GBOX x gpt-3.5-turbo-16k_CoT: 803/812
+  ClaudeCode_GBOX x gpt-3.5-turbo-16k_CoT_UAhint: 811/812
+  ClaudeCode_GBOX x gpt-3.5-turbo-16k_Direct: 803/812
+  ClaudeCode_GBOX x gpt-3.5-turbo-16k_Direct_UAhint: 811/812
+  ClaudeCode_GBOX x gpt-4-0613_CoT: 810/812
+  ClaudeCode_GBOX x gpt-4o_CoT: 807/812
+  ClaudeCode_GBOX x text-bison-001_CoT: 781/812
+  ColorBrowserAgent x STeP_gpt-4-turbo: 811/812
+  ColorBrowserAgent x gpt-3.5-turbo-16k_CoT: 803/812
+  ColorBrowserAgent x gpt-3.5-turbo-16k_CoT_UAhint: 811/812
+  ColorBrowserAgent x gpt-3.5-turbo-16k_Direct: 803/812
+  ColorBrowserAgent x gpt-3.5-turbo-16k_Direct_UAhint: 811/812
+  ColorBrowserAgent x gpt-4-0613_CoT: 810/812
+  ColorBrowserAgent x gpt-4o_CoT: 807/812
+  ColorBrowserAgent x text-bison-001_CoT: 781/812
+  GUI-API-Hybrid_gpt-4o x STeP_gpt-4-turbo: 811/812
+  GUI-API-Hybrid_gpt-4o x gpt-3.5-turbo-16k_CoT: 803/812
+  GUI-API-Hybrid_gpt-4o x gpt-3.5-turbo-16k_CoT_UAhint: 811/812
+  GUI-API-Hybrid_gpt-4o x gpt-3.5-turbo-16k_Direct: 803/812
+  GUI-API-Hybrid_gpt-4o x gpt-3.5-turbo-16k_Direct_UAhint: 811/812
+  GUI-API-Hybrid_gpt-4o x gpt-4-0613_CoT: 810/812
+  GUI-API-Hybrid_gpt-4o x gpt-4o_CoT: 807/812
+  GUI-API-Hybrid_gpt-4o x text-bison-001_CoT: 781/812
+  STeP_gpt-4-turbo x WebOperator_gpt-4o: 811/812
+  STeP_gpt-4-turbo x gpt-3.5-turbo-16k_CoT: 802/812
+  STeP_gpt-4-turbo x gpt-3.5-turbo-16k_CoT_UAhint: 810/812
+  STeP_gpt-4-turbo x gpt-3.5-turbo-16k_Direct: 802/812
+  STeP_gpt-4-turbo x gpt-3.5-turbo-16k_Direct_UAhint: 810/812
+  STeP_gpt-4-turbo x gpt-3.5-turbo_CoT_v1: 811/812
+  STeP_gpt-4-turbo x gpt-3.5-turbo_Direct_v1: 811/812
+  STeP_gpt-4-turbo x gpt-4-0613_CoT: 809/812
+  STeP_gpt-4-turbo x gpt-4o_CoT: 806/812
+  STeP_gpt-4-turbo x text-bison-001_CoT: 780/812
+  WebOperator_gpt-4o x gpt-3.5-turbo-16k_CoT: 803/812
+  WebOperator_gpt-4o x gpt-3.5-turbo-16k_CoT_UAhint: 811/812
+  WebOperator_gpt-4o x gpt-3.5-turbo-16k_Direct: 803/812
+  WebOperator_gpt-4o x gpt-3.5-turbo-16k_Direct_UAhint: 811/812
+  WebOperator_gpt-4o x gpt-4-0613_CoT: 810/812
+  WebOperator_gpt-4o x gpt-4o_CoT: 807/812
+  WebOperator_gpt-4o x text-bison-001_CoT: 781/812
+  gpt-3.5-turbo-16k_CoT x gpt-3.5-turbo-16k_CoT_UAhint: 802/812
+  gpt-3.5-turbo-16k_CoT x gpt-3.5-turbo-16k_Direct: 795/812
+  gpt-3.5-turbo-16k_CoT x gpt-3.5-turbo-16k_Direct_UAhint: 803/812
+  gpt-3.5-turbo-16k_CoT x gpt-3.5-turbo_CoT_v1: 803/812
+  gpt-3.5-turbo-16k_CoT x gpt-3.5-turbo_Direct_v1: 803/812
+  gpt-3.5-turbo-16k_CoT x gpt-4-0613_CoT: 801/812
+  gpt-3.5-turbo-16k_CoT x gpt-4o_CoT: 798/812
+  gpt-3.5-turbo-16k_CoT x text-bison-001_CoT: 773/812
+  gpt-3.5-turbo-16k_CoT_UAhint x gpt-3.5-turbo-16k_Direct: 802/812
+  gpt-3.5-turbo-16k_CoT_UAhint x gpt-3.5-turbo-16k_Direct_UAhint: 810/812
+  gpt-3.5-turbo-16k_CoT_UAhint x gpt-3.5-turbo_CoT_v1: 811/812
+  gpt-3.5-turbo-16k_CoT_UAhint x gpt-3.5-turbo_Direct_v1: 811/812
+  gpt-3.5-turbo-16k_CoT_UAhint x gpt-4-0613_CoT: 809/812
+  gpt-3.5-turbo-16k_CoT_UAhint x gpt-4o_CoT: 806/812
+  gpt-3.5-turbo-16k_CoT_UAhint x text-bison-001_CoT: 780/812
+  gpt-3.5-turbo-16k_Direct x gpt-3.5-turbo-16k_Direct_UAhint: 803/812
+  gpt-3.5-turbo-16k_Direct x gpt-3.5-turbo_CoT_v1: 803/812
+  gpt-3.5-turbo-16k_Direct x gpt-3.5-turbo_Direct_v1: 803/812
+  gpt-3.5-turbo-16k_Direct x gpt-4-0613_CoT: 801/812
+  gpt-3.5-turbo-16k_Direct x gpt-4o_CoT: 798/812
+  gpt-3.5-turbo-16k_Direct x text-bison-001_CoT: 772/812
+  gpt-3.5-turbo-16k_Direct_UAhint x gpt-3.5-turbo_CoT_v1: 811/812
+  gpt-3.5-turbo-16k_Direct_UAhint x gpt-3.5-turbo_Direct_v1: 811/812
+  gpt-3.5-turbo-16k_Direct_UAhint x gpt-4-0613_CoT: 809/812
+  gpt-3.5-turbo-16k_Direct_UAhint x gpt-4o_CoT: 806/812
+  gpt-3.5-turbo-16k_Direct_UAhint x text-bison-001_CoT: 780/812
+  gpt-3.5-turbo_CoT_v1 x gpt-4-0613_CoT: 810/812
+  gpt-3.5-turbo_CoT_v1 x gpt-4o_CoT: 807/812
+  gpt-3.5-turbo_CoT_v1 x text-bison-001_CoT: 781/812
+  gpt-3.5-turbo_Direct_v1 x gpt-4-0613_CoT: 810/812
+  gpt-3.5-turbo_Direct_v1 x gpt-4o_CoT: 807/812
+  gpt-3.5-turbo_Direct_v1 x text-bison-001_CoT: 781/812
+  gpt-4-0613_CoT x gpt-4o_CoT: 805/812
+  gpt-4-0613_CoT x text-bison-001_CoT: 779/812
+  gpt-4o_CoT x text-bison-001_CoT: 776/812
+
+Total matrix cells: 11368
+Total NaN (missing): 59 (0.5%)
+Total valid: 11309 (99.5%)
+[0;32m[INFO][0m Starting reproduction of 82 benchmarks...
+[0;32m[INFO][0m Base directory: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data
+
+[0;32m[INFO][0m ========== terminal_bench ==========
+[0;32m[INFO][0m Downloading Terminal-Bench task metadata...
+[0;32m[INFO][0m Querying Terminal-Bench database...
+[0;32m[INFO][0m Building Terminal-Bench response matrix...
+[0;32m[INFO][0m Generating terminal_bench visualizations...
+[0;32m[INFO][0m terminal_bench: SUCCESS
+
+[0;32m[INFO][0m ========== bfcl ==========
+[0;32m[INFO][0m BFCL-Result repo already exists, pulling latest...
+[0;32m[INFO][0m Building BFCL response matrix...
+[0;32m[INFO][0m Generating bfcl visualizations...
+[0;32m[INFO][0m bfcl: SUCCESS
+
+[0;32m[INFO][0m ========== livecodebench ==========
+[0;32m[INFO][0m   Repo already exists at /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/livecodebench_data/raw/submissions, pulling...
+[0;32m[INFO][0m   Repo already exists at /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/livecodebench_data/raw/livecodebench.github.io, pulling...
+[0;32m[INFO][0m Building LiveCodeBench response matrix...
+[0;32m[INFO][0m Generating livecodebench visualizations...
+[0;32m[INFO][0m livecodebench: SUCCESS
+
+[0;32m[INFO][0m ========== swebench ==========
+[0;32m[INFO][0m Downloading SWE-bench submission results via GitHub API...
+Downloaded 0 new results files. Total: 134
+[0;32m[INFO][0m Building SWE-bench response matrix...
+[0;32m[INFO][0m Generating swebench visualizations...
+[0;32m[INFO][0m swebench: SUCCESS
+
+[0;32m[INFO][0m ========== swebench_full ==========
+[0;32m[INFO][0m Building swebench_full response matrix...
+[0;32m[INFO][0m Generating swebench_full visualizations...
+[0;32m[INFO][0m swebench_full: SUCCESS
+
+[0;32m[INFO][0m ========== swebench_java ==========
+[0;32m[INFO][0m Building swebench_java response matrix...
+[0;32m[INFO][0m Generating swebench_java visualizations...
+[0;32m[INFO][0m swebench_java: SUCCESS
+
+[0;32m[INFO][0m ========== swebench_multilingual ==========
+[0;32m[INFO][0m Building swebench_multilingual response matrix...
+[0;32m[INFO][0m Generating swebench_multilingual visualizations...
+[0;32m[INFO][0m swebench_multilingual: SUCCESS
+
+[0;32m[INFO][0m ========== bigcodebench ==========
+[0;32m[INFO][0m Building bigcodebench response matrix...
+[0;32m[INFO][0m Generating bigcodebench visualizations...
+[0;32m[INFO][0m bigcodebench: SUCCESS
+
+[0;32m[INFO][0m ========== evalplus ==========
+[0;32m[INFO][0m Downloading EvalPlus code samples from GitHub releases...
+Downloading chatgpt_temp_0.0.zip...
+Downloading chatgpt_temp_0.8.zip...
+Downloading code-llama-13b_temp_0.0.zip...
+Downloading code-llama-13b_temp_0.2.zip...
+Downloading code-llama-13b_temp_0.4.zip...
+Downloading code-llama-13b_temp_0.6.zip...
+Downloading code-llama-13b_temp_0.8.zip...
+Downloading code-llama-34b_temp_0.0.zip...
+Downloading code-llama-34b_temp_0.2.zip...
+Downloading code-llama-34b_temp_0.4.zip...
+Downloading code-llama-34b_temp_0.6.zip...
+Downloading code-llama-34b_temp_0.8.zip...
+Downloading code-llama-7b_temp_0.2.zip...
+Downloading code-llama-7b_temp_0.4.zip...
+Downloading code-llama-7b_temp_0.6.zip...
+Downloading code-llama-7b_temp_0.8.zip...
+Downloading codegen-16b_temp_0.2.zip...
+Downloading codegen-16b_temp_0.4.zip...
+Downloading codegen-16b_temp_0.6.zip...
+Downloading codegen-16b_temp_0.8.zip...
+Downloading codegen-2b_temp_0.0.zip...
+Downloading codegen-2b_temp_0.2.zip...
+Downloading codegen-2b_temp_0.4.zip...
+Downloading codegen-2b_temp_0.6.zip...
+Downloading codegen-2b_temp_0.8.zip...
+Downloading codegen-6b_temp_0.2.zip...
+Downloading codegen-6b_temp_0.4.zip...
+Downloading codegen-6b_temp_0.6.zip...
+Downloading codegen-6b_temp_0.8.zip...
+Downloading codegen2-16b_temp_0.0.zip...
+Downloading codegen2-1b_temp_0.0.zip...
+Downloading codegen2-1b_temp_0.2.zip...
+Downloading codegen2-1b_temp_0.4.zip...
+Downloading codegen2-1b_temp_0.6.zip...
+Downloading codegen2-1b_temp_0.8.zip...
+Downloading codegen2-3b_temp_0.0.zip...
+Downloading codegen2-3b_temp_0.2.zip...
+Downloading codegen2-3b_temp_0.4.zip...
+Downloading codegen2-3b_temp_0.6.zip...
+Downloading codegen2-3b_temp_0.8.zip...
+Downloading codegen2-7b_temp_0.0.zip...
+Downloading codegen2-7b_temp_0.2.zip...
+Downloading codegen2-7b_temp_0.4.zip...
+Downloading codegen2-7b_temp_0.6.zip...
+Downloading codegen2-7b_temp_0.8.zip...
+Downloading codet5p-16b_temp_0.2.zip...
+Downloading codet5p-16b_temp_0.4.zip...
+Downloading codet5p-16b_temp_0.6.zip...
+Downloading codet5p-16b_temp_0.8.zip...
+Downloading gpt-4_temp_0.0.zip...
+Downloading gpt-j_temp_0.0.zip...
+Downloading gpt-j_temp_0.2.zip...
+Downloading gpt-j_temp_0.4.zip...
+Downloading gpt-j_temp_0.6.zip...
+Downloading gpt-j_temp_0.8.zip...
+Downloading gptneo-2b_temp_0.0.zip...
+Downloading gptneo-2b_temp_0.2.zip...
+Downloading gptneo-2b_temp_0.4.zip...
+Downloading gptneo-2b_temp_0.6.zip...
+Downloading gptneo-2b_temp_0.8.zip...
+Downloading HumanEvalPlusGT.zip...
+Downloading incoder-1b_temp_0.0.zip...
+Downloading incoder-1b_temp_0.2.zip...
+Downloading incoder-1b_temp_0.4.zip...
+Downloading incoder-1b_temp_0.6.zip...
+Downloading incoder-1b_temp_0.8.zip...
+Downloading incoder-6b_temp_0.0.zip...
+Downloading incoder-6b_temp_0.2.zip...
+Downloading incoder-6b_temp_0.4.zip...
+Downloading incoder-6b_temp_0.6.zip...
+Downloading incoder-6b_temp_0.8.zip...
+Downloading mistral-7b_temp_0.2.zip...
+Downloading mistral-7b_temp_0.4.zip...
+Downloading mistral-7b_temp_0.6.zip...
+Downloading mistral-7b_temp_0.8.zip...
+Downloading phind-code-llama-34b-v2_temp_0.0.zip...
+Downloading phind-code-llama-34b-v2_temp_0.2.zip...
+Downloading phind-code-llama-34b-v2_temp_0.4.zip...
+Downloading phind-code-llama-34b-v2_temp_0.6.zip...
+Downloading phind-code-llama-34b-v2_temp_0.8.zip...
+Downloading polycoder_temp_0.0.zip...
+Downloading polycoder_temp_0.2.zip...
+Downloading polycoder_temp_0.4.zip...
+Downloading polycoder_temp_0.6.zip...
+Downloading polycoder_temp_0.8.zip...
+Downloading santacoder_temp_0.0.zip...
+Downloading santacoder_temp_0.2.zip...
+Downloading santacoder_temp_0.4.zip...
+Downloading santacoder_temp_0.6.zip...
+Downloading santacoder_temp_0.8.zip...
+Downloading stablelm-7b_temp_0.0.zip...
+Downloading stablelm-7b_temp_0.2.zip...
+Downloading stablelm-7b_temp_0.4.zip...
+Downloading stablelm-7b_temp_0.6.zip...
+Downloading stablelm-7b_temp_0.8.zip...
+Downloading starcoderbase-1b_temp_0.0.zip...
+Downloading starcoderbase-3b_temp_0.0.zip...
+Downloading starcoderbase-7b_temp_0.0.zip...
+Downloading starcoder_temp_0.2.zip...
+Downloading starcoder_temp_0.4.zip...
+Downloading starcoder_temp_0.6.zip...
+Downloading starcoder_temp_0.8.zip...
+Downloading vicuna-13b_temp_0.0.zip...
+Downloading vicuna-13b_temp_0.2.zip...
+Downloading vicuna-13b_temp_0.4.zip...
+Downloading vicuna-13b_temp_0.6.zip...
+Downloading vicuna-13b_temp_0.8.zip...
+Downloading vicuna-7b_temp_0.0.zip...
+Downloading vicuna-7b_temp_0.2.zip...
+Downloading vicuna-7b_temp_0.4.zip...
+Downloading vicuna-7b_temp_0.6.zip...
+Downloading vicuna-7b_temp_0.8.zip...
+EvalPlus samples downloaded.
+[0;32m[INFO][0m Building EvalPlus response matrices...
+[0;32m[INFO][0m Generating evalplus visualizations...
+[0;32m[INFO][0m evalplus: SUCCESS
+
+[0;32m[INFO][0m ========== mmlupro ==========
+[0;32m[INFO][0m Downloading MMLU-Pro eval results from GitHub...
+Found 48 eval result zip files
+[0;32m[INFO][0m Building MMLU-Pro response matrix...
+[0;32m[INFO][0m Generating mmlupro visualizations...
+[0;32m[INFO][0m mmlupro: SUCCESS
+
+[0;32m[INFO][0m ========== cruxeval ==========
+[0;32m[INFO][0m   Repo already exists at /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cruxeval_data/raw/cruxeval, pulling...
+[0;32m[INFO][0m Building CRUXEval response matrix...
+[0;32m[INFO][0m Generating cruxeval visualizations...
+[0;32m[INFO][0m cruxeval: SUCCESS
+
+[0;32m[INFO][0m ========== webarena ==========
+[0;32m[INFO][0m Downloading WebArena traces...
+[0;32m[INFO][0m   Repo already exists at /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/webarena_data/raw/agent-evals, pulling...
+[0;32m[INFO][0m Building WebArena response matrix...
+No response_matrix*.csv files found.
+Cloning into '/tmp/agentdojo_repo'...
+Updating files:  34% (12706/36860)Updating files:  35% (12901/36860)Updating files:  36% (13270/36860)Updating files:  37% (13639/36860)Updating files:  38% (14007/36860)Updating files:  39% (14376/36860)Updating files:  40% (14744/36860)Updating files:  41% (15113/36860)Updating files:  42% (15482/36860)Updating files:  43% (15850/36860)Updating files:  44% (16219/36860)Updating files:  45% (16587/36860)Updating files:  46% (16956/36860)Updating files:  47% (17325/36860)Updating files:  48% (17693/36860)Updating files:  49% (18062/36860)Updating files:  50% (18430/36860)Updating files:  51% (18799/36860)Updating files:  52% (19168/36860)Updating files:  53% (19536/36860)Updating files:  54% (19905/36860)Updating files:  55% (20273/36860)Updating files:  56% (20642/36860)Updating files:  57% (21011/36860)Updating files:  58% (21379/36860)Updating files:  59% (21748/36860)Updating files:  60% (22116/36860)Updating files:  61% (22485/36860)Updating files:  62% (22854/36860)Updating files:  63% (23222/36860)Updating files:  64% (23591/36860)Updating files:  65% (23959/36860)Updating files:  66% (24328/36860)Updating files:  67% (24697/36860)Updating files:  68% (25065/36860)Updating files:  69% (25434/36860)Updating files:  70% (25802/36860)Updating files:  71% (26171/36860)Updating files:  72% (26540/36860)Updating files:  73% (26908/36860)Updating files:  74% (27277/36860)Updating files:  75% (27645/36860)Updating files:  76% (28014/36860)Updating files:  77% (28383/36860)Updating files:  78% (28751/36860)Updating files:  78% (28830/36860)Updating files:  79% (29120/36860)Updating files:  80% (29488/36860)Updating files:  81% (29857/36860)Updating files:  82% (30226/36860)Updating files:  83% (30594/36860)Updating files:  84% (30963/36860)Updating files:  85% (31331/36860)Updating files:  86% (31700/36860)Updating files:  87% (32069/36860)Updating files:  88% (32437/36860)Updating files:  89% (32806/36860)Updating files:  90% (33174/36860)Updating files:  91% (33543/36860)Updating files:  92% (33912/36860)Updating files:  93% (34280/36860)Updating files:  94% (34649/36860)Updating files:  95% (35017/36860)Updating files:  96% (35386/36860)Updating files:  97% (35755/36860)Updating files:  98% (36123/36860)Updating files:  99% (36492/36860)Updating files: 100% (36860/36860)Updating files: 100% (36860/36860), done.
+  File "/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/agentdojo_data/scripts/01_build_response_matrix.py", line 430
+    _BENCHMARK_DIR = Path(__file__).resolve().parent.parent
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+Cloning into '/tmp/mle-bench'...
+================================================================================
+MLE-bench Response Matrix Builder
+================================================================================
+
+Loaded 75 competitions from split75
+Traceback (most recent call last):
+  File "/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench_data/scripts/01_build_response_matrix.py", line 512, in <module>
+    main()
+  File "/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench_data/scripts/01_build_response_matrix.py", line 173, in main
+    exp_to_groups = load_experiment_to_run_groups()
+  File "/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench_data/scripts/01_build_response_matrix.py", line 100, in load_experiment_to_run_groups
+    run_group = parts[1].strip()
+IndexError: list index out of range
+Cloning into '/tmp/editbench_repo'...
+========================================================================
+EDIT-Bench Response Matrix Builder
+========================================================================
+
+[1/5] Loading model result JSON files from /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/editbench_data/raw_results...
+  Loaded 44 models
+
+[2/5] Extracting question IDs...
+  Found 540 unique tasks
+  ID range: 1 to 545
+  Missing IDs (gaps in numbering): [108, 237, 331, 439, 544]
+
+[3/5] Building response matrix...
+  Matrix shape: (540, 44) (tasks x models)
+  Fill rate: 23328/23760 (98.2%)
+
+[4/5] Building task metadata from HuggingFace...
+  Task metadata shape: (540, 13)
+
+[5/5] Saving outputs to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/editbench_data/processed...
+  /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/editbench_data/processed/response_matrix.csv (151.1 KB)
+  /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/editbench_data/processed/response_matrix_binary.csv (99.0 KB)
+  /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/editbench_data/processed/task_metadata.csv (137.8 KB)
+
+========================================================================
+EDIT-BENCH RESPONSE MATRIX — SUMMARY REPORT
+========================================================================
+
+--- Matrix Dimensions ---
+  Tasks (rows):       540
+  Models (columns):   44
+  Total cells:        23760
+  Filled cells:       23328
+  Fill rate:          98.18%
+
+--- Score Type ---
+  Primary:   Test pass rate (continuous float in [0.0, 1.0])
+    1.0 = all sub-tests passed (full pass)
+    0.0 = all sub-tests failed (full fail)
+    Intermediate = fraction of sub-tests passed
+  Secondary: Binary pass/fail (1 if score == 1.0, else 0)
+
+--- Score Distribution ---
+  Mean:               0.6407
+  Std:                0.4171
+  Median:             0.8571
+  Unique values:      54
+  Binary (0 or 1):    70.3% of all entries
+  Fraction = 0.0:     0.2269
+  Fraction = 1.0:     0.4762
+
+--- Per-Model Pass Rates (binary pass@1, sorted desc) ---
+  Model                                     Tasks  MeanScore  Pass@1
+  ---------------------------------------- ------ ---------- -------
+  claude-sonnet-4                             540     0.7682  0.6481
+  claude-sonnet-4.5                           540     0.7332  0.5981
+  claude-3.7-sonnet                           540     0.7190  0.5926
+  claude-3.5-sonnet                           540     0.7080  0.5907
+  kimi-k2-0905                                540     0.7147  0.5648
+  glm-4.6                                     540     0.7031  0.5648
+  gpt-o3-mini                                 540     0.7227  0.5630
+  deepseek-chat-v3.1                          540     0.6770  0.5426
+  gpt-5-mini                                  540     0.7079  0.5407
+  qwen3-coder                                 540     0.6973  0.5389
+  gpt-o4-mini-high                            540     0.6926  0.5370
+  gpt-4o                                      540     0.6890  0.5333
+  gpt-o3-mini-high                            540     0.7068  0.5278
+  gpt-5-high                                  540     0.6944  0.5278
+  gpt-o4-mini                                 540     0.6881  0.5278
+  grok-4-fast                                 540     0.6919  0.5204
+  gemini-2.5-flash                            108     0.6991  0.5185
+  gemini-2.5-pro                              540     0.6792  0.5130
+  grok-code-fast-1                            540     0.6911  0.5093
+  qwen3-coder-flash                           540     0.6670  0.5074
+  llama-3.3-70b-instruct                      540     0.6709  0.4963
+  llama-4-maverick                            540     0.6475  0.4944
+  gpt-5                                       540     0.6751  0.4926
+  llama-3.1-405b-instruct                     540     0.6589  0.4870
+  gpt-oss-20b                                 540     0.6614  0.4815
+  gpt-4o-mini                                 540     0.6562  0.4778
+  mistral-small-3.2-24b-instruct              540     0.6402  0.4630
+  qwen3-14b                                   540     0.6476  0.4593
+  gpt-5-nano                                  540     0.6322  0.4574
+  qwen-2.5-72b-instruct                       540     0.6157  0.4519
+  mistralai-codestral-2508                    540     0.6209  0.4481
+  deepseek-r1-0528                            540     0.6066  0.4444
+  llama-4-scout                               540     0.6045  0.4333
+  qwen3-30b-a3b                               540     0.6161  0.4315
+  gpt-oss-120b                                540     0.5416  0.4130
+  devstral-medium                             540     0.6129  0.4111
+  qwen-2.5-coder-32b-instruct                 540     0.5512  0.4000
+  gemma-3-27b-it                              540     0.5784  0.3704
+  devstral-small                              540     0.5589  0.3667
+  llama-3.1-8b-instruct                       540     0.5302  0.3407
+  kimi-dev-72b                                540     0.4873  0.3167
+  gemma-3-12b-it                              540     0.5045  0.3000
+  gemma-3n-e4b-it                             540     0.4765  0.2926
+  glm-4.5                                     540     0.3937  0.2907
+
+--- Task Difficulty ---
+  Easiest task:       question_110 (mean=1.0000)
+  Hardest task:       question_8 (mean=0.0000)
+  Tasks all models pass: 5
+  Tasks all models fail: 27
+  Easy (>=20 models perfect): 295
+  Hard (<20 models perfect):  245
+
+--- Core vs Complete Split ---
+  Core (108 tasks):     mean = 0.6543
+  Non-core (432 tasks): mean = 0.6373
+
+--- Programming Language Distribution ---
+  python                     485 tasks, mean_score=0.6364
+  javascript                  35 tasks, mean_score=0.8034
+  javascript/react            20 tasks, mean_score=0.4621
+
+--- Natural Language Distribution ---
+  russian                    108 tasks, mean_score=0.6386
+  english                    108 tasks, mean_score=0.6554
+  chinese                    108 tasks, mean_score=0.6444
+  spanish                    108 tasks, mean_score=0.6239
+  polish                     108 tasks, mean_score=0.6411
+
+--- All Model Names (44) ---
+   1. claude-3.5-sonnet                        pass_rate=0.5907  avg_test_rate=0.7080
+   2. claude-3.7-sonnet                        pass_rate=0.5926  avg_test_rate=0.7190
+   3. claude-sonnet-4                          pass_rate=0.6481  avg_test_rate=0.7682
+   4. claude-sonnet-4.5                        pass_rate=0.5981  avg_test_rate=0.7332
+   5. deepseek-chat-v3.1                       pass_rate=0.5426  avg_test_rate=0.6770
+   6. deepseek-r1-0528                         pass_rate=0.4444  avg_test_rate=0.6066
+   7. devstral-medium                          pass_rate=0.4111  avg_test_rate=0.6129
+   8. devstral-small                           pass_rate=0.3667  avg_test_rate=0.5589
+   9. gemini-2.5-flash                         pass_rate=0.5185  avg_test_rate=0.6991
+  10. gemini-2.5-pro                           pass_rate=0.5130  avg_test_rate=0.6792
+  11. gemma-3-12b-it                           pass_rate=0.3000  avg_test_rate=0.5045
+  12. gemma-3-27b-it                           pass_rate=0.3704  avg_test_rate=0.5784
+  13. gemma-3n-e4b-it                          pass_rate=0.2926  avg_test_rate=0.4765
+  14. glm-4.5                                  pass_rate=0.2907  avg_test_rate=0.3937
+  15. glm-4.6                                  pass_rate=0.5648  avg_test_rate=0.7031
+  16. gpt-4o                                   pass_rate=0.5333  avg_test_rate=0.6890
+  17. gpt-4o-mini                              pass_rate=0.4778  avg_test_rate=0.6562
+  18. gpt-5                                    pass_rate=0.4926  avg_test_rate=0.6751
+  19. gpt-5-high                               pass_rate=0.5278  avg_test_rate=0.6944
+  20. gpt-5-mini                               pass_rate=0.5407  avg_test_rate=0.7079
+  21. gpt-5-nano                               pass_rate=0.4574  avg_test_rate=0.6322
+  22. gpt-o3-mini                              pass_rate=0.5630  avg_test_rate=0.7227
+  23. gpt-o3-mini-high                         pass_rate=0.5278  avg_test_rate=0.7068
+  24. gpt-o4-mini                              pass_rate=0.5278  avg_test_rate=0.6881
+  25. gpt-o4-mini-high                         pass_rate=0.5370  avg_test_rate=0.6926
+  26. gpt-oss-120b                             pass_rate=0.4130  avg_test_rate=0.5416
+  27. gpt-oss-20b                              pass_rate=0.4815  avg_test_rate=0.6614
+  28. grok-4-fast                              pass_rate=0.5204  avg_test_rate=0.6919
+  29. grok-code-fast-1                         pass_rate=0.5093  avg_test_rate=0.6911
+  30. kimi-dev-72b                             pass_rate=0.3167  avg_test_rate=0.4873
+  31. kimi-k2-0905                             pass_rate=0.5648  avg_test_rate=0.7147
+  32. llama-3.1-405b-instruct                  pass_rate=0.4870  avg_test_rate=0.6589
+  33. llama-3.1-8b-instruct                    pass_rate=0.3407  avg_test_rate=0.5302
+  34. llama-3.3-70b-instruct                   pass_rate=0.4963  avg_test_rate=0.6709
+  35. llama-4-maverick                         pass_rate=0.4944  avg_test_rate=0.6475
+  36. llama-4-scout                            pass_rate=0.4333  avg_test_rate=0.6045
+  37. mistral-small-3.2-24b-instruct           pass_rate=0.4630  avg_test_rate=0.6402
+  38. mistralai-codestral-2508                 pass_rate=0.4481  avg_test_rate=0.6209
+  39. qwen-2.5-72b-instruct                    pass_rate=0.4519  avg_test_rate=0.6157
+  40. qwen-2.5-coder-32b-instruct              pass_rate=0.4000  avg_test_rate=0.5512
+  41. qwen3-14b                                pass_rate=0.4593  avg_test_rate=0.6476
+  42. qwen3-30b-a3b                            pass_rate=0.4315  avg_test_rate=0.6161
+  43. qwen3-coder                              pass_rate=0.5389  avg_test_rate=0.6973
+  44. qwen3-coder-flash                        pass_rate=0.5074  avg_test_rate=0.6670
+
+========================================================================
+Found 2 response matrices across 1 benchmarks.
+
+  [editbench]  editbench_data/processed/response_matrix.csv
+    heatmap  (540 x 44)
+    model_accuracy  (540 models)
+    item_difficulty  (44 items)
+    model_correlation  (540 models)
+  [editbench / binary]  editbench_data/processed/response_matrix_binary.csv
+    heatmap  (540 x 44)
+    model_accuracy  (540 models)
+    item_difficulty  (44 items)
+    model_correlation  (540 models)
+
+Done.
+Cloning into '/tmp/tau-bench'...
+Cloning into '/tmp/tau2-bench'...
+Updating files:  64% (912/1415)Updating files:  65% (920/1415)Updating files:  65% (921/1415)Updating files:  65% (930/1415)Updating files:  66% (934/1415)Updating files:  67% (949/1415)Updating files:  68% (963/1415)Updating files:  69% (977/1415)Updating files:  70% (991/1415)Updating files:  71% (1005/1415)Updating files:  72% (1019/1415)Updating files:  73% (1033/1415)Updating files:  74% (1048/1415)Updating files:  75% (1062/1415)Updating files:  76% (1076/1415)Updating files:  77% (1090/1415)Updating files:  78% (1104/1415)Updating files:  79% (1118/1415)Updating files:  80% (1132/1415)Updating files:  81% (1147/1415)Updating files:  82% (1161/1415)Updating files:  83% (1175/1415)Updating files:  84% (1189/1415)Updating files:  85% (1203/1415)Updating files:  86% (1217/1415)Updating files:  87% (1232/1415)Updating files:  88% (1246/1415)Updating files:  89% (1260/1415)Updating files:  90% (1274/1415)Updating files:  91% (1288/1415)Updating files:  92% (1302/1415)Updating files:  93% (1316/1415)Updating files:  94% (1331/1415)Updating files:  95% (1345/1415)Updating files:  96% (1359/1415)Updating files:  97% (1373/1415)Updating files:  98% (1387/1415)Updating files:  99% (1401/1415)Updating files: 100% (1415/1415)Updating files: 100% (1415/1415), done.
+======================================================================
+TAU-bench Response Matrix Builder
+======================================================================
+
+[1] Parsing tau-bench v1 trajectories...
+  tau-bench v1: 1980 records from 4 files
+
+[2] Parsing tau2-bench trajectories...
+  claude-3-7-sonnet-20250219_airline_default_gpt-4.1-2025-04-14_4trials.json: 200 sims, model=claude-3-7-sonnet-20250219, domain=airline
+  claude-3-7-sonnet-20250219_retail_default_gpt-4.1-2025-04-14_4trials.json: 456 sims, model=claude-3-7-sonnet-20250219, domain=retail
+  claude-3-7-sonnet-20250219_telecom_default_gpt-4.1-2025-04-14_4trials.json: 456 sims, model=claude-3-7-sonnet-20250219, domain=telecom
+  gpt-4.1-2025-04-14_airline_default_gpt-4.1-2025-04-14_4trials.json: 200 sims, model=gpt-4.1-2025-04-14, domain=airline
+  gpt-4.1-2025-04-14_retail_default_gpt-4.1-2025-04-14_4trials.json: 456 sims, model=gpt-4.1-2025-04-14, domain=retail
+  gpt-4.1-2025-04-14_telecom_default_gpt-4.1-2025-04-14_4trials.json: 456 sims, model=gpt-4.1-2025-04-14, domain=telecom
+  gpt-4.1-mini-2025-04-14_airline_base_gpt-4.1-2025-04-14_4trials.json: 200 sims, model=gpt-4.1-mini-2025-04-14_base, domain=airline
+  gpt-4.1-mini-2025-04-14_retail_base_gpt-4.1-2025-04-14_4trials.json: 456 sims, model=gpt-4.1-mini-2025-04-14_base, domain=retail
+  gpt-4.1-mini-2025-04-14_telecom_base_gpt-4.1-2025-04-14_4trials.json: 456 sims, model=gpt-4.1-mini-2025-04-14_base, domain=telecom
+  o4-mini-2025-04-16_airline_default_gpt-4.1-2025-04-14_4trials.json: 200 sims, model=o4-mini-2025-04-16, domain=airline
+  o4-mini-2025-04-16_retail_default_gpt-4.1-2025-04-14_4trials.json: 456 sims, model=o4-mini-2025-04-16, domain=retail
+  o4-mini-2025-04-16_telecom_default_gpt-4.1-2025-04-14_4trials.json: 456 sims, model=o4-mini-2025-04-16, domain=telecom
+  tau2-bench: 4448 total records
+
+[3] Parsing HAL leaderboard heatmap (v1 airline tasks)...
+  HAL heatmap: 1300 records, 26 models, 50 tasks
+
+[4] Parsing tau2-bench leaderboard submissions...
+  Leaderboard submissions: 51 domain-model entries from 17 files
+
+[5] Building v1 airline matrix (v1 models + HAL agents)...
+  Wrote response_matrix_v1_airline.csv (50 tasks x 28 models)
+    Fill rate: 1400/1400 (100.0%)
+    Model means: {'HAL Generalist Agent (Claude Opus 4 (May 2025))': '44.00%', 'HAL Generalist Agent (Claude Opus 4 High (May 2025))': '44.00%', 'HAL Generalist Agent (Claude Opus 4.1 (August 2025))': '54.00%', 'HAL Generalist Agent (Claude Opus 4.1 High (August 2025))': '32.00%', 'HAL Generalist Agent (Claude-3.7 Sonnet (February 2025))': '56.00%', 'HAL Generalist Agent (Claude-3.7 Sonnet High (February 2025))': '44.00%', 'HAL Generalist Agent (DeepSeek R1 (January 2025))': '10.00%', 'HAL Generalist Agent (DeepSeek V3 (March 2025))': '18.00%', 'HAL Generalist Agent (GPT-4.1 (April 2025))': '16.00%', 'HAL Generalist Agent (GPT-5 Medium (August 2025))': '30.00%', 'HAL Generalist Agent (Gemini 2.0 Flash (February 2025))': '22.00%', 'HAL Generalist Agent (o3 Medium (April 2025))': '20.00%', 'HAL Generalist Agent (o4-mini High (April 2025))': '18.00%', 'HAL Generalist Agent (o4-mini Low (April 2025))': '22.00%', 'TAU-bench Tool Calling (Claude Opus 4.1 (August 2025))': '50.00%', 'TAU-bench Tool Calling (Claude Opus 4.1 High (August 2025))': '52.00%', 'TAU-bench Tool Calling (Claude-3.7 Sonnet (February 2025))': '44.00%', 'TAU-bench Tool Calling (Claude-3.7 Sonnet High (February 2025))': '52.00%', 'TAU-bench Tool Calling (DeepSeek R1 (January 2025))': '36.00%', 'TAU-bench Tool Calling (DeepSeek V3 (March 2025))': '44.00%', 'TAU-bench Tool Calling (GPT-4.1 (April 2025))': '36.00%', 'TAU-bench Tool Calling (GPT-5 Medium (August 2025))': '48.00%', 'TAU-bench Tool Calling (Gemini 2.0 Flash High (February 2025))': '28.00%', 'TAU-bench Tool Calling (o3 Medium (April 2025))': '54.00%', 'TAU-bench Tool Calling (o4-mini High (April 2025))': '56.00%', 'TAU-bench Tool Calling (o4-mini Low (April 2025))': '36.00%', 'claude-3.5-sonnet-v2': '46.00%', 'gpt-4o': '42.00%'}
+
+[6] Building v2 airline matrix...
+  Wrote response_matrix_v2_airline.csv (50 tasks x 4 models)
+    Fill rate: 200/200 (100.0%)
+    Model means: {'claude-3-7-sonnet-20250219': '50.00%', 'gpt-4.1-2025-04-14': '56.00%', 'gpt-4.1-mini-2025-04-14_base': '50.50%', 'o4-mini-2025-04-16': '59.00%'}
+
+[7] Building retail matrix (v1 + v2 merged)...
+  Wrote response_matrix_retail.csv (115 tasks x 6 models)
+    Fill rate: 686/690 (99.4%)
+    Model means: {'claude-3-7-sonnet-20250219': '78.73%', 'claude-3.5-sonnet-v2': '69.24%', 'gpt-4.1-2025-04-14': '74.12%', 'gpt-4.1-mini-2025-04-14_base': '66.01%', 'gpt-4o': '60.43%', 'o4-mini-2025-04-16': '71.49%'}
+
+[8] Building telecom matrix (v2 only)...
+  Wrote response_matrix_telecom.csv (114 tasks x 4 models)
+    Fill rate: 456/456 (100.0%)
+    Model means: {'claude-3-7-sonnet-20250219': '49.34%', 'gpt-4.1-2025-04-14': '34.21%', 'gpt-4.1-mini-2025-04-14_base': '43.86%', 'o4-mini-2025-04-16': '42.11%'}
+
+[9] Building HAL-only airline matrix...
+  Wrote response_matrix_hal_airline.csv (50 tasks x 26 models)
+    Fill rate: 1300/1300 (100.0%)
+
+[10] Building combined response matrix...
+  Wrote response_matrix_combined.csv (329 tasks x 32 models)
+    Fill rate: 2742/10528 (26.0%)
+
+[10b] Writing item_content.csv...
+  Wrote item_content.csv (329 items)
+
+[11] Writing task metadata...
+  Wrote task_metadata.csv (443 tasks)
+
+[12] Writing leaderboard summary...
+  Wrote leaderboard_summary.csv (51 rows)
+
+[13] Computing summary statistics...
+  Wrote summary_stats.json
+
+======================================================================
+SUMMARY REPORT
+======================================================================
+
+Score type: binary (0.0 or 1.0 pass/fail per trial)
+Aggregation: mean reward across trials per (task, model) cell
+Total trajectory records: 7728
+Total unique models/agents (trajectory): 32
+Leaderboard models (aggregate only): 17
+Task metadata entries: 443
+
+--- Response Matrix Dimensions ---
+
+  response_matrix_v1_airline.csv:
+    Dimensions: 50 tasks x 28 models
+    Fill rate: 1400/1400 (100.0%)
+    Sources: tau-bench v1 trajectories + HAL leaderboard
+    Models: HAL Generalist Agent (Claude Opus 4 (May 2025)), HAL Generalist Agent (Claude Opus 4 High (May 2025)), HAL Generalist Agent (Claude Opus 4.1 (August 2025)), HAL Generalist Agent (Claude Opus 4.1 High (August 2025)), HAL Generalist Agent (Claude-3.7 Sonnet (February 2025)), HAL Generalist Agent (Claude-3.7 Sonnet High (February 2025)), HAL Generalist Agent (DeepSeek R1 (January 2025)), HAL Generalist Agent (DeepSeek V3 (March 2025)), HAL Generalist Agent (GPT-4.1 (April 2025)), HAL Generalist Agent (GPT-5 Medium (August 2025)), HAL Generalist Agent (Gemini 2.0 Flash (February 2025)), HAL Generalist Agent (o3 Medium (April 2025)), HAL Generalist Agent (o4-mini High (April 2025)), HAL Generalist Agent (o4-mini Low (April 2025)), TAU-bench Tool Calling (Claude Opus 4.1 (August 2025)), TAU-bench Tool Calling (Claude Opus 4.1 High (August 2025)), TAU-bench Tool Calling (Claude-3.7 Sonnet (February 2025)), TAU-bench Tool Calling (Claude-3.7 Sonnet High (February 2025)), TAU-bench Tool Calling (DeepSeek R1 (January 2025)), TAU-bench Tool Calling (DeepSeek V3 (March 2025)), TAU-bench Tool Calling (GPT-4.1 (April 2025)), TAU-bench Tool Calling (GPT-5 Medium (August 2025)), TAU-bench Tool Calling (Gemini 2.0 Flash High (February 2025)), TAU-bench Tool Calling (o3 Medium (April 2025)), TAU-bench Tool Calling (o4-mini High (April 2025)), TAU-bench Tool Calling (o4-mini Low (April 2025)), claude-3.5-sonnet-v2, gpt-4o
+
+  response_matrix_v2_airline.csv:
+    Dimensions: 50 tasks x 4 models
+    Fill rate: 200/200 (100.0%)
+    Sources: tau2-bench trajectories
+    Models: claude-3-7-sonnet-20250219, gpt-4.1-2025-04-14, gpt-4.1-mini-2025-04-14_base, o4-mini-2025-04-16
+
+  response_matrix_retail.csv:
+    Dimensions: 115 tasks x 6 models
+    Fill rate: 686/690 (99.4%)
+    Sources: tau-bench v1 + tau2-bench trajectories (merged)
+    Models: claude-3-7-sonnet-20250219, claude-3.5-sonnet-v2, gpt-4.1-2025-04-14, gpt-4.1-mini-2025-04-14_base, gpt-4o, o4-mini-2025-04-16
+
+  response_matrix_telecom.csv:
+    Dimensions: 114 tasks x 4 models
+    Fill rate: 456/456 (100.0%)
+    Sources: tau2-bench trajectories
+    Models: claude-3-7-sonnet-20250219, gpt-4.1-2025-04-14, gpt-4.1-mini-2025-04-14_base, o4-mini-2025-04-16
+
+  response_matrix_hal_airline.csv:
+    Dimensions: 50 tasks x 26 models
+    Fill rate: 1300/1300 (100.0%)
+    Sources: HAL leaderboard heatmap
+    Models: HAL Generalist Agent (Claude Opus 4 (May 2025)), HAL Generalist Agent (Claude Opus 4 High (May 2025)), HAL Generalist Agent (Claude Opus 4.1 (August 2025)), HAL Generalist Agent (Claude Opus 4.1 High (August 2025)), HAL Generalist Agent (Claude-3.7 Sonnet (February 2025)), HAL Generalist Agent (Claude-3.7 Sonnet High (February 2025)), HAL Generalist Agent (DeepSeek R1 (January 2025)), HAL Generalist Agent (DeepSeek V3 (March 2025)), HAL Generalist Agent (GPT-4.1 (April 2025)), HAL Generalist Agent (GPT-5 Medium (August 2025)), HAL Generalist Agent (Gemini 2.0 Flash (February 2025)), HAL Generalist Agent (o3 Medium (April 2025)), HAL Generalist Agent (o4-mini High (April 2025)), HAL Generalist Agent (o4-mini Low (April 2025)), TAU-bench Tool Calling (Claude Opus 4.1 (August 2025)), TAU-bench Tool Calling (Claude Opus 4.1 High (August 2025)), TAU-bench Tool Calling (Claude-3.7 Sonnet (February 2025)), TAU-bench Tool Calling (Claude-3.7 Sonnet High (February 2025)), TAU-bench Tool Calling (DeepSeek R1 (January 2025)), TAU-bench Tool Calling (DeepSeek V3 (March 2025)), TAU-bench Tool Calling (GPT-4.1 (April 2025)), TAU-bench Tool Calling (GPT-5 Medium (August 2025)), TAU-bench Tool Calling (Gemini 2.0 Flash High (February 2025)), TAU-bench Tool Calling (o3 Medium (April 2025)), TAU-bench Tool Calling (o4-mini High (April 2025)), TAU-bench Tool Calling (o4-mini Low (April 2025))
+
+  response_matrix_combined.csv:
+    Dimensions: 329 tasks x 32 models
+    Fill rate: 2742/10528 (26.0%)
+    Sources: All trajectory sources combined
+    Models: HAL Generalist Agent (Claude Opus 4 (May 2025)), HAL Generalist Agent (Claude Opus 4 High (May 2025)), HAL Generalist Agent (Claude Opus 4.1 (August 2025)), HAL Generalist Agent (Claude Opus 4.1 High (August 2025)), HAL Generalist Agent (Claude-3.7 Sonnet (February 2025)), HAL Generalist Agent (Claude-3.7 Sonnet High (February 2025)), HAL Generalist Agent (DeepSeek R1 (January 2025)), HAL Generalist Agent (DeepSeek V3 (March 2025)), HAL Generalist Agent (GPT-4.1 (April 2025)), HAL Generalist Agent (GPT-5 Medium (August 2025)), HAL Generalist Agent (Gemini 2.0 Flash (February 2025)), HAL Generalist Agent (o3 Medium (April 2025)), HAL Generalist Agent (o4-mini High (April 2025)), HAL Generalist Agent (o4-mini Low (April 2025)), TAU-bench Tool Calling (Claude Opus 4.1 (August 2025)), TAU-bench Tool Calling (Claude Opus 4.1 High (August 2025)), TAU-bench Tool Calling (Claude-3.7 Sonnet (February 2025)), TAU-bench Tool Calling (Claude-3.7 Sonnet High (February 2025)), TAU-bench Tool Calling (DeepSeek R1 (January 2025)), TAU-bench Tool Calling (DeepSeek V3 (March 2025)), TAU-bench Tool Calling (GPT-4.1 (April 2025)), TAU-bench Tool Calling (GPT-5 Medium (August 2025)), TAU-bench Tool Calling (Gemini 2.0 Flash High (February 2025)), TAU-bench Tool Calling (o3 Medium (April 2025)), TAU-bench Tool Calling (o4-mini High (April 2025)), TAU-bench Tool Calling (o4-mini Low (April 2025)), claude-3-7-sonnet-20250219, claude-3.5-sonnet-v2, gpt-4.1-2025-04-14, gpt-4.1-mini-2025-04-14_base, gpt-4o, o4-mini-2025-04-16
+
+--- Per-source record counts ---
+  tau-bench-v1: 1980 records, models: claude-3.5-sonnet-v2, gpt-4o
+  tau2-bench: 4448 records, models: claude-3-7-sonnet-20250219, gpt-4.1-2025-04-14, gpt-4.1-mini-2025-04-14_base, o4-mini-2025-04-16
+  hal-leaderboard: 1300 records, models: HAL Generalist Agent (Claude Opus 4 (May 2025)), HAL Generalist Agent (Claude Opus 4 High (May 2025)), HAL Generalist Agent (Claude Opus 4.1 (August 2025)), HAL Generalist Agent (Claude Opus 4.1 High (August 2025)), HAL Generalist Agent (Claude-3.7 Sonnet (February 2025)), HAL Generalist Agent (Claude-3.7 Sonnet High (February 2025)), HAL Generalist Agent (DeepSeek R1 (January 2025)), HAL Generalist Agent (DeepSeek V3 (March 2025)), HAL Generalist Agent (GPT-4.1 (April 2025)), HAL Generalist Agent (GPT-5 Medium (August 2025)), HAL Generalist Agent (Gemini 2.0 Flash (February 2025)), HAL Generalist Agent (o3 Medium (April 2025)), HAL Generalist Agent (o4-mini High (April 2025)), HAL Generalist Agent (o4-mini Low (April 2025)), TAU-bench Tool Calling (Claude Opus 4.1 (August 2025)), TAU-bench Tool Calling (Claude Opus 4.1 High (August 2025)), TAU-bench Tool Calling (Claude-3.7 Sonnet (February 2025)), TAU-bench Tool Calling (Claude-3.7 Sonnet High (February 2025)), TAU-bench Tool Calling (DeepSeek R1 (January 2025)), TAU-bench Tool Calling (DeepSeek V3 (March 2025)), TAU-bench Tool Calling (GPT-4.1 (April 2025)), TAU-bench Tool Calling (GPT-5 Medium (August 2025)), TAU-bench Tool Calling (Gemini 2.0 Flash High (February 2025)), TAU-bench Tool Calling (o3 Medium (April 2025)), TAU-bench Tool Calling (o4-mini High (April 2025)), TAU-bench Tool Calling (o4-mini Low (April 2025))
+
+--- Leaderboard Models (aggregate pass@k only, no per-task data) ---
+  Claude Opus 4
+  Claude Opus 4.1
+  Claude Sonnet 4
+  Claude-3.7-Sonnet
+  Claude-Sonnet-4.5
+  DeepSeek-V3.2
+  GPT-4.1
+  GPT-4.1-mini
+  GPT-5
+  Gemini 3.0 Pro
+  Kimi-k2
+  Nemotron-Orchestrator-8B
+  Qwen3-Max
+  Qwen3-Max-Thinking
+  Qwen3-Max-Thinking-Preview
+  o3
+  o4-mini
+
+--- Output files ---
+  item_content.csv                              (   34.0 KB)
+  item_content_combined.csv                     (  103.6 KB)
+  item_content_hal_airline.csv                  (   18.8 KB)
+  item_content_retail.csv                       (   43.1 KB)
+  item_content_telecom.csv                      (   31.5 KB)
+  item_content_v1_airline.csv                   (   18.8 KB)
+  item_content_v2_airline.csv                   (    7.5 KB)
+  leaderboard_summary.csv                       (    5.2 KB)
+  response_matrix_combined.csv                  (   39.8 KB)
+  response_matrix_hal_airline.csv               (    7.4 KB)
+  response_matrix_retail.csv                    (    4.3 KB)
+  response_matrix_telecom.csv                   (   16.1 KB)
+  response_matrix_v1_airline.csv                (    7.6 KB)
+  response_matrix_v2_airline.csv                (    1.7 KB)
+  summary_stats.json                            (   10.0 KB)
+  task_metadata.csv                             (  163.9 KB)
+
+Done.
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()

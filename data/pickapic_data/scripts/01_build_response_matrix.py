@@ -52,15 +52,26 @@ os.makedirs(PROCESSED_DIR, exist_ok=True)
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")
 
-SRC_REPO = "yuvalkirstain/pickapic_v2_no_images"
+# Original yuvalkirstain/pickapic_v2_no_images was deleted.
+# Using community mirror with same schema (stream text columns only to avoid 322GB images).
+SRC_REPO = "liuhuohuo2/pick-a-pic-v2"
+
+TEXT_COLUMNS = [
+    "caption", "model_0", "model_1", "label_0", "label_1",
+    "best_image_uid", "user_id", "ranking_id", "has_label",
+    "image_0_uid", "image_1_uid", "created_at", "num_example_per_prompt",
+]
 
 
 def download_data():
-    """Download Pick-a-Pic v2 (no images) training split from HuggingFace."""
+    """Download Pick-a-Pic v2 training split from HuggingFace (text columns only)."""
     from datasets import load_dataset
 
-    print("Downloading Pick-a-Pic v2 (no images) from HuggingFace ...")
-    ds = load_dataset(SRC_REPO, split="train", token=HF_TOKEN)
+    print("Downloading Pick-a-Pic v2 from HuggingFace (text columns only) ...")
+    ds = load_dataset(SRC_REPO, split="train", streaming=False)
+    # Select only text columns to avoid loading embedded images
+    available_cols = [c for c in TEXT_COLUMNS if c in ds.column_names]
+    ds = ds.select_columns(available_cols)
     print(f"  Total rows: {len(ds):,}")
     print(f"  Columns: {ds.column_names}")
 

@@ -168,6 +168,10 @@ BENCHMARKS = [
     "ultrafeedback",
     "rewardbench",
     "judgebench",
+    "summeval",
+    "prm800k",
+    "wmt_mqm",
+    "vl_rewardbench",
     "prism",
     # Vision-language
     "ai2d_test",
@@ -179,6 +183,7 @@ BENCHMARKS = [
     # Domain-specific
     "financebench",
     "igakuqa",
+    "igakuqa119",
     "lawbench",
     "tumlu",
     "legaleval",
@@ -212,6 +217,8 @@ BENCHMARKS = [
     "metr_late2025",
     "haiid",
     "genai_learning",
+    # Agent benchmarks (complex pipelines)
+    "terminal_bench",
 ]
 
 # Benchmarks without item-level model responses yet.
@@ -238,34 +245,28 @@ BENCHMARKS_PENDING = [
     "helpsteer2",
     "shp2",
     "rewardbench2",
-    "summeval",
     "flask",
     "prometheus",
-    "prm800k",
     "beavertails",
     "pku_saferlhf",
     "personalllm",
-    "wmt_mqm",
     "pickapic",
-    "vl_rewardbench",
+    # Medical benchmarks (questions only, no per-item model predictions)
+    "cmb",
+    "cmexam",
+    "frenchmedmcqa",
+    "kormedmcqa",
+    "medarabiq",
+    "medexpqa",
+    "medqa_chinese",
+    "mmedbench",
+    "permedcqa",
     # Complex pipelines not yet producing matrices
-    "terminal_bench",
     "webarena",
 ]
 
 
 # ── Setup functions for benchmarks that need extra steps ─────────────────
-
-def setup_terminal_bench(d):
-    ensure_dirs(d, "raw", "processed", "scripts")
-    log_info("Downloading Terminal-Bench task metadata...")
-    _run([sys.executable, str(d / "scripts/01_download_task_metadata.py")], check=False)
-    log_info("Querying Terminal-Bench database...")
-    _run([sys.executable, str(d / "scripts/05_query_database.py")], check=False)
-    log_info("Building Terminal-Bench response matrix...")
-    run_script(d / "scripts/06_build_response_matrix.py")
-    _run([sys.executable, str(d / "scripts/08_merge_metadata.py")], check=False)
-
 
 def setup_bfcl(d):
     ensure_dirs(d, "raw", "processed")
@@ -543,7 +544,6 @@ def setup_arcagi(d):
 # Map benchmark names to their setup functions.
 # Benchmarks NOT listed here use the default: mkdir + 01_build_response_matrix.py
 SETUP_FUNCS = {
-    "terminal_bench": setup_terminal_bench,
     "bfcl": setup_bfcl,
     "livecodebench": setup_livecodebench,
     "swebench": setup_swebench,
