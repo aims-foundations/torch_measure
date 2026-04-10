@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-Regenerate data/GALLERY.md from the tracked response_matrix*.png files.
+Regenerate the benchmark gallery files from tracked response_matrix*.png files.
 
-Walks data/<benchmark>/processed/ for each benchmark in BENCHMARKS and
-BENCHMARKS_AGGREGATE, collects the PNG heatmaps, and writes a grouped
-markdown file with embedded image links (relative to data/).
+Produces two markdown files under data/:
+  - GALLERY.md           — per-item BENCHMARKS (ready for IRT)
+  - GALLERY_AGGREGATE.md — aggregate-only BENCHMARKS_AGGREGATE
+
+(BENCHMARKS_PENDING has no heatmaps, so no file for it.)
 
 Usage:
     python data/scripts/build_gallery.py
@@ -17,6 +19,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 GALLERY_PATH = BASE_DIR / "GALLERY.md"
+GALLERY_AGGREGATE_PATH = BASE_DIR / "GALLERY_AGGREGATE.md"
 
 
 def _parse_list(source: str, list_name: str) -> list[str]:
@@ -47,18 +50,9 @@ def _variant_label(png_path: Path) -> str:
 IMG_WIDTH = 360  # pixels — tune for readability vs density
 
 
-def render_section(title: str, pngs_by_bench: dict[str, list[Path]]) -> list[str]:
-    """Render a markdown section with a grid of heatmaps, one group per benchmark.
-
-    Uses HTML `<img>` tags with a fixed width to keep the gallery compact.
-    """
-    lines = [f"## {title}", ""]
-    lines.append(
-        f"_{len(pngs_by_bench)} benchmarks, "
-        f"{sum(len(v) for v in pngs_by_bench.values())} heatmaps_"
-    )
-    lines.append("")
-
+def render_gallery_body(pngs_by_bench: dict[str, list[Path]]) -> list[str]:
+    """Render the benchmark sections as markdown with embedded thumbnail images."""
+    lines = []
     for bench in sorted(pngs_by_bench):
         lines.append(f"### {bench}")
         lines.append("")
@@ -75,6 +69,40 @@ def render_section(title: str, pngs_by_bench: dict[str, list[Path]]) -> list[str
     return lines
 
 
+def write_gallery(
+    path: Path,
+    title: str,
+    description: str,
+    pngs_by_bench: dict[str, list[Path]],
+) -> None:
+    """Write a self-contained gallery markdown file."""
+    n_benchmarks = len(pngs_by_bench)
+    n_heatmaps = sum(len(v) for v in pngs_by_bench.values())
+
+    lines = [
+        f"# {title}",
+        "",
+        f"{description}",
+        "",
+        f"**{n_benchmarks} benchmarks**, **{n_heatmaps} heatmaps**.",
+        "",
+        "Each image shows the full response matrix: rows are subjects (usually "
+        "models, sorted by mean score), columns are items (sorted by difficulty), "
+        "colored by score (red=low, green=high). Matrices larger than "
+        "1000 × 2000 are downsampled for render performance.",
+        "",
+        "To regenerate the heatmaps, run the relevant `build.py` or "
+        "`python data/scripts/visualize_response_matrix.py`. "
+        "To regenerate this file, run `python data/scripts/build_gallery.py`.",
+        "",
+        "---",
+        "",
+    ]
+    lines.extend(render_gallery_body(pngs_by_bench))
+    path.write_text("\n".join(lines))
+    print(f"Wrote {path}  ({n_benchmarks} benchmarks, {n_heatmaps} heatmaps)")
+
+
 def main():
     source = (BASE_DIR / "reproduce.py").read_text()
     benchmarks = _parse_list(source, "BENCHMARKS")
@@ -83,47 +111,29 @@ def main():
     ready_pngs = collect_pngs(benchmarks)
     aggregate_pngs = collect_pngs(aggregate)
 
-    n_ready_pngs = sum(len(v) for v in ready_pngs.values())
-    n_agg_pngs = sum(len(v) for v in aggregate_pngs.values())
+    write_gallery(
+        GALLERY_PATH,
+        title="Benchmark Gallery — Per-Item Response Matrices",
+        description=(
+            "Heatmaps for all benchmarks in `BENCHMARKS` (ready for IRT / "
+            "psychometric analysis). Each cell is a single subject's response "
+            "to a single item."
+        ),
+        pngs_by_bench=ready_pngs,
+    )
 
-    lines = [
-        "# Benchmark Gallery",
-        "",
-        f"Response matrix heatmaps for all tracked benchmarks — "
-        f"**{len(ready_pngs) + len(aggregate_pngs)} benchmarks**, "
-        f"**{n_ready_pngs + n_agg_pngs} heatmaps** total.",
-        "",
-        "Each image shows the full response matrix: rows are subjects (usually "
-        "models, sorted by mean score), columns are items (sorted by difficulty), "
-        "colored by score (red=low, green=high). Matrices larger than "
-        "1000 × 2000 are downsampled for render performance.",
-        "",
-        "To regenerate the heatmaps themselves, run the relevant `build.py` or "
-        "`python data/scripts/visualize_response_matrix.py`. "
-        "To regenerate this file, run `python data/scripts/build_gallery.py`.",
-        "",
-        "---",
-        "",
-    ]
-
-    if ready_pngs:
-        lines.extend(render_section(
-            f"BENCHMARKS — per-item response matrices ({len(ready_pngs)})",
-            ready_pngs,
-        ))
-        lines.append("---")
-        lines.append("")
-
-    if aggregate_pngs:
-        lines.extend(render_section(
-            f"BENCHMARKS_AGGREGATE — aggregate-only ({len(aggregate_pngs)})",
-            aggregate_pngs,
-        ))
-
-    GALLERY_PATH.write_text("\n".join(lines))
-    print(f"Wrote {GALLERY_PATH}")
-    print(f"  BENCHMARKS: {len(ready_pngs)} benchmarks, {n_ready_pngs} heatmaps")
-    print(f"  BENCHMARKS_AGGREGATE: {len(aggregate_pngs)} benchmarks, {n_agg_pngs} heatmaps")
+    write_gallery(
+        GALLERY_AGGREGATE_PATH,
+        title="Benchmark Gallery — Aggregate-Only Benchmarks",
+        description=(
+            "Heatmaps for benchmarks in `BENCHMARKS_AGGREGATE`. These have "
+            "multi-model data but the cells are aggregate rates across "
+            "trials, conditions, or sub-benchmarks — **not** per-item "
+            "responses. Useful for model-level comparisons but not IRT-ready. "
+            "See [`GALLERY.md`](GALLERY.md) for per-item benchmarks."
+        ),
+        pngs_by_bench=aggregate_pngs,
+    )
 
 
 if __name__ == "__main__":

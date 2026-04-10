@@ -118,9 +118,12 @@ Shared utilities live in `data/scripts/`:
 
 ## Gallery
 
-A preview of all heatmaps is browsable in [`GALLERY.md`](GALLERY.md). This
-is auto-generated from the tracked `response_matrix*.png` files, which
-live next to each benchmark's CSV in `<benchmark>/processed/`.
+Two browsable heatmap galleries, auto-generated from the tracked
+`response_matrix*.png` files next to each benchmark's CSV:
+
+- [`GALLERY.md`](GALLERY.md) — per-item response matrices (`BENCHMARKS`, 97)
+- [`GALLERY_AGGREGATE.md`](GALLERY_AGGREGATE.md) — aggregate-only benchmarks
+  (`BENCHMARKS_AGGREGATE`, 13)
 
 To regenerate the heatmaps without rebuilding the raw data:
 
