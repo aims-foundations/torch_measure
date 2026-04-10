@@ -21,6 +21,7 @@ Paper: https://arxiv.org/abs/2401.03065
 
 import json
 import os
+import subprocess
 import sys
 import pandas as pd
 import numpy as np
@@ -32,6 +33,23 @@ BASE_DIR = _BENCHMARK_DIR
 RAW_DIR = BASE_DIR / "raw" / "cruxeval"
 PROCESSED_DIR = BASE_DIR / "processed"
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def download():
+    """Download raw data from external sources."""
+    (BASE_DIR / "raw").mkdir(parents=True, exist_ok=True)
+    if not RAW_DIR.exists():
+        print("Cloning cruxeval repo...")
+        subprocess.run(
+            ["git", "clone", "https://github.com/facebookresearch/cruxeval.git", str(RAW_DIR)],
+            check=True,
+        )
+    else:
+        print("cruxeval repo already cloned, pulling latest...")
+        subprocess.run(
+            ["git", "-C", str(RAW_DIR), "pull", "--ff-only"],
+            check=False,
+        )
 
 # Evaluation result directories
 EVAL_DIR_ZIP = RAW_DIR / "samples" / "evaluation_results_unzipped" / "evaluation_results"
@@ -238,6 +256,7 @@ def build_model_summary(eval_files):
 
 
 def main():
+    download()
     print("=" * 70)
     print("CRUXEval Response Matrix Builder")
     print("=" * 70)

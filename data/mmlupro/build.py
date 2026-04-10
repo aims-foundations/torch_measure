@@ -21,6 +21,8 @@ import os
 import re
 import sys
 import json
+import time
+import urllib.request
 import zipfile
 import io
 import warnings
@@ -42,6 +44,42 @@ PROCESSED_DIR = BASE_DIR / "processed"
 EVAL_RESULTS_DIR = RAW_DIR / "eval_results"
 
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Download raw data
+# ──────────────────────────────────────────────────────────────────────
+def download():
+    """Download raw data from external sources."""
+    EVAL_RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
+    print("Downloading MMLU-Pro eval results from GitHub...")
+    api_url = "https://api.github.com/repos/TIGER-AI-Lab/MMLU-Pro/contents/eval_results"
+    try:
+        req = urllib.request.Request(api_url, headers={"User-Agent": "Mozilla/5.0"})
+        listing = json.loads(urllib.request.urlopen(req, timeout=30).read())
+        zips = [f for f in listing if f["name"].endswith(".zip")]
+        print(f"Found {len(zips)} eval result zip files")
+        for z in zips:
+            dest = EVAL_RESULTS_DIR / z["name"]
+            if dest.exists():
+                continue
+            print(f"  Downloading {z['name']}...")
+            urllib.request.urlretrieve(z["download_url"], dest)
+            time.sleep(0.5)
+    except Exception as e:
+        print(f"WARNING: {e}. Using existing data.")
+
+    lb_path = RAW_DIR / "leaderboard_results.csv"
+    if not lb_path.exists():
+        try:
+            url = ("https://huggingface.co/datasets/TIGER-Lab/mmlu_pro_leaderboard_submission/"
+                   "resolve/main/leaderboard_results.csv")
+            urllib.request.urlretrieve(url, lb_path)
+            print("Leaderboard CSV downloaded.")
+        except Exception as e:
+            print(f"WARNING: Leaderboard download failed: {e}")
 
 # ──────────────────────────────────────────────────────────────────────
 # Helper: extract model name from zip filename
@@ -354,6 +392,8 @@ def build_model_summary(response_matrix, q_meta_df, leaderboard_df):
 # Main
 # ──────────────────────────────────────────────────────────────────────
 def main():
+    download()
+
     print("MMLU-Pro Response Matrix Builder")
     print("================================\n")
 

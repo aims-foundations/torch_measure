@@ -17,6 +17,7 @@ Output: processed/response_matrix.csv (models × problems, pass@1 scores)
 
 import json
 import os
+import subprocess
 
 import numpy as np
 import pandas as pd
@@ -28,6 +29,32 @@ SUBMISSIONS_DIR = f"{RAW_DIR}/submissions"
 LEADERBOARD_DIR = f"{RAW_DIR}/livecodebench.github.io/build"
 OUTPUT_DIR = str(_BENCHMARK_DIR / "processed")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+
+def download():
+    """Download raw data from external sources."""
+    raw_path = Path(RAW_DIR)
+    raw_path.mkdir(parents=True, exist_ok=True)
+
+    repos = [
+        ("https://github.com/LiveCodeBench/submissions.git",
+         raw_path / "submissions"),
+        ("https://github.com/LiveCodeBench/livecodebench.github.io.git",
+         raw_path / "livecodebench.github.io"),
+    ]
+    for url, target in repos:
+        if not target.exists():
+            print(f"Cloning {url}...")
+            subprocess.run(
+                ["git", "clone", url, str(target)],
+                check=True,
+            )
+        else:
+            print(f"{target.name} already cloned, pulling latest...")
+            subprocess.run(
+                ["git", "-C", str(target), "pull", "--ff-only"],
+                check=False,
+            )
 
 # Models to skip (duplicates or problematic)
 SKIP_MODELS = {
@@ -117,6 +144,7 @@ def load_leaderboard_json(path, label):
 
 
 def main():
+    download()
     print("=== Loading submissions repo data ===")
     sub_models = load_submissions()
     print(f"Loaded {len(sub_models)} models from submissions repo")

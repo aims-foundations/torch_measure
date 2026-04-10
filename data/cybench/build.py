@@ -32,8 +32,10 @@ Requirements:
 import csv
 import os
 import re
+import subprocess
 import sys
 import urllib.request
+from pathlib import Path
 
 try:
     import pdfplumber
@@ -42,8 +44,7 @@ except ImportError:
     sys.exit(1)
 
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(SCRIPT_DIR)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_DIR = os.path.join(BASE_DIR, "raw")
 OUTPUT_DIR = os.path.join(BASE_DIR, "processed")
 os.makedirs(RAW_DIR, exist_ok=True)
@@ -52,6 +53,41 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 ARXIV_ID = "2408.08926"
 PDF_URL = f"https://arxiv.org/pdf/{ARXIV_ID}"
 PDF_PATH = os.path.join(RAW_DIR, "cybench_paper.pdf")
+LEADERBOARD_URL = "https://cybench.github.io/data/leaderboard.csv"
+LEADERBOARD_PATH = os.path.join(RAW_DIR, "leaderboard.csv")
+
+
+def download():
+    """Download raw data from external sources."""
+    os.makedirs(RAW_DIR, exist_ok=True)
+
+    clone_dir = Path("/tmp/cybench_repo")
+    if not clone_dir.exists():
+        print("Cloning cybench repo...")
+        subprocess.run(
+            ["git", "clone", "https://github.com/andyzorigin/cybench.git", str(clone_dir)],
+            check=True,
+        )
+    else:
+        print("cybench repo already cloned, pulling latest...")
+        subprocess.run(
+            ["git", "-C", str(clone_dir), "pull", "--ff-only"],
+            check=False,
+        )
+
+    if not os.path.exists(LEADERBOARD_PATH):
+        print(f"Downloading {LEADERBOARD_URL}...")
+        try:
+            req = urllib.request.Request(
+                LEADERBOARD_URL, headers={"User-Agent": "Mozilla/5.0"}
+            )
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                with open(LEADERBOARD_PATH, "wb") as f:
+                    f.write(resp.read())
+        except Exception as e:
+            print(f"  Leaderboard download failed: {e}")
+
+    download_pdf()
 
 # ===========================================================================
 # Task list in exact order from the paper (Tables 10-12)
@@ -487,12 +523,11 @@ def print_summary(unguided_rows, subtask_guided_rows, subtask_scores_rows):
 
 
 def main():
+    download()
     print("Building Cybench response matrices...")
     print()
 
-    # Step 1: Download PDF
-    print("Step 1: Download paper PDF")
-    download_pdf()
+    # Step 1: Download PDF (handled by download() above)
 
     # Step 2: Extract tables from PDF
     print("\nStep 2: Extract Tables 10-12 from PDF")

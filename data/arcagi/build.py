@@ -21,6 +21,7 @@ some test outputs were solved. We binarize at threshold >= 0.5.
 """
 
 import os
+import subprocess
 import sys
 import json
 import time
@@ -40,6 +41,24 @@ PROCESSED_DIR = _BENCHMARK_DIR / "processed"
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
 GROUND_TRUTH_DIR = RAW_DIR / "arc-agi-1" / "data" / "evaluation"
+
+
+def download():
+    """Download raw data from external sources."""
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    clone_dir = RAW_DIR / "arc-agi-1"
+    if not clone_dir.exists():
+        print("Cloning ARC-AGI repo...")
+        subprocess.run(
+            ["git", "clone", "https://github.com/fchollet/ARC-AGI.git", str(clone_dir)],
+            check=True,
+        )
+    else:
+        print("ARC-AGI repo already cloned, pulling latest...")
+        subprocess.run(
+            ["git", "-C", str(clone_dir), "pull", "--ff-only"],
+            check=False,
+        )
 
 V1_REPO = "arcprize/arc_agi_v1_public_eval"
 V2_REPO = "arcprize/arc_agi_v2_public_eval"
@@ -385,6 +404,7 @@ def print_matrix_stats(df: pd.DataFrame, label: str):
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
+    download()
     print("ARC-AGI Response Matrix Builder")
     print("=" * 70)
 

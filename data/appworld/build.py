@@ -41,8 +41,8 @@ from datetime import datetime
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "processed")
-RAW_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "raw")
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "processed")
+RAW_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "raw")
 
 LEADERBOARD_URL = "https://appworld.dev/leaderboard.json"
 TASKS_PARQUET_URL = (

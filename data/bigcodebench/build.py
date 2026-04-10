@@ -25,8 +25,8 @@ import pandas as pd
 import numpy as np
 
 # Paths
-RAW_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "raw")
-PROCESSED_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "processed")
+RAW_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "raw")
+PROCESSED_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "processed")
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
 

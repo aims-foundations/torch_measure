@@ -42,8 +42,7 @@ except ImportError:
     sys.exit(1)
 
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(SCRIPT_DIR)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_DIR = os.path.join(BASE_DIR, "raw")
 OUTPUT_DIR = os.path.join(BASE_DIR, "processed")
 os.makedirs(RAW_DIR, exist_ok=True)
@@ -136,6 +135,12 @@ def download_pdf():
     with open(PDF_PATH, "wb") as f:
         f.write(data)
     print(f"  Saved {len(data)} bytes to {PDF_PATH}")
+
+
+def download():
+    """Download raw data from external sources."""
+    os.makedirs(RAW_DIR, exist_ok=True)
+    download_pdf()
 
 
 def extract_tables_from_pdf(pdf_path):
@@ -575,12 +580,11 @@ def print_summary_stats(all_tables, rubric_metadata, overall_scores):
 
 
 def main():
+    download()
     print("Building PaperBench response matrix...")
     print(f"Output directory: {OUTPUT_DIR}\n")
 
-    # Step 1: Download PDF
-    print("Step 1: Download paper PDF")
-    download_pdf()
+    # Step 1: Download PDF (handled by download() above)
 
     # Step 2: Extract tables from PDF
     print("\nStep 2: Extract all tables from PDF")

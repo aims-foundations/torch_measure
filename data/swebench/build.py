@@ -20,6 +20,8 @@ Outputs:
 import json
 import os
 import sys
+import time
+import urllib.request
 from pathlib import Path
 
 import pandas as pd
@@ -27,6 +29,46 @@ import pandas as pd
 # Paths
 RAW_DIR = Path(__file__).resolve().parent / "raw" / "results_json"
 PROCESSED_DIR = Path(__file__).resolve().parent / "processed"
+
+
+def download():
+    """Download raw data from external sources."""
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
+    print("Downloading SWE-bench submission results via GitHub API...")
+    api_url = "https://api.github.com/repos/SWE-bench/experiments/contents/evaluation/verified"
+    try:
+        req = urllib.request.Request(api_url, headers={"User-Agent": "Mozilla/5.0"})
+        submissions = json.loads(urllib.request.urlopen(req, timeout=30).read())
+    except Exception as e:
+        print(f"WARNING: GitHub API call failed: {e}. Using existing raw data if available.")
+        submissions = []
+
+    downloaded = 0
+    for sub in submissions:
+        if sub.get("type") != "dir":
+            continue
+        name = sub["name"]
+        out_file = RAW_DIR / f"{name}.json"
+        if out_file.exists():
+            continue
+        results_url = (
+            f"https://raw.githubusercontent.com/SWE-bench/experiments/main/"
+            f"evaluation/verified/{name}/results/results.json"
+        )
+        try:
+            req2 = urllib.request.Request(results_url, headers={"User-Agent": "Mozilla/5.0"})
+            data = urllib.request.urlopen(req2, timeout=15).read()
+            out_file.write_bytes(data)
+            downloaded += 1
+            if downloaded % 20 == 0:
+                time.sleep(1)
+        except Exception as e:
+            print(f"  Skip {name}: {e}")
+
+    print(f"Downloaded {downloaded} new results files. "
+          f"Total: {len(list(RAW_DIR.glob('*.json')))}")
 
 
 def load_results(results_dir: Path) -> dict:
@@ -87,6 +129,7 @@ def build_model_summary(response_matrix: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
+    download()
     print(f"Loading results from: {RAW_DIR}")
     model_results, instance_ids = load_results(RAW_DIR)
 

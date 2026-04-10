@@ -34,7 +34,7 @@ def load(
     local_dir : str | Path | None
         If provided, look for ``.pt`` files in this directory before
         downloading from HuggingFace Hub.  Useful for offline use or
-        loading data produced by ``migrate_bench_data.py --no-upload``.
+        loading data produced by ``data/scripts/upload_to_hf.py --no-upload``.
         The file is expected at ``<local_dir>/<filename>`` where *filename*
         is the ``filename`` field from the dataset registry (e.g.,
         ``swebench.pt``).

@@ -32,12 +32,55 @@ Outputs (all in processed/):
 import json
 import os
 import csv
+import shutil
+import subprocess
 from collections import defaultdict
 from pathlib import Path
 
 RAW_DIR = Path(__file__).resolve().parent / "raw"
 OUT_DIR = Path(__file__).resolve().parent / "processed"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def download():
+    """Download raw data from external sources."""
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    clone_v1 = Path("/tmp/tau-bench")
+    clone_v2 = Path("/tmp/tau2-bench")
+
+    for url, clone_dir in [
+        ("https://github.com/sierra-research/tau-bench.git", clone_v1),
+        ("https://github.com/sierra-research/tau2-bench.git", clone_v2),
+    ]:
+        if not clone_dir.exists():
+            print(f"Cloning {url}...")
+            try:
+                subprocess.run(["git", "clone", url, str(clone_dir)], check=True)
+            except Exception as e:
+                print(f"WARNING: Failed to clone {url}: {e}")
+        else:
+            print(f"  Repo already exists at {clone_dir}, pulling...")
+            subprocess.run(["git", "-C", str(clone_dir), "pull", "--ff-only"],
+                           capture_output=True)
+
+    print("Copying trajectory data...")
+    traj_dir = clone_v1 / "trajectories"
+    if traj_dir.exists():
+        for f in traj_dir.glob("*.json"):
+            dest = RAW_DIR / f.name
+            if not dest.exists():
+                shutil.copy2(f, dest)
+
+    tau2_results = clone_v2 / "results"
+    tau2_dest = RAW_DIR / "tau2_results"
+    tau2_dest.mkdir(parents=True, exist_ok=True)
+    if tau2_results.exists():
+        for f in tau2_results.glob("*.json"):
+            dest = tau2_dest / f.name
+            if not dest.exists():
+                shutil.copy2(f, dest)
 
 
 # ---------------------------------------------------------------------------
@@ -346,6 +389,8 @@ def compute_model_means(matrix, task_ids, models):
 # Main
 # ---------------------------------------------------------------------------
 def main():
+    download()
+
     print("=" * 70)
     print("TAU-bench Response Matrix Builder")
     print("=" * 70)

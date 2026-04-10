@@ -33,6 +33,8 @@ References:
 """
 
 import json
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -42,9 +44,39 @@ import pandas as pd
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent
+PROJECT_DIR = SCRIPT_DIR
 RAW_RESULTS_DIR = PROJECT_DIR / "raw_results"
 PROCESSED_DIR = PROJECT_DIR / "processed"
+
+
+def download():
+    """Download raw data from external sources."""
+    RAW_RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
+    clone_dir = Path("/tmp/editbench_repo")
+    if not clone_dir.exists():
+        print("Cloning editbench repo...")
+        try:
+            subprocess.run(
+                ["git", "clone", "https://github.com/waynchi/editbench.git",
+                 str(clone_dir)],
+                check=True,
+            )
+        except Exception as e:
+            print(f"WARNING: Failed to clone editbench: {e}")
+    else:
+        print(f"  Repo already exists at {clone_dir}, pulling...")
+        subprocess.run(["git", "-C", str(clone_dir), "pull", "--ff-only"],
+                       capture_output=True)
+
+    # Copy result JSONs to raw_results/
+    results_dir = clone_dir / "results" / "whole_file"
+    if results_dir.exists():
+        for f in results_dir.glob("*.json"):
+            dest = RAW_RESULTS_DIR / f.name
+            if not dest.exists():
+                shutil.copy2(f, dest)
 
 
 def load_model_results(results_dir: Path) -> dict:
@@ -283,6 +315,8 @@ def print_summary(matrix, binary_matrix, metadata, all_data):
 
 
 def main():
+    download()
+
     print("=" * 72)
     print("EDIT-Bench Response Matrix Builder")
     print("=" * 72)

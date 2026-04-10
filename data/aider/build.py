@@ -21,6 +21,7 @@ Output:
 
 import os
 import sys
+import urllib.request
 from pathlib import Path
 
 import yaml
@@ -32,6 +33,32 @@ _BENCHMARK_DIR = Path(__file__).resolve().parent
 RAW_DIR = _BENCHMARK_DIR / "raw"
 PROCESSED_DIR = _BENCHMARK_DIR / "processed"
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def download():
+    """Download raw data from external sources."""
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    yaml_names = [
+        "edit_leaderboard",
+        "polyglot_leaderboard",
+        "o1_polyglot_leaderboard",
+        "refactor_leaderboard",
+    ]
+    for yml in yaml_names:
+        dest = RAW_DIR / f"{yml}.yml"
+        if dest.exists():
+            continue
+        url = (
+            f"https://raw.githubusercontent.com/Aider-AI/aider/main/"
+            f"aider/website/_data/{yml}.yml"
+        )
+        print(f"Downloading {url}...")
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                dest.write_bytes(resp.read())
+        except Exception as e:
+            print(f"  Download failed for {yml}: {e}")
 
 
 def load_yaml(filepath):
@@ -339,6 +366,7 @@ def write_data_availability_report(combined_df):
 
 
 def main():
+    download()
     print("=" * 70)
     print("Building Aider Leaderboard Response Matrix")
     print("=" * 70)

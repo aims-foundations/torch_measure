@@ -21,6 +21,7 @@ import os
 import re
 import subprocess
 import sys
+import urllib.request
 from pathlib import Path
 
 import pandas as pd
@@ -34,6 +35,36 @@ HUMANEVAL_SAMPLES = RAW_DIR / "humaneval_samples" / "extracted"
 MBPP_SAMPLES = RAW_DIR / "mbpp_samples" / "extracted"
 EVAL_RESULTS_DIR = RAW_DIR / "eval_results"
 LEADERBOARD_FILE = RAW_DIR / "leaderboard_results.json"
+
+
+def download():
+    """Download raw data from external sources."""
+    (RAW_DIR / "humaneval_samples").mkdir(parents=True, exist_ok=True)
+    (RAW_DIR / "mbpp_samples").mkdir(parents=True, exist_ok=True)
+    EVAL_RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
+    print("Downloading EvalPlus code samples from GitHub releases...")
+    releases_url = "https://api.github.com/repos/evalplus/evalplus/releases"
+    try:
+        req = urllib.request.Request(releases_url, headers={"User-Agent": "Mozilla/5.0"})
+        releases = json.loads(urllib.request.urlopen(req, timeout=30).read())
+        for rel in releases:
+            for asset in rel.get("assets", []):
+                name = asset["name"]
+                if not name.endswith(".zip"):
+                    continue
+                dest = (RAW_DIR / "humaneval_samples"
+                        if "humaneval" in name.lower()
+                        else RAW_DIR / "mbpp_samples")
+                dest_file = dest / name
+                if dest_file.exists():
+                    continue
+                print(f"Downloading {name}...")
+                urllib.request.urlretrieve(asset["browser_download_url"], dest_file)
+        print("EvalPlus samples downloaded.")
+    except Exception as e:
+        print(f"WARNING: {e}. Using existing data.")
 
 
 def find_model_dirs(base_dir, task_prefix, min_tasks=100):
@@ -219,6 +250,8 @@ def build_model_summary(all_results, leaderboard_data=None):
 
 
 def main():
+    download()
+
     parser = argparse.ArgumentParser(
         description="Build EvalPlus response matrices"
     )
@@ -227,8 +260,12 @@ def main():
         help="Parallel workers for evalplus evaluation"
     )
     parser.add_argument(
-        "--skip-eval", action="store_true",
-        help="Skip evaluation, only build matrices from existing results"
+        "--skip-eval", dest="skip_eval", action="store_true", default=True,
+        help="Skip evaluation, only build matrices from existing results (default)"
+    )
+    parser.add_argument(
+        "--no-skip-eval", dest="skip_eval", action="store_false",
+        help="Run evalplus evaluation from samples"
     )
     parser.add_argument(
         "--benchmarks", nargs="+",
@@ -237,6 +274,18 @@ def main():
     )
     args = parser.parse_args()
 
+    try:
+        _run_build(args)
+    except Exception as e:
+        if args.skip_eval:
+            print(f"Build failed with --skip-eval ({e}); retrying with evaluation...")
+            args.skip_eval = False
+            _run_build(args)
+        else:
+            raise
+
+
+def _run_build(args):
     os.makedirs(EVAL_RESULTS_DIR, exist_ok=True)
     os.makedirs(PROCESSED_DIR, exist_ok=True)
 

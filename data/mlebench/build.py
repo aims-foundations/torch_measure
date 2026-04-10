@@ -29,6 +29,7 @@ Output files:
 import csv
 import json
 import os
+import subprocess
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -44,6 +45,32 @@ CATEGORIES_CSV = EXPERIMENTS_DIR / "competition_categories.csv"
 
 OUTPUT_DIR = _BENCHMARK_DIR / "processed"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def download():
+    """Download raw data from external sources."""
+    if not REPO_DIR.exists():
+        print("Cloning mle-bench repo (with Git LFS skipped)...")
+        env = dict(os.environ)
+        env["GIT_LFS_SKIP_SMUDGE"] = "1"
+        subprocess.run(
+            ["git", "clone", "https://github.com/openai/mle-bench.git", str(REPO_DIR)],
+            check=True,
+            env=env,
+        )
+    else:
+        print("mle-bench repo already cloned, pulling latest...")
+        subprocess.run(
+            ["git", "-C", str(REPO_DIR), "pull", "--ff-only"],
+            check=False,
+        )
+
+    print("Pulling LFS objects under runs/...")
+    subprocess.run(
+        ["git", "lfs", "pull", "--include=runs/**"],
+        cwd=str(REPO_DIR),
+        check=False,
+    )
 
 
 # -- Experiment descriptions (from README) -----------------------------------
@@ -160,6 +187,7 @@ def load_task_metadata():
 
 
 def main():
+    download()
     print("=" * 80)
     print("MLE-bench Response Matrix Builder")
     print("=" * 80)

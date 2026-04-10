@@ -24,6 +24,7 @@ import json
 import os
 import glob
 import re
+import subprocess
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -36,6 +37,28 @@ PROCESSED_DIR = BASE_DIR / "processed"
 SUBMISSION_DIR = RAW_DIR / "swepolybench_submission" / "evaluation"
 
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def download():
+    """Download raw data from external sources."""
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    clone_dir = Path("/tmp/swepolybench_repo")
+    if not clone_dir.exists():
+        print("Cloning SWE-PolyBench repo (submission branch)...")
+        subprocess.run(
+            [
+                "git", "clone", "--branch", "submission",
+                "https://github.com/amazon-science/SWE-PolyBench.git",
+                str(clone_dir),
+            ],
+            check=True,
+        )
+    else:
+        print("SWE-PolyBench repo already cloned, pulling latest...")
+        subprocess.run(
+            ["git", "-C", str(clone_dir), "pull", "--ff-only"],
+            check=False,
+        )
 
 
 def load_instance_metadata(split_name):
@@ -141,6 +164,7 @@ def build_response_matrix(submissions, instance_ids, split_label):
 
 
 def main():
+    download()
     print("=" * 70)
     print("SWE-PolyBench Response Matrix Builder")
     print("=" * 70)

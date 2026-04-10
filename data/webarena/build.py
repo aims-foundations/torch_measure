@@ -27,6 +27,7 @@ Output:
 import json
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -38,6 +39,44 @@ RAW_DIR = _BENCHMARK_DIR / "raw"
 OUT_DIR = _BENCHMARK_DIR / "processed"
 
 NUM_TASKS = 812  # Tasks 0..811
+
+
+def download():
+    """Download raw data from external sources."""
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    print("Downloading WebArena traces...")
+    for folder_url, subdir in [
+        ("https://drive.google.com/drive/folders/1tnFTtNBEfJmPQR0x8arHxINGR2bZFvVm",
+         RAW_DIR / "072023_release_v1"),
+        ("https://drive.google.com/drive/folders/1eFAZkRp6jEbgqJ2LJmhayc1LLHvj1sXH",
+         RAW_DIR / "102023_release_v2"),
+    ]:
+        if not subdir.exists():
+            subdir.mkdir(parents=True, exist_ok=True)
+            try:
+                import gdown  # optional dependency
+                gdown.download_folder(folder_url, output=str(subdir), quiet=False)
+            except Exception:
+                print("WARNING: gdown not installed or Google Drive download failed. "
+                      "Install: pip install gdown")
+
+    # Clone agent-evals repo
+    agent_evals_dir = RAW_DIR / "agent-evals"
+    if not agent_evals_dir.exists():
+        try:
+            subprocess.run(
+                ["git", "clone", "https://github.com/anthropics/agent-evals.git",
+                 str(agent_evals_dir)],
+                check=True,
+            )
+        except Exception as e:
+            print(f"WARNING: Failed to clone agent-evals: {e}")
+    else:
+        print(f"  Repo already exists at {agent_evals_dir}, pulling...")
+        subprocess.run(["git", "-C", str(agent_evals_dir), "pull", "--ff-only"],
+                       capture_output=True)
 
 
 def parse_merged_log(filepath, model_name):
@@ -361,6 +400,11 @@ def build_matrix():
     return df
 
 
-if __name__ == "__main__":
+def main():
+    download()
     os.makedirs(OUT_DIR, exist_ok=True)
-    df = build_matrix()
+    return build_matrix()
+
+
+if __name__ == "__main__":
+    main()

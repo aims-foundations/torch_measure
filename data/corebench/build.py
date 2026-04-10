@@ -28,6 +28,7 @@ Also outputs:
 
 import json
 import os
+import subprocess
 import sys
 import csv
 from collections import defaultdict
@@ -41,6 +42,23 @@ RESULTS_DIR = "/tmp/core-bench/results"
 TRAIN_DATASET = "/tmp/core-bench/benchmark/dataset/core_train.json"
 _BENCHMARK_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = _BENCHMARK_DIR / "processed"
+
+
+def download():
+    """Download raw data from external sources."""
+    clone_dir = Path("/tmp/core-bench")
+    if not clone_dir.exists():
+        print("Cloning core-bench repo...")
+        subprocess.run(
+            ["git", "clone", "https://github.com/siegelz/core-bench.git", str(clone_dir)],
+            check=True,
+        )
+    else:
+        print("core-bench repo already cloned, pulling latest...")
+        subprocess.run(
+            ["git", "-C", str(clone_dir), "pull", "--ff-only"],
+            check=False,
+        )
 
 # Files to skip (post-paper runs, as noted in paper_figures.ipynb cell-16)
 SKIP_FILES = {
@@ -253,6 +271,7 @@ def write_hal_leaderboard(output_dir):
 
 
 def main():
+    download()
     print("=" * 70)
     print("CORE-Bench Response Matrix Builder")
     print("=" * 70)

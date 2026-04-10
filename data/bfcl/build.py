@@ -23,6 +23,7 @@ Outputs:
 
 import json
 import os
+import subprocess
 import sys
 from collections import Counter, defaultdict
 
@@ -31,10 +32,29 @@ import pandas as pd
 from pathlib import Path
 
 _BENCHMARK_DIR = Path(__file__).resolve().parent
+RAW_DIR = _BENCHMARK_DIR / "raw"
 SCORE_DIR = str(_BENCHMARK_DIR / "raw" / "BFCL-Result" / "2024-12-29" / "score")
 RESULT_DIR = str(_BENCHMARK_DIR / "raw" / "BFCL-Result" / "2024-12-29" / "result")
 OUTPUT_DIR = str(_BENCHMARK_DIR / "processed")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+
+def download():
+    """Download raw data from external sources."""
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    clone_dir = RAW_DIR / "BFCL-Result"
+    if not clone_dir.exists():
+        print("Cloning BFCL-Result repo...")
+        subprocess.run(
+            ["git", "clone", "https://github.com/HuanzhiMao/BFCL-Result.git", str(clone_dir)],
+            check=True,
+        )
+    else:
+        print("BFCL-Result repo already exists, pulling latest...")
+        subprocess.run(
+            ["git", "-C", str(clone_dir), "pull", "--ff-only"],
+            check=False,
+        )
 
 # Coarse error categories for grouping
 COARSE_CATEGORY = {
@@ -401,6 +421,7 @@ def extract_error_types(model_dirs, categories, category_task_ids,
 
 
 def main():
+    download()
     # Discover all models (directories in score dir, excluding CSVs)
     model_dirs = sorted([
         d for d in os.listdir(SCORE_DIR)

@@ -27,10 +27,35 @@ Author: auto-generated
 import argparse
 import json
 import os
+import subprocess
 import sys
 from pathlib import Path
 
 import pandas as pd
+
+_BENCHMARK_DIR = Path(__file__).resolve().parent
+RUNS_DIR = Path("/tmp/agentdojo_repo/runs")
+PROCESSED_DIR = _BENCHMARK_DIR / "processed"
+
+
+def download():
+    """Download raw data from external sources."""
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    clone_dir = Path("/tmp/agentdojo_repo")
+    if not clone_dir.exists():
+        print("Cloning AgentDojo repo...")
+        try:
+            subprocess.run(
+                ["git", "clone", "https://github.com/ethz-spylab/agentdojo.git",
+                 str(clone_dir)],
+                check=True,
+            )
+        except Exception as e:
+            print(f"WARNING: Failed to clone agentdojo: {e}")
+    else:
+        print(f"  Repo already exists at {clone_dir}, pulling...")
+        subprocess.run(["git", "-C", str(clone_dir), "pull", "--ff-only"],
+                       capture_output=True)
 
 
 def parse_all_runs(runs_dir: str) -> pd.DataFrame:
@@ -417,18 +442,19 @@ def print_summary(utility_matrix, security_matrix, utility_attack_matrix,
 
 
 def main():
+    download()
+
     parser = argparse.ArgumentParser(
         description="Build response matrices from AgentDojo benchmark results."
     )
     parser.add_argument(
-        "--runs_dir", type=str,
-        default="/tmp/agentdojo_repo/runs",
+        "--runs-dir", "--runs_dir", dest="runs_dir", type=str,
+        default=str(RUNS_DIR),
         help="Path to the runs/ directory from the agentdojo repo."
     )
     parser.add_argument(
         "--output_dir", type=str,
-_BENCHMARK_DIR = Path(__file__).resolve().parent
-        default=str(_BENCHMARK_DIR / "processed"),
+        default=str(PROCESSED_DIR),
         help="Directory to write output CSV files."
     )
     parser.add_argument(
