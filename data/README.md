@@ -33,13 +33,13 @@ Each benchmark follows a consistent layout:
 
 ```
 <benchmark>_data/
+  build.py        # Downloads raw data and builds response matrix
   raw/            # Original data (cloned repos, API downloads, PDFs)
   processed/      # Analysis-ready outputs
     response_matrix.csv    # Primary output: subjects x items
+    item_content.csv       # Item text content (item_id, content)
     model_summary.csv      # Per-subject aggregate statistics
     task_metadata.csv      # Item metadata (difficulty, category, etc.)
-  scripts/        # Processing pipeline
-    01_build_response_matrix.py
   figures/        # Visualizations (heatmaps, bar charts)
 ```
 

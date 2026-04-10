@@ -2541,3 +2541,88 @@ Task metadata entries: 443
 Done.
 /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
   plt.tight_layout()
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+Found 6 response matrices across 1 benchmarks.
+
+  [taubench / combined]  taubench_data/processed/response_matrix_combined.csv
+    ERROR: can only concatenate str (not "float") to str
+  [taubench / hal_airline]  taubench_data/processed/response_matrix_hal_airline.csv
+    heatmap  (50 x 27)
+    model_accuracy  (50 models)
+    item_difficulty  (27 items)
+    model_correlation  (50 models)
+  [taubench / retail]  taubench_data/processed/response_matrix_retail.csv
+    heatmap  (115 x 7)
+    model_accuracy  (115 models)
+    item_difficulty  (7 items)
+    model_correlation  (115 models)
+  [taubench / telecom]  taubench_data/processed/response_matrix_telecom.csv
+    ERROR: can only concatenate str (not "float") to str
+  [taubench / v1_airline]  taubench_data/processed/response_matrix_v1_airline.csv
+    heatmap  (50 x 29)
+    model_accuracy  (50 models)
+    item_difficulty  (29 items)
+    model_correlation  (50 models)
+  [taubench / v2_airline]  taubench_data/processed/response_matrix_v2_airline.csv
+    heatmap  (50 x 5)
+    model_accuracy  (50 models)
+    item_difficulty  (5 items)
+    model_correlation  (50 models)
+
+Done.
+Cloning into '/tmp/cybench_repo'...
+Updating files:   4% (330/7459)Updating files:   5% (373/7459)Updating files:   6% (448/7459)Updating files:   7% (523/7459)Updating files:   8% (597/7459)Updating files:   9% (672/7459)Updating files:  10% (746/7459)Updating files:  11% (821/7459)Updating files:  12% (896/7459)Updating files:  13% (970/7459)Updating files:  14% (1045/7459)Updating files:  15% (1119/7459)Updating files:  16% (1194/7459)Updating files:  17% (1269/7459)Updating files:  18% (1343/7459)Updating files:  19% (1418/7459)Updating files:  20% (1492/7459)Updating files:  21% (1567/7459)Updating files:  22% (1641/7459)Updating files:  23% (1716/7459)Updating files:  24% (1791/7459)Updating files:  25% (1865/7459)Updating files:  26% (1940/7459)Updating files:  27% (2014/7459)Updating files:  27% (2024/7459)Updating files:  28% (2089/7459)Updating files:  29% (2164/7459)Updating files:  30% (2238/7459)Updating files:  31% (2313/7459)Updating files:  32% (2387/7459)Updating files:  33% (2462/7459)Updating files:  34% (2537/7459)Updating files:  35% (2611/7459)Updating files:  36% (2686/7459)Updating files:  37% (2760/7459)Updating files:  38% (2835/7459)Updating files:  39% (2910/7459)Updating files:  40% (2984/7459)Updating files:  40% (2990/7459)Updating files:  41% (3059/7459)Updating files:  42% (3133/7459)Updating files:  43% (3208/7459)Updating files:  44% (3282/7459)Updating files:  45% (3357/7459)Updating files:  46% (3432/7459)Updating files:  47% (3506/7459)Updating files:  48% (3581/7459)Updating files:  49% (3655/7459)Updating files:  50% (3730/7459)Updating files:  51% (3805/7459)Updating files:  52% (3879/7459)Updating files:  53% (3954/7459)Updating files:  54% (4028/7459)Updating files:  55% (4103/7459)Updating files:  56% (4178/7459)Updating files:  57% (4252/7459)Updating files:  58% (4327/7459)Updating files:  59% (4401/7459)Updating files:  60% (4476/7459)Updating files:  61% (4550/7459)Updating files:  62% (4625/7459)Updating files:  63% (4700/7459)Updating files:  64% (4774/7459)Updating files:  65% (4849/7459)Updating files:  66% (4923/7459)Updating files:  67% (4998/7459)Updating files:  68% (5073/7459)Updating files:  69% (5147/7459)Updating files:  70% (5222/7459)Updating files:  71% (5296/7459)Updating files:  72% (5371/7459)Updating files:  73% (5446/7459)Updating files:  74% (5520/7459)Updating files:  74% (5537/7459)Updating files:  75% (5595/7459)Updating files:  76% (5669/7459)Updating files:  77% (5744/7459)Updating files:  78% (5819/7459)Updating files:  79% (5893/7459)Updating files:  80% (5968/7459)Updating files:  81% (6042/7459)Updating files:  82% (6117/7459)Updating files:  83% (6191/7459)Updating files:  84% (6266/7459)Updating files:  85% (6341/7459)Updating files:  85% (6370/7459)Updating files:  86% (6415/7459)Updating files:  87% (6490/7459)Updating files:  88% (6564/7459)Updating files:  89% (6639/7459)Updating files:  90% (6714/7459)Updating files:  91% (6788/7459)Updating files:  92% (6863/7459)Updating files:  93% (6937/7459)Updating files:  94% (7012/7459)Updating files:  95% (7087/7459)Updating files:  96% (7161/7459)Updating files:  96% (7162/7459)Updating files:  97% (7236/7459)Updating files:  98% (7310/7459)Updating files:  99% (7385/7459)Updating files: 100% (7459/7459)Updating files: 100% (7459/7459), done.
+/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3: can't open file '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cybench_data/scripts/01_build_response_matrix.py': [Errno 2] No such file or directory
+Cloning into '/tmp/core-bench'...
+/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3: can't open file '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/corebench_data/scripts/01_build_response_matrix.py': [Errno 2] No such file or directory
+/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3: can't open file '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/paperbench_data/scripts/01_build_response_matrix.py': [Errno 2] No such file or directory
+/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3: can't open file '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/aider_data/scripts/01_build_response_matrix.py': [Errno 2] No such file or directory
+Cloning into '/tmp/swepolybench_repo'...
+Updating files:  70% (5270/7496)Updating files:  71% (5323/7496)Updating files:  71% (5391/7496)Updating files:  72% (5398/7496)Updating files:  73% (5473/7496)Updating files:  74% (5548/7496)Updating files:  75% (5622/7496)Updating files:  76% (5697/7496)Updating files:  77% (5772/7496)Updating files:  78% (5847/7496)Updating files:  79% (5922/7496)Updating files:  80% (5997/7496)Updating files:  81% (6072/7496)Updating files:  82% (6147/7496)Updating files:  83% (6222/7496)Updating files:  83% (6290/7496)Updating files:  84% (6297/7496)Updating files:  85% (6372/7496)Updating files:  86% (6447/7496)Updating files:  87% (6522/7496)Updating files:  88% (6597/7496)Updating files:  89% (6672/7496)Updating files:  90% (6747/7496)Updating files:  91% (6822/7496)Updating files:  92% (6897/7496)Updating files:  93% (6972/7496)Updating files:  94% (7047/7496)Updating files:  95% (7122/7496)Updating files:  96% (7197/7496)Updating files:  97% (7272/7496)Updating files:  98% (7347/7496)Updating files:  99% (7422/7496)Updating files: 100% (7496/7496)Updating files: 100% (7496/7496), done.
+/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3: can't open file '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swepolybench_data/scripts/01_build_response_matrix.py': [Errno 2] No such file or directory
+Found 1 response matrices across 1 benchmarks.
+
+  [visualwebarena]  visualwebarena_data/processed/response_matrix.csv
+    heatmap  (910 x 6)
+    model_accuracy  (910 models)
+    item_difficulty  (6 items)
+    model_correlation  (910 models)
+
+Done.
+Found 2 response matrices across 1 benchmarks.
+
+  [appworld]  appworld_data/processed/response_matrix.csv
+    ERROR: can only concatenate str (not "float") to str
+  [appworld / wide]  appworld_data/processed/response_matrix_wide.csv
+    ERROR: can only concatenate str (not "float") to str
+
+Done.
+Found 1 response matrices across 1 benchmarks.
+
+  [scienceagentbench]  scienceagentbench_data/processed/response_matrix.csv
+    ERROR: can only concatenate str (not "int") to str
+
+Done.
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+Found 2 response matrices across 1 benchmarks.
+
+  [agentbench]  agentbench_data/processed/response_matrix.csv
+    heatmap  (29 x 8)
+    model_accuracy  (29 models)
+    item_difficulty  (8 items)
+    model_correlation  (29 models)
+  [agentbench / with_overall]  agentbench_data/processed/response_matrix_with_overall.csv
+    heatmap  (29 x 9)
+    model_accuracy  (29 models)
+    item_difficulty  (9 items)
+    model_correlation  (29 models)
+
+Done.

@@ -278,7 +278,7 @@ def setup_bfcl(d):
         log_info("BFCL-Result repo already exists, pulling latest...")
         _run(["git", "-C", str(clone_dir), "pull"], check=False)
     log_info("Building BFCL response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_livecodebench(d):
@@ -287,7 +287,7 @@ def setup_livecodebench(d):
     git_clone("https://github.com/LiveCodeBench/livecodebench.github.io.git",
               d / "raw/livecodebench.github.io", depth=None)
     log_info("Building LiveCodeBench response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_swebench(d):
@@ -329,7 +329,7 @@ def setup_swebench(d):
           f"Total: {len(list(raw_dir.glob('*.json')))}")
 
     log_info("Building SWE-bench response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_evalplus(d):
@@ -358,9 +358,9 @@ def setup_evalplus(d):
 
     log_info("Building EvalPlus response matrices...")
     try:
-        run_script(d / "scripts/01_build_response_matrix.py", "--skip-eval")
+        run_script(d / "build.py", "--skip-eval")
     except subprocess.CalledProcessError:
-        run_script(d / "scripts/01_build_response_matrix.py")
+        run_script(d / "build.py")
 
 
 def setup_mmlupro(d):
@@ -396,14 +396,14 @@ def setup_mmlupro(d):
             log_warn(f"Leaderboard download failed: {e}")
 
     log_info("Building MMLU-Pro response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_cruxeval(d):
     ensure_dirs(d, "raw", "processed")
     git_clone("https://github.com/facebookresearch/cruxeval.git", d / "raw/cruxeval", depth=None)
     log_info("Building CRUXEval response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_webarena(d):
@@ -429,7 +429,7 @@ def setup_webarena(d):
               d / "raw/agent-evals", depth=None)
 
     log_info("Building WebArena response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 
@@ -438,7 +438,7 @@ def setup_agentdojo(d):
     clone_dir = Path("/tmp/agentdojo_repo")
     git_clone("https://github.com/ethz-spylab/agentdojo.git", clone_dir, depth=None)
     log_info("Building AgentDojo response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py", "--runs-dir", str(clone_dir / "runs"))
+    run_script(d / "build.py", "--runs-dir", str(clone_dir / "runs"))
 
 
 def setup_mlebench(d):
@@ -449,7 +449,7 @@ def setup_mlebench(d):
         git_clone("https://github.com/openai/mle-bench.git", clone_dir,
                   depth=None, lfs_include="runs/**")
     log_info("Building MLE-bench response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_editbench(d):
@@ -462,7 +462,7 @@ def setup_editbench(d):
         for f in results_dir.glob("*.json"):
             shutil.copy2(f, d / "raw_results" / f.name)
     log_info("Building EDIT-Bench response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_taubench(d):
@@ -485,7 +485,7 @@ def setup_taubench(d):
             shutil.copy2(f, tau2_dest / f.name)
 
     log_info("Building TAU-bench response matrices...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_cybench(d):
@@ -495,21 +495,21 @@ def setup_cybench(d):
     curl_download("https://cybench.github.io/data/leaderboard.csv", d / "raw/leaderboard.csv")
     curl_download("https://arxiv.org/pdf/2408.08926", d / "raw/cybench_paper.pdf")
     log_info("Building Cybench response matrix (extracting Tables 10-12 from PDF)...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_corebench(d):
     ensure_dirs(d, "processed")
     git_clone("https://github.com/siegelz/core-bench.git", Path("/tmp/core-bench"), depth=None)
     log_info("Building CORE-Bench response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_paperbench(d):
     ensure_dirs(d, "raw", "processed")
     curl_download("https://arxiv.org/pdf/2504.01848", d / "raw/paperbench_paper.pdf")
     log_info("Building PaperBench response matrix (extracting Tables 10-18 from PDF)...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_aider(d):
@@ -521,7 +521,7 @@ def setup_aider(d):
                f"aider/website/_data/{yml}.yml")
         curl_download(url, d / f"raw/{yml}.yml")
     log_info("Building Aider response matrix (aggregate only)...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_swepolybench(d):
@@ -529,14 +529,14 @@ def setup_swepolybench(d):
     git_clone("https://github.com/amazon-science/SWE-PolyBench.git",
               Path("/tmp/swepolybench_repo"), branch="submission", depth=None)
     log_info("Building SWE-PolyBench response matrix...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 def setup_arcagi(d):
     ensure_dirs(d, "raw", "processed")
     git_clone("https://github.com/fchollet/ARC-AGI.git", d / "raw/arc-agi-1", depth=None)
     log_info("Building ARC-AGI response matrix (downloads from HuggingFace)...")
-    run_script(d / "scripts/01_build_response_matrix.py")
+    run_script(d / "build.py")
 
 
 
@@ -581,7 +581,7 @@ def run_benchmark(name: str) -> bool:
     else:
         # Default: mkdir + run build script
         ensure_dirs(d, "raw", "processed")
-        build_script = d / "scripts/01_build_response_matrix.py"
+        build_script = d / "build.py"
         if build_script.exists():
             log_info(f"Building {name} response matrix...")
             run_script(build_script)
