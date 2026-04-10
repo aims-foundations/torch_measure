@@ -32,7 +32,7 @@ pip install evalplus     # for EvalPlus (local code evaluation)
 Each benchmark follows a consistent layout:
 
 ```
-<benchmark>_data/
+<benchmark>/
   build.py        # Downloads raw data and builds response matrix
   raw/            # Original data (cloned repos, API downloads, PDFs)
   processed/      # Analysis-ready outputs

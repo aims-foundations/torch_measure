@@ -2626,3 +2626,602 @@ Found 2 response matrices across 1 benchmarks.
     model_correlation  (29 models)
 
 Done.
+Found 2 response matrices across 1 benchmarks.
+
+  [alpacaeval]  alpacaeval_data/processed/response_matrix.csv
+    heatmap  (221 x 805)
+    model_accuracy  (221 models)
+    item_difficulty  (805 items)
+    model_correlation  (221 models)
+  [alpacaeval / preference]  alpacaeval_data/processed/response_matrix_preference.csv
+    heatmap  (221 x 805)
+    model_accuracy  (221 models)
+    item_difficulty  (805 items)
+    model_correlation  (221 models)
+
+Done.
+Found 1 response matrices across 1 benchmarks.
+
+  [androidworld]  androidworld_data/processed/response_matrix.csv
+    heatmap  (3 x 116)
+    model_accuracy  (3 models)
+    item_difficulty  (116 items)
+    model_correlation  (3 models)
+
+Done.
+/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3: can't open file '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/arcagi_data/scripts/01_build_response_matrix.py': [Errno 2] No such file or directory
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+Found 2 response matrices across 1 benchmarks.
+
+  [browsergym]  browsergym_data/processed/response_matrix.csv
+    heatmap  (18 x 8)
+    model_accuracy  (18 models)
+    item_difficulty  (8 items)
+    model_correlation  (18 models)
+  [browsergym / with_stderr]  browsergym_data/processed/response_matrix_with_stderr.csv
+    heatmap  (18 x 16)
+    model_accuracy  (18 models)
+    item_difficulty  (16 items)
+    model_correlation  (18 models)
+
+Done.
+Found 2 response matrices across 1 benchmarks.
+
+  [gaia / hal]  gaia_data/processed/response_matrix_hal.csv
+    heatmap  (32 x 165)
+    model_accuracy  (32 models)
+    item_difficulty  (165 items)
+    model_correlation  (32 models)
+  [gaia / hal_continuous]  gaia_data/processed/response_matrix_hal_continuous.csv
+    heatmap  (32 x 165)
+    model_accuracy  (32 models)
+    item_difficulty  (165 items)
+    model_correlation  (32 models)
+
+Done.
+Found 2 response matrices across 1 benchmarks.
+
+  [hle]  hle_data/processed/response_matrix.csv
+    heatmap  (19 x 1792)
+    model_accuracy  (19 models)
+    item_difficulty  (1792 items)
+    model_correlation  (19 models)
+  [hle / dense]  hle_data/processed/response_matrix_dense.csv
+    heatmap  (14 x 1369)
+    model_accuracy  (14 models)
+    item_difficulty  (1369 items)
+    model_correlation  (14 models)
+
+Done.
+Found 2 response matrices across 1 benchmarks.
+
+  [livebench]  livebench_data/processed/response_matrix.csv
+    heatmap  (195 x 494)
+    model_accuracy  (195 models)
+    item_difficulty  (494 items)
+    model_correlation  (195 models)
+  [livebench / binary]  livebench_data/processed/response_matrix_binary.csv
+    heatmap  (195 x 494)
+    model_accuracy  (195 models)
+    item_difficulty  (494 items)
+    model_correlation  (195 models)
+
+Done.
+Found 73 response matrices across 1 benchmarks.
+
+  [matharena / aime_2025]  matharena_data/processed/response_matrix_aime_2025.csv
+    heatmap  (62 x 30)
+    model_accuracy  (62 models)
+    item_difficulty  (30 items)
+    model_correlation  (62 models)
+  [matharena / aime_2025_I]  matharena_data/processed/response_matrix_aime_2025_I.csv
+    heatmap  (31 x 15)
+    model_accuracy  (31 models)
+    item_difficulty  (15 items)
+    model_correlation  (31 models)
+  [matharena / aime_2025_II]  matharena_data/processed/response_matrix_aime_2025_II.csv
+    heatmap  (31 x 15)
+    model_accuracy  (31 models)
+    item_difficulty  (15 items)
+    model_correlation  (31 models)
+  [matharena / aime_2025_II_binary]  matharena_data/processed/response_matrix_aime_2025_II_binary.csv
+    heatmap  (31 x 15)
+    model_accuracy  (31 models)
+    item_difficulty  (15 items)
+    model_correlation  (31 models)
+  [matharena / aime_2025_II_raw]  matharena_data/processed/response_matrix_aime_2025_II_raw.csv
+    heatmap  (124 x 15)
+    model_accuracy  (124 models)
+    item_difficulty  (15 items)
+    model_correlation  (124 models)
+  [matharena / aime_2025_I_binary]  matharena_data/processed/response_matrix_aime_2025_I_binary.csv
+    heatmap  (31 x 15)
+    model_accuracy  (31 models)
+    item_difficulty  (15 items)
+    model_correlation  (31 models)
+  [matharena / aime_2025_I_raw]  matharena_data/processed/response_matrix_aime_2025_I_raw.csv
+    heatmap  (124 x 15)
+    model_accuracy  (124 models)
+    item_difficulty  (15 items)
+    model_correlation  (124 models)
+  [matharena / aime_2025_binary]  matharena_data/processed/response_matrix_aime_2025_binary.csv
+    heatmap  (62 x 30)
+    model_accuracy  (62 models)
+    item_difficulty  (30 items)
+    model_correlation  (62 models)
+  [matharena / aime_2025_raw]  matharena_data/processed/response_matrix_aime_2025_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_aime_2025_raw.csv'
+  [matharena / aime_2026]  matharena_data/processed/response_matrix_aime_2026.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_aime_2026.csv'
+  [matharena / aime_2026_I]  matharena_data/processed/response_matrix_aime_2026_I.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_aime_2026_I.csv'
+  [matharena / aime_2026_I_binary]  matharena_data/processed/response_matrix_aime_2026_I_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_aime_2026_I_binary.csv'
+  [matharena / aime_2026_I_raw]  matharena_data/processed/response_matrix_aime_2026_I_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_aime_2026_I_raw.csv'
+  [matharena / aime_2026_binary]  matharena_data/processed/response_matrix_aime_2026_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_aime_2026_binary.csv'
+  [matharena / aime_2026_raw]  matharena_data/processed/response_matrix_aime_2026_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_aime_2026_raw.csv'
+  [matharena / aime_combined]  matharena_data/processed/response_matrix_aime_combined.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_aime_combined.csv'
+  [matharena / all_final_answer]  matharena_data/processed/response_matrix_all_final_answer.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_all_final_answer.csv'
+  [matharena / apex_2025]  matharena_data/processed/response_matrix_apex_2025.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_apex_2025.csv'
+  [matharena / apex_2025_binary]  matharena_data/processed/response_matrix_apex_2025_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_apex_2025_binary.csv'
+  [matharena / apex_2025_raw]  matharena_data/processed/response_matrix_apex_2025_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_apex_2025_raw.csv'
+  [matharena / apex_shortlist]  matharena_data/processed/response_matrix_apex_shortlist.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_apex_shortlist.csv'
+  [matharena / apex_shortlist_binary]  matharena_data/processed/response_matrix_apex_shortlist_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_apex_shortlist_binary.csv'
+  [matharena / apex_shortlist_raw]  matharena_data/processed/response_matrix_apex_shortlist_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_apex_shortlist_raw.csv'
+  [matharena / arxivmath_0126]  matharena_data/processed/response_matrix_arxivmath_0126.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_0126.csv'
+  [matharena / arxivmath_0126_binary]  matharena_data/processed/response_matrix_arxivmath_0126_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_0126_binary.csv'
+  [matharena / arxivmath_0126_raw]  matharena_data/processed/response_matrix_arxivmath_0126_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_0126_raw.csv'
+  [matharena / arxivmath_0226]  matharena_data/processed/response_matrix_arxivmath_0226.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_0226.csv'
+  [matharena / arxivmath_0226_binary]  matharena_data/processed/response_matrix_arxivmath_0226_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_0226_binary.csv'
+  [matharena / arxivmath_0226_raw]  matharena_data/processed/response_matrix_arxivmath_0226_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_0226_raw.csv'
+  [matharena / arxivmath_1225]  matharena_data/processed/response_matrix_arxivmath_1225.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_1225.csv'
+  [matharena / arxivmath_1225_binary]  matharena_data/processed/response_matrix_arxivmath_1225_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_1225_binary.csv'
+  [matharena / arxivmath_1225_raw]  matharena_data/processed/response_matrix_arxivmath_1225_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_arxivmath_1225_raw.csv'
+  [matharena / brumo_2025]  matharena_data/processed/response_matrix_brumo_2025.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_brumo_2025.csv'
+  [matharena / brumo_2025_binary]  matharena_data/processed/response_matrix_brumo_2025_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_brumo_2025_binary.csv'
+  [matharena / brumo_2025_raw]  matharena_data/processed/response_matrix_brumo_2025_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_brumo_2025_raw.csv'
+  [matharena / cmimc_2025]  matharena_data/processed/response_matrix_cmimc_2025.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_cmimc_2025.csv'
+  [matharena / cmimc_2025_binary]  matharena_data/processed/response_matrix_cmimc_2025_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_cmimc_2025_binary.csv'
+  [matharena / cmimc_2025_raw]  matharena_data/processed/response_matrix_cmimc_2025_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_cmimc_2025_raw.csv'
+  [matharena / hmmt_feb_2025]  matharena_data/processed/response_matrix_hmmt_feb_2025.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_feb_2025.csv'
+  [matharena / hmmt_feb_2025_binary]  matharena_data/processed/response_matrix_hmmt_feb_2025_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_feb_2025_binary.csv'
+  [matharena / hmmt_feb_2025_raw]  matharena_data/processed/response_matrix_hmmt_feb_2025_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_feb_2025_raw.csv'
+  [matharena / hmmt_feb_2026]  matharena_data/processed/response_matrix_hmmt_feb_2026.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_feb_2026.csv'
+  [matharena / hmmt_feb_2026_binary]  matharena_data/processed/response_matrix_hmmt_feb_2026_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_feb_2026_binary.csv'
+  [matharena / hmmt_feb_2026_raw]  matharena_data/processed/response_matrix_hmmt_feb_2026_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_feb_2026_raw.csv'
+  [matharena / hmmt_nov_2025]  matharena_data/processed/response_matrix_hmmt_nov_2025.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_nov_2025.csv'
+  [matharena / hmmt_nov_2025_binary]  matharena_data/processed/response_matrix_hmmt_nov_2025_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_nov_2025_binary.csv'
+  [matharena / hmmt_nov_2025_raw]  matharena_data/processed/response_matrix_hmmt_nov_2025_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_hmmt_nov_2025_raw.csv'
+  [matharena / imc_2025_points]  matharena_data/processed/response_matrix_imc_2025_points.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_imc_2025_points.csv'
+  [matharena / imo_2025_points]  matharena_data/processed/response_matrix_imo_2025_points.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_imo_2025_points.csv'
+  [matharena / kangaroo_2025_11_12]  matharena_data/processed/response_matrix_kangaroo_2025_11_12.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_11_12.csv'
+  [matharena / kangaroo_2025_11_12_binary]  matharena_data/processed/response_matrix_kangaroo_2025_11_12_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_11_12_binary.csv'
+  [matharena / kangaroo_2025_11_12_raw]  matharena_data/processed/response_matrix_kangaroo_2025_11_12_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_11_12_raw.csv'
+  [matharena / kangaroo_2025_1_2]  matharena_data/processed/response_matrix_kangaroo_2025_1_2.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_1_2.csv'
+  [matharena / kangaroo_2025_1_2_binary]  matharena_data/processed/response_matrix_kangaroo_2025_1_2_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_1_2_binary.csv'
+  [matharena / kangaroo_2025_1_2_raw]  matharena_data/processed/response_matrix_kangaroo_2025_1_2_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_1_2_raw.csv'
+  [matharena / kangaroo_2025_3_4]  matharena_data/processed/response_matrix_kangaroo_2025_3_4.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_3_4.csv'
+  [matharena / kangaroo_2025_3_4_binary]  matharena_data/processed/response_matrix_kangaroo_2025_3_4_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_3_4_binary.csv'
+  [matharena / kangaroo_2025_3_4_raw]  matharena_data/processed/response_matrix_kangaroo_2025_3_4_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_3_4_raw.csv'
+  [matharena / kangaroo_2025_5_6]  matharena_data/processed/response_matrix_kangaroo_2025_5_6.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_5_6.csv'
+  [matharena / kangaroo_2025_5_6_binary]  matharena_data/processed/response_matrix_kangaroo_2025_5_6_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_5_6_binary.csv'
+  [matharena / kangaroo_2025_5_6_raw]  matharena_data/processed/response_matrix_kangaroo_2025_5_6_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_5_6_raw.csv'
+  [matharena / kangaroo_2025_7_8]  matharena_data/processed/response_matrix_kangaroo_2025_7_8.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_7_8.csv'
+  [matharena / kangaroo_2025_7_8_binary]  matharena_data/processed/response_matrix_kangaroo_2025_7_8_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_7_8_binary.csv'
+  [matharena / kangaroo_2025_7_8_raw]  matharena_data/processed/response_matrix_kangaroo_2025_7_8_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_7_8_raw.csv'
+  [matharena / kangaroo_2025_9_10]  matharena_data/processed/response_matrix_kangaroo_2025_9_10.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_9_10.csv'
+  [matharena / kangaroo_2025_9_10_binary]  matharena_data/processed/response_matrix_kangaroo_2025_9_10_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_9_10_binary.csv'
+  [matharena / kangaroo_2025_9_10_raw]  matharena_data/processed/response_matrix_kangaroo_2025_9_10_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_kangaroo_2025_9_10_raw.csv'
+  [matharena / miklos_2025_points]  matharena_data/processed/response_matrix_miklos_2025_points.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_miklos_2025_points.csv'
+  [matharena / putnam_2025_points]  matharena_data/processed/response_matrix_putnam_2025_points.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_putnam_2025_points.csv'
+  [matharena / smt_2025]  matharena_data/processed/response_matrix_smt_2025.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_smt_2025.csv'
+  [matharena / smt_2025_binary]  matharena_data/processed/response_matrix_smt_2025_binary.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_smt_2025_binary.csv'
+  [matharena / smt_2025_raw]  matharena_data/processed/response_matrix_smt_2025_raw.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_smt_2025_raw.csv'
+  [matharena / usamo_2025_points]  matharena_data/processed/response_matrix_usamo_2025_points.csv
+    ERROR: [Errno 2] No such file or directory: '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/matharena_data/processed/response_matrix_usamo_2025_points.csv'
+
+Done.
+[0;32m[INFO][0m Generating webarena visualizations...
+[0;32m[INFO][0m webarena: SUCCESS
+
+[0;32m[INFO][0m ========== dpai ==========
+[0;32m[INFO][0m Downloading DPAI score reports from TeamCity API...
+  junie_cli_claude_opus_4.5: FAILED (HTTP Error 404: )
+  junie_cli_sonnet_4.5: already downloaded
+  junie_cli_gemini_3.0: FAILED (HTTP Error 404: )
+  claude_code_opus_4.5: already downloaded
+  claude_code_sonnet_4.5_auto: already downloaded
+  claude_code_sonnet_4.5_explicit: already downloaded
+  codex_cli_gpt5_codex: already downloaded
+  gemini_cli_gemini_3.0_preview: already downloaded
+  gemini_cli_gemini_2.5_pro: already downloaded
+[0;31m[ERROR][0m dpai: FAILED ('str' object has no attribute 'get')
+
+[0;32m[INFO][0m ========== agentdojo ==========
+[0;32m[INFO][0m Building AgentDojo response matrix...
+[0;31m[ERROR][0m agentdojo: FAILED (Command '['/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3', '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/agentdojo_data/scripts/01_build_response_matrix.py', '--runs-dir', '/tmp/agentdojo_repo/runs']' returned non-zero exit status 1.)
+
+[0;32m[INFO][0m ========== mlebench ==========
+[0;32m[INFO][0m Cloning MLE-bench repo (with Git LFS)...
+[0;32m[INFO][0m Building MLE-bench response matrix...
+[0;31m[ERROR][0m mlebench: FAILED (Command '['/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3', '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench_data/scripts/01_build_response_matrix.py']' returned non-zero exit status 1.)
+
+[0;32m[INFO][0m ========== editbench ==========
+[0;32m[INFO][0m Building EDIT-Bench response matrix...
+[0;32m[INFO][0m Generating editbench visualizations...
+[0;32m[INFO][0m editbench: SUCCESS
+
+[0;32m[INFO][0m ========== taubench ==========
+[0;32m[INFO][0m Copying trajectory data...
+[0;32m[INFO][0m Building TAU-bench response matrices...
+[0;32m[INFO][0m Generating taubench visualizations...
+[0;32m[INFO][0m taubench: SUCCESS
+
+[0;32m[INFO][0m ========== cybench ==========
+[0;32m[INFO][0m Building Cybench response matrix (extracting Tables 10-12 from PDF)...
+[0;31m[ERROR][0m cybench: FAILED (Command '['/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3', '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/cybench_data/scripts/01_build_response_matrix.py']' returned non-zero exit status 2.)
+
+[0;32m[INFO][0m ========== corebench ==========
+[0;32m[INFO][0m Building CORE-Bench response matrix...
+[0;31m[ERROR][0m corebench: FAILED (Command '['/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3', '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/corebench_data/scripts/01_build_response_matrix.py']' returned non-zero exit status 2.)
+
+[0;32m[INFO][0m ========== paperbench ==========
+[0;32m[INFO][0m Building PaperBench response matrix (extracting Tables 10-18 from PDF)...
+[0;31m[ERROR][0m paperbench: FAILED (Command '['/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3', '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/paperbench_data/scripts/01_build_response_matrix.py']' returned non-zero exit status 2.)
+
+[0;32m[INFO][0m ========== aider ==========
+[0;32m[INFO][0m Downloading Aider leaderboard YAML files...
+[0;32m[INFO][0m Building Aider response matrix (aggregate only)...
+[0;31m[ERROR][0m aider: FAILED (Command '['/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3', '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/aider_data/scripts/01_build_response_matrix.py']' returned non-zero exit status 2.)
+
+[0;32m[INFO][0m ========== swepolybench ==========
+[0;32m[INFO][0m Building SWE-PolyBench response matrix...
+[0;31m[ERROR][0m swepolybench: FAILED (Command '['/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3', '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swepolybench_data/scripts/01_build_response_matrix.py']' returned non-zero exit status 2.)
+
+[0;32m[INFO][0m ========== visualwebarena ==========
+[1;33m[WARN][0m No build script found for visualwebarena
+[0;32m[INFO][0m Generating visualwebarena visualizations...
+[0;32m[INFO][0m visualwebarena: SUCCESS
+
+[0;32m[INFO][0m ========== appworld ==========
+[1;33m[WARN][0m No build script found for appworld
+[0;32m[INFO][0m Generating appworld visualizations...
+[0;32m[INFO][0m appworld: SUCCESS
+
+[0;32m[INFO][0m ========== scienceagentbench ==========
+[1;33m[WARN][0m No build script found for scienceagentbench
+[0;32m[INFO][0m Generating scienceagentbench visualizations...
+[0;32m[INFO][0m scienceagentbench: SUCCESS
+
+[0;32m[INFO][0m ========== agentbench ==========
+[1;33m[WARN][0m No build script found for agentbench
+[0;32m[INFO][0m Generating agentbench visualizations...
+[0;32m[INFO][0m agentbench: SUCCESS
+
+[0;32m[INFO][0m ========== alpacaeval ==========
+[1;33m[WARN][0m No build script found for alpacaeval
+[0;32m[INFO][0m Generating alpacaeval visualizations...
+[0;32m[INFO][0m alpacaeval: SUCCESS
+
+[0;32m[INFO][0m ========== androidworld ==========
+[1;33m[WARN][0m No build script found for androidworld
+[0;32m[INFO][0m Generating androidworld visualizations...
+[0;32m[INFO][0m androidworld: SUCCESS
+
+[0;32m[INFO][0m ========== arcagi ==========
+[0;32m[INFO][0m   Repo already exists at /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/arcagi_data/raw/arc-agi-1, pulling...
+[0;32m[INFO][0m Building ARC-AGI response matrix (downloads from HuggingFace)...
+[0;31m[ERROR][0m arcagi: FAILED (Command '['/lfs/skampere1/0/sttruong/miniconda3/envs/torch_measure/bin/python3', '/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/arcagi_data/scripts/01_build_response_matrix.py']' returned non-zero exit status 2.)
+
+[0;32m[INFO][0m ========== browsergym ==========
+[1;33m[WARN][0m No build script found for browsergym
+[0;32m[INFO][0m Generating browsergym visualizations...
+[0;32m[INFO][0m browsergym: SUCCESS
+
+[0;32m[INFO][0m ========== gaia ==========
+[1;33m[WARN][0m No build script found for gaia
+[0;32m[INFO][0m Generating gaia visualizations...
+[0;32m[INFO][0m gaia: SUCCESS
+
+[0;32m[INFO][0m ========== hle ==========
+[1;33m[WARN][0m No build script found for hle
+[0;32m[INFO][0m Generating hle visualizations...
+[0;32m[INFO][0m hle: SUCCESS
+
+[0;32m[INFO][0m ========== livebench ==========
+[1;33m[WARN][0m No build script found for livebench
+[0;32m[INFO][0m Generating livebench visualizations...
+[0;32m[INFO][0m livebench: SUCCESS
+
+[0;32m[INFO][0m ========== matharena ==========
+[1;33m[WARN][0m No build script found for matharena
+[0;32m[INFO][0m Generating matharena visualizations...
+[0;32m[INFO][0m matharena: SUCCESS
+
+[0;32m[INFO][0m ========== osworld ==========
+[0;31m[ERROR][0m Unknown benchmark: osworld
+[0;31m[ERROR][0m osworld: FAILED
+
+[0;32m[INFO][0m ========== theagentcompany ==========
+[0;31m[ERROR][0m Unknown benchmark: theagentcompany
+[0;31m[ERROR][0m theagentcompany: FAILED
+
+[0;32m[INFO][0m ========== toolbench ==========
+[0;31m[ERROR][0m Unknown benchmark: toolbench
+[0;31m[ERROR][0m toolbench: FAILED
+
+[0;32m[INFO][0m ========== wildbench ==========
+[0;31m[ERROR][0m Unknown benchmark: wildbench
+[0;31m[ERROR][0m wildbench: FAILED
+
+[0;32m[INFO][0m ========== workarena ==========
+[0;31m[ERROR][0m Unknown benchmark: workarena
+[0;31m[ERROR][0m workarena: FAILED
+
+[0;32m[INFO][0m ========== arena_140k ==========
+[0;31m[ERROR][0m Unknown benchmark: arena_140k
+[0;31m[ERROR][0m arena_140k: FAILED
+
+[0;32m[INFO][0m ========== arena_hard ==========
+[0;31m[ERROR][0m Unknown benchmark: arena_hard
+[0;31m[ERROR][0m arena_hard: FAILED
+
+[0;32m[INFO][0m ========== mtbench ==========
+[0;31m[ERROR][0m Unknown benchmark: mtbench
+[0;31m[ERROR][0m mtbench: FAILED
+
+[0;32m[INFO][0m ========== ultrafeedback ==========
+[0;31m[ERROR][0m Unknown benchmark: ultrafeedback
+[0;31m[ERROR][0m ultrafeedback: FAILED
+
+[0;32m[INFO][0m ========== nectar ==========
+[0;31m[ERROR][0m Unknown benchmark: nectar
+[0;31m[ERROR][0m nectar: FAILED
+
+[0;32m[INFO][0m ========== biggen ==========
+[0;31m[ERROR][0m Unknown benchmark: biggen
+Found 1 response matrices across 1 benchmarks.
+
+  [bbq]  bbq/processed/response_matrix.csv
+    heatmap  (7 x 58492)
+    model_accuracy  (7 models)
+    item_difficulty  (58492 items)
+    model_correlation  (7 models)
+
+Done.
+Found 6 response matrices across 1 benchmarks.
+
+  [jailbreakbench / all]  jailbreakbench/processed/response_matrix_all.csv
+    heatmap  (18 x 100)
+    model_accuracy  (18 models)
+    item_difficulty  (100 items)
+    model_correlation  (18 models)
+  [jailbreakbench / dsn]  jailbreakbench/processed/response_matrix_dsn.csv
+    heatmap  (2 x 100)
+    model_accuracy  (2 models)
+    item_difficulty  (100 items)
+    model_correlation  SKIPPED (< 3 models)
+  [jailbreakbench / gcg]  jailbreakbench/processed/response_matrix_gcg.csv
+    heatmap  (4 x 100)
+    model_accuracy  (4 models)
+    item_difficulty  (100 items)
+    model_correlation  (4 models)
+  [jailbreakbench / jbc]  jailbreakbench/processed/response_matrix_jbc.csv
+    heatmap  (4 x 100)
+    model_accuracy  (4 models)
+    item_difficulty  (100 items)
+    model_correlation  (4 models)
+  [jailbreakbench / pair]  jailbreakbench/processed/response_matrix_pair.csv
+    heatmap  (4 x 100)
+    model_accuracy  (4 models)
+    item_difficulty  (100 items)
+    model_correlation  (4 models)
+  [jailbreakbench / prompt_with_random_search]  jailbreakbench/processed/response_matrix_prompt_with_random_search.csv
+    heatmap  (4 x 100)
+    model_accuracy  (4 models)
+    item_difficulty  (100 items)
+    model_correlation  (4 models)
+
+Done.
+Found 4 response matrices across 1 benchmarks.
+
+  [collab_cxr / image_ai]  collab_cxr/processed/response_matrix_image_ai.csv
+    heatmap  (326 x 324)
+    model_accuracy  (326 models)
+    item_difficulty  (324 items)
+    model_correlation  (326 models)
+  [collab_cxr / image_ai_history]  collab_cxr/processed/response_matrix_image_ai_history.csv
+    heatmap  (326 x 324)
+    model_accuracy  (326 models)
+    item_difficulty  (324 items)
+    model_correlation  (326 models)
+  [collab_cxr / image_history]  collab_cxr/processed/response_matrix_image_history.csv
+    heatmap  (336 x 324)
+    model_accuracy  (336 models)
+    item_difficulty  (324 items)
+    model_correlation  (336 models)
+  [collab_cxr / image_only]  collab_cxr/processed/response_matrix_image_only.csv
+    heatmap  (326 x 324)
+    model_accuracy  (326 models)
+    item_difficulty  (324 items)
+    model_correlation  (326 models)
+
+Done.
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+Found 2 response matrices across 1 benchmarks.
+
+  [metr_early2025 / ai]  metr_early2025/processed/response_matrix_ai.csv
+    heatmap  (16 x 136)
+    model_accuracy  (16 models)
+    item_difficulty  (136 items)
+    model_correlation  (16 models)
+  [metr_early2025 / no_ai]  metr_early2025/processed/response_matrix_no_ai.csv
+    heatmap  (16 x 110)
+    model_accuracy  (16 models)
+    item_difficulty  (110 items)
+    model_correlation  (16 models)
+
+Done.
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/scripts/visualize_response_matrix.py:121: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
+Found 2 response matrices across 1 benchmarks.
+
+  [metr_late2025 / ai-allowed]  metr_late2025/processed/response_matrix_ai-allowed.csv
+    heatmap  (52 x 500)
+    model_accuracy  (52 models)
+    item_difficulty  (500 items)
+    model_correlation  (52 models)
+  [metr_late2025 / ai-disallowed]  metr_late2025/processed/response_matrix_ai-disallowed.csv
+    heatmap  (53 x 415)
+    model_accuracy  (53 models)
+    item_difficulty  (415 items)
+    model_correlation  (53 models)
+
+Done.
+Found 15 response matrices across 1 benchmarks.
+
+  [haiid / art_post_ai]  haiid/processed/response_matrix_art_post_ai.csv
+    heatmap  (278 x 32)
+    model_accuracy  (278 models)
+    item_difficulty  (32 items)
+    model_correlation  (278 models)
+  [haiid / art_post_human]  haiid/processed/response_matrix_art_post_human.csv
+    heatmap  (280 x 32)
+    model_accuracy  (280 models)
+    item_difficulty  (32 items)
+    model_correlation  (280 models)
+  [haiid / art_pre]  haiid/processed/response_matrix_art_pre.csv
+    heatmap  (558 x 32)
+    model_accuracy  (558 models)
+    item_difficulty  (32 items)
+    model_correlation  (558 models)
+  [haiid / census_post_ai]  haiid/processed/response_matrix_census_post_ai.csv
+    heatmap  (43 x 32)
+    model_accuracy  (43 models)
+    item_difficulty  (32 items)
+    model_correlation  (43 models)
+  [haiid / census_post_human]  haiid/processed/response_matrix_census_post_human.csv
+    heatmap  (49 x 32)
+    model_accuracy  (49 models)
+    item_difficulty  (32 items)
+    model_correlation  (49 models)
+  [haiid / census_pre]  haiid/processed/response_matrix_census_pre.csv
+    heatmap  (92 x 32)
+    model_accuracy  (92 models)
+    item_difficulty  (32 items)
+    model_correlation  (92 models)
+  [haiid / cities_post_ai]  haiid/processed/response_matrix_cities_post_ai.csv
+    heatmap  (79 x 32)
+    model_accuracy  (79 models)
+    item_difficulty  (32 items)
+    model_correlation  (79 models)
+  [haiid / cities_post_human]  haiid/processed/response_matrix_cities_post_human.csv
+    heatmap  (63 x 32)
+    model_accuracy  (63 models)
+    item_difficulty  (32 items)
+    model_correlation  (63 models)
+  [haiid / cities_pre]  haiid/processed/response_matrix_cities_pre.csv
+    heatmap  (142 x 32)
+    model_accuracy  (142 models)
+    item_difficulty  (32 items)
+    model_correlation  (142 models)
+  [haiid / dermatology_post_ai]  haiid/processed/response_matrix_dermatology_post_ai.csv
+    heatmap  (20 x 24)
+    model_accuracy  (20 models)
+    item_difficulty  (24 items)
+    model_correlation  (20 models)
+  [haiid / dermatology_post_human]  haiid/processed/response_matrix_dermatology_post_human.csv
+    heatmap  (17 x 24)
+    model_accuracy  (17 models)
+    item_difficulty  (24 items)
+    model_correlation  (17 models)
+  [haiid / dermatology_pre]  haiid/processed/response_matrix_dermatology_pre.csv
+    heatmap  (37 x 24)
+    model_accuracy  (37 models)
+    item_difficulty  (24 items)
+    model_correlation  (37 models)
+  [haiid / sarcasm_post_ai]  haiid/processed/response_matrix_sarcasm_post_ai.csv
+    heatmap  (147 x 32)
+    model_accuracy  (147 models)
+    item_difficulty  (32 items)
+    model_correlation  (147 models)
+  [haiid / sarcasm_post_human]  haiid/processed/response_matrix_sarcasm_post_human.csv
+    heatmap  (149 x 32)
+    model_accuracy  (149 models)
+    item_difficulty  (32 items)
+    model_correlation  (149 models)
+  [haiid / sarcasm_pre]  haiid/processed/response_matrix_sarcasm_pre.csv
+    heatmap  (296 x 32)
+    model_accuracy  (296 models)
+    item_difficulty  (32 items)
+    model_correlation  (296 models)
+
+Done.

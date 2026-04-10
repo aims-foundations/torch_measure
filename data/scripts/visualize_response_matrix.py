@@ -49,7 +49,7 @@ def _label(csv_path: Path) -> str:
     e.g.  bfcl_data/processed/response_matrix.csv           -> "bfcl"
           bigcodebench_data/processed/response_matrix_instruct.csv -> "bigcodebench / instruct"
     """
-    bench = csv_path.parent.parent.name.removesuffix("_data")
+    bench = csv_path.parent.parent.name
     stem = csv_path.stem  # e.g. "response_matrix_instruct"
     variant = stem.removeprefix("response_matrix").lstrip("_")
     if variant:
@@ -59,7 +59,7 @@ def _label(csv_path: Path) -> str:
 
 def _prefix(csv_path: Path) -> str:
     """Filename prefix for saving figures (no spaces, filesystem-safe)."""
-    bench = csv_path.parent.parent.name.removesuffix("_data")
+    bench = csv_path.parent.parent.name
     variant = csv_path.stem.removeprefix("response_matrix").lstrip("_")
     if variant:
         return f"{bench}_{variant}"
@@ -212,7 +212,7 @@ def discover(benchmarks: list[str] | None = None) -> list[Path]:
     if benchmarks:
         all_csvs = [p for p in all_csvs
                      if p.parent.parent.name in benchmarks
-                     or p.parent.parent.name.removesuffix("_data") in benchmarks]
+                     or p.parent.parent.name in benchmarks]
     return all_csvs
 
 

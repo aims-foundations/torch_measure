@@ -16,8 +16,8 @@ Prerequisites:
 
 Each benchmark:
     1. Downloads/clones raw data from original sources
-    2. Runs the 01_build_response_matrix.py script
-    3. Outputs to <benchmark>_data/processed/response_matrix.csv
+    2. Runs build.py
+    3. Outputs to <benchmark>/processed/response_matrix.csv
     4. Generates standard visualizations (heatmap, accuracy, difficulty, correlation)
 """
 
@@ -570,7 +570,7 @@ def run_benchmark(name: str) -> bool:
     """Run a single benchmark. Returns True on success."""
     log_info(f"========== {name} ==========")
 
-    d = BASE_DIR / f"{name}_data"
+    d = BASE_DIR / f"{name}"
     if not d.exists() and name not in SETUP_FUNCS:
         log_error(f"Unknown benchmark: {name}")
         return False
@@ -646,8 +646,8 @@ def main():
     if failed:
         print(f"{RED}Failed ({len(failed)}):{NC} {' '.join(failed)}")
     print()
-    log_info("Output matrices are in: <benchmark>_data/processed/response_matrix.csv")
-    log_info("Visualizations are in:  <benchmark>_data/figures/")
+    log_info("Output matrices are in: <benchmark>/processed/response_matrix.csv")
+    log_info("Visualizations are in:  <benchmark>/figures/")
 
 
 if __name__ == "__main__":
