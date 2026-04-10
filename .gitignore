@@ -46,7 +46,8 @@ docs/_build/
 data/*/raw/
 data/*/raw_results/
 data/*/processed/
-data/*/figures/
+data/*/figures/*
+!data/*/figures/*_heatmap.png
 data/*/traces/
 data/benchmark_papers/
 

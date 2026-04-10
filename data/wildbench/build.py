@@ -23,6 +23,7 @@ Outputs:
   - model_summary.csv: Per-model aggregate statistics
 """
 
+from pathlib import Path
 import os
 import json
 import urllib.request
@@ -589,6 +590,28 @@ def save_task_metadata_processed(task_meta_df, primary_stats):
             print(f"    {tag:35s}  n={count:4d}  mean_score={mean:.2f}")
 
 
+def _extract_item_content():
+    """Extract item_content.csv: intent + primary_tag from raw task_metadata.csv."""
+    meta_path = os.path.join(RAW_DIR, "task_metadata.csv")
+    if not os.path.exists(meta_path):
+        print("  No raw/task_metadata.csv found; skipping item_content extraction")
+        return
+    meta = pd.read_csv(meta_path)
+    items = []
+    for _, row in meta.iterrows():
+        text = str(row.get("intent", ""))
+        if row.get("primary_tag"):
+            text = f"[{row['primary_tag']}] {text}"
+        if len(text) > 10:
+            items.append({
+                "item_id": str(row.get("session_id", "")),
+                "content": text,
+            })
+    out_path = os.path.join(PROCESSED_DIR, "item_content.csv")
+    pd.DataFrame(items).to_csv(out_path, index=False)
+    print(f"  Extracted {len(items)} items to {out_path}")
+
+
 def main():
     print("WildBench Response Matrix Builder")
     print("=" * 60)
@@ -658,6 +681,22 @@ def main():
     print(f"    WB Score:   (raw - 5) * 2, range [-8, +10]")
     print(f"    WB Score 0 means average quality (raw=5)")
 
+    # Step 6: Extract item content
+    print("\nSTEP 6: Extracting item content")
+    print("-" * 60)
+    _extract_item_content()
+
 
 if __name__ == "__main__":
     main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)

@@ -20,6 +20,7 @@ Models with per-instance results:
   PB Full: iSWE-Agent (only 1 model)
 """
 
+import sys
 import json
 import os
 import glob
@@ -42,7 +43,7 @@ PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 def download():
     """Download raw data from external sources."""
     RAW_DIR.mkdir(parents=True, exist_ok=True)
-    clone_dir = Path("/tmp/swepolybench_repo")
+    clone_dir = _BENCHMARK_DIR / "raw/swepolybench_repo"
     if not clone_dir.exists():
         print("Cloning SWE-PolyBench repo (submission branch)...")
         subprocess.run(
@@ -348,3 +349,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)

@@ -422,6 +422,40 @@ def build_model_summary(response_matrix, meta_df):
 # ──────────────────────────────────────────────────────────────────────
 # Main
 # ──────────────────────────────────────────────────────────────────────
+def _extract_item_content():
+    """Extract item_content.csv: topic classification text across 200+ languages."""
+    annotated_dir = RAW_DIR / "sib-200" / "data" / "annotated"
+    if not annotated_dir.exists():
+        print("  No raw/sib-200/data/annotated directory; skipping item_content extraction")
+        return
+
+    items = []
+    for lang_dir in sorted(annotated_dir.iterdir()):
+        if not lang_dir.is_dir():
+            continue
+        test_file = lang_dir / "test.tsv"
+        if not test_file.exists():
+            continue
+        try:
+            df = pd.read_csv(test_file, sep="\t")
+            lang = lang_dir.name
+            for _, row in df.iterrows():
+                text = str(row.get("text", ""))
+                cat = str(row.get("category", ""))
+                idx = str(row.get("index_id", ""))
+                if len(text) > 10:
+                    items.append({
+                        "item_id": lang + "_" + idx,
+                        "content": "[" + lang + "] [" + cat + "] " + text[:500],
+                    })
+        except Exception:
+            continue
+
+    out_path = PROCESSED_DIR / "item_content.csv"
+    pd.DataFrame(items).to_csv(out_path, index=False)
+    print(f"  Extracted {len(items)} items to {out_path}")
+
+
 def main():
     print("=" * 70)
     print("SIB-200 Response Matrix Builder")
@@ -542,8 +576,22 @@ def main():
     for lang, acc in sorted_langs[-10:]:
         print(f"      {lang:15s}: {acc:.4f}")
 
+    print("\n[Step 6] Extracting item content...")
+    _extract_item_content()
+
     print("\nDone!")
 
 
 if __name__ == "__main__":
     main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)

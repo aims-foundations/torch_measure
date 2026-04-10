@@ -24,6 +24,7 @@ Outputs:
   - model_summary.csv: Per-model aggregate statistics
 """
 
+from pathlib import Path
 import os
 import json
 import urllib.request
@@ -668,6 +669,23 @@ def build_model_summary(successful_models, per_model_winrate, pref_df):
     return summary_df
 
 
+def _extract_item_content():
+    """Extract item_content.csv: instruction text from item_metadata.csv."""
+    meta_path = os.path.join(PROCESSED_DIR, "item_metadata.csv")
+    if not os.path.exists(meta_path):
+        print("  No item_metadata.csv found; skipping item_content extraction")
+        return
+    meta = pd.read_csv(meta_path)
+    items = [
+        {"item_id": str(row.get("item_idx", i)), "content": str(row["instruction"])[:2000]}
+        for i, (_, row) in enumerate(meta.iterrows())
+        if pd.notna(row.get("instruction"))
+    ]
+    out_path = os.path.join(PROCESSED_DIR, "item_content.csv")
+    pd.DataFrame(items).to_csv(out_path, index=False)
+    print(f"  Extracted {len(items)} items to {out_path}")
+
+
 def main():
     print("AlpacaEval 2.0 Response Matrix Builder")
     print("=" * 60)
@@ -718,6 +736,22 @@ def main():
     print(f"      1.5 = tie")
     print(f"      2.0 = strong model preference")
 
+    # Step 5: Extract item content
+    print("\nSTEP 5: Extracting item content")
+    print("-" * 60)
+    _extract_item_content()
+
 
 if __name__ == "__main__":
     main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)

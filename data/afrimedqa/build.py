@@ -27,6 +27,7 @@ Outputs:
   - model_summary.csv: Per-model accuracy and coverage statistics
 """
 
+from pathlib import Path
 import os
 import sys
 import subprocess
@@ -598,6 +599,34 @@ def build_model_summary(response_df, selected_evals):
     return summary_df
 
 
+def _extract_item_content():
+    """Extract item_content.csv: question + answer options from raw phase_2 CSV."""
+    csv_path = os.path.join(
+        RAW_DIR, "AfriMed-QA", "data", "afri_med_qa_15k_v2.5_phase_2_15275.csv"
+    )
+    if not os.path.exists(csv_path):
+        print("  No phase_2 raw CSV found; skipping item_content extraction")
+        return
+    df = pd.read_csv(csv_path)
+    items = []
+    for _, row in df.iterrows():
+        parts = []
+        if pd.notna(row.get("question_clean")):
+            parts.append(str(row["question_clean"]))
+        elif pd.notna(row.get("question")):
+            parts.append(str(row["question"]))
+        if pd.notna(row.get("answer_options")):
+            parts.append(str(row["answer_options"])[:500])
+        if parts:
+            items.append({
+                "item_id": str(row.get("sample_id", "")),
+                "content": "\n".join(parts)[:2000],
+            })
+    out_path = os.path.join(PROCESSED_DIR, "item_content.csv")
+    pd.DataFrame(items).to_csv(out_path, index=False)
+    print(f"  Extracted {len(items)} items to {out_path}")
+
+
 def main():
     print("AfriMed-QA Response Matrix Builder")
     print("=" * 60)
@@ -663,6 +692,22 @@ def main():
         size_kb = os.path.getsize(fpath) / 1024
         print(f"    {f:40s}  {size_kb:.1f} KB")
 
+    # Step 7: Extract item content
+    print(f"\nSTEP 7: Extracting item content")
+    print("-" * 60)
+    _extract_item_content()
+
 
 if __name__ == "__main__":
     main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)

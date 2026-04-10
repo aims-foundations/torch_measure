@@ -26,7 +26,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from scipy.cluster.hierarchy import leaves_list, linkage
 
 sns.set_theme(style="white", font_scale=0.9)
 
@@ -36,9 +35,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent  # data/
 # ── helpers ──────────────────────────────────────────────────────────────
 
 def _save(fig, path: Path):
-    """Save a figure as both PDF and PNG."""
+    """Save a figure as PNG."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(path.with_suffix(".pdf"), bbox_inches="tight", dpi=150)
     fig.savefig(path.with_suffix(".png"), bbox_inches="tight", dpi=150)
     plt.close(fig)
 
@@ -71,14 +69,26 @@ def _prefix(csv_path: Path) -> str:
 def plot_heatmap(matrix: pd.DataFrame, label: str, fig_dir: Path, prefix: str):
     """Full heatmap: models (rows) x items (columns)."""
     df = matrix.copy()
-    n_models, n_items = df.shape
+    orig_n_models, orig_n_items = df.shape
 
     # Sort rows by mean score (best on top), columns by difficulty (easiest left)
     df = df.loc[df.mean(axis=1).sort_values(ascending=False).index]
     df = df[df.mean(axis=0).sort_values(ascending=False).index]
 
-    height = max(6, n_models * 0.18)
-    width = max(10, min(28, n_items * 0.02 + 4))
+    # Downsample to keep figure sizes reasonable (max ~1M cells in the plot).
+    # Use linspace sampling to preserve the top-to-bottom and left-to-right ordering.
+    MAX_ROWS = 1000
+    MAX_COLS = 2000
+    if len(df) > MAX_ROWS:
+        idx = np.linspace(0, len(df) - 1, MAX_ROWS, dtype=int)
+        df = df.iloc[idx]
+    if df.shape[1] > MAX_COLS:
+        idx = np.linspace(0, df.shape[1] - 1, MAX_COLS, dtype=int)
+        df = df.iloc[:, idx]
+    n_models, n_items = df.shape
+
+    height = max(6, min(16, n_models * 0.18))
+    width = max(10, min(20, n_items * 0.02 + 4))
     fig, ax = plt.subplots(figsize=(width, height))
 
     sns.heatmap(
@@ -87,107 +97,21 @@ def plot_heatmap(matrix: pd.DataFrame, label: str, fig_dir: Path, prefix: str):
         vmin=0, vmax=1,
         cbar_kws={"label": "Score", "shrink": 0.4},
         xticklabels=False,
-        yticklabels=True,
+        yticklabels=False,  # always off: too many rows for readable labels anyway
     )
-    ax.set_ylabel("Model (sorted by mean score)")
-    ax.set_xlabel(f"Items ({n_items})")
-    ax.set_title(f"{label}  ({n_models} models x {n_items} items)", fontweight="bold")
-    plt.yticks(fontsize=max(3, min(7, 300 / n_models)))
+    ax.set_ylabel(f"Model (sorted by mean score) — {orig_n_models} total")
+    ax.set_xlabel(f"Items (sorted by difficulty) — {orig_n_items} total")
+    note = "" if (n_models, n_items) == (orig_n_models, orig_n_items) else " [downsampled]"
+    ax.set_title(f"{label}  ({orig_n_models} x {orig_n_items}){note}", fontweight="bold")
 
     _save(fig, fig_dir / f"{prefix}_heatmap")
-    print(f"    heatmap  ({n_models} x {n_items})")
-
-
-def plot_model_accuracy(matrix: pd.DataFrame, label: str, fig_dir: Path, prefix: str):
-    """Horizontal bar chart of per-model mean scores."""
-    scores = matrix.mean(axis=1).sort_values(ascending=True)
-    n = len(scores)
-
-    fig, ax = plt.subplots(figsize=(8, max(4, n * 0.2)))
-    colors = sns.color_palette("viridis", n)
-    ax.barh(range(n), scores.values, color=colors)
-    ax.set_yticks(range(n))
-    ax.set_yticklabels(scores.index, fontsize=max(4, min(9, 200 / n)))
-    ax.set_xlabel("Mean Score")
-    ax.set_title(f"{label} — Model Scores", fontweight="bold")
-    ax.set_xlim(0, min(1.05, scores.max() * 1.15))
-
-    for i, v in enumerate(scores.values):
-        ax.text(v + scores.max() * 0.01, i, f"{v:.3f}", va="center",
-                fontsize=max(3, min(7, 200 / n)))
-
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    plt.tight_layout()
-
-    _save(fig, fig_dir / f"{prefix}_model_accuracy")
-    print(f"    model_accuracy  ({n} models)")
-
-
-def plot_item_difficulty(matrix: pd.DataFrame, label: str, fig_dir: Path, prefix: str):
-    """Histogram of per-item mean scores (difficulty distribution)."""
-    item_scores = matrix.mean(axis=0)
-
-    fig, ax = plt.subplots(figsize=(8, 5))
-    ax.hist(item_scores, bins=40, color=sns.color_palette("Set2")[0],
-            edgecolor="white", linewidth=0.5)
-    ax.axvline(item_scores.median(), color="red", linestyle="--", alpha=0.7,
-               label=f"median = {item_scores.median():.3f}")
-    ax.set_xlabel("Item Mean Score (across models)")
-    ax.set_ylabel("Count")
-    ax.set_title(f"{label} — Item Difficulty Distribution ({len(item_scores)} items)",
-                 fontweight="bold")
-    ax.legend()
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    plt.tight_layout()
-
-    _save(fig, fig_dir / f"{prefix}_item_difficulty")
-    print(f"    item_difficulty  ({len(item_scores)} items)")
-
-
-def plot_model_correlation(matrix: pd.DataFrame, label: str, fig_dir: Path, prefix: str):
-    """Clustered model–model Pearson correlation heatmap."""
-    n_models = matrix.shape[0]
-    if n_models < 3:
-        print("    model_correlation  SKIPPED (< 3 models)")
-        return
-
-    corr = matrix.T.corr()
-
-    # Hierarchical clustering for ordering
-    try:
-        link = linkage(corr.values, method="ward")
-        order = leaves_list(link)
-        corr = corr.iloc[order, order]
-    except Exception:
-        pass  # fall back to original order
-
-    size = max(6, min(16, n_models * 0.25))
-    fig, ax = plt.subplots(figsize=(size, size))
-
-    mask = np.triu(np.ones_like(corr, dtype=bool), k=1)
-    sns.heatmap(
-        corr, ax=ax, cmap="RdBu_r", center=0, vmin=-0.3, vmax=1,
-        mask=mask, square=True,
-        linewidths=0.3, linecolor="white",
-        cbar_kws={"label": "Pearson r", "shrink": 0.6},
-        xticklabels=True, yticklabels=True,
-    )
-    fontsize = max(4, min(9, 200 / n_models))
-    plt.xticks(rotation=90, fontsize=fontsize)
-    plt.yticks(fontsize=fontsize)
-    ax.set_title(f"{label} — Model Correlation (clustered)", fontweight="bold")
-    plt.tight_layout()
-
-    _save(fig, fig_dir / f"{prefix}_model_correlation")
-    print(f"    model_correlation  ({n_models} models)")
+    print(f"    heatmap  ({orig_n_models} x {orig_n_items})")
 
 
 # ── main ─────────────────────────────────────────────────────────────────
 
 def visualize_one(csv_path: Path):
-    """Load a single response matrix CSV and produce all plots."""
+    """Load a single response matrix CSV and produce the heatmap plot."""
     label = _label(csv_path)
     prefix = _prefix(csv_path)
     fig_dir = csv_path.parent.parent / "figures"
@@ -200,9 +124,6 @@ def visualize_one(csv_path: Path):
         return
 
     plot_heatmap(matrix, label, fig_dir, prefix)
-    plot_model_accuracy(matrix, label, fig_dir, prefix)
-    plot_item_difficulty(matrix, label, fig_dir, prefix)
-    plot_model_correlation(matrix, label, fig_dir, prefix)
 
 
 def discover(benchmarks: list[str] | None = None) -> list[Path]:

@@ -30,12 +30,15 @@ Requirements:
 """
 
 import csv
+import json
 import os
 import re
 import subprocess
 import sys
 import urllib.request
 from pathlib import Path
+
+import pandas as pd
 
 try:
     import pdfplumber
@@ -61,7 +64,7 @@ def download():
     """Download raw data from external sources."""
     os.makedirs(RAW_DIR, exist_ok=True)
 
-    clone_dir = Path("/tmp/cybench_repo")
+    clone_dir = Path(__file__).resolve().parent / "raw/cybench_repo"
     if not clone_dir.exists():
         print("Cloning cybench repo...")
         subprocess.run(
@@ -522,6 +525,88 @@ def print_summary(unguided_rows, subtask_guided_rows, subtask_scores_rows):
           f"{max(e[2] for e in LEADERBOARD_DATA):.1f}%")
 
 
+def _extract_item_content():
+    """Extract item_content.csv from the response matrix, enriched with repo metadata.
+
+    Item IDs come from the response_matrix.csv `task_name` column. Content is
+    built from each task's metadata.json in the cloned cybench repo (category,
+    difficulty, task prompt).
+    """
+    rm_path = os.path.join(OUTPUT_DIR, "response_matrix.csv")
+    if not os.path.exists(rm_path):
+        print("  No response_matrix.csv found; skipping item_content extraction")
+        return
+
+    rm = pd.read_csv(rm_path)
+    id_col = rm.columns[0]
+    task_names = [str(t) for t in rm[id_col].tolist()]
+
+    # Build a map from normalized task name → metadata by walking the repo.
+    # The matrix uses display names like "Loot Stash" while the repo uses a mix
+    # of formats: "[Very Easy] LootStash", "61-loot-and-scoot", "matrix-lab-2".
+    # Normalize by lowercasing and stripping non-alphanumerics.
+    repo_dir = Path(__file__).resolve().parent / "raw/cybench_repo"
+    task_meta = {}
+    if repo_dir.exists():
+        difficulty_re = re.compile(r"^\[.*?\]\s*(.+)$")
+        numeric_prefix_re = re.compile(r"^\d+[-_]")
+
+        def norm(s: str) -> str:
+            """Normalize: strip [difficulty], leading digit prefix, then alphanumeric-only lowercase."""
+            s = difficulty_re.sub(r"\1", s)
+            s = numeric_prefix_re.sub("", s)
+            return re.sub(r"[^a-z0-9]", "", s.lower())
+
+        for meta_file in repo_dir.rglob("metadata.json"):
+            task_dir = meta_file.parent.parent
+            try:
+                with open(meta_file) as f:
+                    task_meta[norm(task_dir.name)] = json.load(f)
+            except (json.JSONDecodeError, OSError):
+                continue
+    else:
+        def norm(s: str) -> str:
+            return re.sub(r"[^a-z0-9]", "", s.lower())
+
+    # Fall back to task_metadata.csv (extracted from the paper) for tasks
+    # whose full metadata isn't in the repo (e.g. GlacierCTF 2023 tasks).
+    task_csv_meta = {}
+    task_csv_path = os.path.join(OUTPUT_DIR, "task_metadata.csv")
+    if os.path.exists(task_csv_path):
+        task_csv = pd.read_csv(task_csv_path)
+        for _, row in task_csv.iterrows():
+            task_csv_meta[str(row["task_name"])] = row.to_dict()
+
+    items = []
+    matched_repo = 0
+    matched_csv = 0
+    for name in task_names:
+        meta = task_meta.get(norm(name))
+        if meta:
+            matched_repo += 1
+            cats = ", ".join(meta.get("categories", [])) or "unknown"
+            diff = meta.get("difficulty", "")
+            prompt = meta.get("easy_prompt") or meta.get("hard_prompt") or ""
+            content = f"[{cats}] difficulty={diff}"
+            if prompt:
+                content += f" | {prompt[:1500]}"
+        elif name in task_csv_meta:
+            matched_csv += 1
+            row = task_csv_meta[name]
+            cat = row.get("category", "unknown")
+            comp = row.get("competition_full", row.get("competition", ""))
+            content = f"[{cat}] {comp}: {name}"
+        else:
+            content = f"CTF Challenge: {name}"
+        items.append({"item_id": name, "content": content})
+
+    out_path = os.path.join(OUTPUT_DIR, "item_content.csv")
+    pd.DataFrame(items).to_csv(out_path, index=False)
+    print(f"  Extracted {len(items)} items "
+          f"({matched_repo} from repo metadata, {matched_csv} from paper tables) "
+          f"to {out_path}")
+
+
 def main():
     download()
     print("Building Cybench response matrices...")
@@ -545,6 +630,20 @@ def main():
 
     print_summary(unguided_rows, subtask_guided_rows, subtask_scores_rows)
 
+    print("\nStep 4: Extract item content")
+    _extract_item_content()
+
 
 if __name__ == "__main__":
     main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)

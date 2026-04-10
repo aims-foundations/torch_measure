@@ -50,7 +50,40 @@ def _load_item_content(processed_dir: Path) -> dict[str, str]:
     return dict(zip(df["item_id"], df["content"]))
 
 
-def _csv_to_payload(csv_path: Path, item_content: dict[str, str]) -> dict | None:
+def _load_subject_metadata(processed_dir: Path) -> dict[str, dict] | None:
+    """Load model_summary.csv as a dict: model_name -> metadata dict.
+
+    Benchmarks may use different column names for the model ID — check
+    common variants. Returns None if no summary file is found.
+    """
+    ms_path = processed_dir / "model_summary.csv"
+    if not ms_path.exists():
+        return None
+    df = pd.read_csv(ms_path)
+
+    # Find the model ID column (common variants)
+    id_col = None
+    for candidate in ("model", "model_name", "agent", "judge", "system"):
+        if candidate in df.columns:
+            id_col = candidate
+            break
+    if id_col is None:
+        return None
+
+    df[id_col] = df[id_col].astype(str)
+    # Drop the ID column from the metadata dict values, keep everything else
+    meta_cols = [c for c in df.columns if c != id_col]
+    return {
+        str(row[id_col]): {c: row[c] for c in meta_cols if pd.notna(row[c])}
+        for _, row in df.iterrows()
+    }
+
+
+def _csv_to_payload(
+    csv_path: Path,
+    item_content: dict[str, str],
+    subject_metadata: dict[str, dict] | None,
+) -> dict | None:
     """Convert a response_matrix*.csv to a .pt payload dict."""
     df = pd.read_csv(csv_path, index_col=0)
 
@@ -68,12 +101,21 @@ def _csv_to_payload(csv_path: Path, item_content: dict[str, str]) -> dict | None
     # Look up content for each item (empty string if missing)
     item_contents = [item_content.get(iid, "") for iid in item_ids]
 
+    # Subset metadata to just the subjects in this matrix
+    payload_metadata = None
+    if subject_metadata:
+        payload_metadata = {
+            sid: subject_metadata[sid]
+            for sid in subject_ids
+            if sid in subject_metadata
+        } or None
+
     return {
         "data": data,
         "subject_ids": subject_ids,
         "item_ids": item_ids,
         "item_contents": item_contents,
-        "subject_metadata": None,
+        "subject_metadata": payload_metadata,
     }
 
 
@@ -109,9 +151,14 @@ def convert_benchmark(benchmark_dir: Path) -> list[Path]:
     if item_content:
         print(f"  Loaded {len(item_content)} item contents")
 
+    subject_metadata = _load_subject_metadata(processed_dir)
+    if subject_metadata:
+        n_cols = len(next(iter(subject_metadata.values())))
+        print(f"  Loaded metadata for {len(subject_metadata)} subjects ({n_cols} fields)")
+
     pt_files = []
     for csv_path in csvs:
-        payload = _csv_to_payload(csv_path, item_content)
+        payload = _csv_to_payload(csv_path, item_content, subject_metadata)
         if payload is None:
             continue
 
@@ -123,7 +170,8 @@ def convert_benchmark(benchmark_dir: Path) -> list[Path]:
         nan_count = int(torch.isnan(payload["data"]).sum().item())
         total = n_sub * n_items
         fill_pct = (1 - nan_count / total) * 100 if total > 0 else 0
-        print(f"  {pt_name}: {n_sub}x{n_items}, {fill_pct:.0f}% fill")
+        meta_str = f", {len(payload['subject_metadata'])} with metadata" if payload["subject_metadata"] else ""
+        print(f"  {pt_name}: {n_sub}x{n_items}, {fill_pct:.0f}% fill{meta_str}")
         pt_files.append(pt_path)
 
     return pt_files

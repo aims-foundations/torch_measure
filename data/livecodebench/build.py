@@ -15,6 +15,7 @@ N=10 models have 11 discrete values (0, 0.1, ..., 1.0).
 Output: processed/response_matrix.csv (models × problems, pass@1 scores)
 """
 
+import sys
 import json
 import os
 import subprocess
@@ -141,6 +142,41 @@ def load_leaderboard_json(path, label):
         models[m]["n_problems"] = len(models[m]["results"])
 
     return models
+
+
+def _extract_item_content():
+    """Extract item_content.csv: question title + content from submission eval JSONs."""
+    sub_dir = _BENCHMARK_DIR / "raw" / "submissions"
+    if not sub_dir.exists():
+        print("  No submissions directory found; skipping item_content extraction")
+        return
+
+    items = {}
+    for model_dir in sorted(sub_dir.iterdir()):
+        if not model_dir.is_dir():
+            continue
+        for ef in model_dir.glob("*.json"):
+            try:
+                with open(ef) as f:
+                    data = json.load(f)
+            except (json.JSONDecodeError, OSError):
+                continue
+            for entry in data:
+                qid = entry.get("question_id", "")
+                if qid and qid not in items:
+                    title = entry.get("question_title", "")
+                    content = entry.get("question_content", "")
+                    text = f"{title}\n{content}"[:2000] if content else title
+                    if len(text) > 10:
+                        items[qid] = {"item_id": qid, "content": text}
+        if len(items) >= 1200:
+            break
+
+    out_path = _BENCHMARK_DIR / "processed" / "item_content.csv"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    rows = list(items.values())
+    pd.DataFrame(rows).to_csv(out_path, index=False)
+    print(f"  Extracted {len(rows)} items to {out_path}")
 
 
 def main():
@@ -325,6 +361,20 @@ def main():
         )
         print(f"  Models with >= {n_thresh} problems: {n_models_with}")
 
+    print("\n=== Extracting item content ===")
+    _extract_item_content()
+
 
 if __name__ == "__main__":
     main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)

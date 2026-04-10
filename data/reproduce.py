@@ -15,13 +15,12 @@ visualizations, convert to .pt, and upload to HuggingFace Hub.
 """
 
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-VIZ_SCRIPT = BASE_DIR / "scripts" / "visualize_response_matrix.py"
-UPLOAD_SCRIPT = BASE_DIR / "scripts" / "upload_to_hf.py"
 
 GREEN, RED, YELLOW, NC = "\033[0;32m", "\033[0;31m", "\033[1;33m", "\033[0m"
 
@@ -79,31 +78,21 @@ BENCHMARKS_PENDING = [
 
 
 def run_benchmark(name: str, no_upload: bool) -> None:
-    """Run a single benchmark: build → visualize → upload."""
+    """Run a single benchmark's build.py (which handles download → build → visualize → upload)."""
     print(f"\n{GREEN}[INFO]{NC} ========== {name} ==========")
 
     d = BASE_DIR / name
     if not d.exists():
         raise FileNotFoundError(f"Unknown benchmark: {name}")
 
-    (d / "raw").mkdir(parents=True, exist_ok=True)
-    (d / "processed").mkdir(parents=True, exist_ok=True)
-
     build_script = d / "build.py"
     if not build_script.exists():
         raise FileNotFoundError(f"No build.py found for {name}")
 
-    print(f"{GREEN}[INFO]{NC} Building {name}...")
-    subprocess.run([sys.executable, str(build_script)], check=True)
-
-    print(f"{GREEN}[INFO]{NC} Visualizing {name}...")
-    subprocess.run([sys.executable, str(VIZ_SCRIPT), name], check=False)
-
-    print(f"{GREEN}[INFO]{NC} Uploading {name} to HuggingFace Hub...")
-    upload_cmd = [sys.executable, str(UPLOAD_SCRIPT), name]
+    env = os.environ.copy()
     if no_upload:
-        upload_cmd.append("--no-upload")
-    subprocess.run(upload_cmd, check=False)
+        env["NO_UPLOAD"] = "1"
+    subprocess.run([sys.executable, str(build_script)], check=True, env=env)
 
 
 def main():

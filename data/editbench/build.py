@@ -54,7 +54,7 @@ def download():
     RAW_RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
-    clone_dir = Path("/tmp/editbench_repo")
+    clone_dir = Path(__file__).resolve().parent / "raw/editbench_repo"
     if not clone_dir.exists():
         print("Cloning editbench repo...")
         try:
@@ -314,6 +314,27 @@ def print_summary(matrix, binary_matrix, metadata, all_data):
     print("\n" + "=" * 72)
 
 
+def _extract_item_content():
+    """Extract item_content.csv: instruction preview + language from task_metadata.csv."""
+    meta_path = PROCESSED_DIR / "task_metadata.csv"
+    if not meta_path.exists():
+        print("  No task_metadata.csv found; skipping item_content extraction")
+        return
+    meta = pd.read_csv(meta_path)
+    items = []
+    for _, row in meta.iterrows():
+        text = str(row.get("instruction_preview", ""))
+        if pd.notna(row.get("programming_language")):
+            text = f"[{row['programming_language']}] {text}"
+        if pd.notna(row.get("natural_language")) and str(row["natural_language"]).lower() != "english":
+            text = f"({row['natural_language']}) {text}"
+        if len(text) > 10:
+            items.append({"item_id": str(row["task_id"]), "content": text})
+    out_path = PROCESSED_DIR / "item_content.csv"
+    pd.DataFrame(items).to_csv(out_path, index=False)
+    print(f"  Extracted {len(items)} items to {out_path}")
+
+
 def main():
     download()
 
@@ -391,8 +412,25 @@ def main():
     # ── Summary Report ─────────────────────────────────────────────────────
     print_summary(response_matrix, binary_matrix, task_metadata, all_data)
 
+    # ── Extract item content ───────────────────────────────────────────────
+    print("\n[Extracting item content]")
+    _extract_item_content()
+
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    _rc = main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)
+
+    sys.exit(_rc)

@@ -4,8 +4,9 @@
 
 Build a response matrix for CORE-Bench (Computational Reproducibility Benchmark).
 
-Data source: https://github.com/siegelz/core-bench (cloned to /tmp/core-bench)
-             Per-task results in results/ directory (also in agent_results.tar.gz)
+Data source: https://github.com/siegelz/core-bench (cloned to raw/core-bench/)
+             Per-task results in results/ directory (downloaded from
+             https://corebench.cs.princeton.edu/agent_results.tar.gz)
 
 Each CORE-Bench "task" is a (capsule_id, difficulty_level) pair.
   - 90 capsules total (45 train + 45 test)
@@ -34,19 +35,27 @@ import csv
 from collections import defaultdict
 from pathlib import Path
 
+import pandas as pd
+
 
 # ============================================================
 # Configuration
 # ============================================================
-RESULTS_DIR = "/tmp/core-bench/results"
-TRAIN_DATASET = "/tmp/core-bench/benchmark/dataset/core_train.json"
 _BENCHMARK_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = _BENCHMARK_DIR / "processed"
+CLONE_DIR = _BENCHMARK_DIR / "raw/core-bench"
+RESULTS_DIR = str(CLONE_DIR / "results")
+TRAIN_DATASET = str(CLONE_DIR / "benchmark/dataset/core_train.json")
 
 
 def download():
-    """Download raw data from external sources."""
-    clone_dir = Path("/tmp/core-bench")
+    """Download raw data from external sources.
+
+    Clones the core-bench repo and downloads the agent_results.tar.gz from
+    Princeton's CORE-Bench site (the repo's paper figures notebooks point to
+    this URL but the tarball isn't checked into git).
+    """
+    clone_dir = CLONE_DIR
     if not clone_dir.exists():
         print("Cloning core-bench repo...")
         subprocess.run(
@@ -59,6 +68,28 @@ def download():
             ["git", "-C", str(clone_dir), "pull", "--ff-only"],
             check=False,
         )
+
+    # Download and extract agent results tarball if results/ doesn't exist
+    results_dir = clone_dir / "results"
+    if not results_dir.exists():
+        import urllib.request
+        tar_url = "https://corebench.cs.princeton.edu/agent_results.tar.gz"
+        tar_path = clone_dir / "agent_results.tar.gz"
+        if not tar_path.exists():
+            print(f"Downloading agent results from {tar_url}...")
+            urllib.request.urlretrieve(tar_url, tar_path)
+        print("Extracting agent_results.tar.gz...")
+        subprocess.run(
+            ["tar", "-xzf", str(tar_path), "-C", str(clone_dir)],
+            check=True,
+        )
+        if not results_dir.exists():
+            # The tarball might extract to a subdirectory; try to find and move it
+            for candidate in clone_dir.iterdir():
+                if candidate.is_dir() and "result" in candidate.name.lower():
+                    candidate.rename(results_dir)
+                    break
+        print(f"Results extracted to {results_dir}")
 
 # Files to skip (post-paper runs, as noted in paper_figures.ipynb cell-16)
 SKIP_FILES = {
@@ -270,6 +301,32 @@ def write_hal_leaderboard(output_dir):
     return entries
 
 
+def _extract_item_content():
+    """Extract item_content.csv: capsule title + field + language from task_metadata.csv."""
+    meta_path = OUTPUT_DIR / "task_metadata.csv"
+    if not meta_path.exists():
+        print("  No task_metadata.csv found; skipping item_content extraction")
+        return
+    meta = pd.read_csv(meta_path)
+    items = []
+    for _, row in meta.iterrows():
+        parts = []
+        if pd.notna(row.get("capsule_title")):
+            parts.append(str(row["capsule_title"]))
+        if pd.notna(row.get("field")):
+            parts.append(f"Field: {row['field']}")
+        if pd.notna(row.get("language")):
+            parts.append(f"Language: {row['language']}")
+        if parts:
+            items.append({
+                "item_id": str(row["task_id"]),
+                "content": " | ".join(parts),
+            })
+    out_path = OUTPUT_DIR / "item_content.csv"
+    pd.DataFrame(items).to_csv(out_path, index=False)
+    print(f"  Extracted {len(items)} items to {out_path}")
+
+
 def main():
     download()
     print("=" * 70)
@@ -278,8 +335,8 @@ def main():
 
     if not os.path.isdir(RESULTS_DIR):
         print(f"\nERROR: Results directory not found: {RESULTS_DIR}")
-        print("Clone the repo first:")
-        print("  git clone https://github.com/siegelz/core-bench /tmp/core-bench")
+        print("The download() step should have cloned the repo and extracted")
+        print("agent_results.tar.gz. Check for network errors above.")
         sys.exit(1)
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -442,8 +499,22 @@ def main():
             size = fpath.stat().st_size
             print(f"  {fpath} ({size:,} bytes)")
 
+    print("\n[6/6] Extracting item content...")
+    _extract_item_content()
+
     print()
 
 
 if __name__ == "__main__":
     main()
+
+    # Generate visualizations, then convert to .pt and upload to HuggingFace Hub
+    # (set NO_UPLOAD=1 to skip the upload; .pt file is still generated)
+    import os, subprocess
+    _scripts = Path(__file__).resolve().parent.parent / "scripts"
+    _bench = Path(__file__).resolve().parent.name
+    subprocess.run([sys.executable, str(_scripts / "visualize_response_matrix.py"), _bench], check=False)
+    _cmd = [sys.executable, str(_scripts / "upload_to_hf.py"), _bench]
+    if os.environ.get("NO_UPLOAD") == "1":
+        _cmd.append("--no-upload")
+    subprocess.run(_cmd, check=False)
