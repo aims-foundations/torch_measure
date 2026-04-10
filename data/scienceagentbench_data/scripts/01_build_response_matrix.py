@@ -276,6 +276,21 @@ def build_response_matrix(tasks):
     print(f"       Fill rate: 0% (per-task results not publicly released)")
     print(f"       Cells marked 'NA' -- see aggregate_results.csv for scores")
 
+    # Save item_content.csv — content incorporates domain and subtask_categories
+    item_content_rows = []
+    for t in sorted(tasks, key=lambda x: x["instance_id"]):
+        content = f"Instance {t['instance_id']}: {t['domain']} - {t['subtask_categories']}"
+        item_content_rows.append({
+            "item_id": t["instance_id"],
+            "content": content,
+        })
+    item_content_path = OUTPUT_DIR / "item_content.csv"
+    with open(item_content_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["item_id", "content"])
+        writer.writeheader()
+        writer.writerows(item_content_rows)
+    print(f"[INFO] Wrote item content: {item_content_path} ({len(item_content_rows)} items)")
+
     # --- Write aggregate results ---
     agg_path = OUTPUT_DIR / "aggregate_results.csv"
     agg_fields = [

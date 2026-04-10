@@ -486,6 +486,24 @@ def main():
     print(f"    Fill rate: {filled_combined}/{total_combined} "
           f"({filled_combined/total_combined:.1%})")
 
+    # ---- Item content ----
+    print("\n[10b] Writing item_content.csv...")
+    item_content_rows = []
+    for ctid in all_task_ids:
+        domain = task_domain_map[ctid]
+        # Extract the raw task_id from the combined task id (e.g. "airline_v1_3" -> "3")
+        raw_tid = ctid.split("_", 2)[-1] if "_" in ctid else ctid
+        item_content_rows.append({
+            "item_id": ctid,
+            "content": f"{domain} task {raw_tid}",
+        })
+    item_content_path = OUT_DIR / "item_content.csv"
+    with open(item_content_path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["item_id", "content"])
+        writer.writeheader()
+        writer.writerows(item_content_rows)
+    print(f"  Wrote item_content.csv ({len(item_content_rows)} items)")
+
     # ---- Task metadata ----
     print("\n[11] Writing task metadata...")
     task_meta = {**v1_meta, **v2_meta}

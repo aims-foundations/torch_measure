@@ -1,17 +1,22 @@
 """
-Build PRISM alignment response matrices from per-participant utterance ratings.
+01_build_response_matrix.py — Download and build PRISM alignment response matrices.
 
 Data source:
   - HannahRoseKirk/prism-alignment on HuggingFace
+  - Paper: "PRISM: Mapping the Diversity of Human Preferences for AI Alignment"
+    (Kirk et al., 2024)
   - utterances config: ~68K rated utterances from ~1,500 participants
   - survey config: participant demographics (75 countries)
+
+Downloads the full PRISM alignment dataset from HuggingFace, then builds
+response matrices from per-participant utterance ratings.
 
 PRISM captures diverse human preferences for LLM outputs across demographics.
 Each participant rates multiple LLM responses on a 1-100 cardinal sliding
 scale, and selects a preferred (chosen) response at each turn.
 
 Processing:
-  1. Download utterances and survey configs from HuggingFace
+  1. Download full dataset and utterances/survey configs from HuggingFace
   2. Build response matrix: participants (rows) x utterances (columns)
   3. Two value types:
      - Continuous: score normalized from 1-100 to [0, 1]
@@ -19,6 +24,7 @@ Processing:
   4. Merge participant demographics from survey config
 
 Outputs:
+  - raw/dataset/: Full HuggingFace dataset saved to disk
   - raw/utterances_raw.parquet: Cached utterance data
   - raw/survey_raw.parquet: Cached survey/demographics data
   - processed/response_matrix_scores.csv: Participants x utterances, continuous [0,1]
@@ -29,21 +35,44 @@ Outputs:
 
 import os
 import sys
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 # Paths
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(SCRIPT_DIR)
-RAW_DIR = os.path.join(BASE_DIR, "raw")
-PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
+_BENCHMARK_DIR = Path(__file__).resolve().parent.parent
+RAW_DIR = os.path.join(_BENCHMARK_DIR, "raw")
+PROCESSED_DIR = os.path.join(_BENCHMARK_DIR, "processed")
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")
 
 SRC_REPO = "HannahRoseKirk/prism-alignment"
+
+
+def download():
+    """Download the full PRISM alignment dataset from HuggingFace."""
+    os.makedirs(RAW_DIR, exist_ok=True)
+
+    dataset_dir = os.path.join(RAW_DIR, "dataset")
+
+    if os.path.exists(dataset_dir) and os.listdir(dataset_dir):
+        print(f"Dataset already exists at {dataset_dir}, skipping")
+        return
+
+    from datasets import load_dataset
+
+    print("Downloading HannahRoseKirk/prism-alignment...")
+    ds = load_dataset("HannahRoseKirk/prism-alignment")
+
+    for split_name, split_ds in ds.items():
+        print(f"  {split_name}: {len(split_ds)} examples")
+
+    print(f"Saving to {dataset_dir}...")
+    ds.save_to_disk(dataset_dir)
+    print(f"Done: {ds}")
 
 
 def download_utterances():
@@ -169,6 +198,15 @@ def build_response_matrices(utt_df):
     chosen_pivot.to_csv(chosen_path)
     print(f"\n  Saved: {scores_path}")
     print(f"  Saved: {chosen_path}")
+
+    # Save item_content.csv — items are utterance IDs (columns of the response matrix)
+    item_content_df = pd.DataFrame({
+        "item_id": utterance_ids,
+        "content": utterance_ids,
+    })
+    item_content_path = os.path.join(PROCESSED_DIR, "item_content.csv")
+    item_content_df.to_csv(item_content_path, index=False)
+    print(f"  Saved: {item_content_path} ({len(item_content_df)} utterances)")
 
     return scores_pivot, chosen_pivot, participant_ids, utterance_ids
 
@@ -338,6 +376,8 @@ def print_statistics(scores_df, chosen_df):
 
 
 def main():
+    download()
+
     print("PRISM Alignment Response Matrix Builder")
     print("=" * 60)
     print(f"  Raw data dir:       {RAW_DIR}")

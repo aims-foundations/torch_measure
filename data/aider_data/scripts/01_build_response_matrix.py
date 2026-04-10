@@ -352,6 +352,17 @@ def main():
     print(f"\nFull response matrix saved to: {response_matrix_path}")
     print(f"  Shape: {combined_df.shape}")
 
+    # Save item_content.csv — items are the benchmark names (long-format rows)
+    benchmarks = combined_df["benchmark"].unique().tolist()
+    item_content_df = pd.DataFrame({
+        "item_id": benchmarks,
+        "content": benchmarks,
+    })
+    item_content_path = PROCESSED_DIR / "item_content.csv"
+    item_content_df.to_csv(item_content_path, index=False)
+    print(f"\nItem content saved to: {item_content_path}")
+    print(f"  {len(item_content_df)} benchmarks")
+
     # Build and save model summary
     summary_df = build_model_summary(combined_df)
     summary_path = PROCESSED_DIR / "model_summary.csv"

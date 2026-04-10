@@ -7,13 +7,13 @@ Curated response matrices from 40+ AI evaluation benchmarks, standardized as
 
 ```bash
 # Reproduce all benchmarks from original sources
-bash reproduce.sh
+python reproduce.py
 
 # Reproduce a single benchmark
-bash reproduce.sh bfcl
+python reproduce.py bfcl
 
 # List available benchmarks
-bash reproduce.sh --list
+python reproduce.py --list
 ```
 
 ## Prerequisites
@@ -38,10 +38,8 @@ Each benchmark follows a consistent layout:
     response_matrix.csv    # Primary output: subjects x items
     model_summary.csv      # Per-subject aggregate statistics
     task_metadata.csv      # Item metadata (difficulty, category, etc.)
-  scripts/        # Numbered processing pipeline
+  scripts/        # Processing pipeline
     01_build_response_matrix.py
-    02_visualize_response_matrix.py
-    ...
   figures/        # Visualizations (heatmaps, bar charts)
 ```
 

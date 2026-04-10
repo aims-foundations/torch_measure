@@ -1,0 +1,1622 @@
+Loading Terminal-Bench dataset from HuggingFace (ia03/terminal-bench)...
+Loaded 112 rows
+Columns: ['task_id', 'archive', 'task_yaml', 'difficulty', 'tags', 'author_email', 'category', 'base_description', 'max_agent_timeout_sec', 'max_test_timeout_sec', 'tar_sha256', 'archive_bytes', 'n_files', 'generated_at']
+
+Saved task_metadata.csv with 112 tasks
+Saved task_metadata.json
+
+=== Summary ===
+Total tasks: 112
+
+Difficulty distribution:
+difficulty
+medium    49
+hard      42
+easy      21
+
+Category distribution:
+category
+software-engineering     23
+system-administration    19
+debugging                12
+data-science             10
+security                 10
+model-training            9
+file-operations           8
+scientific-computing      7
+mathematics               5
+games                     4
+machine-learning          2
+file_operations           1
+personal-assistant        1
+algorithms                1
+
+Description length stats:
+  Min: 85, Max: 7566, Mean: 1012, Median: 552
+Traceback (most recent call last):
+  File "/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/terminal_bench_data/scripts/05_query_database.py", line 11, in <module>
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+Loading trial data...
+Total trials: 56988
+
+=== Building Resolution Rate Matrix ===
+Agent-model combos with full coverage (89 tasks): 123
+Agent-model combos with partial coverage: 5
+Saved resolution_rate_matrix.csv ((128, 89))
+
+=== Building Binary Response Matrix ===
+Saved binary_response_matrix.json ((128, 89))
+
+=== Building Majority-Vote Binary Matrix ===
+Saved binary_majority_matrix.csv ((128, 89))
+
+=== Building Trials Count Matrix ===
+Saved trials_count_matrix.csv
+
+=== Per-Model Summary ===
+Saved agent_model_summary.csv (128 combos)
+
+--- Best agent per model (full 89-task coverage) ---
+  gpt-5.3-codex                             77.3% (agent: Factory Droid, trials: 445)
+  gemini-3.1-pro-preview                    74.8% (agent: terminus-3-3, trials: 445)
+  claude-opus-4-6                           74.7% (agent: terminus-3-3, trials: 442)
+  claude-opus-4.6                           71.9% (agent: judy, trials: 445)
+  gpt-5.2-codex                             66.5% (agent: deepagent-harbor, trials: 433)
+  gemini-3-pro-preview                      65.2% (agent: sage, trials: 445)
+  gpt-5.2                                   65.1% (agent: Factory Droid, trials: 443)
+  gemini-3-flash-preview                    64.3% (agent: Junie, trials: 445)
+  claude-opus-4-5-20251101                  63.1% (agent: Factory Droid, trials: 442)
+  claude-haiku-4-5                          61.5% (agent: warp, trials: 442)
+  claude-opus-4-5                           58.4% (agent: mux, trials: 89)
+  gpt-5.1-codex                             57.8% (agent: codex, trials: 445)
+  gpt-5.1-codex-max                         56.1% (agent: codex, trials: 480)
+  gpt-5-nano                                55.1% (agent: warp, trials: 885)
+  claude-haiku-4-5-20251001                 55.1% (agent: warp, trials: 885)
+  glm-5                                     52.4% (agent: terminus-2, trials: 442)
+  claude-sonnet-4-5-20250929                50.1% (agent: warp, trials: 441)
+  gpt-5                                     49.6% (agent: codex, trials: 439)
+  gpt-5.1                                   47.6% (agent: terminus-2, trials: 445)
+  claude-sonnet-4-5                         46.5% (agent: TerminalBenchAgent, trials: 441)
+  gpt-5-codex                               44.3% (agent: codex, trials: 436)
+  kimi-k2.5                                 43.2% (agent: terminus-2, trials: 435)
+  gpt-5.1-codex-mini                        43.1% (agent: codex, trials: 445)
+  claude-4.5-sonnet                         42.7% (agent: final, trials: 437)
+  minimax-m2.5                              42.2% (agent: terminus-2, trials: 444)
+  deepseek-v3.2                             39.6% (agent: terminus-2, trials: 444)
+  claude-opus-4-1-20250805                  38.0% (agent: terminus-2, trials: 443)
+  minimax-m2.1                              36.6% (agent: claude-code, trials: 445)
+  moonshotai/Kimi-K2-Thinking               35.7% (agent: terminus-2, trials: 446)
+  gpt-5-mini                                34.8% (agent: spoox-m, trials: 445)
+  glm-4.7                                   33.4% (agent: terminus-2, trials: 427)
+  GLM-4.7                                   33.3% (agent: claude-code, trials: 445)
+  gemini-2.5-pro                            32.6% (agent: terminus-2, trials: 442)
+  accounts/fireworks/models/minimax-m2      30.0% (agent: terminus-2, trials: 451)
+  moonshotai/Kimi-K2-Instruct-0905          27.8% (agent: terminus-2, trials: 462)
+  Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8   27.2% (agent: aone-agent, trials: 442)
+  grok-4-0709                               26.0% (agent: openhands, trials: 448)
+  grok-code-fast-1                          25.8% (agent: mini-swe-agent, trials: 445)
+  accounts/fireworks/models/glm-4p6         24.5% (agent: terminus-2, trials: 452)
+  openai/gpt-oss-120b                       18.7% (agent: terminus-2, trials: 463)
+  gemini-2.5-flash                          17.1% (agent: mini-swe-agent, trials: 445)
+  openai/gpt-oss-20b                         3.4% (agent: mini-swe-agent, trials: 445)
+
+=== Task Difficulty (empirical) ===
+Easiest tasks:
+  vulnerable-secret                         74.3% avg resolution
+  nginx-request-logging                     77.3% avg resolution
+  portfolio-optimization                    79.9% avg resolution
+  cobol-modernization                       81.0% avg resolution
+  git-leak-recovery                         83.2% avg resolution
+  fix-git                                   83.7% avg resolution
+  multi-source-data-merger                  85.1% avg resolution
+  prove-plus-comm                           85.2% avg resolution
+  constraints-scheduling                    85.4% avg resolution
+  modernize-scientific-stack                88.9% avg resolution
+Hardest tasks:
+  make-doom-for-mips                         0.2% avg resolution
+  filter-js-from-html                        1.0% avg resolution
+  sam-cell-seg                               1.5% avg resolution
+  gpt2-codegolf                              1.5% avg resolution
+  install-windows-3.11                       1.7% avg resolution
+  raman-fitting                              2.1% avg resolution
+  extract-moves-from-video                   2.6% avg resolution
+  train-fasttext                             2.8% avg resolution
+  caffe-cifar-10                             3.4% avg resolution
+  video-processing                           3.4% avg resolution
+Saved task_empirical_difficulty.csv
+
+=== Overall Statistics ===
+Total tasks: 89
+Total agent-model combos: 128
+  Full coverage (89 tasks): 123
+  Partial coverage: 5
+Total individual trials: 56988
+Matrix density: 97.7%
+
+Trials per agent-model combo: min=3, max=893, median=445
+Trials per (agent-model, task): min=1, max=11, median=5
+DB tasks (TB 2.0 evaluated): 89
+HuggingFace tasks: 112
+
+Saved tasks_complete_metadata.csv and .json (89 tasks)
+
+=== Task Metadata Summary (TB 2.0, 89 tasks) ===
+
+Category distribution:
+category
+software-engineering     26
+system-administration     9
+security                  8
+data-science              8
+scientific-computing      8
+file-operations           5
+debugging                 5
+model-training            4
+data-processing           4
+mathematics               4
+machine-learning          3
+video-processing          1
+games                     1
+data-querying             1
+optimization              1
+personal-assistant        1
+
+Human difficulty distribution:
+difficulty
+medium    55
+hard      30
+easy       4
+
+Empirical difficulty distribution:
+empirical_difficulty
+medium       23
+easy         23
+very_hard    19
+hard         12
+very_easy    12
+
+Human vs Empirical difficulty cross-tab:
+empirical_difficulty  very_hard  hard  medium  easy  very_easy
+difficulty                                                    
+easy                          0     0       1     0          3
+hard                         12     6       7     5          0
+medium                        7     6      15    18          9
+
+Description length: min=123, max=4346, median=716
+
+Tasks with HuggingFace metadata match: 37/89
+No response_matrix*.csv files found.
+Already up to date.
+/lfs/skampere1/0/sttruong/aimslab/torch_measure/data/bfcl_data/scripts/01_build_response_matrix.py:243: RuntimeWarning: Mean of empty slice
+  task_difficulty = np.nanmean(matrix, axis=0)
+Found 93 models with score files
+Found 22 categories: ['exec_multiple', 'exec_parallel_multiple', 'exec_parallel', 'exec_simple', 'irrelevance', 'java', 'javascript', 'live_irrelevance', 'live_multiple', 'live_parallel_multiple', 'live_parallel', 'live_relevance', 'live_simple', 'multi_turn_base', 'multi_turn_long_context', 'multi_turn_miss_func', 'multi_turn_miss_param', 'multiple', 'parallel_multiple', 'parallel', 'rest', 'simple']
+
+Discovering task IDs from result files...
+  exec_multiple: 50 tasks
+  exec_parallel_multiple: 40 tasks
+  exec_parallel: 50 tasks
+  exec_simple: 100 tasks
+  irrelevance: 240 tasks
+  java: 100 tasks
+  javascript: 50 tasks
+  live_irrelevance: 882 tasks
+  live_multiple: 1053 tasks
+  live_parallel_multiple: 24 tasks
+  live_parallel: 16 tasks
+  live_relevance: 18 tasks
+  live_simple: 258 tasks
+  multi_turn_base: 200 tasks
+  multi_turn_long_context: 200 tasks
+  multi_turn_miss_func: 200 tasks
+  multi_turn_miss_param: 200 tasks
+  multiple: 200 tasks
+  parallel_multiple: 200 tasks
+  parallel: 200 tasks
+  rest: 70 tasks
+  simple: 400 tasks
+
+Total unique task items: 4751
+
+Building 93 × 4751 response matrix...
+  Processed 10/93 models
+  Processed 20/93 models
+  Processed 30/93 models
+  Processed 40/93 models
+  Processed 50/93 models
+  Processed 60/93 models
+  Processed 70/93 models
+  Processed 80/93 models
+  Processed 90/93 models
+  Processed 93/93 models
+
+Saved /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/bfcl_data/processed/response_matrix.csv
+  Shape: (93, 4751)
+  Filled cells: 440996/441843 (99.8%)
+  Pass rate: 0.607
+
+=== Per-Category Summary ===
+  exec_multiple                        items=   50  mean_acc=0.875  coverage=1.000
+  exec_parallel_multiple               items=   40  mean_acc=0.630  coverage=1.000
+  exec_parallel                        items=   50  mean_acc=0.698  coverage=1.000
+  exec_simple                          items=  100  mean_acc=0.925  coverage=1.000
+  irrelevance                          items=  240  mean_acc=0.670  coverage=1.000
+  java                                 items=  100  mean_acc=0.568  coverage=1.000
+  javascript                           items=   50  mean_acc=0.643  coverage=1.000
+  live_irrelevance                     items=  882  mean_acc=0.614  coverage=0.991
+  live_multiple                        items= 1053  mean_acc=0.689  coverage=1.000
+  live_parallel_multiple               items=   24  mean_acc=0.535  coverage=1.000
+  live_parallel                        items=   16  mean_acc=0.591  coverage=1.000
+  live_relevance                       items=   18  mean_acc=0.765  coverage=1.000
+  live_simple                          items=  258  mean_acc=0.720  coverage=1.000
+  multi_turn_base                      items=  200  mean_acc=0.178  coverage=1.000
+  multi_turn_long_context              items=  200  mean_acc=0.128  coverage=1.000
+  multi_turn_miss_func                 items=  200  mean_acc=0.083  coverage=1.000
+  multi_turn_miss_param                items=  200  mean_acc=0.115  coverage=1.000
+  multiple                             items=  200  mean_acc=0.875  coverage=1.000
+  parallel_multiple                    items=  200  mean_acc=0.667  coverage=1.000
+  parallel                             items=  200  mean_acc=0.710  coverage=1.000
+  rest                                 items=   70  mean_acc=0.665  coverage=1.000
+  simple                               items=  400  mean_acc=0.879  coverage=1.000
+
+=== Per-Model Summary (top/bottom 10) ===
+  Top 10:
+    watt-ai_watt-tool-70B                               acc=0.783  items=4750
+    gpt-4o-2024-11-20                                   acc=0.782  items=4750
+    gpt-4o-2024-11-20-FC                                acc=0.762  items=4750
+    gpt-4-turbo-2024-04-09-FC                           acc=0.755  items=4750
+    watt-ai_watt-tool-8B                                acc=0.748  items=4750
+    o1-2024-12-17                                       acc=0.747  items=4750
+    gemini-2.0-flash-exp                                acc=0.734  items=4750
+    meetkai_functionary-medium-v3.1-FC                  acc=0.724  items=4750
+    gemini-1.5-pro-002                                  acc=0.719  items=4750
+    o1-mini-2024-09-12                                  acc=0.716  items=4750
+  Bottom 10:
+    gemini-1.0-pro-002                                  acc=0.436  items=4750
+    meta-llama_Meta-Llama-3-8B-Instruct                 acc=0.436  items=4750
+    Qwen_Qwen2-1.5B-Instruct                            acc=0.373  items=4750
+    Salesforce_xLAM-1b-fc-r                             acc=0.345  items=4750
+    Qwen_Qwen2.5-0.5B-Instruct                          acc=0.343  items=4750
+    meta-llama_Llama-3.1-70B-Instruct-FC                acc=0.337  items=4750
+    meta-llama_Llama-3.1-8B-Instruct-FC                 acc=0.323  items=4750
+    google_gemma-2-2b-it                                acc=0.309  items=4750
+    meta-llama_Llama-3.2-1B-Instruct                    acc=0.284  items=4750
+    deepseek-ai_DeepSeek-Coder-V2-Lite-Instruct         acc=0.262  items=4750
+
+=== Task Difficulty Distribution ===
+  Always pass (acc=1.0): 1
+  Always fail (acc=0.0): 183
+  Mixed (0<acc<1): 4566
+  Mean difficulty: 0.607
+  Median difficulty: 0.731
+Found 1 response matrices across 1 benchmarks.
+
+  [bfcl]  bfcl_data/processed/response_matrix.csv
+    heatmap  (93 x 4751)
+    model_accuracy  (93 models)
+    item_difficulty  (4751 items)
+    model_correlation  (93 models)
+
+Done.
+=== Loading submissions repo data ===
+  Skipping DeepSeek-V3 copy (duplicate)
+  Skipping O1-2024-12-17 (Low)_prompt_old (duplicate)
+  Skipping OpenCodeReasoning-Nemotron-1.1-32B (no data files)
+Loaded 70 models from submissions repo
+
+=== Loading leaderboard data (v6) ===
+Loaded 28 models from leaderboard v6
+
+=== Loading leaderboard data (v5) ===
+Loaded 35 models from leaderboard v5
+
+Filled 2 models from leaderboard:
+  OpenCodeReasoning-Nemotron-1.1-32B: v6 (1055 problems)
+  Gemini-2.5-Pro: v5 (880 problems)
+
+Total unique problems: 1055
+Total models: 72
+
+Saved /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/livecodebench_data/processed/response_matrix.csv
+  Shape: (72, 1055)
+  Filled cells: 67477/75960 (88.8%)
+  Mean pass@1: 0.609
+
+=== Per-Model Summary ===
+  Top 10:
+    O4-Mini (High)                                      pass@1=0.873  n=1055  N=1  src=submissions
+    Kimi-k1.6-IOI-high                                  pass@1=0.860  n=880  N=1  src=submissions
+    O3 (High)                                           pass@1=0.847  n=1055  N=1  src=submissions
+    Gemini-2.5-Pro                                      pass@1=0.847  n=880  N=?  src=leaderboard_v5
+    O4-Mini (Medium)                                    pass@1=0.845  n=1055  N=1  src=submissions
+    DeepSeek-R1-0528                                    pass@1=0.844  n=1055  N=10  src=submissions
+    Gemini-2.5-Pro-06-05                                pass@1=0.843  n=1055  N=1  src=submissions
+    O1-2024-12-17 (High)                                pass@1=0.832  n=880  N=1  src=submissions
+    Gemini-2.5-Pro-05-06                                pass@1=0.827  n=1055  N=1  src=submissions
+    Gemini-2.5-Pro-03-25                                pass@1=0.815  n=1055  N=1  src=submissions
+  Bottom 10:
+    Codestral-Latest                                    pass@1=0.353  n=880  N=10  src=submissions
+    Qwen2.5-Coder-Ins-7B                                pass@1=0.341  n=713  N=10  src=submissions
+    GPT-4-0613                                          pass@1=0.339  n=713  N=10  src=submissions
+    Qwen2-Ins-72B                                       pass@1=0.306  n=713  N=10  src=submissions
+    Qwen2.5-Ins-7B                                      pass@1=0.301  n=713  N=10  src=submissions
+    DSCoder-33b-Ins                                     pass@1=0.267  n=713  N=10  src=submissions
+    Claude-3-Haiku                                      pass@1=0.225  n=1055  N=10  src=submissions
+    AzeroGPT-64b                                        pass@1=0.220  n=880  N=10  src=submissions
+    DSCoder-6.7b-Ins                                    pass@1=0.198  n=713  N=10  src=submissions
+    DSCoder-1.3b-Ins                                    pass@1=0.086  n=713  N=10  src=submissions
+
+=== Problem Difficulty Distribution ===
+  Always pass (pass@1=1.0): 22 / 1055
+  Always fail (pass@1=0.0): 34 / 1055
+  Mixed (0<pass@1<1): 999 / 1055
+  Mean difficulty: 0.599
+  Median difficulty: 0.640
+
+=== Problem Metadata ===
+  Saved problem_metadata.csv (1055 problems)
+
+  Difficulty distribution:
+    medium: 383
+    hard: 350
+    easy: 322
+
+  Platform distribution:
+    atcoder: 602
+    leetcode: 444
+    codeforces: 9
+
+=== Coverage by Problem Set ===
+  Models with >= 713 problems: 72
+  Models with >= 880 problems: 59
+  Models with >= 1055 problems: 35
+Found 1 response matrices across 1 benchmarks.
+
+  [livecodebench]  livecodebench_data/processed/response_matrix.csv
+    heatmap  (72 x 1055)
+    model_accuracy  (72 models)
+    item_difficulty  (1055 items)
+    model_correlation  (72 models)
+
+Done.
+Loading results from: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_data/raw/results_json
+Found 134 models
+Found 500 unique instance IDs
+Building response matrix...
+Response matrix shape: (134, 500)
+Building model summary...
+Saved response matrix to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_data/processed/response_matrix.csv
+Saved model summary to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_data/processed/model_summary.csv
+
+================================================================================
+TOP 20 MODELS (by resolve rate):
+================================================================================
+                                            model  resolved_count  total_instances  resolve_rate
+            20251215_livesweagent_claude-opus-4-5             396              500          79.2
+  20251205_sonar-foundation-agent_claude-opus-4-5             396              500          79.2
+                   20250928_trae_doubao_seed_code             394              500          78.8
+               20251127_openhands_claude-opus-4-5             388              500          77.6
+       20251120_livesweagent_gemini-3-pro-preview             387              500          77.4
+             20250804_epam-ai-run-claude-4-sonnet             384              500          76.8
+                      20250902_atlassian-rovo-dev             384              500          76.8
+                                  20250819_ACoder             382              500          76.4
+                                    20250901_warp             378              500          75.6
+                                    20250612_trae             376              500          75.2
+20251103_sonar-foundation-agent_claude-sonnet-4-5             374              500          74.8
+                              20250731_harness_ai             374              500          74.8
+    20250720_Lingxi-v1.5_claude-4-sonnet-20250514             373              500          74.6
+                                 20250915_JoyCode             373              500          74.6
+            20250603_Refact_Agent_claude-4-sonnet             372              500          74.4
+                  20251015_Prometheus_v1.2.1_gpt5             372              500          74.4
+     20251103_SalesforceAIResearch_SAGE_OpenHands             369              500          73.8
+                     20250522_tools_claude-4-opus             366              500          73.2
+     20251021_SalesforceAIResearch_SAGE_bash_only             365              500          73.0
+                   20250522_tools_claude-4-sonnet             362              500          72.4
+
+================================================================================
+BOTTOM 10 MODELS (by resolve rate):
+================================================================================
+                                  model  resolved_count  total_instances  resolve_rate
+                 20240402_sweagent_gpt4             112              500          22.4
+20241002_lingma-agent_lingma-swe-gpt-7b              91              500          18.2
+          20240402_sweagent_claude3opus              79              500          15.8
+20240918_lingma-agent_lingma-swe-gpt-7b              51              500          10.2
+               20240402_rag_claude3opus              35              500           7.0
+                   20231010_rag_claude2              22              500           4.4
+                      20240402_rag_gpt4              14              500           2.8
+                20231010_rag_swellama7b               7              500           1.4
+               20231010_rag_swellama13b               6              500           1.2
+                     20231010_rag_gpt35               2              500           0.4
+
+================================================================================
+MATRIX STATISTICS:
+================================================================================
+  Models (rows): 134
+  Instances (columns): 500
+  Total resolved cells: 34485
+  Overall density: 0.5147
+
+  Instances resolved by ALL models: 0
+  Instances resolved by NO model: 32
+  Mean models resolving each instance: 69.0
+  Median models resolving each instance: 74.5
+Found 1 response matrices across 1 benchmarks.
+
+  [swebench]  swebench_data/processed/response_matrix.csv
+    heatmap  (134 x 500)
+    model_accuracy  (134 models)
+    item_difficulty  (500 items)
+    model_correlation  (134 models)
+
+Done.
+================================================================================
+SWE-bench Full Response Matrix Builder
+  Benchmark: SWE-bench Full (2,294 instances)
+  Source: github.com/SWE-bench/experiments/evaluation/test/
+================================================================================
+
+[Step 1] Discovering submissions...
+Fetching submission list from GitHub API...
+  Found 24 submissions on GitHub
+
+[Step 2] Downloading results.json files...
+  Download summary: 0 new, 24 cached, 0 failed
+
+[Step 3] Loading canonical instance IDs...
+  Loaded 2294 canonical instance IDs from cache
+
+[Step 4] Loading results from: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_full_data/raw/results_json
+  Found 24 models with results
+  Found 2294 unique instance IDs in result files
+  Using 2294 instance IDs for matrix columns
+
+[Step 5] Building response matrix...
+  Matrix shape: (24, 2294)
+
+[Step 6] Building model summary...
+
+[Step 7] Saving outputs...
+  Saved response matrix: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_full_data/processed/response_matrix.csv (0.16 MB)
+  Saved model summary: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_full_data/processed/model_summary.csv
+
+================================================================================
+SWE-BENCH FULL RESPONSE MATRIX STATISTICS
+================================================================================
+
+  Matrix shape: 24 models x 2294 instances
+  Total cells: 55,056
+  Total resolved cells: 10,618
+  Overall density (resolve rate): 0.1929
+
+  Per-model resolve counts:
+    Min:        4  (0.2%)
+    Max:     1207  (52.6%)
+    Mean:      442.4  (19.3%)
+    Median:    424.0  (18.5%)
+    Std:       337.9  (14.7%)
+
+  Per-instance statistics:
+    Resolved by ALL 24 models: 0
+    Resolved by NO model:  870
+    Mean models resolving:  4.63 (of 24)
+    Median models resolving: 2.0
+    Std:    5.58
+
+  Instance difficulty distribution (by fraction of 24 models resolving):
+       [0%, 10%):  1214 instances
+      [10%, 25%):   294 instances
+      [25%, 50%):   416 instances
+      [50%, 75%):   307 instances
+      [75%, 90%):    63 instances
+     [90%, 100%]:     0 instances
+
+================================================================================
+TOP MODELS (by resolve rate):
+================================================================================
+                                                 model  resolved_count  total_instances  resolve_rate
+       20251219_sonar-foundation-agent_claude-opus-4-5            1207             2294         52.62
+                              20251027_salesforce_SAGE            1015             2294         44.25
+                           20250605_atlassian-rovo-dev             963             2294         41.98
+        20250522_amazon-q-developer-agent-20250405-dev             851             2294         37.10
+                 20250227_sweagent-claude-3-7-20250219             776             2294         33.83
+        20250131_amazon-q-developer-agent-20241202-dev             688             2294         29.99
+        20241103_OpenHands-CodeAct-2.1-sonnet-20241022             674             2294         29.38
+20241121_autocoderover-v2.0-claude-3-5-sonnet-20241022             571             2294         24.89
+                                    20240820_honeycomb             506             2294         22.06
+        20240721_amazon-q-developer-agent-20240719-dev             453             2294         19.75
+                           20240617_factory_code_droid             442             2294         19.27
+                      20240628_autocoderover-v20240620             432             2294         18.83
+                     20240620_sweagent_claude3.5sonnet             416             2294         18.13
+                           20240615_appmap-navie_gpt4o             335             2294         14.60
+        20240509_amazon-q-developer-agent-20240430-dev             317             2294         13.82
+                                20240402_sweagent_gpt4             286             2294         12.47
+                               20240728_sweagent_gpt4o             275             2294         11.99
+                         20240402_sweagent_claude3opus             213             2294          9.29
+                              20240402_rag_claude3opus              87             2294          3.79
+                                  20231010_rag_claude2              45             2294          1.96
+                                     20240402_rag_gpt4              30             2294          1.31
+                              20231010_rag_swellama13b              16             2294          0.70
+                               20231010_rag_swellama7b              16             2294          0.70
+                                    20231010_rag_gpt35               4             2294          0.17
+
+================================================================================
+BOTTOM 10 MODELS (by resolve rate):
+================================================================================
+                                         model  resolved_count  total_instances  resolve_rate
+20240509_amazon-q-developer-agent-20240430-dev             317             2294         13.82
+                        20240402_sweagent_gpt4             286             2294         12.47
+                       20240728_sweagent_gpt4o             275             2294         11.99
+                 20240402_sweagent_claude3opus             213             2294          9.29
+                      20240402_rag_claude3opus              87             2294          3.79
+                          20231010_rag_claude2              45             2294          1.96
+                             20240402_rag_gpt4              30             2294          1.31
+                      20231010_rag_swellama13b              16             2294          0.70
+                       20231010_rag_swellama7b              16             2294          0.70
+                            20231010_rag_gpt35               4             2294          0.17
+
+================================================================================
+OUTPUT FILES:
+================================================================================
+  item_content.csv                                 4122.2 KB
+  model_summary.csv                                   1.1 KB
+  response_matrix.csv                               159.8 KB
+
+Done.
+Found 1 response matrices across 1 benchmarks.
+
+  [swebench_full]  swebench_full_data/processed/response_matrix.csv
+    heatmap  (24 x 2294)
+    model_accuracy  (24 models)
+    item_difficulty  (2294 items)
+    model_correlation  (24 models)
+
+Done.
+======================================================================
+  SWE-bench Java Response Matrix Builder
+  Benchmark: SWE-bench Java (Java GitHub issue resolution)
+  Paper: arXiv:2408.14354
+======================================================================
+
+[Step 1] Downloading data...
+
+  Downloading Multi-SWE-bench Java verified results...
+    Found 41 submissions on GitHub
+    Download: 2 new, 39 cached, 0 failed
+
+  Downloading SWE-bench Multilingual results...
+    Found 13 submissions on GitHub
+    Download: 0 new, 13 cached, 0 failed
+
+[Step 2] Loading canonical instance IDs...
+    Loaded 91 HF canonical instance IDs from cache
+
+[Step 3] Loading Multi-SWE-bench Java verified results...
+    Found 41 models
+    Found 128 unique instance IDs in results
+    Index.json canonical IDs: 128
+    Using 128 instance IDs for matrix
+
+[Step 4] Building Multi-SWE-bench Java response matrix...
+
+======================================================================
+  Multi-SWE-bench Java Verified (128 instances)
+======================================================================
+  Matrix dimensions: 41 models x 128 instances
+  Total cells:       5,248
+  Filled cells:      4,905 (93.5%)
+  Resolved (1):      796 (16.2%)
+  Unresolved (0):    4,109 (83.8%)
+
+  Per-model resolve counts:
+    Min:        1  (0.8%)
+    Max:       56  (43.8%)
+    Mean:       19.4  (15.2%)
+    Median:     16.0  (12.5%)
+    Std:        12.8  (10.0%)
+
+  Per-instance statistics:
+    Resolved by ALL 41 models: 0
+    Resolved by NO model:  52
+    Mean models resolving:  6.22 (of 41)
+    Median: 1.0
+
+  Instance difficulty (fraction of 41 models resolving):
+       [0%, 10%):    77 instances
+      [10%, 25%):    20 instances
+      [25%, 50%):    17 instances
+      [50%, 75%):    12 instances
+      [75%, 90%):     2 instances
+     [90%, 100%]:     0 instances
+
+  Repository breakdown:
+    alibaba__fastjson2                      :    6 instances, avg resolve 12.9%
+    apache__dubbo                           :    3 instances, avg resolve 12.5%
+    elastic__logstash                       :   38 instances, avg resolve 2.4%
+    fasterxml__jackson-core                 :   18 instances, avg resolve 20.5%
+    fasterxml__jackson-databind             :   42 instances, avg resolve 22.9%
+    fasterxml__jackson-dataformat-xml       :    5 instances, avg resolve 18.2%
+    google__gson                            :    5 instances, avg resolve 31.6%
+    googlecontainertools__jib               :    5 instances, avg resolve 36.8%
+    mockito__mockito                        :    6 instances, avg resolve 2.1%
+
+======================================================================
+  LEADERBOARD: Multi-SWE-bench Java Verified
+======================================================================
+  Rank  Model                                               Resolved    Rate
+  ----  --------------------------------------------------  --------  ------
+     1  CodeArts-Agent_CodeArts-MiniMax-M2.5                      56   43.8%
+     2  InfCode_GPT-5.2                                           50   39.1%
+     3  iSWE_Agent                                                43   33.6%
+     4  iSWE-OpenModels                                           40   31.2%
+     5  MSWE-agent_Gemini-2.5-Pro                                 37   28.9%
+     6  MSWE-Agent_CodeArts-MiniMax-M2.5                          35   27.3%
+     7  MSWE-agent_Claude-3.7-Sonnet                              30   23.4%
+     8  MagentLess_DeepSeek-R1                                    29   22.7%
+     9  MagentLess_Gemini-2.5-Pro                                 28   21.9%
+    10  MSWE-agent_OpenAI-o1                                      28   21.9%
+    11  MopenHands_Claude-3.7-Sonnet                              28   21.9%
+    12  MagentLess_OpenAI-o1                                      27   21.1%
+    13  MSWE-agent_Claude-3.5-Sonnet(Oct)                         26   20.3%
+    14  MSWE-agent_OpenAI-o3-mini-high                            21   16.4%
+    15  MopenHands_Claude-3.5-Sonnet(Oct)                         19   14.8%
+    16  MagentLess_Llama-4-Maverick                               19   14.8%
+    17  MagentLess_Claude-3.5-Sonnet(Oct)                         19   14.8%
+    18  MagentLess_Claude-3.7-Sonnet                              18   14.1%
+    19  MagentLess_Doubao-1.5-thinking                            17   13.3%
+    20  MSWE-agent_GPT-4o-1120                                    16   12.5%
+    21  MopenHands_Gemini-2.5-Pro                                 16   12.5%
+    22  MagentLess_GPT-4o-1120                                    15   11.7%
+    23  MSWE-agent_DeepSeek-V3                                    15   11.7%
+    24  MSWE-agent_Doubao-1.5-thinking                            15   11.7%
+    25  MagentLess_Qwen2.5-72B-Instruct                           14   10.9%
+    26  MopenHands_Doubao-1.5-thinking                            14   10.9%
+    27  MopenHands_OpenAI-o3-mini-high                            13   10.2%
+    28  MopenHands_GPT-4o-1120                                    12    9.4%
+    29  MSWE-agent_DeepSeek-R1                                    12    9.4%
+    30  MopenHands_DeepSeek-V3                                    12    9.4%
+    31  MopenHands_DeepSeek-R1                                    11    8.6%
+    32  MSWE-agent_Doubao-1.5-pro                                  9    7.0%
+    33  MagentLess_DeepSeek-V3                                     9    7.0%
+    34  MSWE-agent_Llama-4-Maverick                                8    6.2%
+    35  MopenHands_Llama-4-Maverick                                8    6.2%
+    36  MagentLess_OpenAI-o3-mini-high                             7    5.5%
+    37  MagentLess_Doubao-1.5-pro                                  7    5.5%
+    38  MopenHands_OpenAI-o1                                       5    3.9%
+    39  MopenHands_Qwen2.5-72B-Instruct                            4    3.1%
+    40  MSWE-agent_Qwen2.5-72B-Instruct                            3    2.3%
+    41  MopenHands_Doubao-1.5-pro                                  1    0.8%
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_java_data/processed/response_matrix_multi_swebench_java.csv
+
+[Step 5] Loading SWE-bench Multilingual Java results...
+    Found 13 models
+    Found 43 Java instance IDs
+
+[Step 6] Building SWE-bench Multilingual Java response matrix...
+
+======================================================================
+  SWE-bench Multilingual Java Subset (43 instances)
+======================================================================
+  Matrix dimensions: 13 models x 43 instances
+  Total cells:       559
+  Filled cells:      559 (100.0%)
+  Resolved (1):      390 (69.8%)
+  Unresolved (0):    169 (30.2%)
+
+  Per-model resolve counts:
+    Min:       17  (39.5%)
+    Max:       37  (86.0%)
+    Mean:       30.0  (69.8%)
+    Median:     31.0  (72.1%)
+    Std:         5.1  (11.9%)
+
+  Per-instance statistics:
+    Resolved by ALL 13 models: 9
+    Resolved by NO model:  0
+    Mean models resolving:  9.07 (of 13)
+    Median: 10.0
+
+  Instance difficulty (fraction of 13 models resolving):
+       [0%, 10%):     1 instances
+      [10%, 25%):     5 instances
+      [25%, 50%):     6 instances
+      [50%, 75%):     7 instances
+      [75%, 90%):     9 instances
+     [90%, 100%]:    15 instances
+
+  Repository breakdown:
+    apache__druid                           :    5 instances, avg resolve 50.8%
+    apache__lucene                          :    9 instances, avg resolve 80.3%
+    google__gson                            :    9 instances, avg resolve 53.0%
+    javaparser__javaparser                  :    2 instances, avg resolve 100.0%
+    projectlombok__lombok                   :   17 instances, avg resolve 73.3%
+    reactivex__rxjava                       :    1 instances, avg resolve 100.0%
+
+======================================================================
+  LEADERBOARD: SWE-bench Multilingual Java Subset
+======================================================================
+  Rank  Model                                               Resolved    Rate
+  ----  --------------------------------------------------  --------  ------
+     1  SWEbenchML_glm-5                                          37   86.0%
+     2  SWEbenchML_gemini-3-flash                                 35   81.4%
+     3  SWEbenchML_claude-4-5-opus                                34   79.1%
+     4  SWEbenchML_minimax-2-5                                    33   76.7%
+     5  SWEbenchML_claude-4-5-sonnet                              32   74.4%
+     6  SWEbenchML_kimi-k2-5                                      31   72.1%
+     7  SWEbenchML_gemini-3-pro                                   31   72.1%
+     8  SWEbenchML_claude-4-6-opus                                31   72.1%
+     9  SWEbenchML_claude-4-5-haiku                               29   67.4%
+    10  SWEbenchML_gpt-5-2-codex                                  28   65.1%
+    11  SWEbenchML_gpt-5-2-high                                   27   62.8%
+    12  SWEbenchML_deepseek-3-2                                   25   58.1%
+    13  SWEbenchML_gpt-5-mini                                     17   39.5%
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_java_data/processed/response_matrix_swebench_multilingual_java.csv
+
+[Step 7] Building combined response matrix...
+    Total unique Java instance IDs: 170
+    From Multi-SWE-bench: 128
+    From SWE-bench Multilingual: 43
+    Overlap: 1
+
+======================================================================
+  Combined SWE-bench Java (all sources, 170 instances)
+======================================================================
+  Matrix dimensions: 54 models x 170 instances
+  Total cells:       9,180
+  Filled cells:      5,464 (59.5%)
+  Resolved (1):      1,186 (21.7%)
+  Unresolved (0):    4,278 (78.3%)
+
+  Per-model resolve counts:
+    Min:        1  (0.6%)
+    Max:       56  (32.9%)
+    Mean:       22.0  (12.9%)
+    Median:     19.0  (11.2%)
+    Std:        12.3  (7.2%)
+
+  Per-instance statistics:
+    Resolved by ALL 54 models: 0
+    Resolved by NO model:  52
+    Mean models resolving:  6.98 (of 54)
+    Median: 4.5
+
+  Instance difficulty (fraction of 54 models resolving):
+       [0%, 10%):    90 instances
+      [10%, 25%):    57 instances
+      [25%, 50%):    18 instances
+      [50%, 75%):     5 instances
+      [75%, 90%):     0 instances
+     [90%, 100%]:     0 instances
+
+  Repository breakdown:
+    alibaba__fastjson2                      :    6 instances, avg resolve 12.9%
+    apache__druid                           :    5 instances, avg resolve 50.8%
+    apache__dubbo                           :    3 instances, avg resolve 12.5%
+    apache__lucene                          :    9 instances, avg resolve 80.3%
+    elastic__logstash                       :   38 instances, avg resolve 2.4%
+    fasterxml__jackson-core                 :   18 instances, avg resolve 20.5%
+    fasterxml__jackson-databind             :   42 instances, avg resolve 22.9%
+    fasterxml__jackson-dataformat-xml       :    5 instances, avg resolve 18.2%
+    google__gson                            :   13 instances, avg resolve 43.7%
+    googlecontainertools__jib               :    5 instances, avg resolve 36.8%
+    javaparser__javaparser                  :    2 instances, avg resolve 100.0%
+    mockito__mockito                        :    6 instances, avg resolve 2.1%
+    projectlombok__lombok                   :   17 instances, avg resolve 73.3%
+    reactivex__rxjava                       :    1 instances, avg resolve 100.0%
+
+======================================================================
+  LEADERBOARD: Combined SWE-bench Java
+======================================================================
+  Rank  Model                                               Resolved    Rate
+  ----  --------------------------------------------------  --------  ------
+     1  CodeArts-Agent_CodeArts-MiniMax-M2.5                      56   32.9%
+     2  InfCode_GPT-5.2                                           50   29.4%
+     3  iSWE_Agent                                                43   25.3%
+     4  iSWE-OpenModels                                           40   23.5%
+     5  MSWE-agent_Gemini-2.5-Pro                                 37   21.8%
+     6  SWEbenchML_glm-5                                          37   21.8%
+     7  SWEbenchML_gemini-3-flash                                 35   20.6%
+     8  MSWE-Agent_CodeArts-MiniMax-M2.5                          35   20.6%
+     9  SWEbenchML_claude-4-5-opus                                34   20.0%
+    10  SWEbenchML_minimax-2-5                                    33   19.4%
+    11  SWEbenchML_claude-4-5-sonnet                              32   18.8%
+    12  SWEbenchML_claude-4-6-opus                                31   18.2%
+    13  SWEbenchML_kimi-k2-5                                      31   18.2%
+    14  SWEbenchML_gemini-3-pro                                   31   18.2%
+    15  MSWE-agent_Claude-3.7-Sonnet                              30   17.6%
+    16  SWEbenchML_claude-4-5-haiku                               29   17.1%
+    17  MagentLess_DeepSeek-R1                                    29   17.1%
+    18  MSWE-agent_OpenAI-o1                                      28   16.5%
+    19  MagentLess_Gemini-2.5-Pro                                 28   16.5%
+    20  SWEbenchML_gpt-5-2-codex                                  28   16.5%
+    21  MopenHands_Claude-3.7-Sonnet                              28   16.5%
+    22  MagentLess_OpenAI-o1                                      27   15.9%
+    23  SWEbenchML_gpt-5-2-high                                   27   15.9%
+    24  MSWE-agent_Claude-3.5-Sonnet(Oct)                         26   15.3%
+    25  SWEbenchML_deepseek-3-2                                   25   14.7%
+    26  MSWE-agent_OpenAI-o3-mini-high                            21   12.3%
+    27  MagentLess_Claude-3.5-Sonnet(Oct)                         19   11.2%
+    28  MagentLess_Llama-4-Maverick                               19   11.2%
+    29  MopenHands_Claude-3.5-Sonnet(Oct)                         19   11.2%
+    30  MagentLess_Claude-3.7-Sonnet                              18   10.6%
+    31  MagentLess_Doubao-1.5-thinking                            17   10.0%
+    32  SWEbenchML_gpt-5-mini                                     17   10.0%
+    33  MopenHands_Gemini-2.5-Pro                                 16    9.4%
+    34  MSWE-agent_GPT-4o-1120                                    16    9.4%
+    35  MagentLess_GPT-4o-1120                                    15    8.8%
+    36  MSWE-agent_Doubao-1.5-thinking                            15    8.8%
+    37  MSWE-agent_DeepSeek-V3                                    15    8.8%
+    38  MopenHands_Doubao-1.5-thinking                            14    8.2%
+    39  MagentLess_Qwen2.5-72B-Instruct                           14    8.2%
+    40  MopenHands_OpenAI-o3-mini-high                            13    7.7%
+    41  MopenHands_DeepSeek-V3                                    12    7.1%
+    42  MopenHands_GPT-4o-1120                                    12    7.1%
+    43  MSWE-agent_DeepSeek-R1                                    12    7.1%
+    44  MopenHands_DeepSeek-R1                                    11    6.5%
+    45  MSWE-agent_Doubao-1.5-pro                                  9    5.3%
+    46  MagentLess_DeepSeek-V3                                     9    5.3%
+    47  MSWE-agent_Llama-4-Maverick                                8    4.7%
+    48  MopenHands_Llama-4-Maverick                                8    4.7%
+    49  MagentLess_OpenAI-o3-mini-high                             7    4.1%
+    50  MagentLess_Doubao-1.5-pro                                  7    4.1%
+    51  MopenHands_OpenAI-o1                                       5    2.9%
+    52  MopenHands_Qwen2.5-72B-Instruct                            4    2.4%
+    53  MSWE-agent_Qwen2.5-72B-Instruct                            3    1.8%
+    54  MopenHands_Doubao-1.5-pro                                  1    0.6%
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_java_data/processed/response_matrix.csv
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_java_data/processed/model_summary.csv
+
+======================================================================
+  FINAL SUMMARY
+======================================================================
+
+  Data sources:
+    1. Multi-SWE-bench Java Verified: 41 models x 128 instances
+    2. SWE-bench Multilingual Java:   13 models x 43 instances
+    3. HuggingFace canonical IDs:      91 (original SWE-bench-java-verified)
+
+  Combined matrix:
+    Dimensions: 54 models x 170 instances
+    Fill rate:  59.5%
+    Value distribution: 1 (resolved) = 1186, 0 (unresolved) = 4278
+    Mean resolve rate: 21.7%
+
+  Output files:
+    item_content.csv                                            853.4 KB
+    model_summary.csv                                             2.3 KB
+    response_matrix.csv                                          30.7 KB
+    response_matrix_multi_swebench_java.csv                      20.9 KB
+    response_matrix_swebench_multilingual_java.csv                2.4 KB
+
+Done.
+Found 3 response matrices across 1 benchmarks.
+
+  [swebench_java]  swebench_java_data/processed/response_matrix.csv
+    heatmap  (54 x 170)
+    model_accuracy  (54 models)
+    item_difficulty  (170 items)
+    model_correlation  (54 models)
+  [swebench_java / multi_swebench_java]  swebench_java_data/processed/response_matrix_multi_swebench_java.csv
+    heatmap  (41 x 128)
+    model_accuracy  (41 models)
+    item_difficulty  (128 items)
+    model_correlation  (41 models)
+  [swebench_java / swebench_multilingual_java]  swebench_java_data/processed/response_matrix_swebench_multilingual_java.csv
+    heatmap  (13 x 43)
+    model_accuracy  (13 models)
+    item_difficulty  (43 items)
+    model_correlation  (13 models)
+
+Done.
+SWE-bench Multilingual Response Matrix Builder
+======================================================================
+  Raw data dir:       /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/raw
+  Processed data dir: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed
+======================================================================
+  SWE-bench Multilingual (official)
+======================================================================
+
+  Models:          13
+  Instances:       301
+  Matrix dims:     13 x 301
+  Total cells:     3,913
+  Filled cells:    3,897 (99.6%)
+  Pass cells:      2,556 (65.6%)
+  Fail cells:      1,341 (34.4%)
+  Mean pass rate:  65.6%
+
+  Per-model resolve rate:
+    Min:    39.7% (gpt-5-mini)
+    Max:    72.7% (gemini-3-flash)
+    Median: 67.3%
+    Std:    8.5%
+
+  Per-instance solve rate:
+    Min:    0.0%
+    Max:    100.0%
+    Median: 84.6%
+    Std:    35.6%
+
+  Instance difficulty distribution:
+    Unsolved by all (0%):     31
+    Hard (<20%):              52
+    Easy (>80%):              153
+    Solved by all (100%):     72
+
+  Language breakdown (inferred from repos):
+    C           :   30 instances, avg resolve rate 68.7%
+    C++         :   12 instances, avg resolve rate 67.3%
+    Go          :   42 instances, avg resolve rate 52.9%
+    Java        :   43 instances, avg resolve rate 69.8%
+    JavaScript  :   34 instances, avg resolve rate 66.6%
+    PHP         :   43 instances, avg resolve rate 69.6%
+    Ruby        :   44 instances, avg resolve rate 62.2%
+    Rust        :   43 instances, avg resolve rate 70.8%
+    TypeScript  :   10 instances, avg resolve rate 55.4%
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix.csv
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/model_summary.csv
+
+  Leaderboard (SWE-bench Multilingual):
+  Rank  Model                                Resolved    Rate
+  ----  -----------------------------------  --------  ------
+     1  gemini-3-flash                            218   72.7%
+     2  claude-4-6-opus                           216   72.0%
+     3  claude-4-5-opus                           212   70.7%
+     4  glm-5                                     209   69.7%
+     5  gemini-3-pro                              206   68.7%
+     6  minimax-2-5                               203   68.3%
+     7  kimi-k2-5                                 202   67.3%
+     8  claude-4-5-sonnet                         201   67.0%
+     9  gpt-5-2-high                              200   66.7%
+    10  gpt-5-2-codex                             199   66.3%
+    11  claude-4-5-haiku                          194   64.7%
+    12  deepseek-3-2                              177   59.0%
+    13  gpt-5-mini                                119   39.7%
+
+======================================================================
+  Multi-SWE-bench (ByteDance)
+======================================================================
+
+  Languages: 8
+  Unique models: 79
+  Total unique instance IDs: 2132
+
+  c:
+    Models: 37, Instances: 128
+    Fill rate: 86.6%, Mean resolve: 3.8%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench_c.csv
+
+  c++:
+    Models: 37, Instances: 129
+    Fill rate: 96.1%, Mean resolve: 6.0%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench_c++.csv
+
+  go:
+    Models: 36, Instances: 428
+    Fill rate: 86.0%, Mean resolve: 4.8%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench_go.csv
+
+  java:
+    Models: 39, Instances: 128
+    Fill rate: 93.4%, Mean resolve: 15.1%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench_java.csv
+
+  javascript:
+    Models: 37, Instances: 356
+    Fill rate: 84.0%, Mean resolve: 4.7%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench_javascript.csv
+
+  python:
+    Models: 36, Instances: 500
+    Fill rate: 94.4%, Mean resolve: 30.2%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench_python.csv
+
+  rust:
+    Models: 36, Instances: 239
+    Fill rate: 92.7%, Mean resolve: 5.8%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench_rust.csv
+
+  typescript:
+    Models: 37, Instances: 224
+    Fill rate: 95.6%, Mean resolve: 5.8%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench_typescript.csv
+
+  Building combined Multi-SWE-bench matrix...
+
+  Combined matrix:
+    Models:        79
+    Instances:     2132
+    Matrix dims:   79 x 2132
+    Total cells:   168,428
+    Filled cells:  70,555 (41.9%)
+    Pass cells:    8,356
+    Mean resolve:  11.8%
+    Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/swebench_multilingual_data/processed/response_matrix_multi_swebench.csv
+
+======================================================================
+  FINAL SUMMARY
+======================================================================
+
+  SWE-bench Multilingual (primary):
+    Dimensions: 13 models x 301 instances
+    Fill rate:  99.6%
+    Mean pass:  65.6%
+
+  Multi-SWE-bench (combined):
+    Dimensions: 79 models x 2132 instances
+    Fill rate:  41.9%
+    Mean pass:  11.8%
+
+  All output files:
+    item_content.csv                                         4974.7 KB
+    model_summary.csv                                        0.4 KB
+    response_matrix.csv                                      14.6 KB
+    response_matrix_multi_swebench.csv                       416.2 KB
+    response_matrix_multi_swebench_c++.csv                   19.4 KB
+    response_matrix_multi_swebench_c.csv                     19.9 KB
+    response_matrix_multi_swebench_go.csv                    60.9 KB
+    response_matrix_multi_swebench_java.csv                  19.8 KB
+    response_matrix_multi_swebench_javascript.csv            53.0 KB
+    response_matrix_multi_swebench_python.csv                74.2 KB
+    response_matrix_multi_swebench_rust.csv                  35.8 KB
+    response_matrix_multi_swebench_typescript.csv            34.8 KB
+Found 10 response matrices across 1 benchmarks.
+
+  [swebench_multilingual]  swebench_multilingual_data/processed/response_matrix.csv
+    heatmap  (13 x 301)
+    model_accuracy  (13 models)
+    item_difficulty  (301 items)
+    model_correlation  (13 models)
+  [swebench_multilingual / multi_swebench]  swebench_multilingual_data/processed/response_matrix_multi_swebench.csv
+    heatmap  (79 x 2132)
+    model_accuracy  (79 models)
+    item_difficulty  (2132 items)
+    model_correlation  (79 models)
+  [swebench_multilingual / multi_swebench_c++]  swebench_multilingual_data/processed/response_matrix_multi_swebench_c++.csv
+    heatmap  (37 x 129)
+    model_accuracy  (37 models)
+    item_difficulty  (129 items)
+    model_correlation  (37 models)
+  [swebench_multilingual / multi_swebench_c]  swebench_multilingual_data/processed/response_matrix_multi_swebench_c.csv
+    heatmap  (37 x 128)
+    model_accuracy  (37 models)
+    item_difficulty  (128 items)
+    model_correlation  (37 models)
+  [swebench_multilingual / multi_swebench_go]  swebench_multilingual_data/processed/response_matrix_multi_swebench_go.csv
+    heatmap  (36 x 428)
+    model_accuracy  (36 models)
+    item_difficulty  (428 items)
+    model_correlation  (36 models)
+  [swebench_multilingual / multi_swebench_java]  swebench_multilingual_data/processed/response_matrix_multi_swebench_java.csv
+    heatmap  (39 x 128)
+    model_accuracy  (39 models)
+    item_difficulty  (128 items)
+    model_correlation  (39 models)
+  [swebench_multilingual / multi_swebench_javascript]  swebench_multilingual_data/processed/response_matrix_multi_swebench_javascript.csv
+    heatmap  (37 x 356)
+    model_accuracy  (37 models)
+    item_difficulty  (356 items)
+    model_correlation  (37 models)
+  [swebench_multilingual / multi_swebench_python]  swebench_multilingual_data/processed/response_matrix_multi_swebench_python.csv
+    heatmap  (36 x 500)
+    model_accuracy  (36 models)
+    item_difficulty  (500 items)
+    model_correlation  (36 models)
+  [swebench_multilingual / multi_swebench_rust]  swebench_multilingual_data/processed/response_matrix_multi_swebench_rust.csv
+    heatmap  (36 x 239)
+    model_accuracy  (36 models)
+    item_difficulty  (239 items)
+    model_correlation  (36 models)
+  [swebench_multilingual / multi_swebench_typescript]  swebench_multilingual_data/processed/response_matrix_multi_swebench_typescript.csv
+    heatmap  (37 x 224)
+    model_accuracy  (37 models)
+    item_difficulty  (224 items)
+    model_correlation  (37 models)
+
+Done.
+BigCodeBench Response Matrix Builder
+============================================================
+
+============================================================
+  Full-Complete
+============================================================
+  Models:          153
+  Tasks:           1140
+  Matrix dims:     153 x 1140
+  Total cells:     174,420
+  Pass cells:      77,703 (44.5%)
+  Fail cells:      96,717 (55.5%)
+  Fill rate:       100.0%
+  Mean pass rate:  44.5%
+
+  Per-model pass rate:
+    Min:    7.9% (DeepSeek-R1-Distill-Qwen-1.5B)
+    Max:    62.4% (Gemini-Exp-1206)
+    Median: 46.3%
+    Std:    11.4%
+
+  Per-task solve rate:
+    Min:    0.0%
+    Max:    100.0%
+    Median: 45.4%
+    Std:    32.9%
+
+  Task difficulty distribution:
+    Unsolved (0%):   106
+    Hard (<10%):     274
+    Easy (>90%):     106
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/bigcodebench_data/processed/response_matrix.csv
+
+============================================================
+  Full-Instruct
+============================================================
+  Models:          126
+  Tasks:           1140
+  Matrix dims:     126 x 1140
+  Total cells:     143,640
+  Pass cells:      53,744 (37.4%)
+  Fail cells:      89,896 (62.6%)
+  Fill rate:       100.0%
+  Mean pass rate:  37.4%
+
+  Per-model pass rate:
+    Min:    7.0% (DeepSeek-R1-Distill-Qwen-1.5B)
+    Max:    51.1% (GPT-4o-2024-05-13)
+    Median: 38.1%
+    Std:    9.1%
+
+  Per-task solve rate:
+    Min:    0.0%
+    Max:    100.0%
+    Median: 32.5%
+    Std:    33.6%
+
+  Task difficulty distribution:
+    Unsolved (0%):   211
+    Hard (<10%):     400
+    Easy (>90%):     81
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/bigcodebench_data/processed/response_matrix_instruct.csv
+
+============================================================
+  Hard-Complete
+============================================================
+  Models:          199
+  Tasks:           148
+  Matrix dims:     199 x 148
+  Total cells:     29,452
+  Pass cells:      6,140 (20.8%)
+  Fail cells:      23,312 (79.2%)
+  Fill rate:       100.0%
+  Mean pass rate:  20.8%
+
+  Per-model pass rate:
+    Min:    0.0% (DeepSeek-R1-Distill-Qwen-1.5B)
+    Max:    40.5% (Gemini-Exp-1206)
+    Median: 19.6%
+    Std:    10.6%
+
+  Per-task solve rate:
+    Min:    0.0%
+    Max:    64.3%
+    Median: 14.8%
+    Std:    19.8%
+
+  Task difficulty distribution:
+    Unsolved (0%):   26
+    Hard (<10%):     59
+    Easy (>90%):     0
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/bigcodebench_data/processed/response_matrix_hard_complete.csv
+
+============================================================
+  Hard-Instruct
+============================================================
+  Models:          173
+  Tasks:           148
+  Matrix dims:     173 x 148
+  Total cells:     25,604
+  Pass cells:      4,679 (18.3%)
+  Fail cells:      20,925 (81.7%)
+  Fill rate:       100.0%
+  Mean pass rate:  18.3%
+
+  Per-model pass rate:
+    Min:    0.0% (DeepSeek-R1-Distill-Qwen-1.5B)
+    Max:    33.1% (o3-mini-2025-01-31 (temperature=1, reasoning=medium))
+    Median: 18.9%
+    Std:    8.3%
+
+  Per-task solve rate:
+    Min:    0.0%
+    Max:    82.7%
+    Median: 6.1%
+    Std:    22.2%
+
+  Task difficulty distribution:
+    Unsolved (0%):   43
+    Hard (<10%):     81
+    Easy (>90%):     0
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/bigcodebench_data/processed/response_matrix_hard_instruct.csv
+
+============================================================
+  MODEL SUMMARY
+============================================================
+  Total unique models: 201
+  Models with complete scores: 153
+  Models with instruct scores: 126
+  Models with hard-complete scores: 199
+  Models with hard-instruct scores: 173
+
+  Top 10 models (by complete pass@1):
+    Gemini-Exp-1206                           complete=62.4%  instruct=47.0%
+    DeepSeek-V3                               complete=62.2%  instruct=50.0%
+    Llama-4-Maverick                          complete=61.4%  instruct=49.7%
+    GPT-4o-2024-05-13                         complete=61.1%  instruct=51.1%
+    Quasar-Alpha                              complete=60.6%  instruct=49.6%
+    Gemini-2.0-Flash-Exp                      complete=59.9%  instruct=45.9%
+    DeepSeek-Coder-V2-Instruct                complete=59.7%  instruct=48.2%
+    DeepSeek-V2-Chat (2024-06-28)             complete=59.4%  instruct=48.9%
+    GPT-4.1-Mini-2025-04-14                   complete=59.3%  instruct=48.9%
+    Gemini-Exp-1114                           complete=59.3%  instruct=49.2%
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/bigcodebench_data/processed/model_summary.csv
+
+============================================================
+  FINAL SUMMARY
+============================================================
+
+  PRIMARY response matrix (Full-Complete):
+    Dimensions: 153 models x 1140 tasks
+    Fill rate:  100.0%
+    Mean pass:  44.5%
+
+  All output files:
+    item_content.csv                               1271.3 KB
+    model_summary.csv                              32.9 KB
+    response_matrix.csv                            362.8 KB
+    response_matrix_hard_complete.csv              64.5 KB
+    response_matrix_hard_instruct.csv              56.6 KB
+    response_matrix_instruct.csv                   302.2 KB
+Found 4 response matrices across 1 benchmarks.
+
+  [bigcodebench]  bigcodebench_data/processed/response_matrix.csv
+    heatmap  (153 x 1140)
+    model_accuracy  (153 models)
+    item_difficulty  (1140 items)
+    model_correlation  (153 models)
+  [bigcodebench / hard_complete]  bigcodebench_data/processed/response_matrix_hard_complete.csv
+    heatmap  (199 x 148)
+    model_accuracy  (199 models)
+    item_difficulty  (148 items)
+    model_correlation  (199 models)
+  [bigcodebench / hard_instruct]  bigcodebench_data/processed/response_matrix_hard_instruct.csv
+    heatmap  (173 x 148)
+    model_accuracy  (173 models)
+    item_difficulty  (148 items)
+    model_correlation  (173 models)
+  [bigcodebench / instruct]  bigcodebench_data/processed/response_matrix_instruct.csv
+    heatmap  (126 x 1140)
+    model_accuracy  (126 models)
+    item_difficulty  (1140 items)
+    model_correlation  (126 models)
+
+Done.
+======================================================================
+Step 1: Discovering model sample directories
+======================================================================
+
+Found 31 HumanEval+ models:
+  - chatgpt
+  - code-llama-13b
+  - code-llama-34b
+  - code-llama-7b
+  - codegen-16b
+  - codegen-2b
+  - codegen-6b
+  - codegen2-16b
+  - codegen2-1b
+  - codegen2-3b
+  - codegen2-7b
+  - codet5p-16b
+  - codet5p-2b
+  - codet5p-6b
+  - gpt-4
+  - gpt-4-1106-preview
+  - gpt-j
+  - gptneo-2b
+  - incoder-1b
+  - incoder-6b
+  - mistral-7b
+  - phind-code-llama-34b-v2
+  - polycoder
+  - santacoder
+  - stablelm-7b
+  - starcoder
+  - starcoderbase-1b
+  - starcoderbase-3b
+  - starcoderbase-7b
+  - vicuna-13b
+  - vicuna-7b
+
+Found 22 MBPP+ models:
+  - code-llama-13b
+  - code-llama-34b
+  - code-llama-7b
+  - codegen-16b
+  - codegen-2b
+  - codegen-6b
+  - codet5p-16b
+  - codet5p-2b
+  - codet5p-6b
+  - deepseek-coder-1.3b-base
+  - deepseek-coder-1.3b-instruct
+  - deepseek-coder-33b-instruct
+  - deepseek-coder-6.7b-base
+  - deepseek-coder-6.7b-instruct
+  - gpt-3.5-turbo
+  - gpt-4-1106-preview
+  - mistral-7b
+  - starcoder
+  - wizardcoder-15b
+  - wizardcoder-34b
+  - wizardcoder-7b
+  - zephyr-7b
+
+======================================================================
+Step 2: Converting samples and running evaluations
+======================================================================
+
+[SKIP] Skipping evaluation, loading existing results...
+
+======================================================================
+Step 3: Building response matrices
+======================================================================
+
+  humaneval_base: 31 models x 164 tasks, overall pass rate: 29.2%
+  Saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/evalplus_data/processed/response_matrix_humaneval_base.csv
+
+  humaneval_plus: 31 models x 164 tasks, overall pass rate: 25.6%
+  Saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/evalplus_data/processed/response_matrix_humaneval_plus.csv
+
+  mbpp_base: 22 models x 378 tasks, overall pass rate: 60.9%
+  Saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/evalplus_data/processed/response_matrix_mbpp_base.csv
+
+  mbpp_plus: 22 models x 378 tasks, overall pass rate: 51.4%
+  Saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/evalplus_data/processed/response_matrix_mbpp_plus.csv
+
+======================================================================
+Step 4: Building combined response matrix
+======================================================================
+
+  Combined (HumanEval+) matrix: (31, 164)
+  Saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/evalplus_data/processed/response_matrix.csv
+
+======================================================================
+Step 5: Building model summary
+======================================================================
+
+  Model summary: 166 models
+  Saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/evalplus_data/processed/model_summary.csv
+
+======================================================================
+Summary Statistics
+======================================================================
+
+  humaneval_plus:
+    Models evaluated: 31
+    Pass rate range: 2.4% - 80.5%
+    Mean pass rate: 25.6%
+    Median pass rate: 21.3%
+
+  humaneval_base:
+    Models evaluated: 31
+    Pass rate range: 2.4% - 88.4%
+    Mean pass rate: 29.2%
+    Median pass rate: 24.4%
+
+  mbpp_plus:
+    Models evaluated: 22
+    Pass rate range: 35.7% - 73.5%
+    Mean pass rate: 51.4%
+    Median pass rate: 48.1%
+
+  mbpp_base:
+    Models evaluated: 22
+    Pass rate range: 42.1% - 86.0%
+    Mean pass rate: 60.9%
+    Median pass rate: 57.3%
+
+  Leaderboard (HumanEval+): 125 models
+    Range: 1.8% - 89.0%
+    Mean: 49.4%, Median: 51.8%
+
+======================================================================
+Done!
+======================================================================
+Found 5 response matrices across 1 benchmarks.
+
+  [evalplus]  evalplus_data/processed/response_matrix.csv
+    heatmap  (31 x 164)
+    model_accuracy  (31 models)
+    item_difficulty  (164 items)
+    model_correlation  (31 models)
+  [evalplus / humaneval_base]  evalplus_data/processed/response_matrix_humaneval_base.csv
+    heatmap  (31 x 164)
+    model_accuracy  (31 models)
+    item_difficulty  (164 items)
+    model_correlation  (31 models)
+  [evalplus / humaneval_plus]  evalplus_data/processed/response_matrix_humaneval_plus.csv
+    heatmap  (31 x 164)
+    model_accuracy  (31 models)
+    item_difficulty  (164 items)
+    model_correlation  (31 models)
+  [evalplus / mbpp_base]  evalplus_data/processed/response_matrix_mbpp_base.csv
+    heatmap  (22 x 378)
+    model_accuracy  (22 models)
+    item_difficulty  (378 items)
+    model_correlation  (22 models)
+  [evalplus / mbpp_plus]  evalplus_data/processed/response_matrix_mbpp_plus.csv
+    heatmap  (22 x 378)
+    model_accuracy  (22 models)
+    item_difficulty  (378 items)
+    model_correlation  (22 models)
+
+Done.
+MMLU-Pro Response Matrix Builder
+================================
+
+======================================================================
+PART 1: Building per-question response matrix from eval_results/
+======================================================================
+Found 48 model output zip files
+
+  [ 1/48] Processing DeepSeek-Coder-V2... 10394 questions, 6586 correct (63.4%)
+  [ 2/48] Processing Llama-2-13b-hf... 12032 questions, 2830 correct (23.5%)
+  [ 3/48] Processing Llama-2-70b-hf... 12032 questions, 4366 correct (36.3%)
+  [ 4/48] Processing Llama-2-7b-hf... 12032 questions, 2207 correct (18.3%)
+  [ 5/48] Processing Meta-Llama-3-70B-Instruct... 12187 questions, 6774 correct (55.6%)
+  [ 6/48] Processing Meta-Llama-3-70B... 12032 questions, 6258 correct (52.0%)
+  [ 7/48] Processing Meta-Llama-3-8B-Instruct... 12032 questions, 4827 correct (40.1%)
+  [ 8/48] Processing Meta-Llama-3-8B... 12032 questions, 4112 correct (34.2%)
+  [ 9/48] Processing Meta-Llama-3_1-70B-Instruct... 12032 questions, 7559 correct (62.8%)
+  [10/48] Processing Meta-Llama-3_1-70B... 12032 questions, 6313 correct (52.5%)
+  [11/48] Processing Meta-Llama-3_1-8B-Instruct... 12032 questions, 5317 correct (44.2%)
+  [12/48] Processing Meta-Llama-3_1-8B... 12032 questions, 4391 correct (36.5%)
+  [13/48] Processing Mistral-7B-Instruct-v0.1... 12032 questions, 2906 correct (24.2%)
+  [14/48] Processing Mistral-7B-Instruct-v0.2... 12032 questions, 3460 correct (28.8%)
+  [15/48] Processing Mistral-7B-v0.1... 12032 questions, 3582 correct (29.8%)
+  [16/48] Processing Mistral-7B-v0.2-hf... 12032 questions, 3510 correct (29.2%)
+  [17/48] Processing Mixtral-8x7B-Instruct-v0.1... 12032 questions, 5040 correct (41.9%)
+  [18/48] Processing Mixtral-8x7B-v0.1... 12032 questions, 4798 correct (39.9%)
+  [19/48] Processing Phi-3-mini-4k-instruct... 12032 questions, 4991 correct (41.5%)
+  [20/48] Processing Qwen1.5-110B... 12032 questions, 5920 correct (49.2%)
+  [21/48] Processing Qwen1.5-14B-Chat... 12032 questions, 4358 correct (36.2%)
+  [22/48] Processing Qwen1.5-72B-Chat... 12032 questions, 5673 correct (47.1%)
+  [23/48] Processing Qwen1.5-7B-Chat... 12032 questions, 3181 correct (26.4%)
+  [24/48] Processing Yi-34B... 12032 questions, 5063 correct (42.1%)
+  [25/48] Processing Yi-6B... 12032 questions, 3004 correct (25.0%)
+  [26/48] Processing Yi-6b-Chat... 12032 questions, 3225 correct (26.8%)
+  [27/48] Processing arx_0314... 12005 questions, 9960 correct (83.0%)
+  [28/48] Processing arx_3... 12031 questions, 9413 correct (78.2%)
+  [29/48] Processing c4ai-command-r-v01... 12032 questions, 4403 correct (36.6%)
+  [30/48] Processing claude-3-5-haiku-20241022... 12032 questions, 7474 correct (62.1%)
+  [31/48] Processing claude-3-5-sonnet-20241022... 12032 questions, 9342 correct (77.6%)
+  [32/48] Processing claude-3.5-sonnet... 12030 questions, 9157 correct (76.1%)
+  [33/48] Processing deepseek-chat-v2_5... 12032 questions, 7921 correct (65.8%)
+  [34/48] Processing deepseek... 11997 questions, 6296 correct (52.5%)
+  [35/48] Processing flash... 12032 questions, 7114 correct (59.1%)
+  [36/48] Processing gemini-1.5-flash-002... 12012 questions, 7699 correct (64.1%)
+  [37/48] Processing gemini-1.5-pro-002... 12020 questions, 8444 correct (70.2%)
+  [38/48] Processing gemini-3.1-pro... 963 questions, 841 correct (87.3%)
+  [39/48] Processing gemma-7b... 12032 questions, 3893 correct (32.4%)
+  [40/48] Processing gpt-4o-2024-08-06... 12032 questions, 8985 correct (74.7%)
+  [41/48] Processing gpt-4o-mini... 12032 questions, 7591 correct (63.1%)
+  [42/48] Processing gpt4o(2024-05-13)... 12032 questions, 8671 correct (72.1%)
+  [43/48] Processing iask_pro... 11939 questions, 9693 correct (81.2%)
+  [44/48] Processing jamba-1.5-large... 12032 questions, 5951 correct (49.5%)
+  [45/48] Processing mathstral-7B... 12032 questions, 5053 correct (42.0%)
+  [46/48] Processing opus... 12032 questions, 8237 correct (68.5%)
+  [47/48] Processing sonnet-3.5... 12032 questions, 8764 correct (72.8%)
+  [48/48] Processing sonnet... 12031 questions, 6631 correct (55.1%)
+
+  Building matrix: 12257 questions x 48 models
+
+  Per-model accuracy range: 0.183 - 0.873
+  Mean accuracy: 0.507
+  Questions solved by all models: 218
+  Questions solved by no models: 217
+
+======================================================================
+PART 2: Building per-category matrix from leaderboard_results.csv
+======================================================================
+  Loaded 249 models from leaderboard
+  Category matrix shape: (14, 247)
+  Models: 247
+  Categories: ['Biology', 'Business', 'Chemistry', 'Computer Science', 'Economics', 'Engineering', 'Health', 'History', 'Law', 'Math', 'Philosophy', 'Physics', 'Psychology', 'Other']
+
+  Top 10 models by Overall accuracy:
+    Gemini-3.1-Pro                           0.9116
+    Gemini-3-Pro(11/25)                      0.9010
+    GPT-o1                                   0.8930
+    Claude-4.6-Opus(Thinking)                0.8910
+    Gemini-3-Flash(12/25)                    0.8860
+    Qwen3.5-397B-A17B                        0.8780
+    Seed2.0-Lite                             0.8770
+    Claude-4.5-Sonnet(Thinking)              0.8740
+    GPT-5.2                                  0.8740
+    Claude-4-Opus-Thinking                   0.8730
+
+======================================================================
+PART 3: Building model summary
+======================================================================
+  Processing per-question models...
+  Processing leaderboard models...
+  Processing Open LLM Leaderboard models...
+
+  Total model entries in summary: 4871
+  By source:
+source
+open_llm_leaderboard    4576
+tiger_leaderboard        247
+github_eval_results       48
+
+======================================================================
+SAVING OUTPUTS
+======================================================================
+  Saved per-question response matrix: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mmlupro_data/processed/response_matrix.csv
+    Shape: (12257, 48) (12257 questions x 48 models)
+  Saved compressed: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mmlupro_data/processed/response_matrix.csv.gz
+  Saved question metadata: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mmlupro_data/processed/question_metadata.csv
+    Shape: (12257, 4)
+  Saved per-category response matrix: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mmlupro_data/processed/response_matrix_category.csv
+    Shape: (14, 247) (14 categories x 247 models)
+  Saved model summary: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mmlupro_data/processed/model_summary.csv
+    Total entries: 4871
+
+======================================================================
+FINAL REPORT
+======================================================================
+
+  Per-Question Response Matrix:
+    Questions: 12257
+    Models: 48
+    Density: 0.959
+    Overall accuracy (mean across models): 0.5065
+    Model accuracy range: 0.1834 - 0.8733
+    Question difficulty range: 0.0000 - 1.0000
+
+    Per-category accuracy (averaged across 48 models):
+      biology             : 0.6777 (725 questions)
+      business            : 0.5204 (798 questions)
+      chemistry           : 0.4226 (1148 questions)
+      computer science    : 0.5197 (416 questions)
+      economics           : 0.6053 (855 questions)
+      engineering         : 0.3753 (1031 questions)
+      health              : 0.5423 (826 questions)
+      history             : 0.5040 (387 questions)
+      law                 : 0.3646 (1115 questions)
+      math                : 0.4649 (1365 questions)
+      other               : 0.5506 (956 questions)
+      philosophy          : 0.5038 (511 questions)
+      physics             : 0.4680 (1318 questions)
+      psychology          : 0.6433 (806 questions)
+
+  Per-Category Leaderboard Matrix:
+    Categories: 14
+    Models: 247
+    Density: 0.562
+
+  Model Summary:
+    Total entries: 4871
+    github_eval_results      :    48 models, accuracy range: 0.1834 - 0.8733
+    tiger_leaderboard        :   247 models, accuracy range: 0.1085 - 0.9116
+    open_llm_leaderboard     :  4576 models, accuracy range: 0.1000 - 0.7303
+
+Done!

@@ -343,6 +343,15 @@ def main():
     majority_df.to_csv(out_majority)
     print(f"  Saved: {out_majority} ({majority_df.shape[0]} x {majority_df.shape[1]})")
 
+    # Save item_content.csv — items are row IDs (MTurk HIT IDs); no text content available
+    item_content_df = pd.DataFrame({
+        "item_id": item_ids,
+        "content": item_ids,
+    })
+    item_content_path = PROCESSED_DIR / "item_content.csv"
+    item_content_df.to_csv(item_content_path, index=False)
+    print(f"  Saved: {item_content_path} ({len(item_content_df)} items)")
+
     out_averaged = PROCESSED_DIR / "response_matrix_averaged.csv"
     averaged_df.to_csv(out_averaged)
     print(f"  Saved: {out_averaged}")

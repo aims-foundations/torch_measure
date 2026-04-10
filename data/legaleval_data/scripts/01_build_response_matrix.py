@@ -630,6 +630,8 @@ def main():
     all_matrices = []
     all_metadata = []
     all_model_summaries = []
+    lb_content_rows = []
+    le_content_rows = []
 
     # ── LawBench ─────────────────────────────────────────────────────
     print("\n[1/2] LawBench (Chinese Legal, EMNLP 2024)")
@@ -638,6 +640,40 @@ def main():
     if lb_matrix is not None:
         lb_matrix.to_csv(PROCESSED_DIR / "lawbench_response_matrix.csv")
         print(f"  Saved: lawbench_response_matrix.csv")
+
+        # Extract LawBench item content from the reference model's prediction files
+        lb_content_rows = []
+        lb_pred_dir = LAWBENCH_DIR / "predictions" / "zero_shot"
+        lb_ref_model = None
+        for md in sorted(d for d in lb_pred_dir.iterdir() if d.is_dir() and not d.name.startswith(".")):
+            if len(sorted(md.glob("*.json"))) >= 15:
+                lb_ref_model = md
+                break
+        if lb_ref_model is None:
+            lb_ref_model = sorted(d for d in lb_pred_dir.iterdir() if d.is_dir() and not d.name.startswith("."))[0]
+        for tf in sorted(lb_ref_model.glob("*.json")):
+            task_id = tf.stem
+            if task_id not in LAWBENCH_TASKS:
+                continue
+            try:
+                with open(tf) as f_lb:
+                    data = json.load(f_lb)
+            except Exception:
+                continue
+            for idx_str in sorted(data.keys(), key=lambda x: int(x)):
+                idx = int(idx_str)
+                entry = data[idx_str]
+                item_id = f"lawbench_{task_id}_item{idx}"
+                if item_id in lb_matrix.columns:
+                    prompt_data = entry.get("origin_prompt", [])
+                    if isinstance(prompt_data, list) and len(prompt_data) > 0:
+                        content = prompt_data[-1].get("prompt", "")
+                    elif isinstance(prompt_data, str):
+                        content = prompt_data
+                    else:
+                        content = ""
+                    lb_content_rows.append({"item_id": item_id, "content": content})
+
         all_matrices.append(lb_matrix)
         all_metadata.append(lb_meta)
 
@@ -660,6 +696,29 @@ def main():
     if le_matrix is not None:
         le_matrix.to_csv(PROCESSED_DIR / "lexeval_response_matrix.csv")
         print(f"  Saved: lexeval_response_matrix.csv")
+
+        # Extract LexEval item content from the reference model's prediction files
+        le_content_rows = []
+        le_pred_dir = LEXEVAL_DIR / "model_output" / "zero_shot"
+        le_ref_model = le_pred_dir / "gpt4"
+        if not le_ref_model.exists():
+            le_ref_model = sorted(d for d in le_pred_dir.iterdir() if d.is_dir() and not d.name.startswith("."))[0]
+        for tf in sorted(le_ref_model.glob("*.jsonl")):
+            parts = tf.stem.split("_")
+            task_id = f"{parts[-2]}_{parts[-1]}"
+            if task_id not in LEXEVAL_TASKS:
+                continue
+            try:
+                with open(tf) as f_le:
+                    for idx, line in enumerate(f_le):
+                        entry = json.loads(line.strip())
+                        item_id = f"lexeval_{task_id}_item{idx}"
+                        if item_id in le_matrix.columns:
+                            content = entry.get("input", "")
+                            le_content_rows.append({"item_id": item_id, "content": content})
+            except Exception:
+                continue
+
         all_matrices.append(le_matrix)
         all_metadata.append(le_meta)
 
@@ -685,6 +744,13 @@ def main():
         combined.to_csv(PROCESSED_DIR / "response_matrix.csv")
         print(f"  Combined matrix: {combined.shape[0]} models x {combined.shape[1]} items")
         print(f"  Saved: response_matrix.csv")
+
+        # Item content
+        all_content_rows = lb_content_rows + le_content_rows
+        if all_content_rows:
+            content_df = pd.DataFrame(all_content_rows)
+            content_df.to_csv(PROCESSED_DIR / "item_content.csv", index=False)
+            print(f"  Saved: item_content.csv ({len(content_df)} items)")
 
         # Task metadata
         meta_combined = pd.concat(all_metadata, ignore_index=True)

@@ -396,6 +396,23 @@ def build_response_matrix(
         writer.writerows(matrix_rows)
 
     print(f"\nSaved response matrix: {out_path}")
+
+    # Save item_content.csv — use task intent from BrowserGym configs as content
+    item_content_rows = []
+    for config in all_configs:
+        intent = config.get("intent", "")
+        content = intent if intent else f"VisualWebArena task {config['task_id']}"
+        item_content_rows.append({
+            "item_id": config["task_id"],
+            "content": content,
+        })
+    item_content_path = PROCESSED_DIR / "item_content.csv"
+    with open(item_content_path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["item_id", "content"])
+        writer.writeheader()
+        writer.writerows(item_content_rows)
+    print(f"Saved item content: {item_content_path} ({len(item_content_rows)} tasks)")
+
     return matrix_rows, columns
 
 

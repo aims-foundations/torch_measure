@@ -264,6 +264,14 @@ def save_outputs(response_df, task_meta_df, model_summary_df):
     print(f"  Saved response_matrix.csv: {rmat_path}")
     print(f"    Shape: {response_df.shape}")
 
+    # Save item content
+    items = pd.DataFrame({
+        "item_id": response_df.columns,
+        "content": response_df.columns,
+    })
+    items.to_csv(PROCESSED_DIR / "item_content.csv", index=False)
+    print(f"  Saved item_content.csv ({len(items)} items)")
+
     # Task metadata
     tmeta_path = PROCESSED_DIR / "task_metadata.csv"
     task_meta_df.to_csv(tmeta_path, index=False)

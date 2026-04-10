@@ -153,15 +153,19 @@ def score_judge_on_pair(pair: dict) -> float | None:
     label = pair["label"]
     judgments = pair.get("judgments", [])
 
+    # Filter out None entries in judgments list
+    judgments = [j for j in judgments if j is not None]
     if not judgments:
         return None
 
     if len(judgments) >= 2:
+        j0 = judgments[0].get("judgment") or {}
+        j1 = judgments[1].get("judgment") or {}
         decision_1 = extract_decision(
-            judgments[0].get("judgment", {}).get("response", "")
+            j0.get("response", "") if isinstance(j0, dict) else ""
         )
         decision_2_raw = extract_decision(
-            judgments[1].get("judgment", {}).get("response", "")
+            j1.get("response", "") if isinstance(j1, dict) else ""
         )
         decision_2 = flip_decision(decision_2_raw) if decision_2_raw else None
 
@@ -184,8 +188,9 @@ def score_judge_on_pair(pair: dict) -> float | None:
         else:
             return None
     else:
+        j0 = judgments[0].get("judgment") or {}
         decision = extract_decision(
-            judgments[0].get("judgment", {}).get("response", "")
+            j0.get("response", "") if isinstance(j0, dict) else ""
         )
         if decision is None:
             return None
@@ -256,6 +261,7 @@ def download_item_metadata():
                     "category": SOURCE_TO_CATEGORY.get(source, "unknown"),
                     "label": item["label"],
                     "response_model": item["response_model"],
+                    "question": item.get("question", ""),
                 }
             )
         meta_df = pd.DataFrame(rows)
@@ -480,6 +486,15 @@ def main():
     merged_path = os.path.join(PROCESSED_DIR, "item_metadata.csv")
     merged.to_csv(merged_path, index=False)
     print(f"  Item metadata saved: {merged_path}")
+
+    # Save item_content.csv
+    if item_meta_df is not None and "question" in item_meta_df.columns:
+        content_df = item_meta_df[["pair_id", "question"]].rename(
+            columns={"pair_id": "item_id", "question": "content"}
+        )
+        content_path = os.path.join(PROCESSED_DIR, "item_content.csv")
+        content_df.to_csv(content_path, index=False)
+        print(f"  Saved item_content.csv ({len(content_df)} items)")
 
     # Category breakdown
     print(f"\n  Per-category accuracy (across all judges):")
