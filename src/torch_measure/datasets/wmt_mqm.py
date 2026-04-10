@@ -50,8 +50,8 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
 
     # --- 2020 ---
 
-    datasets["wmt_mqm/2020_en_de"] = DatasetInfo(
-        name="wmt_mqm/2020_en_de",
+    datasets["2020_en_de"] = DatasetInfo(
+        name="2020_en_de",
         family="wmt_mqm",
         description="WMT 2020 MQM en-de: 10 systems x 1418 segments",
         response_type="continuous",
@@ -59,15 +59,15 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
         n_items=1418,
         subject_entity="system",
         item_entity="segment",
-        filename="wmt_mqm/2020_en_de.pt",
+        filename="2020_en_de.pt",
         citation=_WMT_MQM_CITATION,
         url=_WMT_MQM_URL,
         license="CC-BY-4.0",
         tags=["mt", "mqm", "en-de", "2020", "human-eval"],
     )
 
-    datasets["wmt_mqm/2020_zh_en"] = DatasetInfo(
-        name="wmt_mqm/2020_zh_en",
+    datasets["2020_zh_en"] = DatasetInfo(
+        name="2020_zh_en",
         family="wmt_mqm",
         description="WMT 2020 MQM zh-en: 10 systems x 2000 segments",
         response_type="continuous",
@@ -75,7 +75,7 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
         n_items=2000,
         subject_entity="system",
         item_entity="segment",
-        filename="wmt_mqm/2020_zh_en.pt",
+        filename="2020_zh_en.pt",
         citation=_WMT_MQM_CITATION,
         url=_WMT_MQM_URL,
         license="CC-BY-4.0",
@@ -84,8 +84,8 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
 
     # --- 2021 ---
 
-    datasets["wmt_mqm/2021_en_de"] = DatasetInfo(
-        name="wmt_mqm/2021_en_de",
+    datasets["2021_en_de"] = DatasetInfo(
+        name="2021_en_de",
         family="wmt_mqm",
         description="WMT 2021 MQM en-de: 17 systems x 1050 segments",
         response_type="continuous",
@@ -93,15 +93,15 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
         n_items=1050,
         subject_entity="system",
         item_entity="segment",
-        filename="wmt_mqm/2021_en_de.pt",
+        filename="2021_en_de.pt",
         citation=_WMT_MQM_CITATION,
         url=_WMT_MQM_URL,
         license="CC-BY-4.0",
         tags=["mt", "mqm", "en-de", "2021", "human-eval"],
     )
 
-    datasets["wmt_mqm/2021_en_ru"] = DatasetInfo(
-        name="wmt_mqm/2021_en_ru",
+    datasets["2021_en_ru"] = DatasetInfo(
+        name="2021_en_ru",
         family="wmt_mqm",
         description="WMT 2021 MQM en-ru: 16 systems x 1031 segments",
         response_type="continuous",
@@ -109,15 +109,15 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
         n_items=1031,
         subject_entity="system",
         item_entity="segment",
-        filename="wmt_mqm/2021_en_ru.pt",
+        filename="2021_en_ru.pt",
         citation=_WMT_MQM_CITATION,
         url=_WMT_MQM_URL,
         license="CC-BY-4.0",
         tags=["mt", "mqm", "en-ru", "2021", "human-eval"],
     )
 
-    datasets["wmt_mqm/2021_zh_en"] = DatasetInfo(
-        name="wmt_mqm/2021_zh_en",
+    datasets["2021_zh_en"] = DatasetInfo(
+        name="2021_zh_en",
         family="wmt_mqm",
         description="WMT 2021 MQM zh-en: 16 systems x 1173 segments",
         response_type="continuous",
@@ -125,7 +125,7 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
         n_items=1173,
         subject_entity="system",
         item_entity="segment",
-        filename="wmt_mqm/2021_zh_en.pt",
+        filename="2021_zh_en.pt",
         citation=_WMT_MQM_CITATION,
         url=_WMT_MQM_URL,
         license="CC-BY-4.0",
@@ -134,8 +134,8 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
 
     # --- 2022 ---
 
-    datasets["wmt_mqm/2022_en_de"] = DatasetInfo(
-        name="wmt_mqm/2022_en_de",
+    datasets["2022_en_de"] = DatasetInfo(
+        name="2022_en_de",
         family="wmt_mqm",
         description="WMT 2022 MQM en-de: 15 systems x 1215 segments",
         response_type="continuous",
@@ -143,15 +143,15 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
         n_items=1215,
         subject_entity="system",
         item_entity="segment",
-        filename="wmt_mqm/2022_en_de.pt",
+        filename="2022_en_de.pt",
         citation=_WMT_MQM_CITATION,
         url=_WMT_MQM_URL,
         license="CC-BY-4.0",
         tags=["mt", "mqm", "en-de", "2022", "human-eval"],
     )
 
-    datasets["wmt_mqm/2022_en_ru"] = DatasetInfo(
-        name="wmt_mqm/2022_en_ru",
+    datasets["2022_en_ru"] = DatasetInfo(
+        name="2022_en_ru",
         family="wmt_mqm",
         description="WMT 2022 MQM en-ru: 15 systems x 1215 segments",
         response_type="continuous",
@@ -159,15 +159,15 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
         n_items=1215,
         subject_entity="system",
         item_entity="segment",
-        filename="wmt_mqm/2022_en_ru.pt",
+        filename="2022_en_ru.pt",
         citation=_WMT_MQM_CITATION,
         url=_WMT_MQM_URL,
         license="CC-BY-4.0",
         tags=["mt", "mqm", "en-ru", "2022", "human-eval"],
     )
 
-    datasets["wmt_mqm/2022_zh_en"] = DatasetInfo(
-        name="wmt_mqm/2022_zh_en",
+    datasets["2022_zh_en"] = DatasetInfo(
+        name="2022_zh_en",
         family="wmt_mqm",
         description="WMT 2022 MQM zh-en: 15 systems x 1871 segments",
         response_type="continuous",
@@ -175,7 +175,7 @@ def _register_wmt_mqm_datasets() -> dict[str, DatasetInfo]:
         n_items=1871,
         subject_entity="system",
         item_entity="segment",
-        filename="wmt_mqm/2022_zh_en.pt",
+        filename="2022_zh_en.pt",
         citation=_WMT_MQM_CITATION,
         url=_WMT_MQM_URL,
         license="CC-BY-4.0",

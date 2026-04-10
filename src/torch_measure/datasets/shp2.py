@@ -53,8 +53,8 @@ def _register_shp2_datasets() -> dict[str, DatasetInfo]:
     """
     datasets: dict[str, DatasetInfo] = {}
 
-    datasets["shp2/domain_stats"] = DatasetInfo(
-        name="shp2/domain_stats",
+    datasets["domain_stats"] = DatasetInfo(
+        name="domain_stats",
         family="shp2",
         description=(
             "SHP-2 — per-domain preference statistics from 4.3M Reddit/SE pairs "
@@ -65,15 +65,15 @@ def _register_shp2_datasets() -> dict[str, DatasetInfo]:
         n_items=5,
         subject_entity="domain",
         item_entity="metric",
-        filename="shp2/domain_stats.pt",
+        filename="domain_stats.pt",
         citation=_SHP2_CITATION,
         url=_SHP2_URL,
         license="ODC-BY",
         tags=["preference", "pairwise", "reddit", "stackexchange", "human", "summary"],
     )
 
-    datasets["shp2/sampled_pairs"] = DatasetInfo(
-        name="shp2/sampled_pairs",
+    datasets["sampled_pairs"] = DatasetInfo(
+        name="sampled_pairs",
         family="shp2",
         description=(
             "SHP-2 — 100K sampled preference pairs, binary preferred label "
@@ -84,7 +84,7 @@ def _register_shp2_datasets() -> dict[str, DatasetInfo]:
         n_items=100000,
         subject_entity="response_position",
         item_entity="pair",
-        filename="shp2/sampled_pairs.pt",
+        filename="sampled_pairs.pt",
         citation=_SHP2_CITATION,
         url=_SHP2_URL,
         license="ODC-BY",

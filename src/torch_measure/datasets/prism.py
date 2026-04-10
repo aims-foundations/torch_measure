@@ -64,8 +64,8 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
 
     # --- Continuous scores (1-100 normalized to 0-1) ---
 
-    datasets["prism/scores"] = DatasetInfo(
-        name="prism/scores",
+    datasets["scores"] = DatasetInfo(
+        name="scores",
         family="prism",
         description=(
             "PRISM -- human cardinal ratings of LLM responses, "
@@ -77,7 +77,7 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_UTTERANCES,
         subject_entity="human",
         item_entity="utterance",
-        filename="prism/scores.pt",
+        filename="scores.pt",
         citation=_PRISM_CITATION,
         url=_PRISM_URL,
         license="CC-BY-NC-4.0",
@@ -93,8 +93,8 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
 
     # --- Binary chosen indicator ---
 
-    datasets["prism/chosen"] = DatasetInfo(
-        name="prism/chosen",
+    datasets["chosen"] = DatasetInfo(
+        name="chosen",
         family="prism",
         description=(
             "PRISM -- binary chosen indicator for LLM responses "
@@ -105,7 +105,7 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_UTTERANCES,
         subject_entity="human",
         item_entity="utterance",
-        filename="prism/chosen.pt",
+        filename="chosen.pt",
         citation=_PRISM_CITATION,
         url=_PRISM_URL,
         license="CC-BY-NC-4.0",
@@ -121,8 +121,8 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
 
     # --- Crossed: utterances x participants (continuous) ---
 
-    datasets["prism/crossed_scores"] = DatasetInfo(
-        name="prism/crossed_scores",
+    datasets["crossed_scores"] = DatasetInfo(
+        name="crossed_scores",
         family="prism",
         description=(
             "PRISM -- utterances x participants continuous scores, "
@@ -133,7 +133,7 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_PARTICIPANTS,
         subject_entity="utterance",
         item_entity="human",
-        filename="prism/crossed_scores.pt",
+        filename="crossed_scores.pt",
         citation=_PRISM_CITATION,
         url=_PRISM_URL,
         license="CC-BY-NC-4.0",
@@ -149,8 +149,8 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
 
     # --- Crossed: utterances x participants (binary) ---
 
-    datasets["prism/crossed_chosen"] = DatasetInfo(
-        name="prism/crossed_chosen",
+    datasets["crossed_chosen"] = DatasetInfo(
+        name="crossed_chosen",
         family="prism",
         description=(
             "PRISM -- utterances x participants binary chosen, "
@@ -161,7 +161,7 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_PARTICIPANTS,
         subject_entity="utterance",
         item_entity="human",
-        filename="prism/crossed_chosen.pt",
+        filename="crossed_chosen.pt",
         citation=_PRISM_CITATION,
         url=_PRISM_URL,
         license="CC-BY-NC-4.0",

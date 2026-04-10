@@ -55,8 +55,8 @@ def _register_hh_rlhf_datasets() -> dict[str, DatasetInfo]:
     datasets: dict[str, DatasetInfo] = {}
 
     # --- Helpful subset ---
-    datasets["hh_rlhf/helpful"] = DatasetInfo(
-        name="hh_rlhf/helpful",
+    datasets["helpful"] = DatasetInfo(
+        name="helpful",
         family="hh_rlhf",
         description=(
             "Anthropic HH-RLHF helpful subset — human preference pairs "
@@ -68,7 +68,7 @@ def _register_hh_rlhf_datasets() -> dict[str, DatasetInfo]:
         n_comparisons=124503,
         subject_entity="response",
         item_entity="conversation_pair",
-        filename="hh_rlhf/helpful.pt",
+        filename="helpful.pt",
         citation=_HH_RLHF_CITATION,
         url=_HH_RLHF_URL,
         license="MIT",
@@ -76,8 +76,8 @@ def _register_hh_rlhf_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Harmless subset ---
-    datasets["hh_rlhf/harmless"] = DatasetInfo(
-        name="hh_rlhf/harmless",
+    datasets["harmless"] = DatasetInfo(
+        name="harmless",
         family="hh_rlhf",
         description=(
             "Anthropic HH-RLHF harmless subset — human preference pairs "
@@ -89,7 +89,7 @@ def _register_hh_rlhf_datasets() -> dict[str, DatasetInfo]:
         n_comparisons=44849,
         subject_entity="response",
         item_entity="conversation_pair",
-        filename="hh_rlhf/harmless.pt",
+        filename="harmless.pt",
         citation=_HH_RLHF_CITATION,
         url=_HH_RLHF_URL,
         license="MIT",

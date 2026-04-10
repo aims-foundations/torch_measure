@@ -106,8 +106,8 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
 
     # --- All pairs (GPT split) ---
 
-    d["judgebench/all"] = DatasetInfo(
-        name="judgebench/all",
+    d["all"] = DatasetInfo(
+        name="all",
         family="judgebench",
         description=(
             "JudgeBench all categories — LLM-as-judge evaluation on "
@@ -118,7 +118,7 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
         n_items=350,
         subject_entity="judge",
         item_entity="pair",
-        filename="judgebench/all.pt",
+        filename="all.pt",
         citation=_JB_CITATION,
         url=_JB_URL,
         license="MIT",
@@ -127,8 +127,8 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
 
     # --- Per-category splits ---
 
-    d["judgebench/knowledge"] = DatasetInfo(
-        name="judgebench/knowledge",
+    d["knowledge"] = DatasetInfo(
+        name="knowledge",
         family="judgebench",
         description=(
             "JudgeBench knowledge category — MMLU-Pro subjects "
@@ -139,15 +139,15 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
         n_items=143,
         subject_entity="judge",
         item_entity="pair",
-        filename="judgebench/knowledge.pt",
+        filename="knowledge.pt",
         citation=_JB_CITATION,
         url=_JB_URL,
         license="MIT",
         tags=["llm-as-judge", "preference", "knowledge"],
     )
 
-    d["judgebench/reasoning"] = DatasetInfo(
-        name="judgebench/reasoning",
+    d["reasoning"] = DatasetInfo(
+        name="reasoning",
         family="judgebench",
         description=(
             "JudgeBench reasoning category — LiveBench reasoning "
@@ -158,15 +158,15 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
         n_items=98,
         subject_entity="judge",
         item_entity="pair",
-        filename="judgebench/reasoning.pt",
+        filename="reasoning.pt",
         citation=_JB_CITATION,
         url=_JB_URL,
         license="MIT",
         tags=["llm-as-judge", "preference", "reasoning"],
     )
 
-    d["judgebench/math"] = DatasetInfo(
-        name="judgebench/math",
+    d["math"] = DatasetInfo(
+        name="math",
         family="judgebench",
         description=(
             "JudgeBench math category — LiveBench math + MMLU-Pro math "
@@ -177,15 +177,15 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
         n_items=67,
         subject_entity="judge",
         item_entity="pair",
-        filename="judgebench/math.pt",
+        filename="math.pt",
         citation=_JB_CITATION,
         url=_JB_URL,
         license="MIT",
         tags=["llm-as-judge", "preference", "math"],
     )
 
-    d["judgebench/coding"] = DatasetInfo(
-        name="judgebench/coding",
+    d["coding"] = DatasetInfo(
+        name="coding",
         family="judgebench",
         description=(
             "JudgeBench coding category — LiveCodeBench "
@@ -196,7 +196,7 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
         n_items=42,
         subject_entity="judge",
         item_entity="pair",
-        filename="judgebench/coding.pt",
+        filename="coding.pt",
         citation=_JB_CITATION,
         url=_JB_URL,
         license="MIT",

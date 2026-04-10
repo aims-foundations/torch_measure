@@ -14,7 +14,7 @@ class DatasetInfo:
     Parameters
     ----------
     name : str
-        Canonical name (e.g., ``"helm/mmlu"``). Used as the key in :func:`load`.
+        Canonical name (e.g., ``"swebench"``). Used as the key in :func:`load`.
     family : str
         Dataset family (e.g., ``"helm"``).
     description : str
@@ -32,7 +32,7 @@ class DatasetInfo:
     repo_id : str
         HuggingFace Hub repository ID.
     filename : str
-        Filename within the HF repo (e.g., ``"helm/mmlu.pt"``).
+        Filename within the HF repo (e.g., ``"swebench.pt"``).
     citation : str
         BibTeX citation string for the source data.
     url : str

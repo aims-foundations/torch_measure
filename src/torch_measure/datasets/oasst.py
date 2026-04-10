@@ -58,8 +58,8 @@ def _register_oasst_datasets() -> dict[str, DatasetInfo]:
     datasets: dict[str, DatasetInfo] = {}
 
     # --- All prompts with >= 2 ranked alternatives ---
-    datasets["oasst/ranked"] = DatasetInfo(
-        name="oasst/ranked",
+    datasets["ranked"] = DatasetInfo(
+        name="ranked",
         family="oasst",
         description=(
             "OASST1 -- human-ranked assistant responses, normalized rank scores, "
@@ -70,7 +70,7 @@ def _register_oasst_datasets() -> dict[str, DatasetInfo]:
         n_items=18922,
         subject_entity="rank_tier",
         item_entity="prompt",
-        filename="oasst/ranked.pt",
+        filename="ranked.pt",
         citation=_OASST_CITATION,
         url=_OASST_URL,
         license="Apache-2.0",
@@ -78,8 +78,8 @@ def _register_oasst_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Rich subset: prompts with >= 3 ranked alternatives ---
-    datasets["oasst/ranked_rich"] = DatasetInfo(
-        name="oasst/ranked_rich",
+    datasets["ranked_rich"] = DatasetInfo(
+        name="ranked_rich",
         family="oasst",
         description=(
             "OASST1 -- human-ranked assistant responses, normalized rank scores, "
@@ -90,7 +90,7 @@ def _register_oasst_datasets() -> dict[str, DatasetInfo]:
         n_items=12058,
         subject_entity="rank_tier",
         item_entity="prompt",
-        filename="oasst/ranked_rich.pt",
+        filename="ranked_rich.pt",
         citation=_OASST_CITATION,
         url=_OASST_URL,
         license="Apache-2.0",

@@ -51,8 +51,8 @@ def _register_vl_rewardbench_datasets() -> dict[str, DatasetInfo]:
     """
     d: dict[str, DatasetInfo] = {}
 
-    d["vl_rewardbench/all"] = DatasetInfo(
-        name="vl_rewardbench/all",
+    d["all"] = DatasetInfo(
+        name="all",
         family="vl_rewardbench",
         description=(
             "VL-RewardBench all categories — vision-language reward model "
@@ -63,15 +63,15 @@ def _register_vl_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=1247,
         subject_entity="judge",
         item_entity="pair",
-        filename="vl_rewardbench/all.pt",
+        filename="all.pt",
         citation=_VLR_CITATION,
         url=_VLR_URL,
         license="MIT",
         tags=["reward-model", "preference", "vision-language", "multimodal", "binary"],
     )
 
-    d["vl_rewardbench/general"] = DatasetInfo(
-        name="vl_rewardbench/general",
+    d["general"] = DatasetInfo(
+        name="general",
         family="vl_rewardbench",
         description=(
             "VL-RewardBench General category — general multimodal instruction "
@@ -82,15 +82,15 @@ def _register_vl_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=183,
         subject_entity="judge",
         item_entity="pair",
-        filename="vl_rewardbench/general.pt",
+        filename="general.pt",
         citation=_VLR_CITATION,
         url=_VLR_URL,
         license="MIT",
         tags=["reward-model", "preference", "vision-language", "general"],
     )
 
-    d["vl_rewardbench/hallucination"] = DatasetInfo(
-        name="vl_rewardbench/hallucination",
+    d["hallucination"] = DatasetInfo(
+        name="hallucination",
         family="vl_rewardbench",
         description=(
             "VL-RewardBench Hallucination category — visual hallucination "
@@ -101,15 +101,15 @@ def _register_vl_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=746,
         subject_entity="judge",
         item_entity="pair",
-        filename="vl_rewardbench/hallucination.pt",
+        filename="hallucination.pt",
         citation=_VLR_CITATION,
         url=_VLR_URL,
         license="MIT",
         tags=["reward-model", "preference", "vision-language", "hallucination"],
     )
 
-    d["vl_rewardbench/reasoning"] = DatasetInfo(
-        name="vl_rewardbench/reasoning",
+    d["reasoning"] = DatasetInfo(
+        name="reasoning",
         family="vl_rewardbench",
         description=(
             "VL-RewardBench Reasoning category — multimodal reasoning "
@@ -120,7 +120,7 @@ def _register_vl_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=318,
         subject_entity="judge",
         item_entity="pair",
-        filename="vl_rewardbench/reasoning.pt",
+        filename="reasoning.pt",
         citation=_VLR_CITATION,
         url=_VLR_URL,
         license="MIT",

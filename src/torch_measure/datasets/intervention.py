@@ -74,8 +74,8 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
 
     # ── Collab-CXR (Radiology) ────────────────────────────────────────────
 
-    d["intervention/collab_cxr_image_only"] = DatasetInfo(
-        name="intervention/collab_cxr_image_only",
+    d["collab_cxr_image_only"] = DatasetInfo(
+        name="collab_cxr_image_only",
         family="intervention",
         description="Collab-CXR: 326 radiologists x 324 CXR cases, image only (no AI)",
         response_type="continuous",
@@ -83,15 +83,15 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
         n_items=324,
         subject_entity="radiologist",
         item_entity="case",
-        filename="intervention/collab_cxr_image_only.pt",
+        filename="collab_cxr_image_only.pt",
         citation=_COLLAB_CXR_CITATION,
         url="https://osf.io/z7apq/",
         license="CC-BY-4.0",
         tags=["intervention", "radiology", "no-ai", "continuous"],
     )
 
-    d["intervention/collab_cxr_image_ai"] = DatasetInfo(
-        name="intervention/collab_cxr_image_ai",
+    d["collab_cxr_image_ai"] = DatasetInfo(
+        name="collab_cxr_image_ai",
         family="intervention",
         description="Collab-CXR: 326 radiologists x 324 CXR cases, with AI predictions",
         response_type="continuous",
@@ -99,15 +99,15 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
         n_items=324,
         subject_entity="radiologist",
         item_entity="case",
-        filename="intervention/collab_cxr_image_ai.pt",
+        filename="collab_cxr_image_ai.pt",
         citation=_COLLAB_CXR_CITATION,
         url="https://osf.io/z7apq/",
         license="CC-BY-4.0",
         tags=["intervention", "radiology", "with-ai", "continuous"],
     )
 
-    d["intervention/collab_cxr_accuracy_no_ai"] = DatasetInfo(
-        name="intervention/collab_cxr_accuracy_no_ai",
+    d["collab_cxr_accuracy_no_ai"] = DatasetInfo(
+        name="collab_cxr_accuracy_no_ai",
         family="intervention",
         description="Collab-CXR: binary accuracy, image only (no AI)",
         response_type="continuous",
@@ -115,15 +115,15 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
         n_items=324,
         subject_entity="radiologist",
         item_entity="case",
-        filename="intervention/collab_cxr_accuracy_no_ai.pt",
+        filename="collab_cxr_accuracy_no_ai.pt",
         citation=_COLLAB_CXR_CITATION,
         url="https://osf.io/z7apq/",
         license="CC-BY-4.0",
         tags=["intervention", "radiology", "no-ai", "accuracy"],
     )
 
-    d["intervention/collab_cxr_accuracy_with_ai"] = DatasetInfo(
-        name="intervention/collab_cxr_accuracy_with_ai",
+    d["collab_cxr_accuracy_with_ai"] = DatasetInfo(
+        name="collab_cxr_accuracy_with_ai",
         family="intervention",
         description="Collab-CXR: binary accuracy, with AI predictions",
         response_type="continuous",
@@ -131,7 +131,7 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
         n_items=324,
         subject_entity="radiologist",
         item_entity="case",
-        filename="intervention/collab_cxr_accuracy_with_ai.pt",
+        filename="collab_cxr_accuracy_with_ai.pt",
         citation=_COLLAB_CXR_CITATION,
         url="https://osf.io/z7apq/",
         license="CC-BY-4.0",
@@ -140,8 +140,8 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
 
     # ── METR Developer Productivity RCT ────────────────────────────────────
 
-    d["intervention/metr_dev_early_ai"] = DatasetInfo(
-        name="intervention/metr_dev_early_ai",
+    d["metr_dev_early_ai"] = DatasetInfo(
+        name="metr_dev_early_ai",
         family="intervention",
         description="METR Early-2025: 16 devs x 136 issues, AI-allowed (completion time in min)",
         response_type="continuous",
@@ -149,15 +149,15 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
         n_items=136,
         subject_entity="developer",
         item_entity="issue",
-        filename="intervention/metr_dev_early_ai.pt",
+        filename="metr_dev_early_ai.pt",
         citation=_METR_PRODUCTIVITY_CITATION,
         url="https://github.com/METR/Measuring-Early-2025-AI-on-Exp-OSS-Devs",
         license="MIT",
         tags=["intervention", "coding", "ai-allowed", "time"],
     )
 
-    d["intervention/metr_dev_early_no_ai"] = DatasetInfo(
-        name="intervention/metr_dev_early_no_ai",
+    d["metr_dev_early_no_ai"] = DatasetInfo(
+        name="metr_dev_early_no_ai",
         family="intervention",
         description="METR Early-2025: 16 devs x 110 issues, AI-disallowed (completion time in min)",
         response_type="continuous",
@@ -165,15 +165,15 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
         n_items=110,
         subject_entity="developer",
         item_entity="issue",
-        filename="intervention/metr_dev_early_no_ai.pt",
+        filename="metr_dev_early_no_ai.pt",
         citation=_METR_PRODUCTIVITY_CITATION,
         url="https://github.com/METR/Measuring-Early-2025-AI-on-Exp-OSS-Devs",
         license="MIT",
         tags=["intervention", "coding", "ai-disallowed", "time"],
     )
 
-    d["intervention/metr_dev_late_ai"] = DatasetInfo(
-        name="intervention/metr_dev_late_ai",
+    d["metr_dev_late_ai"] = DatasetInfo(
+        name="metr_dev_late_ai",
         family="intervention",
         description="METR Late-2025: 52 devs x 500 issues, AI-allowed (completion time in min)",
         response_type="continuous",
@@ -181,15 +181,15 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
         n_items=500,
         subject_entity="developer",
         item_entity="issue",
-        filename="intervention/metr_dev_late_ai.pt",
+        filename="metr_dev_late_ai.pt",
         citation=_METR_PRODUCTIVITY_CITATION,
         url="https://github.com/METR/Measuring-Late-2025-AI-on-OSS-Devs",
         license="MIT",
         tags=["intervention", "coding", "ai-allowed", "time"],
     )
 
-    d["intervention/metr_dev_late_no_ai"] = DatasetInfo(
-        name="intervention/metr_dev_late_no_ai",
+    d["metr_dev_late_no_ai"] = DatasetInfo(
+        name="metr_dev_late_no_ai",
         family="intervention",
         description="METR Late-2025: 53 devs x 415 issues, AI-disallowed (completion time in min)",
         response_type="continuous",
@@ -197,7 +197,7 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
         n_items=415,
         subject_entity="developer",
         item_entity="issue",
-        filename="intervention/metr_dev_late_no_ai.pt",
+        filename="metr_dev_late_no_ai.pt",
         citation=_METR_PRODUCTIVITY_CITATION,
         url="https://github.com/METR/Measuring-Late-2025-AI-on-OSS-Devs",
         license="MIT",
@@ -207,8 +207,8 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
     # ── HAIID (Human-AI Interactions Dataset) ──────────────────────────────
 
     for domain in ["art", "census", "cities", "dermatology", "sarcasm"]:
-        d[f"intervention/haiid_{domain}_pre"] = DatasetInfo(
-            name=f"intervention/haiid_{domain}_pre",
+        d[f"haiid_{domain}_pre"] = DatasetInfo(
+            name=f"haiid_{domain}_pre",
             family="intervention",
             description=f"HAIID {domain}: participant x item, pre-advice binary accuracy",
             response_type="binary",
@@ -216,7 +216,7 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
             n_items={"art": 32, "census": 32, "cities": 32, "dermatology": 24, "sarcasm": 32}[domain],
             subject_entity="participant",
             item_entity="classification_item",
-            filename=f"intervention/haiid_{domain}_pre.pt",
+            filename=f"haiid_{domain}_pre.pt",
             citation=_HAIID_CITATION,
             url="https://github.com/kailas-v/human-ai-interactions",
             license="MIT",
@@ -232,8 +232,8 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
                 ("sarcasm", "ai"): 147, ("sarcasm", "human"): 149,
             }[(domain, source)]
 
-            d[f"intervention/haiid_{domain}_post_{source}"] = DatasetInfo(
-                name=f"intervention/haiid_{domain}_post_{source}",
+            d[f"haiid_{domain}_post_{source}"] = DatasetInfo(
+                name=f"haiid_{domain}_post_{source}",
                 family="intervention",
                 description=f"HAIID {domain}: post-{source}-advice binary accuracy",
                 response_type="binary",
@@ -241,7 +241,7 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
                 n_items={"art": 32, "census": 32, "cities": 32, "dermatology": 24, "sarcasm": 32}[domain],
                 subject_entity="participant",
                 item_entity="classification_item",
-                filename=f"intervention/haiid_{domain}_post_{source}.pt",
+                filename=f"haiid_{domain}_post_{source}.pt",
                 citation=_HAIID_CITATION,
                 url="https://github.com/kailas-v/human-ai-interactions",
                 license="MIT",
@@ -252,8 +252,8 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
 
     for phase, n_items in [("practice", 57), ("exam", 48)]:
         for arm, n_students in [("control", 349), ("augmented", 312), ("vanilla", 282)]:
-            d[f"intervention/genai_learning_{phase}_{arm}"] = DatasetInfo(
-                name=f"intervention/genai_learning_{phase}_{arm}",
+            d[f"genai_learning_{phase}_{arm}"] = DatasetInfo(
+                name=f"genai_learning_{phase}_{arm}",
                 family="intervention",
                 description=f"GenAI Learning: {phase} phase, {arm} arm ({n_students} students x {n_items} problems)",
                 response_type="binary",
@@ -261,7 +261,7 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
                 n_items=n_items,
                 subject_entity="student",
                 item_entity="math_problem",
-                filename=f"intervention/genai_learning_{phase}_{arm}.pt",
+                filename=f"genai_learning_{phase}_{arm}.pt",
                 citation=_GENAI_LEARNING_CITATION,
                 url="https://github.com/obastani/GenAICanHarmLearning",
                 license="MIT",

@@ -27,7 +27,7 @@ def load(
     Parameters
     ----------
     name : str
-        Dataset name (e.g., ``"helm/mmlu"`` or ``"arena/chatbot_arena"``).
+        Dataset name (e.g., ``"swebench"`` or ``"chatbot_arena"``).
         Use :func:`list_datasets` to see available names.
     force_download : bool
         If ``True``, re-download even if cached locally.
@@ -37,7 +37,7 @@ def load(
         loading data produced by ``migrate_bench_data.py --no-upload``.
         The file is expected at ``<local_dir>/<filename>`` where *filename*
         is the ``filename`` field from the dataset registry (e.g.,
-        ``bench/swebench.pt``).
+        ``swebench.pt``).
 
     Returns
     -------

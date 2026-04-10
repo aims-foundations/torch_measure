@@ -50,8 +50,8 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
     datasets: dict[str, DatasetInfo] = {}
 
     # --- Overall (mean across all 5 attributes) ---
-    datasets["helpsteer2/overall"] = DatasetInfo(
-        name="helpsteer2/overall",
+    datasets["overall"] = DatasetInfo(
+        name="overall",
         family="helpsteer2",
         description=(
             "HelpSteer2 -- mean human rating across all attributes, "
@@ -62,7 +62,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="response",
         item_entity="prompt",
-        filename="helpsteer2/overall.pt",
+        filename="overall.pt",
         citation=_HS2_CITATION,
         url=_HS2_URL,
         license="CC-BY-4.0",
@@ -70,8 +70,8 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Helpfulness ---
-    datasets["helpsteer2/helpfulness"] = DatasetInfo(
-        name="helpsteer2/helpfulness",
+    datasets["helpfulness"] = DatasetInfo(
+        name="helpfulness",
         family="helpsteer2",
         description=(
             "HelpSteer2 -- human helpfulness rating, "
@@ -82,7 +82,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="response",
         item_entity="prompt",
-        filename="helpsteer2/helpfulness.pt",
+        filename="helpfulness.pt",
         citation=_HS2_CITATION,
         url=_HS2_URL,
         license="CC-BY-4.0",
@@ -90,8 +90,8 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Correctness ---
-    datasets["helpsteer2/correctness"] = DatasetInfo(
-        name="helpsteer2/correctness",
+    datasets["correctness"] = DatasetInfo(
+        name="correctness",
         family="helpsteer2",
         description=(
             "HelpSteer2 -- human correctness rating, "
@@ -102,7 +102,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="response",
         item_entity="prompt",
-        filename="helpsteer2/correctness.pt",
+        filename="correctness.pt",
         citation=_HS2_CITATION,
         url=_HS2_URL,
         license="CC-BY-4.0",
@@ -110,8 +110,8 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Coherence ---
-    datasets["helpsteer2/coherence"] = DatasetInfo(
-        name="helpsteer2/coherence",
+    datasets["coherence"] = DatasetInfo(
+        name="coherence",
         family="helpsteer2",
         description=(
             "HelpSteer2 -- human coherence rating, "
@@ -122,7 +122,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="response",
         item_entity="prompt",
-        filename="helpsteer2/coherence.pt",
+        filename="coherence.pt",
         citation=_HS2_CITATION,
         url=_HS2_URL,
         license="CC-BY-4.0",
@@ -130,8 +130,8 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Complexity ---
-    datasets["helpsteer2/complexity"] = DatasetInfo(
-        name="helpsteer2/complexity",
+    datasets["complexity"] = DatasetInfo(
+        name="complexity",
         family="helpsteer2",
         description=(
             "HelpSteer2 -- human complexity rating, "
@@ -142,7 +142,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="response",
         item_entity="prompt",
-        filename="helpsteer2/complexity.pt",
+        filename="complexity.pt",
         citation=_HS2_CITATION,
         url=_HS2_URL,
         license="CC-BY-4.0",
@@ -150,8 +150,8 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Verbosity ---
-    datasets["helpsteer2/verbosity"] = DatasetInfo(
-        name="helpsteer2/verbosity",
+    datasets["verbosity"] = DatasetInfo(
+        name="verbosity",
         family="helpsteer2",
         description=(
             "HelpSteer2 -- human verbosity rating, "
@@ -162,7 +162,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="response",
         item_entity="prompt",
-        filename="helpsteer2/verbosity.pt",
+        filename="verbosity.pt",
         citation=_HS2_CITATION,
         url=_HS2_URL,
         license="CC-BY-4.0",

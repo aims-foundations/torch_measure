@@ -39,8 +39,8 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
     datasets: dict[str, DatasetInfo] = {}
 
     # --- Both turns averaged (continuous) ---
-    datasets["mtbench/score"] = DatasetInfo(
-        name="mtbench/score",
+    datasets["score"] = DatasetInfo(
+        name="score",
         family="mtbench",
         description="MT-Bench GPT-4 scores, both turns averaged, normalized to [0,1]",
         response_type="continuous",
@@ -48,7 +48,7 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
         n_items=80,
         subject_entity="LLM",
         item_entity="question",
-        filename="mtbench/score.pt",
+        filename="score.pt",
         citation=_MTBENCH_CITATION,
         url=_MTBENCH_URL,
         license="CC-BY-4.0",
@@ -56,8 +56,8 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Both turns averaged (binary) ---
-    datasets["mtbench/binary"] = DatasetInfo(
-        name="mtbench/binary",
+    datasets["binary"] = DatasetInfo(
+        name="binary",
         family="mtbench",
         description="MT-Bench GPT-4 scores, both turns, binary (score >= 0.5)",
         response_type="binary",
@@ -65,7 +65,7 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
         n_items=80,
         subject_entity="LLM",
         item_entity="question",
-        filename="mtbench/binary.pt",
+        filename="binary.pt",
         citation=_MTBENCH_CITATION,
         url=_MTBENCH_URL,
         license="CC-BY-4.0",
@@ -73,8 +73,8 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Turn 1 only (continuous) ---
-    datasets["mtbench/score_t1"] = DatasetInfo(
-        name="mtbench/score_t1",
+    datasets["score_t1"] = DatasetInfo(
+        name="score_t1",
         family="mtbench",
         description="MT-Bench GPT-4 scores, turn 1 only, normalized to [0,1]",
         response_type="continuous",
@@ -82,7 +82,7 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
         n_items=80,
         subject_entity="LLM",
         item_entity="question",
-        filename="mtbench/score_t1.pt",
+        filename="score_t1.pt",
         citation=_MTBENCH_CITATION,
         url=_MTBENCH_URL,
         license="CC-BY-4.0",
@@ -90,8 +90,8 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Turn 1 only (binary) ---
-    datasets["mtbench/binary_t1"] = DatasetInfo(
-        name="mtbench/binary_t1",
+    datasets["binary_t1"] = DatasetInfo(
+        name="binary_t1",
         family="mtbench",
         description="MT-Bench GPT-4 scores, turn 1, binary (score >= 0.5)",
         response_type="binary",
@@ -99,7 +99,7 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
         n_items=80,
         subject_entity="LLM",
         item_entity="question",
-        filename="mtbench/binary_t1.pt",
+        filename="binary_t1.pt",
         citation=_MTBENCH_CITATION,
         url=_MTBENCH_URL,
         license="CC-BY-4.0",
@@ -107,8 +107,8 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Turn 2 only (continuous) ---
-    datasets["mtbench/score_t2"] = DatasetInfo(
-        name="mtbench/score_t2",
+    datasets["score_t2"] = DatasetInfo(
+        name="score_t2",
         family="mtbench",
         description="MT-Bench GPT-4 scores, turn 2 only, normalized to [0,1]",
         response_type="continuous",
@@ -116,7 +116,7 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
         n_items=80,
         subject_entity="LLM",
         item_entity="question",
-        filename="mtbench/score_t2.pt",
+        filename="score_t2.pt",
         citation=_MTBENCH_CITATION,
         url=_MTBENCH_URL,
         license="CC-BY-4.0",
@@ -124,8 +124,8 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Turn 2 only (binary) ---
-    datasets["mtbench/binary_t2"] = DatasetInfo(
-        name="mtbench/binary_t2",
+    datasets["binary_t2"] = DatasetInfo(
+        name="binary_t2",
         family="mtbench",
         description="MT-Bench GPT-4 scores, turn 2, binary (score >= 0.5)",
         response_type="binary",
@@ -133,7 +133,7 @@ def _register_mtbench_datasets() -> dict[str, DatasetInfo]:
         n_items=80,
         subject_entity="LLM",
         item_entity="question",
-        filename="mtbench/binary_t2.pt",
+        filename="binary_t2.pt",
         citation=_MTBENCH_CITATION,
         url=_MTBENCH_URL,
         license="CC-BY-4.0",

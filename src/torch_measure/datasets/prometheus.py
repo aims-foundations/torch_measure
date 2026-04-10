@@ -65,8 +65,8 @@ def _register_prometheus_datasets() -> dict[str, DatasetInfo]:
 
     # --- Feedback-Collection (absolute scoring) ---
 
-    datasets["prometheus/feedback"] = DatasetInfo(
-        name="prometheus/feedback",
+    datasets["feedback"] = DatasetInfo(
+        name="feedback",
         family="prometheus",
         description=(
             "Prometheus Feedback-Collection — GPT-4 rubric-based scores, "
@@ -78,7 +78,7 @@ def _register_prometheus_datasets() -> dict[str, DatasetInfo]:
         subject_entity="rubric_criteria",
         item_entity="instance",
         repo_id="aims-foundation/torch-measure-data",
-        filename="prometheus/feedback.pt",
+        filename="feedback.pt",
         citation=_PROMETHEUS_CITATION,
         url="https://huggingface.co/datasets/prometheus-eval/Feedback-Collection",
         license="CC-BY-4.0",
@@ -87,8 +87,8 @@ def _register_prometheus_datasets() -> dict[str, DatasetInfo]:
 
     # --- Preference-Collection (pairwise comparison) ---
 
-    datasets["prometheus/preference"] = DatasetInfo(
-        name="prometheus/preference",
+    datasets["preference"] = DatasetInfo(
+        name="preference",
         family="prometheus",
         description=(
             "Prometheus Preference-Collection — GPT-4 pairwise preferences, "
@@ -100,7 +100,7 @@ def _register_prometheus_datasets() -> dict[str, DatasetInfo]:
         subject_entity="rubric_criteria",
         item_entity="instance",
         repo_id="aims-foundation/torch-measure-data",
-        filename="prometheus/preference.pt",
+        filename="preference.pt",
         citation=_PROMETHEUS2_CITATION,
         url="https://huggingface.co/datasets/prometheus-eval/Preference-Collection",
         license="CC-BY-4.0",

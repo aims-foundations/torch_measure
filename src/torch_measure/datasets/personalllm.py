@@ -81,8 +81,8 @@ def _register_personalllm_datasets() -> dict[str, DatasetInfo]:
     d: dict[str, DatasetInfo] = {}
 
     # --- All prompts (train + test), all 8 responses per prompt ---
-    d["personalllm/all"] = DatasetInfo(
-        name="personalllm/all",
+    d["all"] = DatasetInfo(
+        name="all",
         family="personalllm",
         description=(
             "PersonalLLM — all prompts, reward-model scores on LLM responses "
@@ -93,7 +93,7 @@ def _register_personalllm_datasets() -> dict[str, DatasetInfo]:
         n_items=83216,
         subject_entity="reward_model",
         item_entity="prompt_response",
-        filename="personalllm/all.pt",
+        filename="all.pt",
         citation=_PERSONALLLM_CITATION,
         url=_PERSONALLLM_URL,
         license="CC-BY-4.0",
@@ -101,8 +101,8 @@ def _register_personalllm_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Train split only ---
-    d["personalllm/train"] = DatasetInfo(
-        name="personalllm/train",
+    d["train"] = DatasetInfo(
+        name="train",
         family="personalllm",
         description=(
             "PersonalLLM train split — reward-model scores on LLM responses "
@@ -113,7 +113,7 @@ def _register_personalllm_datasets() -> dict[str, DatasetInfo]:
         n_items=75216,
         subject_entity="reward_model",
         item_entity="prompt_response",
-        filename="personalllm/train.pt",
+        filename="train.pt",
         citation=_PERSONALLLM_CITATION,
         url=_PERSONALLLM_URL,
         license="CC-BY-4.0",
@@ -121,8 +121,8 @@ def _register_personalllm_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Test split only ---
-    d["personalllm/test"] = DatasetInfo(
-        name="personalllm/test",
+    d["test"] = DatasetInfo(
+        name="test",
         family="personalllm",
         description=(
             "PersonalLLM test split — reward-model scores on LLM responses "
@@ -133,7 +133,7 @@ def _register_personalllm_datasets() -> dict[str, DatasetInfo]:
         n_items=8000,
         subject_entity="reward_model",
         item_entity="prompt_response",
-        filename="personalllm/test.pt",
+        filename="test.pt",
         citation=_PERSONALLLM_CITATION,
         url=_PERSONALLLM_URL,
         license="CC-BY-4.0",

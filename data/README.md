@@ -106,87 +106,87 @@ and registered in `src/torch_measure/datasets/bench.py`. Load with:
 ```python
 from torch_measure.datasets import load, list_datasets
 
-list_datasets("bench")          # See all available
-rm = load("bench/swebench")     # Download and load as ResponseMatrix
+list_datasets()                 # See all available
+rm = load("swebench")           # Download and load as ResponseMatrix
 print(rm.data.shape)            # torch.Size([134, 500])
 ```
 
 | Dataset | Shape | Type | Description |
 |---------|-------|------|-------------|
-| `bench/agentbench` | 29x8 | continuous | AgentBench — multi-environment agent evaluation |
-| `bench/agentdojo` | 29x132 | binary | AgentDojo — tool-use agent utility tasks |
-| `bench/agentdojo_security` | 28x949 | binary | AgentDojo — security evaluation |
-| `bench/agentdojo_utility_attack` | 28x97 | binary | AgentDojo — utility under attack |
-| `bench/alpacaeval` | 221x805 | binary | AlpacaEval — instruction following |
-| `bench/androidworld` | 3x116 | binary | AndroidWorld — mobile device automation |
-| `bench/appworld` | 18x24 | continuous | AppWorld — multi-app interaction |
-| `bench/arcagi` | 52x400 | binary | ARC-AGI v1 — abstract reasoning |
-| `bench/arcagi_v2` | 28x120 | binary | ARC-AGI v2 — abstract reasoning |
-| `bench/bfcl` | 93x4751 | binary | BFCL v3 — function calling |
-| `bench/bigcodebench` | 153x1140 | binary | BigCodeBench — code generation |
-| `bench/bigcodebench_hard_complete` | 199x148 | binary | BigCodeBench — hard tasks |
-| `bench/bigcodebench_hard_instruct` | 173x148 | binary | BigCodeBench — hard instruct |
-| `bench/bigcodebench_instruct` | 126x1140 | binary | BigCodeBench — instruct |
-| `bench/browsergym` | 18x8 | continuous | BrowserGym — web agent aggregates |
-| `bench/clinebench` | 3x12 | continuous | ClineBench — AI coding agent |
-| `bench/corebench` | 15x270 | binary | CORE-Bench — reproducibility |
-| `bench/corebench_scores` | 15x270 | continuous | CORE-Bench — scores |
-| `bench/cruxeval` | 38x800 | continuous | CRUXEval — code reasoning |
-| `bench/cruxeval_binary` | 38x800 | binary | CRUXEval — code reasoning (binary) |
-| `bench/cruxeval_input` | 20x800 | continuous | CRUXEval — input prediction |
-| `bench/cruxeval_input_binary` | 20x800 | binary | CRUXEval — input prediction (binary) |
-| `bench/cruxeval_output` | 18x800 | continuous | CRUXEval — output prediction |
-| `bench/cruxeval_output_binary` | 18x800 | binary | CRUXEval — output prediction (binary) |
-| `bench/cybench` | 8x40 | binary | Cybench — CTF tasks |
-| `bench/cybench_guided` | 8x40 | binary | Cybench — guided CTF tasks |
-| `bench/cybench_scores` | 8x40 | continuous | Cybench — subtask scores |
-| `bench/dpai` | 9x141 | continuous | DPAI Arena — total score |
-| `bench/dpai_binary` | 9x141 | binary | DPAI Arena — binary |
-| `bench/dpai_blind` | 9x141 | continuous | DPAI Arena — blind evaluation |
-| `bench/dpai_informed` | 9x141 | continuous | DPAI Arena — informed evaluation |
-| `bench/editbench` | 44x540 | continuous | EDIT-Bench — code editing |
-| `bench/editbench_binary` | 44x540 | binary | EDIT-Bench — code editing (binary) |
-| `bench/evalplus` | 31x164 | binary | EvalPlus — HumanEval+ and MBPP+ |
-| `bench/evalplus_humaneval_base` | 31x164 | binary | EvalPlus — HumanEval base |
-| `bench/evalplus_humaneval_plus` | 31x164 | binary | EvalPlus — HumanEval+ |
-| `bench/evalplus_mbpp_base` | 22x378 | binary | EvalPlus — MBPP base |
-| `bench/evalplus_mbpp_plus` | 22x378 | binary | EvalPlus — MBPP+ |
-| `bench/gaia` | 32x165 | binary | GAIA — general AI assistant |
-| `bench/hle` | 19x1792 | binary | Humanity's Last Exam |
-| `bench/livebench` | 195x494 | continuous | LiveBench — contamination-free |
-| `bench/livebench_binary` | 195x494 | binary | LiveBench — binary |
-| `bench/livecodebench` | 72x1055 | continuous | LiveCodeBench — competitive programming |
-| `bench/matharena` | 68x336 | continuous | MathArena — competition math |
-| `bench/matharena_aime2025` | 62x30 | binary | MathArena — AIME 2025 |
-| `bench/mlebench` | 30x75 | continuous | MLE-bench — ML engineering |
-| `bench/mlebench_above_median` | 30x75 | binary | MLE-bench — above-median |
-| `bench/mlebench_binary` | 30x75 | binary | MLE-bench — binary |
-| `bench/mlebench_scores` | 30x75 | continuous | MLE-bench — raw Kaggle scores |
-| `bench/mmlupro` | 48x12257 | continuous | MMLU-Pro — per-question |
-| `bench/mmlupro_category` | 247x14 | continuous | MMLU-Pro — per-category |
-| `bench/osworld` | 77x369 | continuous | OSWorld — desktop automation |
-| `bench/osworld_binary` | 77x369 | binary | OSWorld — binary |
-| `bench/paperbench` | 9x20 | continuous | PaperBench — paper reproduction |
-| `bench/paperbench_runs` | 7x180 | continuous | PaperBench — per-run |
-| `bench/swebench` | 134x500 | binary | SWE-bench Verified |
-| `bench/swebench_full` | 24x2294 | binary | SWE-bench Full |
-| `bench/swebench_java` | 52x170 | binary | SWE-bench Java |
-| `bench/swebench_multi_all` | 79x2132 | binary | SWE-bench Multi — all languages |
-| `bench/swebench_multilingual` | 13x301 | binary | SWE-bench Multilingual |
-| `bench/swepolybench_full` | 1x2110 | binary | SWE-PolyBench — full |
-| `bench/swepolybench_verified` | 3x382 | binary | SWE-PolyBench — verified |
-| `bench/taubench` | 32x329 | continuous | TAU-bench — all domains |
-| `bench/taubench_hal_airline` | 26x50 | continuous | TAU-bench — HAL airline |
-| `bench/taubench_retail` | 6x115 | continuous | TAU-bench — retail |
-| `bench/taubench_telecom` | 4x114 | continuous | TAU-bench — telecom |
-| `bench/taubench_v1_airline` | 28x50 | continuous | TAU-bench — airline v1 |
-| `bench/taubench_v2_airline` | 4x50 | continuous | TAU-bench — airline v2 |
-| `bench/terminalbench` | 128x89 | binary | Terminal-Bench — CLI tasks |
-| `bench/terminalbench_resolution` | 128x89 | continuous | Terminal-Bench — resolution rate |
-| `bench/theagentcompany` | 19x175 | continuous | TheAgentCompany — enterprise |
-| `bench/theagentcompany_binary` | 19x175 | binary | TheAgentCompany — binary |
-| `bench/toolbench` | 10x765 | binary | StableToolBench — tool-use |
-| `bench/visualwebarena` | 6x910 | continuous | VisualWebArena — multimodal web |
-| `bench/webarena` | 14x812 | continuous | WebArena — web agent tasks |
-| `bench/wildbench` | 63x1024 | continuous | WildBench — open-ended LLM eval |
-| `bench/workarena` | 4x118 | continuous | WorkArena — enterprise web tasks |
+| `agentbench` | 29x8 | continuous | AgentBench — multi-environment agent evaluation |
+| `agentdojo` | 29x132 | binary | AgentDojo — tool-use agent utility tasks |
+| `agentdojo_security` | 28x949 | binary | AgentDojo — security evaluation |
+| `agentdojo_utility_attack` | 28x97 | binary | AgentDojo — utility under attack |
+| `alpacaeval` | 221x805 | binary | AlpacaEval — instruction following |
+| `androidworld` | 3x116 | binary | AndroidWorld — mobile device automation |
+| `appworld` | 18x24 | continuous | AppWorld — multi-app interaction |
+| `arcagi` | 52x400 | binary | ARC-AGI v1 — abstract reasoning |
+| `arcagi_v2` | 28x120 | binary | ARC-AGI v2 — abstract reasoning |
+| `bfcl` | 93x4751 | binary | BFCL v3 — function calling |
+| `bigcodebench` | 153x1140 | binary | BigCodeBench — code generation |
+| `bigcodebench_hard_complete` | 199x148 | binary | BigCodeBench — hard tasks |
+| `bigcodebench_hard_instruct` | 173x148 | binary | BigCodeBench — hard instruct |
+| `bigcodebench_instruct` | 126x1140 | binary | BigCodeBench — instruct |
+| `browsergym` | 18x8 | continuous | BrowserGym — web agent aggregates |
+| `clinebench` | 3x12 | continuous | ClineBench — AI coding agent |
+| `corebench` | 15x270 | binary | CORE-Bench — reproducibility |
+| `corebench_scores` | 15x270 | continuous | CORE-Bench — scores |
+| `cruxeval` | 38x800 | continuous | CRUXEval — code reasoning |
+| `cruxeval_binary` | 38x800 | binary | CRUXEval — code reasoning (binary) |
+| `cruxeval_input` | 20x800 | continuous | CRUXEval — input prediction |
+| `cruxeval_input_binary` | 20x800 | binary | CRUXEval — input prediction (binary) |
+| `cruxeval_output` | 18x800 | continuous | CRUXEval — output prediction |
+| `cruxeval_output_binary` | 18x800 | binary | CRUXEval — output prediction (binary) |
+| `cybench` | 8x40 | binary | Cybench — CTF tasks |
+| `cybench_guided` | 8x40 | binary | Cybench — guided CTF tasks |
+| `cybench_scores` | 8x40 | continuous | Cybench — subtask scores |
+| `dpai` | 9x141 | continuous | DPAI Arena — total score |
+| `dpai_binary` | 9x141 | binary | DPAI Arena — binary |
+| `dpai_blind` | 9x141 | continuous | DPAI Arena — blind evaluation |
+| `dpai_informed` | 9x141 | continuous | DPAI Arena — informed evaluation |
+| `editbench` | 44x540 | continuous | EDIT-Bench — code editing |
+| `editbench_binary` | 44x540 | binary | EDIT-Bench — code editing (binary) |
+| `evalplus` | 31x164 | binary | EvalPlus — HumanEval+ and MBPP+ |
+| `evalplus_humaneval_base` | 31x164 | binary | EvalPlus — HumanEval base |
+| `evalplus_humaneval_plus` | 31x164 | binary | EvalPlus — HumanEval+ |
+| `evalplus_mbpp_base` | 22x378 | binary | EvalPlus — MBPP base |
+| `evalplus_mbpp_plus` | 22x378 | binary | EvalPlus — MBPP+ |
+| `gaia` | 32x165 | binary | GAIA — general AI assistant |
+| `hle` | 19x1792 | binary | Humanity's Last Exam |
+| `livebench` | 195x494 | continuous | LiveBench — contamination-free |
+| `livebench_binary` | 195x494 | binary | LiveBench — binary |
+| `livecodebench` | 72x1055 | continuous | LiveCodeBench — competitive programming |
+| `matharena` | 68x336 | continuous | MathArena — competition math |
+| `matharena_aime2025` | 62x30 | binary | MathArena — AIME 2025 |
+| `mlebench` | 30x75 | continuous | MLE-bench — ML engineering |
+| `mlebench_above_median` | 30x75 | binary | MLE-bench — above-median |
+| `mlebench_binary` | 30x75 | binary | MLE-bench — binary |
+| `mlebench_scores` | 30x75 | continuous | MLE-bench — raw Kaggle scores |
+| `mmlupro` | 48x12257 | continuous | MMLU-Pro — per-question |
+| `mmlupro_category` | 247x14 | continuous | MMLU-Pro — per-category |
+| `osworld` | 77x369 | continuous | OSWorld — desktop automation |
+| `osworld_binary` | 77x369 | binary | OSWorld — binary |
+| `paperbench` | 9x20 | continuous | PaperBench — paper reproduction |
+| `paperbench_runs` | 7x180 | continuous | PaperBench — per-run |
+| `swebench` | 134x500 | binary | SWE-bench Verified |
+| `swebench_full` | 24x2294 | binary | SWE-bench Full |
+| `swebench_java` | 52x170 | binary | SWE-bench Java |
+| `swebench_multi_all` | 79x2132 | binary | SWE-bench Multi — all languages |
+| `swebench_multilingual` | 13x301 | binary | SWE-bench Multilingual |
+| `swepolybench_full` | 1x2110 | binary | SWE-PolyBench — full |
+| `swepolybench_verified` | 3x382 | binary | SWE-PolyBench — verified |
+| `taubench` | 32x329 | continuous | TAU-bench — all domains |
+| `taubench_hal_airline` | 26x50 | continuous | TAU-bench — HAL airline |
+| `taubench_retail` | 6x115 | continuous | TAU-bench — retail |
+| `taubench_telecom` | 4x114 | continuous | TAU-bench — telecom |
+| `taubench_v1_airline` | 28x50 | continuous | TAU-bench — airline v1 |
+| `taubench_v2_airline` | 4x50 | continuous | TAU-bench — airline v2 |
+| `terminalbench` | 128x89 | binary | Terminal-Bench — CLI tasks |
+| `terminalbench_resolution` | 128x89 | continuous | Terminal-Bench — resolution rate |
+| `theagentcompany` | 19x175 | continuous | TheAgentCompany — enterprise |
+| `theagentcompany_binary` | 19x175 | binary | TheAgentCompany — binary |
+| `toolbench` | 10x765 | binary | StableToolBench — tool-use |
+| `visualwebarena` | 6x910 | continuous | VisualWebArena — multimodal web |
+| `webarena` | 14x812 | continuous | WebArena — web agent tasks |
+| `wildbench` | 63x1024 | continuous | WildBench — open-ended LLM eval |
+| `workarena` | 4x118 | continuous | WorkArena — enterprise web tasks |

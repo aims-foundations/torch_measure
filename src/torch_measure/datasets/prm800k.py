@@ -68,8 +68,8 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
     d: dict[str, DatasetInfo] = {}
 
     # ── Combined (all phases, all splits) ────────────────────────────
-    d["prm800k/all"] = DatasetInfo(
-        name="prm800k/all",
+    d["all"] = DatasetInfo(
+        name="all",
         family="prm800k",
         description=(
             "PRM800K all phases & splits — step-level correctness labels "
@@ -80,7 +80,7 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
         n_items=107,
         subject_entity="solution",
         item_entity="step",
-        filename="prm800k/all.pt",
+        filename="all.pt",
         citation=_PRM800K_CITATION,
         url=_PRM800K_URL,
         license="MIT",
@@ -88,8 +88,8 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
     )
 
     # ── Train split (phase 1 + phase 2 train) ───────────────────────
-    d["prm800k/train"] = DatasetInfo(
-        name="prm800k/train",
+    d["train"] = DatasetInfo(
+        name="train",
         family="prm800k",
         description=(
             "PRM800K train split — step-level correctness labels "
@@ -100,7 +100,7 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
         n_items=107,
         subject_entity="solution",
         item_entity="step",
-        filename="prm800k/train.pt",
+        filename="train.pt",
         citation=_PRM800K_CITATION,
         url=_PRM800K_URL,
         license="MIT",
@@ -108,8 +108,8 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
     )
 
     # ── Test split (phase 1 + phase 2 test) ─────────────────────────
-    d["prm800k/test"] = DatasetInfo(
-        name="prm800k/test",
+    d["test"] = DatasetInfo(
+        name="test",
         family="prm800k",
         description=(
             "PRM800K test split — step-level correctness labels "
@@ -120,7 +120,7 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
         n_items=53,
         subject_entity="solution",
         item_entity="step",
-        filename="prm800k/test.pt",
+        filename="test.pt",
         citation=_PRM800K_CITATION,
         url=_PRM800K_URL,
         license="MIT",
@@ -128,8 +128,8 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
     )
 
     # ── Phase 2 only (bulk of the data) ─────────────────────────────
-    d["prm800k/phase2"] = DatasetInfo(
-        name="prm800k/phase2",
+    d["phase2"] = DatasetInfo(
+        name="phase2",
         family="prm800k",
         description=(
             "PRM800K phase 2 only — active-learning-selected solutions "
@@ -140,7 +140,7 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
         n_items=107,
         subject_entity="solution",
         item_entity="step",
-        filename="prm800k/phase2.pt",
+        filename="phase2.pt",
         citation=_PRM800K_CITATION,
         url=_PRM800K_URL,
         license="MIT",

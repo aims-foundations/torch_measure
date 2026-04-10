@@ -35,8 +35,8 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
 
     # --- All tasks (pass rate from score_binarized) ---
 
-    datasets["metr/all"] = DatasetInfo(
-        name="metr/all",
+    datasets["all"] = DatasetInfo(
+        name="all",
         family="metr",
         description="All METR tasks, mean pass rate across runs (34 agents x 170 tasks)",
         response_type="continuous",
@@ -44,15 +44,15 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
         n_items=170,
         subject_entity="LLM",
         item_entity="task",
-        filename="metr/all.pt",
+        filename="all.pt",
         citation=_METR_CITATION,
         url=_METR_URL,
         license="MIT",
         tags=["agentic", "multi-benchmark", "pass-rate"],
     )
 
-    datasets["metr/all_score"] = DatasetInfo(
-        name="metr/all_score",
+    datasets["all_score"] = DatasetInfo(
+        name="all_score",
         family="metr",
         description="All METR tasks, mean continuous score across runs (34 agents x 170 tasks)",
         response_type="continuous",
@@ -60,7 +60,7 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
         n_items=170,
         subject_entity="LLM",
         item_entity="task",
-        filename="metr/all_score.pt",
+        filename="all_score.pt",
         citation=_METR_CITATION,
         url=_METR_URL,
         license="MIT",
@@ -69,8 +69,8 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
 
     # --- Per task-source splits (pass rate) ---
 
-    datasets["metr/hcast"] = DatasetInfo(
-        name="metr/hcast",
+    datasets["hcast"] = DatasetInfo(
+        name="hcast",
         family="metr",
         description="HCAST tasks, mean pass rate across runs",
         response_type="continuous",
@@ -78,15 +78,15 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
         n_items=97,
         subject_entity="LLM",
         item_entity="task",
-        filename="metr/hcast.pt",
+        filename="hcast.pt",
         citation=_METR_CITATION,
         url=_METR_URL,
         license="MIT",
         tags=["agentic", "hcast", "pass-rate"],
     )
 
-    datasets["metr/rebench"] = DatasetInfo(
-        name="metr/rebench",
+    datasets["rebench"] = DatasetInfo(
+        name="rebench",
         family="metr",
         description="RE-Bench tasks, mean pass rate across runs",
         response_type="continuous",
@@ -94,15 +94,15 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
         n_items=7,
         subject_entity="LLM",
         item_entity="task",
-        filename="metr/rebench.pt",
+        filename="rebench.pt",
         citation=_METR_CITATION,
         url=_METR_URL,
         license="MIT",
         tags=["agentic", "rebench", "pass-rate"],
     )
 
-    datasets["metr/swaa"] = DatasetInfo(
-        name="metr/swaa",
+    datasets["swaa"] = DatasetInfo(
+        name="swaa",
         family="metr",
         description="SWAA tasks, mean pass rate across runs",
         response_type="continuous",
@@ -110,7 +110,7 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
         n_items=66,
         subject_entity="LLM",
         item_entity="task",
-        filename="metr/swaa.pt",
+        filename="swaa.pt",
         citation=_METR_CITATION,
         url=_METR_URL,
         license="MIT",
@@ -119,8 +119,8 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
 
     # --- Per task-source splits (continuous score) ---
 
-    datasets["metr/hcast_score"] = DatasetInfo(
-        name="metr/hcast_score",
+    datasets["hcast_score"] = DatasetInfo(
+        name="hcast_score",
         family="metr",
         description="HCAST tasks, mean continuous score across runs",
         response_type="continuous",
@@ -128,15 +128,15 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
         n_items=97,
         subject_entity="LLM",
         item_entity="task",
-        filename="metr/hcast_score.pt",
+        filename="hcast_score.pt",
         citation=_METR_CITATION,
         url=_METR_URL,
         license="MIT",
         tags=["agentic", "hcast", "continuous"],
     )
 
-    datasets["metr/rebench_score"] = DatasetInfo(
-        name="metr/rebench_score",
+    datasets["rebench_score"] = DatasetInfo(
+        name="rebench_score",
         family="metr",
         description="RE-Bench tasks, mean continuous score across runs",
         response_type="continuous",
@@ -144,15 +144,15 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
         n_items=7,
         subject_entity="LLM",
         item_entity="task",
-        filename="metr/rebench_score.pt",
+        filename="rebench_score.pt",
         citation=_METR_CITATION,
         url=_METR_URL,
         license="MIT",
         tags=["agentic", "rebench", "continuous"],
     )
 
-    datasets["metr/swaa_score"] = DatasetInfo(
-        name="metr/swaa_score",
+    datasets["swaa_score"] = DatasetInfo(
+        name="swaa_score",
         family="metr",
         description="SWAA tasks, mean continuous score across runs",
         response_type="continuous",
@@ -160,7 +160,7 @@ def _register_metr_datasets() -> dict[str, DatasetInfo]:
         n_items=66,
         subject_entity="LLM",
         item_entity="task",
-        filename="metr/swaa_score.pt",
+        filename="swaa_score.pt",
         citation=_METR_CITATION,
         url=_METR_URL,
         license="MIT",

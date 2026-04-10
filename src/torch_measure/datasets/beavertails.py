@@ -104,8 +104,8 @@ def _register_beavertails_datasets() -> dict[str, DatasetInfo]:
     datasets: dict[str, DatasetInfo] = {}
 
     # --- All categories + overall combined ---
-    datasets["beavertails/all"] = DatasetInfo(
-        name="beavertails/all",
+    datasets["all"] = DatasetInfo(
+        name="all",
         family="beavertails",
         description=(
             "BeaverTails — all 14 harm categories + overall safety label "
@@ -116,7 +116,7 @@ def _register_beavertails_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="harm_category",
         item_entity="qa_pair",
-        filename="beavertails/all.pt",
+        filename="all.pt",
         citation=_BEAVERTAILS_CITATION,
         url=_BEAVERTAILS_URL,
         license="CC-BY-NC-4.0",
@@ -124,8 +124,8 @@ def _register_beavertails_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Overall is_safe label ---
-    datasets["beavertails/overall"] = DatasetInfo(
-        name="beavertails/overall",
+    datasets["overall"] = DatasetInfo(
+        name="overall",
         family="beavertails",
         description=(
             f"BeaverTails — overall binary safety label (1 x {_N_ITEMS:,} QA pairs)"
@@ -135,7 +135,7 @@ def _register_beavertails_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="harm_category",
         item_entity="qa_pair",
-        filename="beavertails/overall.pt",
+        filename="overall.pt",
         citation=_BEAVERTAILS_CITATION,
         url=_BEAVERTAILS_URL,
         license="CC-BY-NC-4.0",
@@ -145,7 +145,7 @@ def _register_beavertails_datasets() -> dict[str, DatasetInfo]:
     # --- Per-category datasets ---
     for category in HARM_CATEGORIES:
         short = CATEGORY_NAME_MAP[category]
-        name = f"beavertails/{short}"
+        name = f"{short}"
         datasets[name] = DatasetInfo(
             name=name,
             family="beavertails",
@@ -158,7 +158,7 @@ def _register_beavertails_datasets() -> dict[str, DatasetInfo]:
             n_items=_N_ITEMS,
             subject_entity="harm_category",
             item_entity="qa_pair",
-            filename=f"beavertails/{short}.pt",
+            filename=f"{short}.pt",
             citation=_BEAVERTAILS_CITATION,
             url=_BEAVERTAILS_URL,
             license="CC-BY-NC-4.0",

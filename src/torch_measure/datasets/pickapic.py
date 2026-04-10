@@ -64,8 +64,8 @@ def _register_pickapic_datasets() -> dict[str, DatasetInfo]:
     """
     datasets: dict[str, DatasetInfo] = {}
 
-    datasets["pickapic/sampled_100k"] = DatasetInfo(
-        name="pickapic/sampled_100k",
+    datasets["sampled_100k"] = DatasetInfo(
+        name="sampled_100k",
         family="pickapic",
         description=(
             "Pick-a-Pic v2 — 100K sampled human preference comparisons "
@@ -77,7 +77,7 @@ def _register_pickapic_datasets() -> dict[str, DatasetInfo]:
         n_comparisons=100000,
         subject_entity="text-to-image model",
         item_entity="prompt",
-        filename="pickapic/sampled_100k.pt",
+        filename="sampled_100k.pt",
         citation=_PICKAPIC_CITATION,
         url=_PICKAPIC_URL,
         license="CC0-1.0",

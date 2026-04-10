@@ -43,8 +43,8 @@ def _register_rewardbench_datasets() -> dict[str, DatasetInfo]:
 
     # --- All items ---
 
-    datasets["rewardbench/results"] = DatasetInfo(
-        name="rewardbench/results",
+    datasets["results"] = DatasetInfo(
+        name="results",
         family="rewardbench",
         description=(
             "RewardBench full eval set, binary correct/incorrect per reward model"
@@ -54,7 +54,7 @@ def _register_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=2985,
         subject_entity="reward_model",
         item_entity="preference_pair",
-        filename="rewardbench/results.pt",
+        filename="results.pt",
         citation=_REWARDBENCH_CITATION,
         url=_REWARDBENCH_URL,
         license="Apache-2.0",
@@ -63,8 +63,8 @@ def _register_rewardbench_datasets() -> dict[str, DatasetInfo]:
 
     # --- Per-category splits ---
 
-    datasets["rewardbench/chat"] = DatasetInfo(
-        name="rewardbench/chat",
+    datasets["chat"] = DatasetInfo(
+        name="chat",
         family="rewardbench",
         description="RewardBench chat subset (alpacaeval, mt-bench easy/med)",
         response_type="binary",
@@ -72,15 +72,15 @@ def _register_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=358,
         subject_entity="reward_model",
         item_entity="preference_pair",
-        filename="rewardbench/chat.pt",
+        filename="chat.pt",
         citation=_REWARDBENCH_CITATION,
         url=_REWARDBENCH_URL,
         license="Apache-2.0",
         tags=["reward-model", "preference", "binary", "chat"],
     )
 
-    datasets["rewardbench/chat_hard"] = DatasetInfo(
-        name="rewardbench/chat_hard",
+    datasets["chat_hard"] = DatasetInfo(
+        name="chat_hard",
         family="rewardbench",
         description="RewardBench chat-hard subset (mt-bench hard, LLMBar adversarial)",
         response_type="binary",
@@ -88,15 +88,15 @@ def _register_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=456,
         subject_entity="reward_model",
         item_entity="preference_pair",
-        filename="rewardbench/chat_hard.pt",
+        filename="chat_hard.pt",
         citation=_REWARDBENCH_CITATION,
         url=_REWARDBENCH_URL,
         license="Apache-2.0",
         tags=["reward-model", "preference", "binary", "chat-hard"],
     )
 
-    datasets["rewardbench/safety"] = DatasetInfo(
-        name="rewardbench/safety",
+    datasets["safety"] = DatasetInfo(
+        name="safety",
         family="rewardbench",
         description="RewardBench safety subset (refusals, xstest, donotanswer)",
         response_type="binary",
@@ -104,15 +104,15 @@ def _register_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=740,
         subject_entity="reward_model",
         item_entity="preference_pair",
-        filename="rewardbench/safety.pt",
+        filename="safety.pt",
         citation=_REWARDBENCH_CITATION,
         url=_REWARDBENCH_URL,
         license="Apache-2.0",
         tags=["reward-model", "preference", "binary", "safety"],
     )
 
-    datasets["rewardbench/reasoning"] = DatasetInfo(
-        name="rewardbench/reasoning",
+    datasets["reasoning"] = DatasetInfo(
+        name="reasoning",
         family="rewardbench",
         description="RewardBench reasoning subset (math-prm, HumanEval code)",
         response_type="binary",
@@ -120,7 +120,7 @@ def _register_rewardbench_datasets() -> dict[str, DatasetInfo]:
         n_items=1431,
         subject_entity="reward_model",
         item_entity="preference_pair",
-        filename="rewardbench/reasoning.pt",
+        filename="reasoning.pt",
         citation=_REWARDBENCH_CITATION,
         url=_REWARDBENCH_URL,
         license="Apache-2.0",

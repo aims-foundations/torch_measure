@@ -38,8 +38,8 @@ def _register_preference_dissection_datasets() -> dict[str, DatasetInfo]:
     """
     datasets: dict[str, DatasetInfo] = {}
 
-    datasets["preference_dissection/all_judges"] = DatasetInfo(
-        name="preference_dissection/all_judges",
+    datasets["all_judges"] = DatasetInfo(
+        name="all_judges",
         family="preference_dissection",
         description=(
             "GAIR Preference Dissection — 33 judges x 5,240 Chatbot Arena "
@@ -50,15 +50,15 @@ def _register_preference_dissection_datasets() -> dict[str, DatasetInfo]:
         n_items=5240,
         subject_entity="judge",
         item_entity="pair",
-        filename="preference_dissection/all_judges.pt",
+        filename="all_judges.pt",
         citation=_PD_CITATION,
         url=_PD_URL,
         license="CC-BY-NC-4.0",
         tags=["preference", "pairwise", "multi-judge", "chatbot-arena"],
     )
 
-    datasets["preference_dissection/crossed"] = DatasetInfo(
-        name="preference_dissection/crossed",
+    datasets["crossed"] = DatasetInfo(
+        name="crossed",
         family="preference_dissection",
         description=(
             "GAIR Preference Dissection — 5,240 pairs x 33 judges, "
@@ -69,7 +69,7 @@ def _register_preference_dissection_datasets() -> dict[str, DatasetInfo]:
         n_items=33,
         subject_entity="pair",
         item_entity="judge",
-        filename="preference_dissection/crossed.pt",
+        filename="crossed.pt",
         citation=_PD_CITATION,
         url=_PD_URL,
         license="CC-BY-NC-4.0",

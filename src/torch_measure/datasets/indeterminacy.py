@@ -45,8 +45,8 @@ def _register_indeterminacy_datasets() -> dict[str, DatasetInfo]:
 
     # --- Combined (all groups) ---
 
-    datasets["indeterminacy/all"] = DatasetInfo(
-        name="indeterminacy/all",
+    datasets["all"] = DatasetInfo(
+        name="all",
         family="indeterminacy",
         description=(
             "All task groups combined, P(cat 0) across reps "
@@ -57,7 +57,7 @@ def _register_indeterminacy_datasets() -> dict[str, DatasetInfo]:
         n_items=800,
         subject_entity="LLM",
         item_entity="item",
-        filename="indeterminacy/all.pt",
+        filename="all.pt",
         citation=_INDETERMINACY_CITATION,
         url=_INDETERMINACY_URL,
         license="MIT",
@@ -74,7 +74,7 @@ def _register_indeterminacy_datasets() -> dict[str, DatasetInfo]:
     }
 
     for g in range(4):
-        name = f"indeterminacy/group_{g}"
+        name = f"group_{g}"
         datasets[name] = DatasetInfo(
             name=name,
             family="indeterminacy",
@@ -84,7 +84,7 @@ def _register_indeterminacy_datasets() -> dict[str, DatasetInfo]:
             n_items=200,
             subject_entity="LLM",
             item_entity="item",
-            filename=f"indeterminacy/group_{g}.pt",
+            filename=f"group_{g}.pt",
             citation=_INDETERMINACY_CITATION,
             url=_INDETERMINACY_URL,
             license="MIT",

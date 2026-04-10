@@ -48,8 +48,8 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
     datasets: dict[str, DatasetInfo] = {}
 
     # --- Overall (mean across all 4 aspects) ---
-    datasets["ultrafeedback/overall"] = DatasetInfo(
-        name="ultrafeedback/overall",
+    datasets["overall"] = DatasetInfo(
+        name="overall",
         family="ultrafeedback",
         description=(
             "UltraFeedback — mean GPT-4 rating across all aspects, "
@@ -60,7 +60,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
         n_items=63967,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="ultrafeedback/overall.pt",
+        filename="overall.pt",
         citation=_UF_CITATION,
         url=_UF_URL,
         license="MIT",
@@ -68,8 +68,8 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Helpfulness ---
-    datasets["ultrafeedback/helpfulness"] = DatasetInfo(
-        name="ultrafeedback/helpfulness",
+    datasets["helpfulness"] = DatasetInfo(
+        name="helpfulness",
         family="ultrafeedback",
         description=(
             "UltraFeedback — GPT-4 helpfulness rating, "
@@ -80,7 +80,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
         n_items=63967,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="ultrafeedback/helpfulness.pt",
+        filename="helpfulness.pt",
         citation=_UF_CITATION,
         url=_UF_URL,
         license="MIT",
@@ -88,8 +88,8 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Honesty ---
-    datasets["ultrafeedback/honesty"] = DatasetInfo(
-        name="ultrafeedback/honesty",
+    datasets["honesty"] = DatasetInfo(
+        name="honesty",
         family="ultrafeedback",
         description=(
             "UltraFeedback — GPT-4 honesty rating, "
@@ -100,7 +100,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
         n_items=63967,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="ultrafeedback/honesty.pt",
+        filename="honesty.pt",
         citation=_UF_CITATION,
         url=_UF_URL,
         license="MIT",
@@ -108,8 +108,8 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Instruction Following ---
-    datasets["ultrafeedback/instruction_following"] = DatasetInfo(
-        name="ultrafeedback/instruction_following",
+    datasets["instruction_following"] = DatasetInfo(
+        name="instruction_following",
         family="ultrafeedback",
         description=(
             "UltraFeedback — GPT-4 instruction-following rating, "
@@ -120,7 +120,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
         n_items=63967,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="ultrafeedback/instruction_following.pt",
+        filename="instruction_following.pt",
         citation=_UF_CITATION,
         url=_UF_URL,
         license="MIT",
@@ -128,8 +128,8 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- Truthfulness ---
-    datasets["ultrafeedback/truthfulness"] = DatasetInfo(
-        name="ultrafeedback/truthfulness",
+    datasets["truthfulness"] = DatasetInfo(
+        name="truthfulness",
         family="ultrafeedback",
         description=(
             "UltraFeedback — GPT-4 truthfulness rating, "
@@ -140,7 +140,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
         n_items=63967,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="ultrafeedback/truthfulness.pt",
+        filename="truthfulness.pt",
         citation=_UF_CITATION,
         url=_UF_URL,
         license="MIT",

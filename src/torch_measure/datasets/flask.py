@@ -74,8 +74,8 @@ def _register_flask_datasets() -> dict[str, DatasetInfo]:
 
     # --- Overall (mean across applicable skills) ---
 
-    datasets["flask/overall"] = DatasetInfo(
-        name="flask/overall",
+    datasets["overall"] = DatasetInfo(
+        name="overall",
         family="flask",
         description=(
             f"FLASK overall mean score across applicable skills "
@@ -86,7 +86,7 @@ def _register_flask_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_ITEMS,
         subject_entity="model",
         item_entity="instruction",
-        filename="flask/overall.pt",
+        filename="overall.pt",
         citation=_FLASK_CITATION,
         url=_FLASK_URL,
         license="Apache-2.0",
@@ -96,7 +96,7 @@ def _register_flask_datasets() -> dict[str, DatasetInfo]:
     # --- Per-skill splits ---
 
     for skill, n_items in _SKILLS.items():
-        name = f"flask/{skill}"
+        name = f"{skill}"
         datasets[name] = DatasetInfo(
             name=name,
             family="flask",
@@ -109,7 +109,7 @@ def _register_flask_datasets() -> dict[str, DatasetInfo]:
             n_items=n_items,
             subject_entity="model",
             item_entity="instruction",
-            filename=f"flask/{skill}.pt",
+            filename=f"{skill}.pt",
             citation=_FLASK_CITATION,
             url=_FLASK_URL,
             license="Apache-2.0",

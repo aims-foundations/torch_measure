@@ -84,8 +84,8 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
     # --- Default config (all Alpaca variants combined) ---
 
     # Helpfulness: combined train+test
-    datasets["pku_saferlhf/helpfulness"] = DatasetInfo(
-        name="pku_saferlhf/helpfulness",
+    datasets["helpfulness"] = DatasetInfo(
+        name="helpfulness",
         family="pku_saferlhf",
         description=(
             "PKU-SafeRLHF helpfulness preference pairs "
@@ -97,7 +97,7 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
         n_comparisons=82118,
         subject_entity="response",
         item_entity="prompt_pair",
-        filename="pku_saferlhf/helpfulness.pt",
+        filename="helpfulness.pt",
         citation=_PKU_SAFERLHF_CITATION,
         url=_PKU_SAFERLHF_URL,
         license="CC-BY-NC-4.0",
@@ -105,8 +105,8 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
     )
 
     # Safety: combined train+test
-    datasets["pku_saferlhf/safety"] = DatasetInfo(
-        name="pku_saferlhf/safety",
+    datasets["safety"] = DatasetInfo(
+        name="safety",
         family="pku_saferlhf",
         description=(
             "PKU-SafeRLHF safety preference pairs "
@@ -118,7 +118,7 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
         n_comparisons=82118,
         subject_entity="response",
         item_entity="prompt_pair",
-        filename="pku_saferlhf/safety.pt",
+        filename="safety.pt",
         citation=_PKU_SAFERLHF_CITATION,
         url=_PKU_SAFERLHF_URL,
         license="CC-BY-NC-4.0",
@@ -137,8 +137,8 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
         _train, _test, total = _CONFIG_SIZES[config]
 
         # Helpfulness
-        datasets[f"pku_saferlhf/{friendly_name}_helpfulness"] = DatasetInfo(
-            name=f"pku_saferlhf/{friendly_name}_helpfulness",
+        datasets[f"{friendly_name}_helpfulness"] = DatasetInfo(
+            name=f"{friendly_name}_helpfulness",
             family="pku_saferlhf",
             description=(
                 f"PKU-SafeRLHF helpfulness preference pairs "
@@ -150,7 +150,7 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
             n_comparisons=total,
             subject_entity="response",
             item_entity="prompt_pair",
-            filename=f"pku_saferlhf/{friendly_name}_helpfulness.pt",
+            filename=f"{friendly_name}_helpfulness.pt",
             citation=_PKU_SAFERLHF_CITATION,
             url=_PKU_SAFERLHF_URL,
             license="CC-BY-NC-4.0",
@@ -158,8 +158,8 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
         )
 
         # Safety
-        datasets[f"pku_saferlhf/{friendly_name}_safety"] = DatasetInfo(
-            name=f"pku_saferlhf/{friendly_name}_safety",
+        datasets[f"{friendly_name}_safety"] = DatasetInfo(
+            name=f"{friendly_name}_safety",
             family="pku_saferlhf",
             description=(
                 f"PKU-SafeRLHF safety preference pairs "
@@ -171,7 +171,7 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
             n_comparisons=total,
             subject_entity="response",
             item_entity="prompt_pair",
-            filename=f"pku_saferlhf/{friendly_name}_safety.pt",
+            filename=f"{friendly_name}_safety.pt",
             citation=_PKU_SAFERLHF_CITATION,
             url=_PKU_SAFERLHF_URL,
             license="CC-BY-NC-4.0",

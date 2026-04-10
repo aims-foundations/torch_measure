@@ -49,8 +49,8 @@ def _register_biggen_datasets() -> dict[str, DatasetInfo]:
 
     # --- Per-judge 2D response matrices (99 models x 695 items) ---
 
-    datasets["biggen/gpt4"] = DatasetInfo(
-        name="biggen/gpt4",
+    datasets["gpt4"] = DatasetInfo(
+        name="gpt4",
         family="biggen",
         description="BiGGen-Bench scored by GPT-4-1106 (99 models x 695 items)",
         response_type="continuous",
@@ -58,15 +58,15 @@ def _register_biggen_datasets() -> dict[str, DatasetInfo]:
         n_items=695,
         subject_entity="LLM",
         item_entity="task",
-        filename="biggen/gpt4.pt",
+        filename="gpt4.pt",
         citation=_BIGGEN_CITATION,
         url=_BIGGEN_URL,
         license="Apache-2.0",
         tags=["multi-judge", "g-theory", "llm-as-judge", "gpt4"],
     )
 
-    datasets["biggen/gpt4_turbo"] = DatasetInfo(
-        name="biggen/gpt4_turbo",
+    datasets["gpt4_turbo"] = DatasetInfo(
+        name="gpt4_turbo",
         family="biggen",
         description="BiGGen-Bench scored by GPT-4-Turbo-2024-04-09 (99 models x 695 items)",
         response_type="continuous",
@@ -74,15 +74,15 @@ def _register_biggen_datasets() -> dict[str, DatasetInfo]:
         n_items=695,
         subject_entity="LLM",
         item_entity="task",
-        filename="biggen/gpt4_turbo.pt",
+        filename="gpt4_turbo.pt",
         citation=_BIGGEN_CITATION,
         url=_BIGGEN_URL,
         license="Apache-2.0",
         tags=["multi-judge", "g-theory", "llm-as-judge", "gpt4-turbo"],
     )
 
-    datasets["biggen/claude"] = DatasetInfo(
-        name="biggen/claude",
+    datasets["claude"] = DatasetInfo(
+        name="claude",
         family="biggen",
         description="BiGGen-Bench scored by Claude-3-Opus (99 models x 695 items)",
         response_type="continuous",
@@ -90,15 +90,15 @@ def _register_biggen_datasets() -> dict[str, DatasetInfo]:
         n_items=695,
         subject_entity="LLM",
         item_entity="task",
-        filename="biggen/claude.pt",
+        filename="claude.pt",
         citation=_BIGGEN_CITATION,
         url=_BIGGEN_URL,
         license="Apache-2.0",
         tags=["multi-judge", "g-theory", "llm-as-judge", "claude"],
     )
 
-    datasets["biggen/prometheus"] = DatasetInfo(
-        name="biggen/prometheus",
+    datasets["prometheus"] = DatasetInfo(
+        name="prometheus",
         family="biggen",
         description="BiGGen-Bench scored by Prometheus-2-8x7B (99 models x 695 items)",
         response_type="continuous",
@@ -106,15 +106,15 @@ def _register_biggen_datasets() -> dict[str, DatasetInfo]:
         n_items=695,
         subject_entity="LLM",
         item_entity="task",
-        filename="biggen/prometheus.pt",
+        filename="prometheus.pt",
         citation=_BIGGEN_CITATION,
         url=_BIGGEN_URL,
         license="Apache-2.0",
         tags=["multi-judge", "g-theory", "llm-as-judge", "prometheus"],
     )
 
-    datasets["biggen/prometheus_bgb"] = DatasetInfo(
-        name="biggen/prometheus_bgb",
+    datasets["prometheus_bgb"] = DatasetInfo(
+        name="prometheus_bgb",
         family="biggen",
         description="BiGGen-Bench scored by Prometheus-2-8x7B-BGB (99 models x 695 items)",
         response_type="continuous",
@@ -122,7 +122,7 @@ def _register_biggen_datasets() -> dict[str, DatasetInfo]:
         n_items=695,
         subject_entity="LLM",
         item_entity="task",
-        filename="biggen/prometheus_bgb.pt",
+        filename="prometheus_bgb.pt",
         citation=_BIGGEN_CITATION,
         url=_BIGGEN_URL,
         license="Apache-2.0",
@@ -131,8 +131,8 @@ def _register_biggen_datasets() -> dict[str, DatasetInfo]:
 
     # --- Combined 3D tensor (99 models x 695 items x 5 judges) ---
 
-    datasets["biggen/all_judges"] = DatasetInfo(
-        name="biggen/all_judges",
+    datasets["all_judges"] = DatasetInfo(
+        name="all_judges",
         family="biggen",
         description="BiGGen-Bench all 5 judges combined, 3D tensor (99 models x 695 items x 5 judges)",
         response_type="continuous",
@@ -140,7 +140,7 @@ def _register_biggen_datasets() -> dict[str, DatasetInfo]:
         n_items=695,
         subject_entity="LLM",
         item_entity="task",
-        filename="biggen/all_judges.pt",
+        filename="all_judges.pt",
         citation=_BIGGEN_CITATION,
         url=_BIGGEN_URL,
         license="Apache-2.0",

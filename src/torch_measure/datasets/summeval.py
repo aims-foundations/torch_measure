@@ -63,7 +63,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
     # --- Expert 2D response matrices (16 models x 100 docs) ---
 
     for dim in _DIMENSIONS:
-        name = f"summeval/expert_{dim}"
+        name = f"expert_{dim}"
         datasets[name] = DatasetInfo(
             name=name,
             family="summeval",
@@ -76,7 +76,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
             n_items=_N_DOCS,
             subject_entity="model",
             item_entity="document",
-            filename=f"summeval/expert_{dim}.pt",
+            filename=f"expert_{dim}.pt",
             citation=_SUMMEVAL_CITATION,
             url=_SUMMEVAL_URL,
             license="MIT",
@@ -84,8 +84,8 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
         )
 
     # Expert overall (mean of 4 dimensions)
-    datasets["summeval/expert_overall"] = DatasetInfo(
-        name="summeval/expert_overall",
+    datasets["expert_overall"] = DatasetInfo(
+        name="expert_overall",
         family="summeval",
         description=(
             "SummEval expert overall rating (mean of 4 dimensions), "
@@ -96,7 +96,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_DOCS,
         subject_entity="model",
         item_entity="document",
-        filename="summeval/expert_overall.pt",
+        filename="expert_overall.pt",
         citation=_SUMMEVAL_CITATION,
         url=_SUMMEVAL_URL,
         license="MIT",
@@ -106,7 +106,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
     # --- Crowd 2D response matrices (16 models x 100 docs) ---
 
     for dim in _DIMENSIONS:
-        name = f"summeval/crowd_{dim}"
+        name = f"crowd_{dim}"
         datasets[name] = DatasetInfo(
             name=name,
             family="summeval",
@@ -119,7 +119,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
             n_items=_N_DOCS,
             subject_entity="model",
             item_entity="document",
-            filename=f"summeval/crowd_{dim}.pt",
+            filename=f"crowd_{dim}.pt",
             citation=_SUMMEVAL_CITATION,
             url=_SUMMEVAL_URL,
             license="MIT",
@@ -127,8 +127,8 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
         )
 
     # Crowd overall (mean of 4 dimensions)
-    datasets["summeval/crowd_overall"] = DatasetInfo(
-        name="summeval/crowd_overall",
+    datasets["crowd_overall"] = DatasetInfo(
+        name="crowd_overall",
         family="summeval",
         description=(
             "SummEval crowd overall rating (mean of 4 dimensions), "
@@ -139,7 +139,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_DOCS,
         subject_entity="model",
         item_entity="document",
-        filename="summeval/crowd_overall.pt",
+        filename="crowd_overall.pt",
         citation=_SUMMEVAL_CITATION,
         url=_SUMMEVAL_URL,
         license="MIT",
@@ -148,8 +148,8 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
 
     # --- 3D expert tensor (16 models x 100 docs x 3 experts) ---
 
-    datasets["summeval/expert_3d"] = DatasetInfo(
-        name="summeval/expert_3d",
+    datasets["expert_3d"] = DatasetInfo(
+        name="expert_3d",
         family="summeval",
         description=(
             "SummEval 3D expert tensor, per-expert mean-of-4-dimensions "
@@ -160,7 +160,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
         n_items=_N_DOCS,
         subject_entity="model",
         item_entity="document",
-        filename="summeval/expert_3d.pt",
+        filename="expert_3d.pt",
         citation=_SUMMEVAL_CITATION,
         url=_SUMMEVAL_URL,
         license="MIT",

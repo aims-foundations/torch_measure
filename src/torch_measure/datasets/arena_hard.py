@@ -44,8 +44,8 @@ def _register_arena_hard_datasets() -> dict[str, DatasetInfo]:
     """
     datasets: dict[str, DatasetInfo] = {}
 
-    datasets["arena_hard/judgments"] = DatasetInfo(
-        name="arena_hard/judgments",
+    datasets["judgments"] = DatasetInfo(
+        name="judgments",
         family="arena_hard",
         description=(
             "Arena-Hard-Auto v0.1 judgments: GPT-4-Turbo judge scores "
@@ -56,7 +56,7 @@ def _register_arena_hard_datasets() -> dict[str, DatasetInfo]:
         n_items=500,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="arena_hard/judgments.pt",
+        filename="judgments.pt",
         citation=_ARENA_HARD_CITATION,
         url=_ARENA_HARD_URL,
         license="Apache-2.0",

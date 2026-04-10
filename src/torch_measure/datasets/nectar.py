@@ -59,8 +59,8 @@ def _register_nectar_datasets() -> dict[str, DatasetInfo]:
     datasets: dict[str, DatasetInfo] = {}
 
     # --- All prompts ---
-    datasets["nectar/all"] = DatasetInfo(
-        name="nectar/all",
+    datasets["all"] = DatasetInfo(
+        name="all",
         family="nectar",
         description=(
             "Nectar — all prompts, normalized rank scores "
@@ -71,7 +71,7 @@ def _register_nectar_datasets() -> dict[str, DatasetInfo]:
         n_items=182954,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="nectar/all.pt",
+        filename="all.pt",
         citation=_NECTAR_CITATION,
         url=_NECTAR_URL,
         license="CC-BY-NC-4.0",
@@ -79,8 +79,8 @@ def _register_nectar_datasets() -> dict[str, DatasetInfo]:
     )
 
     # --- 50K subset ---
-    datasets["nectar/50k"] = DatasetInfo(
-        name="nectar/50k",
+    datasets["50k"] = DatasetInfo(
+        name="50k",
         family="nectar",
         description=(
             "Nectar — 50K random prompt subset, normalized rank scores "
@@ -91,7 +91,7 @@ def _register_nectar_datasets() -> dict[str, DatasetInfo]:
         n_items=50000,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="nectar/50k.pt",
+        filename="50k.pt",
         citation=_NECTAR_CITATION,
         url=_NECTAR_URL,
         license="CC-BY-NC-4.0",
