@@ -39,7 +39,7 @@ PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-HF_TOKEN = os.environ.get("HF_TOKEN", "")
+HF_TOKEN = os.environ.get("HF_TOKEN") or None
 
 SRC_FEEDBACK_REPO = "prometheus-eval/Feedback-Collection"
 SRC_PREFERENCE_REPO = "prometheus-eval/Preference-Collection"
@@ -194,7 +194,7 @@ def build_feedback_matrix(scores_df):
     print(f"  Matrix: {n_criteria} criteria x {n_instances} instances")
 
     # Save
-    output_path = os.path.join(PROCESSED_DIR, "feedback_response_matrix.csv")
+    output_path = os.path.join(PROCESSED_DIR, "response_matrix.csv")
     matrix_df.to_csv(output_path)
     print(f"  Saved: {output_path}")
 
@@ -222,7 +222,7 @@ def build_preference_matrix(pref_df):
     print(f"  Matrix: {n_criteria} criteria x {n_instances} instances")
 
     # Save
-    output_path = os.path.join(PROCESSED_DIR, "preference_response_matrix.csv")
+    output_path = os.path.join(PROCESSED_DIR, "response_matrix_preference.csv")
     matrix_df.to_csv(output_path)
     print(f"  Saved: {output_path}")
 

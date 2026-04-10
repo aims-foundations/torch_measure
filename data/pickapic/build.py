@@ -34,6 +34,8 @@ Outputs:
   - processed/model_pair_stats.csv:    Win-rate matrix between model pairs
   - processed/model_summary.csv:       Per-model aggregate statistics
   - processed/prompt_stats.csv:        Per-prompt comparison counts
+  - processed/response_matrix.csv:     Models (rows) x prompts (columns),
+                                       mean preference score in [0,1] per (model, prompt)
 """
 
 from pathlib import Path
@@ -273,6 +275,73 @@ def build_model_summary(df, all_models):
     return model_df
 
 
+def build_response_matrix(df, all_models, min_prompt_n=2):
+    """Build a models x prompts response matrix.
+
+    For each (model, prompt) pair, compute the mean preference score
+    across all comparisons where the model generated one of the two images.
+    Score in [0, 1]: 1.0 = always preferred, 0.5 = tie, 0.0 = never preferred.
+
+    Prompts seen in fewer than ``min_prompt_n`` comparisons are dropped to
+    reduce sparsity and matrix size.
+    """
+    print(f"\n{'='*60}")
+    print("Building response matrix (models x prompts)...")
+    print(f"{'='*60}")
+
+    # Reshape to long form: one row per (comparison, model, preference)
+    print("  Reshaping to long form...")
+    part_0 = df[["caption", "model_0", "label_0"]].rename(
+        columns={"model_0": "model", "label_0": "pref"}
+    )
+    part_1 = df[["caption", "model_1", "label_1"]].rename(
+        columns={"model_1": "model", "label_1": "pref"}
+    )
+    long_df = pd.concat([part_0, part_1], ignore_index=True)
+    long_df = long_df.dropna(subset=["caption", "model", "pref"])
+
+    # Filter prompts with few comparisons
+    prompt_counts = long_df.groupby("caption").size()
+    keep_prompts = prompt_counts[prompt_counts >= min_prompt_n].index
+    print(f"  Prompts kept (n_comparisons >= {min_prompt_n}): "
+          f"{len(keep_prompts):,} / {len(prompt_counts):,}")
+    long_df = long_df[long_df["caption"].isin(keep_prompts)]
+
+    # Aggregate: mean preference per (model, caption)
+    print("  Aggregating mean preference per (model, prompt)...")
+    agg = (
+        long_df.groupby(["model", "caption"])["pref"]
+        .mean()
+        .reset_index()
+    )
+
+    # Pivot: rows=models, cols=captions
+    matrix = agg.pivot(index="model", columns="caption", values="pref")
+    matrix.index.name = "Model"
+
+    n_models, n_prompts = matrix.shape
+    print(f"  Matrix shape: {n_models} models x {n_prompts:,} prompts")
+    fill_rate = matrix.notna().sum().sum() / (n_models * n_prompts)
+    print(f"  Fill rate: {fill_rate*100:.1f}%")
+
+    # Save with integer prompt IDs to keep file size small
+    prompt_ids = [f"prompt_{i}" for i in range(n_prompts)]
+    captions = list(matrix.columns)
+    matrix.columns = prompt_ids
+
+    output_path = os.path.join(PROCESSED_DIR, "response_matrix.csv")
+    matrix.to_csv(output_path)
+    print(f"  Saved: {output_path}")
+
+    # Save item_content mapping
+    ic_df = pd.DataFrame({"item_id": prompt_ids, "content": captions})
+    ic_path = os.path.join(PROCESSED_DIR, "item_content.csv")
+    ic_df.to_csv(ic_path, index=False)
+    print(f"  Saved: {ic_path}")
+
+    return matrix
+
+
 def build_prompt_stats(df):
     """Build per-prompt comparison counts."""
     print(f"\n{'='*60}")
@@ -336,6 +405,11 @@ def main():
     print("\nSTEP 6: Building per-prompt statistics")
     print("-" * 60)
     prompt_df = build_prompt_stats(df)
+
+    # Step 7: Build model x prompt response matrix
+    print("\nSTEP 7: Building response matrix")
+    print("-" * 60)
+    build_response_matrix(df, all_models)
 
     # Final summary
     print(f"\n{'='*60}")

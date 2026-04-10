@@ -44,7 +44,7 @@ PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-HF_TOKEN = os.environ.get("HF_TOKEN", "")
+HF_TOKEN = os.environ.get("HF_TOKEN") or None
 
 SRC_REPO = "namkoong-lab/PersonalLLM"
 
@@ -208,7 +208,11 @@ def build_subject_summary(matrix_df):
 
     subject_df = pd.DataFrame(rows)
     subject_df = subject_df.sort_values("mean_score", ascending=False)
-    output_path = os.path.join(PROCESSED_DIR, "subject_summary.csv")
+    # Add 'model' alias column so upload_to_hf.py picks up subject metadata.
+    subject_df["model"] = subject_df["reward_model"]
+    cols = ["model"] + [c for c in subject_df.columns if c != "model"]
+    subject_df = subject_df[cols]
+    output_path = os.path.join(PROCESSED_DIR, "model_summary.csv")
     subject_df.to_csv(output_path, index=False)
     print(f"\n  Subject summary saved: {output_path}")
     return subject_df

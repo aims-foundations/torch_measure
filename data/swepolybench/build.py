@@ -208,10 +208,16 @@ def main():
     print(f"    Shape: {rm_verified.shape}")
     print(f"    Models: {list(rm_verified.columns)}")
 
-    rm_full.to_csv(PROCESSED_DIR / "response_matrix_full.csv")
-    print(f"  Saved: {PROCESSED_DIR / 'response_matrix_full.csv'}")
-    print(f"    Shape: {rm_full.shape}")
-    print(f"    Models: {list(rm_full.columns)}")
+    # Only save "full" matrix if it has at least 2 models (single-model
+    # matrices are trivially IRT-invalid). Currently only iSWE-Agent is
+    # evaluated on the full 2110-item set.
+    if rm_full.shape[1] >= 2:
+        rm_full.to_csv(PROCESSED_DIR / "response_matrix_full.csv")
+        print(f"  Saved: {PROCESSED_DIR / 'response_matrix_full.csv'}")
+        print(f"    Shape: {rm_full.shape}")
+        print(f"    Models: {list(rm_full.columns)}")
+    else:
+        print(f"  Skipping response_matrix_full.csv: only {rm_full.shape[1]} model(s)")
 
     # ---- 5. Save instance metadata ----
     print("\n--- Saving instance metadata ---")

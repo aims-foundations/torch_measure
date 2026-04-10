@@ -94,8 +94,37 @@ def clone_repo():
         )
 
 
+def _verdict_to_score(verdict_str):
+    """Convert a verdict string (e.g., 'A>>B', 'B>A', 'A=B') to numeric score."""
+    if not verdict_str:
+        return None
+    # Normalize 'tie' variants to 'tie'
+    v = verdict_str.strip()
+    if v in ("A=B", "B=A", "tie"):
+        return 0.5
+    if v in JUDGMENT_MAP:
+        return JUDGMENT_MAP[v]
+    # Try extracting from [[X]] pattern
+    import re
+    m = re.search(r"\[\[([^\]]+)\]\]", verdict_str)
+    if m:
+        inner = m.group(1).strip()
+        if inner in JUDGMENT_MAP:
+            return JUDGMENT_MAP[inner]
+        if inner in ("A=B", "B=A", "tie"):
+            return 0.5
+    return None
+
+
 def parse_judgment_jsonl(filepath):
-    """Parse a single judgment JSONL file, return dict of {question_id: score}."""
+    """Parse a single judgment JSONL file, return dict of {question_id: score}.
+
+    Arena-Hard format: each row has fields (uid, category, judge, model, baseline, games).
+    games is a list of dicts each with (user_prompt, judgment, score). The `score`
+    field is already a verdict string like 'A>>B', 'A>B', 'A=B', 'B>A', 'B>>A'.
+    Multiple games per row correspond to the two orderings (model-first, baseline-first);
+    we average the numeric scores.
+    """
     scores = {}
     with open(filepath, "r") as f:
         for line in f:
@@ -107,64 +136,54 @@ def parse_judgment_jsonl(filepath):
             except json.JSONDecodeError:
                 continue
 
-            question_id = record.get("question_id", "")
-            # Games may have multiple turns; take the judgment from the record
-            # The judgment field contains the verdict string
-            judgment_str = ""
+            # Question identifier
+            question_id = (
+                record.get("uid")
+                or record.get("question_id")
+                or record.get("id")
+                or ""
+            )
+            if not question_id:
+                continue
 
-            # Try different field names
-            for field in ["judgment", "judge", "result"]:
-                if field in record:
-                    judgment_str = str(record[field])
-                    break
-
-            # Also check nested games structure
+            game_scores = []
             games = record.get("games", [])
-            if games and isinstance(games, list):
-                # Use first game's judgment
-                game = games[0] if len(games) > 0 else {}
-                judgment_str = str(game.get("judgment", judgment_str))
-                # Some formats store the score directly
-                if "score" in game:
-                    judgment_str = str(game["score"])
+            if isinstance(games, list) and len(games) > 0:
+                for i, game in enumerate(games):
+                    if not isinstance(game, dict):
+                        continue
+                    # Prefer the 'score' field (already a verdict string)
+                    verdict = game.get("score", "")
+                    s = _verdict_to_score(str(verdict))
+                    if s is None:
+                        # Fall back to parsing judgment text
+                        s = _verdict_to_score(str(game.get("judgment", "")))
+                    if s is None:
+                        continue
+                    # In arena-hard the two games swap A/B roles.
+                    # Game 0: A=baseline, B=model (so "B>A" means model wins).
+                    # Game 1: A=model, B=baseline (so "A>B" means model wins).
+                    # We flip game 0 to normalize: always "model vs baseline".
+                    if i % 2 == 0:
+                        s = 1.0 - s
+                    game_scores.append(s)
 
-            # Extract verdict from judgment text
-            score = None
-            # Check for explicit verdict patterns in the text
-            for verdict, val in JUDGMENT_MAP.items():
-                if verdict in judgment_str:
-                    score = val
-                    break
+            if not game_scores:
+                # Try top-level score field
+                top_score = record.get("score")
+                if isinstance(top_score, (int, float)):
+                    game_scores.append(float(top_score))
+                elif isinstance(top_score, str):
+                    s = _verdict_to_score(top_score)
+                    if s is not None:
+                        game_scores.append(s)
 
-            # Also try extracting from [[X]] pattern
-            if score is None:
-                import re
-
-                match = re.search(r"\[\[([^\]]+)\]\]", judgment_str)
-                if match:
-                    verdict_text = match.group(1).strip()
-                    for verdict, val in JUDGMENT_MAP.items():
-                        if verdict == verdict_text:
-                            score = val
-                            break
-
-            # Try direct score field
-            if score is None and "score" in record:
-                try:
-                    raw_score = record["score"]
-                    if isinstance(raw_score, (int, float)):
-                        score = float(raw_score)
-                    elif isinstance(raw_score, str) and raw_score in JUDGMENT_MAP:
-                        score = JUDGMENT_MAP[raw_score]
-                except (ValueError, TypeError):
-                    pass
-
-            if question_id and score is not None:
-                # Average multiple games if question_id already seen
+            if game_scores:
+                avg = sum(game_scores) / len(game_scores)
                 if question_id in scores:
-                    scores[question_id] = (scores[question_id] + score) / 2.0
+                    scores[question_id] = (scores[question_id] + avg) / 2.0
                 else:
-                    scores[question_id] = score
+                    scores[question_id] = avg
 
     return scores
 

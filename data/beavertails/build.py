@@ -47,7 +47,7 @@ PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-HF_TOKEN = os.environ.get("HF_TOKEN", "")
+HF_TOKEN = os.environ.get("HF_TOKEN") or None
 
 SRC_REPO = "PKU-Alignment/BeaverTails"
 

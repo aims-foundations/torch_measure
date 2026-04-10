@@ -180,8 +180,11 @@ def main():
             print(f"    Min:         {np.min(valid_vals):.3f}")
             print(f"    Max:         {np.max(valid_vals):.3f}")
 
-        # Save
-        output_path = PROCESSED_DIR / f"response_matrix_{name}.csv"
+        # Save - "overall" becomes the default response_matrix.csv
+        if name == "overall":
+            output_path = PROCESSED_DIR / "response_matrix.csv"
+        else:
+            output_path = PROCESSED_DIR / f"response_matrix_{name}.csv"
         mat.to_csv(output_path)
         print(f"    Saved: {output_path}")
 

@@ -296,6 +296,40 @@ def main():
             print(f"\n  Games: {df[game_col].nunique()}")
             print(f"  Metrics: {metric_cols}")
 
+        # Build response matrices: rows = methods (agents), columns = games
+        print("\n" + "=" * 60)
+        print("BUILDING RESPONSE MATRICES")
+        print("=" * 60)
+
+        # Primary response matrix: in-game reward (points), higher = better
+        # Normalize to [0, 1] using min/max across the matrix
+        rm_points = df.pivot(index="method", columns="game", values="points")
+        rm_points.index.name = "model"
+        rm_norm = (rm_points - rm_points.min().min()) / (
+            rm_points.max().max() - rm_points.min().min()
+        )
+        out_rm = PROCESSED_DIR / "response_matrix.csv"
+        rm_norm.to_csv(out_rm)
+        print(f"  Saved primary response matrix (points, normalized): {out_rm}")
+        print(f"    Shape: {rm_norm.shape} (methods x games)")
+
+        # Auxiliary matrix: ethical violations (higher = worse)
+        rm_viol = df.pivot(index="method", columns="game", values="violations.Σ")
+        rm_viol.index.name = "model"
+        # Normalize then invert so higher = safer/better (1 - normalized)
+        rm_viol_n = (rm_viol - rm_viol.min().min()) / (
+            rm_viol.max().max() - rm_viol.min().min()
+        )
+        rm_viol_safety = 1.0 - rm_viol_n
+        out_rm_viol = PROCESSED_DIR / "response_matrix_ethics.csv"
+        rm_viol_safety.to_csv(out_rm_viol)
+        print(f"  Saved ethics response matrix (1 - normalized violations): {out_rm_viol}")
+        print(f"    Shape: {rm_viol_safety.shape}")
+
+        # Save raw (unnormalized) pivots for reference
+        rm_points.to_csv(PROCESSED_DIR / "machiavelli_points_pivot.csv")
+        rm_viol.to_csv(PROCESSED_DIR / "machiavelli_violations_pivot.csv")
+
     # Overall summary
     summary_rows = [
         {"metric": "n_result_files", "value": len(results_dfs)},

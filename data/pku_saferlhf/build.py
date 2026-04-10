@@ -38,7 +38,7 @@ PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-HF_TOKEN = os.environ.get("HF_TOKEN", "")
+HF_TOKEN = os.environ.get("HF_TOKEN") or None
 HF_SOURCE = "PKU-Alignment/PKU-SafeRLHF"
 
 CONFIGS = ["default", "alpaca-7b", "alpaca2-7b", "alpaca3-8b"]
@@ -206,6 +206,44 @@ def build_harm_category_stats(df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values("total_count", ascending=False)
 
 
+def build_response_matrix(df: pd.DataFrame) -> pd.DataFrame:
+    """Build a (harm-category x response) binary response matrix.
+
+    Each pair contributes two response items (one per side). Rows are the
+    19 harm categories plus an overall `is_unsafe` row. Values are binary
+    {0, 1} where 1 indicates that category (or overall unsafe) is flagged
+    for that response.
+    """
+    n_pairs = len(df)
+    n_items = 2 * n_pairs
+    subject_ids = ["is_unsafe"] + HARM_CATEGORIES
+    n_subjects = len(subject_ids)
+
+    matrix = np.zeros((n_subjects, n_items), dtype=np.float64)
+    item_ids = [None] * n_items
+
+    for i, (_, row) in enumerate(df.iterrows()):
+        base = f"{row['config']}_{row['split']}_{int(row['pair_idx'])}"
+        # response 0
+        col0 = 2 * i
+        item_ids[col0] = f"{base}_resp0"
+        matrix[0, col0] = 0.0 if bool(row["is_response_0_safe"]) else 1.0
+        for j, cat in enumerate(HARM_CATEGORIES):
+            key = f"resp0_harm_{cat}"
+            matrix[j + 1, col0] = 1.0 if bool(row.get(key, False)) else 0.0
+        # response 1
+        col1 = 2 * i + 1
+        item_ids[col1] = f"{base}_resp1"
+        matrix[0, col1] = 0.0 if bool(row["is_response_1_safe"]) else 1.0
+        for j, cat in enumerate(HARM_CATEGORIES):
+            key = f"resp1_harm_{cat}"
+            matrix[j + 1, col1] = 1.0 if bool(row.get(key, False)) else 0.0
+
+    matrix_df = pd.DataFrame(matrix, index=subject_ids, columns=item_ids)
+    matrix_df.index.name = "category"
+    return matrix_df
+
+
 def main():
     print("PKU-SafeRLHF Response Matrix Builder")
     print("=" * 60)
@@ -265,6 +303,15 @@ def main():
         harm_path = os.path.join(PROCESSED_DIR, "harm_category_stats.csv")
         harm_stats.to_csv(harm_path, index=False)
         print(f"  Saved: {harm_path}")
+
+        # Build and save the category x response binary matrix.
+        print("\n  Building response matrix (categories x responses) ...")
+        matrix_df = build_response_matrix(default_df)
+        rm_path = os.path.join(PROCESSED_DIR, "response_matrix.csv")
+        matrix_df.to_csv(rm_path)
+        n_subs, n_items = matrix_df.shape
+        print(f"  Saved: {rm_path}")
+        print(f"  Shape: {n_subs} categories x {n_items:,} response items")
 
         print(f"\n  Harm category distribution (top 10):")
         for _, row in harm_stats.head(10).iterrows():

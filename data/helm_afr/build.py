@@ -17,11 +17,11 @@ Usage:
     python 01_build_response_matrix.py [--skip-download] [--workers 8]
 """
 
-import sys
 from __future__ import annotations
 
 import argparse
 import json
+import sys
 import os
 import urllib.parse
 import urllib.request

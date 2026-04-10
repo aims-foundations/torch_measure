@@ -42,12 +42,11 @@ docs/_build/
 *.pkl
 *.parquet
 
-# Data artifacts (keep scripts/, ignore raw data and processed outputs)
+# Data artifacts (keep build.py, ignore raw data and processed outputs except heatmap PNGs)
 data/*/raw/
 data/*/raw_results/
-data/*/processed/
-data/*/figures/*
-!data/*/figures/*_heatmap.png
+data/*/processed/*
+!data/*/processed/response_matrix*.png
 data/*/traces/
 data/benchmark_papers/
 

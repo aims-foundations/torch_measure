@@ -31,16 +31,22 @@ BENCHMARKS = [
     # Coding & software engineering
     "bfcl", "livecodebench", "swebench", "swebench_full", "swebench_java",
     "swebench_multilingual", "bigcodebench", "evalplus", "cruxeval",
-    "swepolybench", "editbench", "aider",
+    "swepolybench", "editbench",
     # Agent benchmarks
     "dpai", "agentdojo", "mlebench", "taubench", "cybench", "corebench",
     "paperbench", "visualwebarena", "appworld", "scienceagentbench",
-    "agentbench", "androidworld", "browsergym", "toolbench", "workarena",
+    "androidworld", "toolbench", "workarena",
     "theagentcompany", "terminal_bench",
     # General knowledge & reasoning
     "mmlupro", "gaia", "hle", "livebench", "matharena", "osworld", "arcagi",
     "alpacaeval", "wildbench", "ultrafeedback", "rewardbench", "judgebench",
     "summeval", "prm800k", "wmt_mqm", "vl_rewardbench", "prism",
+    # Reward / judge / preference benchmarks
+    "rewardbench2", "indeterminacy", "flask", "prometheus", "personalllm",
+    "helpsteer2",
+    # Preference / pairwise datasets with per-item response matrices
+    "arena_140k", "arena_hard", "mtbench", "nectar", "biggen",
+    "preference_dissection", "oasst", "shp2", "pickapic",
     # Vision-language
     "ai2d_test", "hallusionbench", "mathvista_mini", "mmbench_v11", "mme",
     "mmmu_dev_val",
@@ -48,32 +54,69 @@ BENCHMARKS = [
     "financebench", "igakuqa", "igakuqa119", "lawbench", "tumlu", "legaleval",
     # Multilingual
     "afrieval", "afrimedqa", "culturaleval", "bridging_gap", "sib200",
-    "ko_leaderboard", "la_leaderboard", "pt_leaderboard", "thai_leaderboard",
     "helm_afr", "helm_cleva", "helm_thaiexam", "rakuda", "tengu",
+    "kmmlu", "kormedmcqa",
     # Safety & red teaming
-    "aegis", "bbq", "jailbreakbench", "ai_safety_index", "chatgpt_drift",
-    # Monitoring & incidents
-    "ca_dmv_disengagement", "nhtsa_sgo",
+    "aegis", "bbq", "jailbreakbench", "chatgpt_drift",
+    "beavertails", "pku_saferlhf",
+    "faithcot", "llmail_inject",
     # Intervention / treatment-response
     "collab_cxr", "metr_early2025", "metr_late2025", "haiid", "genai_learning",
+    # Agent benchmarks
+    "clinebench", "webarena",
+    # Safety red teaming
+    "machiavelli",
 ]
 
-# Benchmarks without item-level model responses yet — either no public
-# per-item predictions, pairwise preference data, or complex pipelines.
+# Benchmarks with aggregate-only model data (no per-item cells).
+# These have multi-model data but at the level of condition/category/metric
+# rates, not individual items. Cells are already averages across trials or
+# sub-benchmarks. They can still be used for model-level comparisons but
+# aren't proper IRT response matrices.
+# Run with: python reproduce.py --aggregate
+BENCHMARKS_AGGREGATE = [
+    # Safety / red teaming (extracted from paper tables)
+    "agent_safetybench",       # 16 models x 18 categories (from paper Tables 5+6)
+    "agentharm",               # 15 models x 9 conditions (from paper Table 9)
+    "agentic_misalignment",    # 18 models x 18 scenario conditions (from appendix)
+    # Model × sub-benchmark aggregate scores
+    "aider",                   # 178 models x 6 aider benchmarks (pass_rate_2 aggregates)
+    "agentbench",              # 29 models x 8 environment types (OS, DB, KG, ...)
+    "browsergym",              # 18 agents x 8 sub-benchmarks (MiniWoB, WebArena, ...)
+    "ko_leaderboard",          # 1159 models x 9 Korean benchmarks
+    "la_leaderboard",          # 69 models x 70 Latin/Iberian benchmarks
+    "pt_leaderboard",          # 1148 models x 10 Portuguese benchmarks
+    "thai_leaderboard",        # 72 models x 19 Thai benchmarks
+    # Governance / safety meta-analytic data (rows are companies/manufacturers)
+    "ai_safety_index",         # 8 companies x 6 policy domains
+    "ca_dmv_disengagement",    # 16 manufacturers x 7 location types
+    "nhtsa_sgo",               # 27 manufacturers x 17 vehicle types
+]
+
+# Benchmarks without any multi-model evaluation data yet — questions-only
+# datasets, catalogs, conversation logs, or pipelines not yet wired up.
 # Run with: python reproduce.py --pending
 BENCHMARKS_PENDING = [
     # No public per-item model predictions
-    "ceval", "cmmlu", "fineval", "kmmlu",
-    # Preference / pairwise datasets
-    "arena_140k", "arena_hard", "mtbench", "nectar", "biggen",
-    "preference_dissection", "indeterminacy", "hh_rlhf", "oasst", "helpsteer2",
-    "shp2", "rewardbench2", "flask", "prometheus", "beavertails",
-    "pku_saferlhf", "personalllm", "pickapic",
+    "ceval", "cmmlu", "fineval",
+    # Preference datasets without model identities
+    # (hh_rlhf is chosen/rejected text without per-model labels)
+    "hh_rlhf",
     # Medical benchmarks (questions only)
-    "cmb", "cmexam", "frenchmedmcqa", "kormedmcqa", "medarabiq", "medexpqa",
+    "cmb", "cmexam", "frenchmedmcqa", "medarabiq", "medexpqa",
     "medqa_chinese", "mmedbench", "permedcqa",
-    # Complex pipelines
-    "webarena",
+    # Safety / red teaming (no per-item response matrices)
+    "apollo_deception", "cot_safety_behaviors", "cot_unfaithfulness",
+    "gandalf", "lmsys_toxicchat",
+    "reward_hacks", "safeagentbench", "sycophancy_subterfuge",
+    "tensortrust", "atbench", "bells", "odcv_bench", "scale_mrt", "trail",
+    # AI governance / incidents / risk catalogs
+    "aiid", "mit_airisk", "oecd_aim", "responsible_ai_measures",
+    "alignment_faking",
+    # Large-scale conversation/interaction logs (not per-item)
+    "wildchat",
+    # Multilingual (questions only, no model predictions)
+    "agreval", "asiaeval", "iberbench",
 ]
 
 
@@ -99,8 +142,10 @@ def main():
     parser = argparse.ArgumentParser(description="Reproduce all benchmark response matrices.")
     parser.add_argument("benchmarks", nargs="*", help="Benchmark names (default: all ready)")
     parser.add_argument("--list", action="store_true", help="List available benchmarks")
+    parser.add_argument("--aggregate", action="store_true",
+                        help="Run BENCHMARKS_AGGREGATE (aggregate-only, non-IRT) instead of BENCHMARKS")
     parser.add_argument("--pending", action="store_true",
-                        help="Run BENCHMARKS_PENDING instead of BENCHMARKS")
+                        help="Run BENCHMARKS_PENDING (no model data) instead of BENCHMARKS")
     parser.add_argument("--no-upload", action="store_true",
                         help="Skip uploading .pt files to HuggingFace Hub")
     args = parser.parse_args()
@@ -109,12 +154,20 @@ def main():
         print(f"Ready benchmarks ({len(BENCHMARKS)}):")
         for b in BENCHMARKS:
             print(f"  {b}")
+        print(f"\nAggregate-only benchmarks ({len(BENCHMARKS_AGGREGATE)}):")
+        for b in BENCHMARKS_AGGREGATE:
+            print(f"  {b}")
         print(f"\nPending benchmarks ({len(BENCHMARKS_PENDING)}):")
         for b in BENCHMARKS_PENDING:
             print(f"  {b}")
         return
 
-    default_list = BENCHMARKS_PENDING if args.pending else BENCHMARKS
+    if args.aggregate:
+        default_list = BENCHMARKS_AGGREGATE
+    elif args.pending:
+        default_list = BENCHMARKS_PENDING
+    else:
+        default_list = BENCHMARKS
     targets = args.benchmarks or default_list
 
     print(f"{GREEN}[INFO]{NC} Reproducing {len(targets)} benchmarks from {BASE_DIR}")

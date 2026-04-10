@@ -384,11 +384,12 @@ def main():
     item_meta.to_csv(item_meta_path, index=False)
     print(f"  Saved: {item_meta_path}")
 
-    # Save model summary
+    # Save model summary (reindex ensures scalar values, avoids Series issues
+    # when model_names has duplicates).
     model_summary = pd.DataFrame({
         "model": model_names,
         "model_type": model_types,
-        "accuracy": [per_model_acc[m] for m in model_names],
+        "accuracy": per_model_acc.reindex(model_names).values,
     })
     model_summary = model_summary.sort_values("accuracy", ascending=False)
     model_summary_path = os.path.join(PROCESSED_DIR, "model_summary.csv")

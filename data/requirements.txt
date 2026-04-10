@@ -1,0 +1,22 @@
+# Core dependencies — required by almost every build.py
+pandas>=2.0
+numpy>=1.24
+torch>=2.0
+
+# HuggingFace Hub — downloading raw data and uploading .pt files
+datasets>=2.14
+huggingface_hub>=0.20
+
+# Visualization — used by data/scripts/visualize_response_matrix.py
+matplotlib>=3.7
+seaborn>=0.13
+
+# Benchmark-specific (only a few build scripts need each of these)
+pdfplumber>=0.10      # cybench, paperbench — extract tables from PDFs
+openpyxl>=3.1         # responsible_ai_measures — Excel spreadsheets
+pyyaml>=6.0           # aider — parse leaderboard YAML files
+gdown>=5.0            # webarena — download traces from Google Drive
+remotezip>=0.12       # benchmarks that stream ZIPs without full download
+psycopg2-binary>=2.9  # terminal_bench — query public Supabase database
+requests>=2.31        # misc HTTP helpers
+tomli>=2.0 ; python_version < "3.11"  # clinebench — TOML parsing (builtin in 3.11+)

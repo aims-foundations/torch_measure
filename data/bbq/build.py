@@ -2,7 +2,6 @@
 01_build_response_matrix.py — Download and build response matrix from BBQ (Bias Benchmark for QA).
 
 Downloads the BBQ repository (58,492 items across 11 bias categories, per-model logits for 5+ models)
-import sys
 from https://github.com/nyu-mll/BBQ, then builds a binary response matrix (models x items).
 
 Paper: Parrish et al., "BBQ: A Hand-Built Bias Benchmark for Question Answering", ACL 2022
@@ -20,6 +19,7 @@ Output:
 
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 import pandas as pd

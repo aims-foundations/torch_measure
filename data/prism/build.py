@@ -53,7 +53,7 @@ SRC_REPO = "HannahRoseKirk/prism-alignment"
 
 
 def download():
-    """Download the full PRISM alignment dataset from HuggingFace."""
+    """Download all PRISM alignment configs from HuggingFace."""
     os.makedirs(RAW_DIR, exist_ok=True)
 
     dataset_dir = os.path.join(RAW_DIR, "dataset")
@@ -64,15 +64,17 @@ def download():
 
     from datasets import load_dataset
 
-    print("Downloading HannahRoseKirk/prism-alignment...")
-    ds = load_dataset("HannahRoseKirk/prism-alignment")
-
-    for split_name, split_ds in ds.items():
-        print(f"  {split_name}: {len(split_ds)} examples")
-
-    print(f"Saving to {dataset_dir}...")
-    ds.save_to_disk(dataset_dir)
-    print(f"Done: {ds}")
+    # PRISM has 4 configs: survey, conversations, utterances, metadata
+    print("Downloading HannahRoseKirk/prism-alignment (all configs)...")
+    configs = ["survey", "conversations", "utterances", "metadata"]
+    os.makedirs(dataset_dir, exist_ok=True)
+    for cfg in configs:
+        print(f"  Loading {cfg}...")
+        ds = load_dataset(SRC_REPO, cfg)
+        out_path = os.path.join(dataset_dir, cfg)
+        ds.save_to_disk(out_path)
+        for split_name, split_ds in ds.items():
+            print(f"    {split_name}: {len(split_ds)} examples")
 
 
 def download_utterances():

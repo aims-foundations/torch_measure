@@ -210,7 +210,7 @@ def main():
 
     df_combined = pd.DataFrame(combined, index=model_names, columns=combined_items)
     df_combined.index.name = "judge"
-    combined_path = os.path.join(PROCESSED_DIR, "response_matrix_all.csv")
+    combined_path = os.path.join(PROCESSED_DIR, "response_matrix.csv")
     df_combined.to_csv(combined_path)
     print(f"  Saved: {combined_path}")
 
@@ -242,7 +242,7 @@ def main():
         summary_rows.append(row_data)
 
     summary_df = pd.DataFrame(summary_rows)
-    summary_path = os.path.join(PROCESSED_DIR, "judge_summary.csv")
+    summary_path = os.path.join(PROCESSED_DIR, "model_summary.csv")
     summary_df.to_csv(summary_path, index=False)
 
     print(f"\n  Judge summary:")

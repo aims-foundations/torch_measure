@@ -333,13 +333,22 @@ def build_matrix():
     df = pd.DataFrame(matrix_data)
     df = df.set_index("task_id")
 
-    # Save response matrix
-    out_path = OUT_DIR / "webarena_response_matrix.csv"
-    df.to_csv(out_path)
+    # Transpose so rows=models, columns=tasks (standard convention)
+    df_rm = df.T
+    df_rm.index.name = "model"
+    df_rm.columns = [str(c) for c in df_rm.columns]
+
+    # Save response matrix (standard naming: response_matrix.csv)
+    out_path = OUT_DIR / "response_matrix.csv"
+    df_rm.to_csv(out_path)
     print(f"Saved response matrix to {out_path}")
-    print(f"  Shape: {df.shape}")
-    print(f"  Tasks: {df.shape[0]}, Models: {df.shape[1]}")
+    print(f"  Shape: {df_rm.shape} (models x tasks)")
+    print(f"  Models: {df_rm.shape[0]}, Tasks: {df_rm.shape[1]}")
     print()
+
+    # Keep legacy file for backwards compatibility
+    legacy_path = OUT_DIR / "webarena_response_matrix.csv"
+    df.to_csv(legacy_path)
 
     # Generate summary stats
     summary_rows = []

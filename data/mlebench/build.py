@@ -72,6 +72,28 @@ def download():
         check=False,
     )
 
+    # Workaround for upstream bug: runs/run_group_experiments.csv has
+    # unresolved merge conflict markers on main, so git lfs pull can't
+    # smudge it. Restore an earlier clean pointer and smudge manually.
+    rge_path = REPO_DIR / "runs/run_group_experiments.csv"
+    if rge_path.exists() and "<<<<<<< HEAD" in rge_path.read_text():
+        print("  run_group_experiments.csv has merge conflict; using earlier clean pointer...")
+        # Grab the clean pointer from commit c5631ba (the last clean version)
+        clean_ptr = subprocess.run(
+            ["git", "show", "c5631ba:runs/run_group_experiments.csv"],
+            cwd=str(REPO_DIR), capture_output=True, text=True, check=False,
+        ).stdout
+        if clean_ptr and clean_ptr.startswith("version "):
+            rge_path.write_text(clean_ptr)
+            # Smudge to expand the pointer
+            result = subprocess.run(
+                ["git", "lfs", "smudge"],
+                cwd=str(REPO_DIR), input=clean_ptr, capture_output=True, text=True,
+            )
+            if result.returncode == 0 and result.stdout:
+                rge_path.write_text(result.stdout)
+                print(f"  Recovered {len(result.stdout.splitlines())} lines")
+
 
 # -- Experiment descriptions (from README) -----------------------------------
 EXPERIMENT_DESCRIPTIONS = {
@@ -123,6 +145,8 @@ def load_experiment_to_run_groups():
             if not line or line.startswith("experiment_id"):
                 continue
             parts = line.split(",", maxsplit=1)
+            if len(parts) < 2:
+                continue  # skip malformed lines
             exp_id = parts[0].strip()
             run_group = parts[1].strip()
             mapping[exp_id].append(run_group)

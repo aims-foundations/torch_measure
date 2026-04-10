@@ -37,15 +37,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent  # data/
 def _save(fig, path: Path):
     """Save a figure as PNG."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(path.with_suffix(".png"), bbox_inches="tight", dpi=150)
+    fig.savefig(path, bbox_inches="tight", dpi=150)
     plt.close(fig)
 
 
 def _label(csv_path: Path) -> str:
     """Derive a human-readable label from the CSV path.
 
-    e.g.  bfcl_data/processed/response_matrix.csv           -> "bfcl"
-          bigcodebench_data/processed/response_matrix_instruct.csv -> "bigcodebench / instruct"
+    e.g.  bfcl/processed/response_matrix.csv                -> "bfcl"
+          bigcodebench/processed/response_matrix_instruct.csv -> "bigcodebench / instruct"
     """
     bench = csv_path.parent.parent.name
     stem = csv_path.stem  # e.g. "response_matrix_instruct"
@@ -55,18 +55,9 @@ def _label(csv_path: Path) -> str:
     return bench
 
 
-def _prefix(csv_path: Path) -> str:
-    """Filename prefix for saving figures (no spaces, filesystem-safe)."""
-    bench = csv_path.parent.parent.name
-    variant = csv_path.stem.removeprefix("response_matrix").lstrip("_")
-    if variant:
-        return f"{bench}_{variant}"
-    return bench
-
-
 # ── plots ────────────────────────────────────────────────────────────────
 
-def plot_heatmap(matrix: pd.DataFrame, label: str, fig_dir: Path, prefix: str):
+def plot_heatmap(matrix: pd.DataFrame, label: str, out_path: Path):
     """Full heatmap: models (rows) x items (columns)."""
     df = matrix.copy()
     orig_n_models, orig_n_items = df.shape
@@ -104,17 +95,21 @@ def plot_heatmap(matrix: pd.DataFrame, label: str, fig_dir: Path, prefix: str):
     note = "" if (n_models, n_items) == (orig_n_models, orig_n_items) else " [downsampled]"
     ax.set_title(f"{label}  ({orig_n_models} x {orig_n_items}){note}", fontweight="bold")
 
-    _save(fig, fig_dir / f"{prefix}_heatmap")
-    print(f"    heatmap  ({orig_n_models} x {orig_n_items})")
+    _save(fig, out_path)
+    print(f"    {out_path.name}  ({orig_n_models} x {orig_n_items})")
 
 
 # ── main ─────────────────────────────────────────────────────────────────
 
 def visualize_one(csv_path: Path):
-    """Load a single response matrix CSV and produce the heatmap plot."""
+    """Load a single response matrix CSV and save a heatmap next to it.
+
+    Output path: same directory as the CSV, same stem but .png extension.
+      processed/response_matrix.csv            -> processed/response_matrix.png
+      processed/response_matrix_instruct.csv   -> processed/response_matrix_instruct.png
+    """
     label = _label(csv_path)
-    prefix = _prefix(csv_path)
-    fig_dir = csv_path.parent.parent / "figures"
+    out_path = csv_path.with_suffix(".png")
 
     print(f"  [{label}]  {csv_path.relative_to(BASE_DIR)}")
 
@@ -123,7 +118,7 @@ def visualize_one(csv_path: Path):
         print("    SKIPPED (empty matrix)")
         return
 
-    plot_heatmap(matrix, label, fig_dir, prefix)
+    plot_heatmap(matrix, label, out_path)
 
 
 def discover(benchmarks: list[str] | None = None) -> list[Path]:

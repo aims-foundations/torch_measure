@@ -145,7 +145,7 @@ def build_response_matrices(records):
             )
             df.index.name = "model"
             name = f"{source}_{dim}"
-            output_path = os.path.join(PROCESSED_DIR, f"{name}.csv")
+            output_path = os.path.join(PROCESSED_DIR, f"response_matrix_{name}.csv")
             df.to_csv(output_path)
             all_dfs[name] = df
 
@@ -163,7 +163,7 @@ def build_response_matrices(records):
         df = pd.DataFrame(overall, index=model_ids, columns=doc_ids)
         df.index.name = "model"
         name = f"{source}_overall"
-        output_path = os.path.join(PROCESSED_DIR, f"{name}.csv")
+        output_path = os.path.join(PROCESSED_DIR, f"response_matrix_{name}.csv")
         df.to_csv(output_path)
         all_dfs[name] = df
 

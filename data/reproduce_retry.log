@@ -1,0 +1,1724 @@
+Found 1 response matrices across 1 benchmarks.
+
+  [aider]  aider/processed/response_matrix.csv
+    ERROR: can only concatenate str (not "int") to str
+
+Done.
+
+[aider]
+  Loaded 6 item contents
+  Loaded metadata for 175 subjects (15 fields)
+  aider.pt: 209x30, 55% fill
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  .../aider/processed/aider.pt: 100%|██████████| 31.6kB / 31.6kB            [A[A
+
+  .../aider/processed/aider.pt: 100%|██████████| 31.6kB / 31.6kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 31.6kB / 31.6kB, 53.8kB/s  
+New Data Upload               : 100%|██████████| 31.6kB / 31.6kB, 53.8kB/s  [A
+
+  .../aider/processed/aider.pt: 100%|██████████| 31.6kB / 31.6kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 31.6kB / 31.6kB, 52.7kB/s  
+New Data Upload               : 100%|██████████| 31.6kB / 31.6kB, 52.7kB/s  
+  .../aider/processed/aider.pt: 100%|██████████| 31.6kB / 31.6kB            
+  uploaded aider.pt
+
+Done.
+======================================================================
+Building Aider Leaderboard Response Matrix
+======================================================================
+Loaded edit leaderboard: 98 entries
+Loaded polyglot leaderboard: 69 entries
+Loaded o1 polyglot leaderboard: 10 entries
+Loaded refactor leaderboard: 14 entries
+Loaded Qwen3 leaderboard: 10 entries
+Loaded o1 results: 8 entries
+
+Total entries across all leaderboards: 209
+Unique models: 178
+Benchmarks: ['edit_133_python', 'polyglot_225', 'o1_polyglot', 'refactor', 'qwen3_polyglot', 'o1_results']
+
+Full response matrix saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/aider/processed/response_matrix.csv
+  Shape: (209, 31)
+
+Item content saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/aider/processed/item_content.csv
+  6 benchmarks
+
+Model summary saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/aider/processed/model_summary.csv
+  Shape: (194, 16)
+
+Polyglot response matrix saved to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/aider/processed/polyglot_response_matrix.csv
+  Shape: (78, 16)
+Data availability report written to: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/aider/processed/data_availability_report.txt
+
+======================================================================
+SUMMARY STATISTICS
+======================================================================
+
+--- edit_133_python ---
+  Entries: 98
+  Unique models: 98
+  Pass rate (try 2) range: 14.3% - 84.2%
+  Pass rate (try 2) mean: 54.9%
+  Pass rate (try 2) median: 57.4%
+  Top 5 models:
+    claude-3-5-sonnet-20241022: 84.2% (diff)
+    o1: 84.2% (diff)
+    gemini-exp-1206 (whole): 80.5% (whole)
+    o1-preview: 79.7% (diff)
+    claude-3.5-sonnet-20240620: 77.4% (diff)
+
+--- o1_polyglot ---
+  Entries: 10
+  Unique models: 10
+  Pass rate (try 2) range: 3.6% - 61.7%
+  Pass rate (try 2) mean: 27.3%
+  Pass rate (try 2) median: 25.1%
+  Top 5 models:
+    o1-2024-12-17 (high): 61.7% (diff)
+    claude-3-5-sonnet-20241022: 45.3% (diff)
+    gemini-exp-1206: 38.2% (whole)
+    o1-mini-2024-09-12: 32.9% (whole)
+    claude-3-5-haiku-20241022: 28.0% (diff)
+
+--- o1_results ---
+  Entries: 8
+  Unique models: 8
+  Pass rate (try 2) range: 55.6% - 79.7%
+  Pass rate (try 2) mean: 71.0%
+  Pass rate (try 2) median: 73.3%
+  Top 5 models:
+    o1-preview (whole): 79.7% (whole)
+    claude-3.5-sonnet (diff): 77.4% (diff)
+    claude-3.5-sonnet (whole): 75.2% (whole)
+    o1-preview (diff): 75.2% (diff)
+    gpt-4o-2024-08-06 (diff): 71.4% (diff)
+
+--- polyglot_225 ---
+  Entries: 69
+  Unique models: 68
+  Pass rate (try 2) range: 3.6% - 88.0%
+  Pass rate (try 2) mean: 47.7%
+  Pass rate (try 2) median: 52.4%
+  Top 5 models:
+    gpt-5 (high): 88.0% (diff)
+    gpt-5 (medium): 86.7% (diff)
+    o3-pro (high): 84.9% (diff)
+    gemini-2.5-pro-preview-06-05 (32k think): 83.1% (diff-fenced)
+    o3 (high): 81.3% (diff)
+
+--- qwen3_polyglot ---
+  Entries: 10
+  Unique models: 10
+  Pass rate (try 2) range: 40.0% - 65.3%
+  Pass rate (try 2) mean: 53.9%
+  Pass rate (try 2) median: 56.9%
+  Top 5 models:
+    Qwen3-235B-A22B whole with VLLM, bfloat16, recommended /no_think settings: 65.3% (whole)
+    Qwen3 235B A22B whole, no think, via official Alibaba API: 61.8% (whole)
+    Qwen3-235B-A22B diff with VLLM, bfloat16, recommended /no_think settings: 61.3% (diff)
+    Qwen3 235B A22B diff, no think, via official Alibaba API: 59.6% (diff)
+    Qwen3-235B-A22B whole with llama.cpp, Q5_K_M (unsloth), recommended /no_think settings: 59.1% (whole)
+
+--- refactor ---
+  Entries: 14
+  Unique models: 14
+  Top 5 models:
+    gemini/gemini-1.5-pro-latest: nan% (diff-fenced)
+    claude-3-opus-20240229: nan% (diff)
+    gpt-4-turbo-2024-04-09 (udiff): nan% (udiff)
+    gpt-4-0125-preview: nan% (udiff)
+    gpt-4-1106-preview: nan% (udiff)
+
+======================================================================
+OUTPUT FILES
+======================================================================
+  aider.pt: 31,643 bytes
+  data_availability_report.txt: 2,783 bytes
+  item_content.csv: 168 bytes
+  model_summary.csv: 19,809 bytes
+  polyglot_response_matrix.csv: 7,816 bytes
+  response_matrix.csv: 48,502 bytes
+Already up to date.
+mle-bench repo already cloned, pulling latest...
+Pulling LFS objects under runs/...
+================================================================================
+MLE-bench Response Matrix Builder
+================================================================================
+
+Loaded 75 competitions from split75
+Found 33 experiment configurations
+  AIBuildAI: 3 run groups -- 
+  AIRA-dojo: 20 run groups -- o3 + AIRA-DOJO Greedy scaffold (H200)
+  Disarray: 3 run groups -- Ensemble (Claude-Opus-4.5, Sonnet-4.5, GPT-5.2, Gemini-3-Pro)
+  Famou-Agent: 3 run groups -- Gemini-2.5-Pro + Famou-Agent scaffold
+  Famou-Agent-2.0: 3 run groups -- Gemini-2.5-Pro + Famou-Agent-2.0 scaffold
+  Leeroo: 3 run groups -- Ensemble (Gemini-3-Pro, GPT-5, GPT-5-mini) + Leeroo
+  LoongFlow: 3 run groups -- Gemini-3-Flash-preview + LoongFlow scaffold
+  MARS: 3 run groups -- 
+  MARS+: 3 run groups -- 
+  MLE-STAR-Pro-1.0: 3 run groups -- MLE-STAR-Pro-1.0 scaffold
+  MLE-STAR-Pro-1.5: 3 run groups -- MLE-STAR-Pro-1.5 scaffold
+  MLEvolve: 3 run groups -- Gemini-3-Pro-preview + MLEvolve (H200)
+  PiEvolve_12hrs: 3 run groups -- Gemini-3-Pro-preview + PiEvolve (12h, H100)
+  PiEvolve_24hrs: 3 run groups -- Gemini-3-Pro-preview + PiEvolve (24h, H100)
+  Thesis: 3 run groups -- GPT-5-codex + custom scaffold (H100)
+  biggpu-gpt4o-aide: 5 run groups -- GPT-4o + AIDE (2x A10 GPUs)
+  cpu-gpt4o-aide: 3 run groups -- GPT-4o + AIDE (CPU only)
+  deepseek-r1-InternAgent: 3 run groups -- DeepSeek-R1 + InternAgent scaffold
+  deepseek-r1-ML-Master: 3 run groups -- DeepSeek-R1 + ML-Master scaffold
+  deepseek-v3.2-speciale-ML-Master-2.0: 3 run groups -- DeepSeek-V3.2-Speciale + ML-Master-2.0
+  extratime-gpt4o-aide: 2 run groups -- GPT-4o + AIDE (100h time limit)
+  gpt-5-R&D-Agent: 3 run groups -- GPT-5 + R&D-Agent scaffold
+  models-claude35sonnet-aide: 3 run groups -- Claude 3.5 Sonnet + AIDE scaffold
+  models-llama-3.1-405B-instruct-aide: 2 run groups -- LLaMA 3.1 405B + AIDE scaffold
+  models-o1-preview-aide: 5 run groups -- o1-preview + AIDE scaffold
+  multi-agent-Neo: 3 run groups -- Multi-Agent (GPT-4.1 + Claude Sonnet 4.0) + NEO
+  o1-preview-R&D-Agent: 5 run groups -- o1-preview + R&D-Agent scaffold
+  o3-gpt-4.1-R&D-Agent: 3 run groups -- o3 + GPT-4.1 + R&D-Agent scaffold
+  obfuscation-gpt4o-aide: 4 run groups -- GPT-4o + AIDE (obfuscated descriptions)
+  operand-ensemble: 3 run groups -- Operand Ensemble
+  scaffolding-gpt4o-aide: 14 run groups -- GPT-4o + AIDE scaffold (24h, 1 GPU)
+  scaffolding-gpt4o-mlab: 4 run groups -- GPT-4o + MLAB scaffold
+  scaffolding-gpt4o-opendevin: 4 run groups -- GPT-4o + OpenDevin scaffold
+  WARNING: No grading report for run group '2024-09-23T14-55-33-GMT_run-group_aide' (experiment 'extratime-gpt4o-aide')
+
+Written: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench/processed/response_matrix.csv
+
+Written: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench/processed/response_matrix_binary.csv
+
+Written: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench/processed/response_matrix_above_median.csv
+
+Written: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench/processed/response_matrix_scores.csv
+Written: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench/processed/task_metadata.csv
+Written: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench/processed/experiment_metadata.csv
+
+Written: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench/processed/summary_stats.txt
+
+================================================================================
+MLE-bench Response Matrix Summary
+================================================================================
+
+Dimensions: 75 tasks x 33 experiments
+
+Tasks (rows): 75 Kaggle competitions
+Experiments (columns): 33 agent/model configs
+
+Fill rate: 2275/2475 = 91.9%
+
+Score types in response_matrix.csv:
+  3 = gold medal, 2 = silver, 1 = bronze, 0.5 = above median, 0 = below median/no valid submission
+  Empty = experiment did not attempt this competition
+
+--------------------------------------------------------------------------------
+Per-experiment summary (best across seeds):
+--------------------------------------------------------------------------------
+Experiment                                     Medal%    Med%  Gold  Silv  Brnz Tasks
+--------------------------------------------------------------------------------
+AIBuildAI                                       64.0%   74.7%    24    20     4    75
+AIRA-dojo                                       58.7%   69.3%    25    15     4    75
+Disarray                                        80.0%   85.3%    27    20    13    75
+Famou-Agent                                     50.7%   58.7%    20    12     6    75
+Famou-Agent-2.0                                 62.7%   73.3%    28    15     4    75
+Leeroo                                         100.0%  100.0%    23    13     4    40
+LoongFlow                                      100.0%  100.0%    26    17     5    48
+MARS                                            61.3%   70.7%    26    15     5    75
+MARS+                                           65.3%   77.3%    29    13     7    75
+MLE-STAR-Pro-1.0                                44.0%   57.3%    17     9     7    75
+MLE-STAR-Pro-1.5                                49.3%   57.3%    19    10     8    75
+MLEvolve                                        67.6%   79.7%    29    17     4    74
+PiEvolve_12hrs                                  84.9%   90.6%    29    12     4    53
+PiEvolve_24hrs                                  88.7%   92.5%    32    10     5    53
+Thesis                                          58.7%   68.0%    25    11     8    75
+biggpu-gpt4o-aide                               16.0%   22.7%     7     2     3    75
+cpu-gpt4o-aide                                  20.0%   26.7%     9     2     4    75
+deepseek-r1-InternAgent                         42.7%   56.0%    17     9     6    75
+deepseek-r1-ML-Master                           36.0%   50.7%    15     8     4    75
+deepseek-v3.2-speciale-ML-Master-2.0            61.3%   66.7%    17    23     6    75
+extratime-gpt4o-aide                            25.0%   25.0%     1     0     0     4
+gpt-5-R&D-Agent                                 42.7%   45.3%    14    15     3    75
+models-claude35sonnet-aide                      13.3%   21.3%     6     3     1    75
+models-llama-3.1-405B-instruct-aide              5.3%   12.0%     3     1     0    75
+models-o1-preview-aide                          44.0%   61.3%    15    11     7    75
+multi-agent-Neo                                 42.7%   50.7%    16    14     2    75
+o1-preview-R&D-Agent                            32.0%   44.0%    13     9     2    75
+o3-gpt-4.1-R&D-Agent                            37.3%   52.0%    14     7     7    75
+obfuscation-gpt4o-aide                          21.3%   33.3%     8     3     5    75
+operand-ensemble                                56.6%   62.3%    12     7    11    53
+scaffolding-gpt4o-aide                          28.0%   40.0%    10     4     7    75
+scaffolding-gpt4o-mlab                           4.0%    8.0%     2     1     0    75
+scaffolding-gpt4o-opendevin                      8.0%   13.3%     3     2     1    75
+
+--------------------------------------------------------------------------------
+Per-task difficulty (how many experiments achieved medal):
+--------------------------------------------------------------------------------
+Competition                                              Medals  Tested       %
+nomad2018-predict-transparent-conductors                     32      32  100.0%
+tabular-playground-series-dec-2021                           32      32  100.0%
+plant-pathology-2021-fgvc8                                   31      32   96.9%
+plant-pathology-2020-fgvc7                                   30      32   93.8%
+dogs-vs-cats-redux-kernels-edition                           29      32   90.6%
+hotel-id-2021-fgvc8                                          29      32   90.6%
+predict-volcanic-eruptions-ingv-oe                           29      32   90.6%
+the-icml-2013-whale-challenge-right-whale-redux              29      32   90.6%
+stanford-covid-vaccine                                       29      33   87.9%
+google-quest-challenge                                       28      32   87.5%
+aerial-cactus-identification                                 27      32   84.4%
+histopathologic-cancer-detection                             27      32   84.4%
+rsna-miccai-brain-tumor-radiogenomic-classification          26      31   83.9%
+text-normalization-challenge-english-language                26      32   81.2%
+detecting-insults-in-social-commentary                       25      32   78.1%
+iwildcam-2019-fgvc6                                          25      32   78.1%
+spooky-author-identification                                 25      32   78.1%
+denoising-dirty-documents                                    24      32   75.0%
+herbarium-2020-fgvc7                                         24      32   75.0%
+random-acts-of-pizza                                         23      31   74.2%
+aptos2019-blindness-detection                                23      32   71.9%
+inaturalist-2019-fgvc6                                       23      32   71.9%
+mlsp-2013-birds                                              23      32   71.9%
+iwildcam-2020-fgvc7                                          22      32   68.8%
+jigsaw-toxic-comment-classification-challenge                22      32   68.8%
+herbarium-2021-fgvc8                                         21      32   65.6%
+seti-breakthrough-listen                                     21      32   65.6%
+whale-categorization-playground                              21      32   65.6%
+h-and-m-personalized-fashion-recommendations                 19      30   63.3%
+herbarium-2022-fgvc9                                         20      32   62.5%
+kuzushiji-recognition                                        20      32   62.5%
+text-normalization-challenge-russian-language                20      32   62.5%
+learning-agency-lab-automated-essay-scoring-2                19      32   59.4%
+leaf-classification                                          18      32   56.2%
+tweet-sentiment-extraction                                   18      32   56.2%
+us-patent-phrase-to-phrase-matching                          17      32   53.1%
+freesound-audio-tagging-2019                                 16      31   51.6%
+cassava-leaf-disease-classification                          16      32   50.0%
+lmsys-chatbot-arena                                          15      31   48.4%
+3d-object-detection-for-autonomous-vehicles                  14      31   45.2%
+vinbigdata-chest-xray-abnormalities-detection                14      31   45.2%
+hubmap-kidney-segmentation                                   13      30   43.3%
+petfinder-pawpularity-score                                  13      32   40.6%
+chaii-hindi-and-tamil-question-answering                     12      32   37.5%
+multi-modal-gesture-recognition                              10      31   32.3%
+billion-word-imputation                                       7      29   24.1%
+cdiscount-image-classification-challenge                      7      31   22.6%
+nfl-player-contact-detection                                  6      29   20.7%
+siim-isic-melanoma-classification                             6      30   20.0%
+imet-2020-fgvc7                                               4      28   14.3%
+tensorflow-speech-recognition-challenge                       4      29   13.8%
+facebook-recruiting-iii-keyword-extraction                    2      29    6.9%
+tensorflow2-question-answering                                1      26    3.8%
+alaska2-image-steganalysis                                    1      27    3.7%
+google-research-identify-contrails-reduce-global-warming       1      27    3.7%
+smartphone-decimeter-2022                                     1      27    3.7%
+statoil-iceberg-classifier-challenge                          1      27    3.7%
+uw-madison-gi-tract-image-segmentation                        1      27    3.7%
+champs-scalar-coupling                                        1      28    3.6%
+osic-pulmonary-fibrosis-progression                           1      28    3.6%
+rsna-breast-cancer-detection                                  1      28    3.6%
+vesuvius-challenge-ink-detection                              1      28    3.6%
+dog-breed-identification                                      1      30    3.3%
+tabular-playground-series-may-2022                            1      30    3.3%
+AI4Code                                                       0      28    0.0%
+bms-molecular-translation                                     0      27    0.0%
+hms-harmful-brain-activity-classification                     0      27    0.0%
+icecube-neutrinos-in-deep-ice                                 0      27    0.0%
+jigsaw-unintended-bias-in-toxicity-classification             0      27    0.0%
+new-york-city-taxi-fare-prediction                            0      30    0.0%
+ranzcr-clip-catheter-line-classification                      0      30    0.0%
+rsna-2022-cervical-spine-fracture-detection                   0      28    0.0%
+siim-covid19-detection                                        0      28    0.0%
+tgs-salt-identification-challenge                             0      27    0.0%
+ventilator-pressure-prediction                                0      28    0.0%
+
+--------------------------------------------------------------------------------
+Experiment/Model configurations:
+--------------------------------------------------------------------------------
+  AIBuildAI
+    Description: No description
+    Run groups (seeds): 3
+  AIRA-dojo
+    Description: o3 + AIRA-DOJO Greedy scaffold (H200)
+    Run groups (seeds): 20
+  Disarray
+    Description: Ensemble (Claude-Opus-4.5, Sonnet-4.5, GPT-5.2, Gemini-3-Pro)
+    Run groups (seeds): 3
+  Famou-Agent
+    Description: Gemini-2.5-Pro + Famou-Agent scaffold
+    Run groups (seeds): 3
+  Famou-Agent-2.0
+    Description: Gemini-2.5-Pro + Famou-Agent-2.0 scaffold
+    Run groups (seeds): 3
+  Leeroo
+    Description: Ensemble (Gemini-3-Pro, GPT-5, GPT-5-mini) + Leeroo
+    Run groups (seeds): 3
+  LoongFlow
+    Description: Gemini-3-Flash-preview + LoongFlow scaffold
+    Run groups (seeds): 3
+  MARS
+    Description: No description
+    Run groups (seeds): 3
+  MARS+
+    Description: No description
+    Run groups (seeds): 3
+  MLE-STAR-Pro-1.0
+    Description: MLE-STAR-Pro-1.0 scaffold
+    Run groups (seeds): 3
+  MLE-STAR-Pro-1.5
+    Description: MLE-STAR-Pro-1.5 scaffold
+    Run groups (seeds): 3
+  MLEvolve
+    Description: Gemini-3-Pro-preview + MLEvolve (H200)
+    Run groups (seeds): 3
+  PiEvolve_12hrs
+    Description: Gemini-3-Pro-preview + PiEvolve (12h, H100)
+    Run groups (seeds): 3
+  PiEvolve_24hrs
+    Description: Gemini-3-Pro-preview + PiEvolve (24h, H100)
+    Run groups (seeds): 3
+  Thesis
+    Description: GPT-5-codex + custom scaffold (H100)
+    Run groups (seeds): 3
+  biggpu-gpt4o-aide
+    Description: GPT-4o + AIDE (2x A10 GPUs)
+    Run groups (seeds): 5
+  cpu-gpt4o-aide
+    Description: GPT-4o + AIDE (CPU only)
+    Run groups (seeds): 3
+  deepseek-r1-InternAgent
+    Description: DeepSeek-R1 + InternAgent scaffold
+    Run groups (seeds): 3
+  deepseek-r1-ML-Master
+    Description: DeepSeek-R1 + ML-Master scaffold
+    Run groups (seeds): 3
+  deepseek-v3.2-speciale-ML-Master-2.0
+    Description: DeepSeek-V3.2-Speciale + ML-Master-2.0
+    Run groups (seeds): 3
+  extratime-gpt4o-aide
+    Description: GPT-4o + AIDE (100h time limit)
+    Run groups (seeds): 2
+  gpt-5-R&D-Agent
+    Description: GPT-5 + R&D-Agent scaffold
+    Run groups (seeds): 3
+  models-claude35sonnet-aide
+    Description: Claude 3.5 Sonnet + AIDE scaffold
+    Run groups (seeds): 3
+  models-llama-3.1-405B-instruct-aide
+    Description: LLaMA 3.1 405B + AIDE scaffold
+    Run groups (seeds): 2
+  models-o1-preview-aide
+    Description: o1-preview + AIDE scaffold
+    Run groups (seeds): 5
+  multi-agent-Neo
+    Description: Multi-Agent (GPT-4.1 + Claude Sonnet 4.0) + NEO
+    Run groups (seeds): 3
+  o1-preview-R&D-Agent
+    Description: o1-preview + R&D-Agent scaffold
+    Run groups (seeds): 5
+  o3-gpt-4.1-R&D-Agent
+    Description: o3 + GPT-4.1 + R&D-Agent scaffold
+    Run groups (seeds): 3
+  obfuscation-gpt4o-aide
+    Description: GPT-4o + AIDE (obfuscated descriptions)
+    Run groups (seeds): 4
+  operand-ensemble
+    Description: Operand Ensemble
+    Run groups (seeds): 3
+  scaffolding-gpt4o-aide
+    Description: GPT-4o + AIDE scaffold (24h, 1 GPU)
+    Run groups (seeds): 14
+  scaffolding-gpt4o-mlab
+    Description: GPT-4o + MLAB scaffold
+    Run groups (seeds): 4
+  scaffolding-gpt4o-opendevin
+    Description: GPT-4o + OpenDevin scaffold
+    Run groups (seeds): 4
+
+--------------------------------------------------------------------------------
+Task complexity breakdown:
+--------------------------------------------------------------------------------
+  High: 15 tasks
+  Low: 22 tasks
+  Medium: 38 tasksFound 4 response matrices across 1 benchmarks.
+
+  [mlebench]  mlebench/processed/response_matrix.csv
+    heatmap  (75 x 33)
+  [mlebench / above_median]  mlebench/processed/response_matrix_above_median.csv
+    heatmap  (75 x 33)
+  [mlebench / binary]  mlebench/processed/response_matrix_binary.csv
+    heatmap  (75 x 33)
+  [mlebench / scores]  mlebench/processed/response_matrix_scores.csv
+    heatmap  (75 x 33)
+
+Done.
+
+[mlebench]
+  mlebench.pt: 75x33, 92% fill
+  mlebench_above_median.pt: 75x33, 92% fill
+  mlebench_binary.pt: 75x33, 92% fill
+  mlebench_scores.pt: 75x33, 84% fill
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...nch/processed/mlebench.pt: 100%|██████████| 15.2kB / 15.2kB            [A[A
+
+  ...nch/processed/mlebench.pt: 100%|██████████| 15.2kB / 15.2kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 15.2kB / 15.2kB, 40.9kB/s  
+New Data Upload               : 100%|██████████| 15.2kB / 15.2kB, 40.9kB/s  [A
+
+  ...nch/processed/mlebench.pt: 100%|██████████| 15.2kB / 15.2kB            [A[A
+
+  ...nch/processed/mlebench.pt: 100%|██████████| 15.2kB / 15.2kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 15.2kB / 15.2kB, 26.6kB/s  
+New Data Upload               : 100%|██████████| 15.2kB / 15.2kB, 26.6kB/s  
+  ...nch/processed/mlebench.pt: 100%|██████████| 15.2kB / 15.2kB            
+  uploaded mlebench.pt
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  .../mlebench_above_median.pt: 100%|██████████| 15.4kB / 15.4kB            [A[A
+
+  .../mlebench_above_median.pt: 100%|██████████| 15.4kB / 15.4kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 15.4kB / 15.4kB,   ???B/s  
+New Data Upload               : 100%|██████████| 15.4kB / 15.4kB,   ???B/s  [A
+
+  .../mlebench_above_median.pt: 100%|██████████| 15.4kB / 15.4kB            [A[A
+
+  .../mlebench_above_median.pt: 100%|██████████| 15.4kB / 15.4kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 15.4kB / 15.4kB,  0.00B/s  
+New Data Upload               : 100%|██████████| 15.4kB / 15.4kB,  0.00B/s  
+  .../mlebench_above_median.pt: 100%|██████████| 15.4kB / 15.4kB            
+  uploaded mlebench_above_median.pt
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...cessed/mlebench_binary.pt: 100%|██████████| 15.3kB / 15.3kB            [A[A
+
+  ...cessed/mlebench_binary.pt: 100%|██████████| 15.3kB / 15.3kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 15.3kB / 15.3kB,   ???B/s  
+New Data Upload               : 100%|██████████| 15.3kB / 15.3kB,   ???B/s  [A
+
+  ...cessed/mlebench_binary.pt: 100%|██████████| 15.3kB / 15.3kB            [A[A
+
+  ...cessed/mlebench_binary.pt: 100%|██████████| 15.3kB / 15.3kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 15.3kB / 15.3kB,  0.00B/s  
+New Data Upload               : 100%|██████████| 15.3kB / 15.3kB,  0.00B/s  
+  ...cessed/mlebench_binary.pt: 100%|██████████| 15.3kB / 15.3kB            
+  uploaded mlebench_binary.pt
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...cessed/mlebench_scores.pt: 100%|██████████| 15.3kB / 15.3kB            [A[A
+
+  ...cessed/mlebench_scores.pt: 100%|██████████| 15.3kB / 15.3kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 15.3kB / 15.3kB,   ???B/s  
+New Data Upload               : 100%|██████████| 15.3kB / 15.3kB,   ???B/s  [A
+
+  ...cessed/mlebench_scores.pt: 100%|██████████| 15.3kB / 15.3kB            [A[A
+
+  ...cessed/mlebench_scores.pt: 100%|██████████| 15.3kB / 15.3kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 15.3kB / 15.3kB,  0.00B/s  
+New Data Upload               : 100%|██████████| 15.3kB / 15.3kB,  0.00B/s  
+  ...cessed/mlebench_scores.pt: 100%|██████████| 15.3kB / 15.3kB            
+  uploaded mlebench_scores.pt
+
+Done.
+
+
+Written: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/mlebench/processed/per_seed_details.json
+
+Done!
+Found 1 response matrices across 1 benchmarks.
+
+  [visualwebarena]  visualwebarena/processed/response_matrix.csv
+    heatmap  (910 x 6)
+
+Done.
+
+[visualwebarena]
+  Loaded 466 item contents
+  visualwebarena.pt: 910x6, 14% fill
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...ocessed/visualwebarena.pt: 100%|██████████| 34.6kB / 34.6kB            [A[A
+
+  ...ocessed/visualwebarena.pt: 100%|██████████| 34.6kB / 34.6kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 34.6kB / 34.6kB, 61.2kB/s  
+New Data Upload               : 100%|██████████| 34.6kB / 34.6kB, 61.2kB/s  [A
+
+  ...ocessed/visualwebarena.pt: 100%|██████████| 34.6kB / 34.6kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 34.6kB / 34.6kB, 57.8kB/s  
+New Data Upload               : 100%|██████████| 34.6kB / 34.6kB, 57.8kB/s  
+  ...ocessed/visualwebarena.pt: 100%|██████████| 34.6kB / 34.6kB            
+  uploaded visualwebarena.pt
+
+Done.
+======================================================================
+Building VisualWebArena Response Matrix
+======================================================================
+
+[1/6] Loading task metadata...
+  Loaded 234 tasks from test_classifieds.raw.json
+  Loaded 210 tasks from test_reddit.raw.json
+  Loaded 466 tasks from test_shopping.raw.json
+Total: 910 VWA tasks
+Saved task metadata: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/visualwebarena/processed/task_metadata.csv (910 tasks)
+
+[2/6] Loading AgentRewardBench automated rewards...
+Loading cached AgentRewardBench rewards from /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/visualwebarena/raw/agentrewardbench_per_task_rewards.json
+
+[3/6] Loading human annotations...
+Loaded 300 VWA human annotations
+  GenericAgent-qwen2.5-vl-72b: 100 tasks, 23 passed (23.0%)
+  GenericAgent-claude-3.7-sonnet: 100 tasks, 30 passed (30.0%)
+  GenericAgent-gpt-4o-2024-11-20: 100 tasks, 38 passed (38.0%)
+
+[4/6] Loading leaderboard aggregate data...
+Loaded 37 leaderboard entries, saved to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/visualwebarena/processed/leaderboard_aggregate.csv
+
+[5/6] Loading paper per-domain results...
+  23 model configs with per-domain breakdowns
+
+[6/6] Building response matrix...
+
+Saved response matrix: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/visualwebarena/processed/response_matrix.csv
+Saved item content: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/visualwebarena/processed/item_content.csv (910 tasks)
+
+======================================================================
+VISUALWEBARENA RESPONSE MATRIX - SUMMARY REPORT
+======================================================================
+
+--- Matrix Dimensions ---
+  Rows (tasks): 910
+  Columns (model configs with per-task data): 6
+  Total cells: 5460
+  Filled cells: 780
+  Fill rate: 14.3%
+
+--- Score Type ---
+  Binary: 1 = pass (task completed), 0 = fail (task not completed)
+  Source [auto]: BrowserGym automated evaluation (cum_reward)
+  Source [human]: AgentRewardBench human annotation (trajectory_success)
+
+--- Model Names (per-task data available) ---
+  GenericAgent-claude-3.7-sonnet [auto]: 130/910 tasks evaluated, 30 passed (23.1%)
+  GenericAgent-gpt-4o-2024-11-20 [auto]: 130/910 tasks evaluated, 25 passed (19.2%)
+  GenericAgent-qwen2.5-vl-72b [auto]: 130/910 tasks evaluated, 25 passed (19.2%)
+  GenericAgent-claude-3.7-sonnet [human]: 130/910 tasks evaluated, 35 passed (26.9%)
+  GenericAgent-gpt-4o-2024-11-20 [human]: 130/910 tasks evaluated, 45 passed (34.6%)
+  GenericAgent-qwen2.5-vl-72b [human]: 130/910 tasks evaluated, 38 passed (29.2%)
+
+--- Task Coverage ---
+  Tasks by domain:
+    shopping: 468 tasks (51.4%)
+    classifieds: 234 tasks (25.7%)
+    reddit: 182 tasks (20.0%)
+    wikipedia: 26 tasks (2.9%)
+  Tasks by difficulty:
+    medium: 378 tasks (41.5%)
+    hard: 327 tasks (35.9%)
+    easy: 205 tasks (22.5%)
+  Eval types (tasks can have multiple):
+    program_html: 409
+    string_match: 280
+    url_match: 224
+    page_image_query: 42
+
+--- Leaderboard Aggregate Results (37 entries) ---
+  Top 5 models:
+    Human (Human): 88.7%
+    Gemini 2.5 Flash (Multimodal (SoM)): 54.0%
+    GPT-5 (Multimodal (SoM)): 52.9%
+    GPT-5 (Multimodal (SoM)): 36.5%
+    GPT-4o + R-MCTS (Multimodal (SoM)): 33.7%
+  ...
+  Lowest: CogVLM (Multimodal): 0.3%
+  Human performance: 88.7%
+
+--- Paper Per-Domain Breakdown (23 model configs) ---
+  Available domains: classifieds, reddit, shopping
+  Example: GPT-4V+SoM [multimodal]: classifieds=9.83%, reddit=17.14%, shopping=19.31%, overall=16.37%
+
+--- Data Sources ---
+  1. AgentRewardBench (HuggingFace): per-task for 3 models x 100 tasks
+  2. AgentRewardBench annotations: human labels for ~200 unique tasks
+  3. VWA leaderboard (Google Sheets): aggregate for 37 models
+  4. VWA paper (arXiv:2401.13649): per-domain for 23 model configs
+  5. BrowserGym test_raw.json: full 910 task metadata
+
+======================================================================
+Found 1 response matrices across 1 benchmarks.
+
+  [terminal_bench]  terminal_bench/processed/response_matrix.csv
+    heatmap  (147 x 89)
+
+Done.
+
+[terminal_bench]
+  terminal_bench.pt: 147x89, 98% fill
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...ocessed/terminal_bench.pt: 100%|██████████| 62.0kB / 62.0kB            [A[A
+
+  ...ocessed/terminal_bench.pt: 100%|██████████| 62.0kB / 62.0kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 62.0kB / 62.0kB,  103kB/s  
+New Data Upload               : 100%|██████████| 62.0kB / 62.0kB,  103kB/s  [A
+
+  ...ocessed/terminal_bench.pt: 100%|██████████| 62.0kB / 62.0kB            [A[A
+
+  ...ocessed/terminal_bench.pt: 100%|██████████| 62.0kB / 62.0kB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 62.0kB / 62.0kB, 77.5kB/s  
+New Data Upload               : 100%|██████████| 62.0kB / 62.0kB, 77.5kB/s  
+  ...ocessed/terminal_bench.pt: 100%|██████████| 62.0kB / 62.0kB            
+  uploaded terminal_bench.pt
+
+Done.
+Loading Terminal-Bench dataset from HuggingFace (ia03/terminal-bench)...
+Loaded 112 rows  (columns: ['task_id', 'archive', 'task_yaml', 'difficulty', 'tags', 'author_email', 'category', 'base_description', 'max_agent_timeout_sec', 'max_test_timeout_sec', 'tar_sha256', 'archive_bytes', 'n_files', 'generated_at'])
+Saved task_metadata.csv / .json (112 tasks)
+Saved all_tasks_metadata.csv / .json (112 tasks)
+
+Connecting to Terminal-Bench database...
+Connected successfully!
+
+=== Querying tasks ===
+Found 89 tasks in Terminal-Bench 2.0
+
+=== Querying agents ===
+Found 54 agents
+
+=== Querying models ===
+Found 69 models
+
+=== Querying per-task per-model results ===
+Got 13157 per-task per-model rows
+
+=== Querying individual trial results ===
+Got 68352 individual trial results
+
+=== Download summary ===
+HF tasks: 112
+DB tasks: 89
+Agents: 54, Models: 69
+Per-task rows: 13157, Individual trials: 68352
+
+============================================================
+Building response matrices
+============================================================
+Total trials: 68352
+
+=== Building Resolution Rate Matrix ===
+Full coverage (89 tasks): 142
+Partial coverage: 5
+Saved resolution_rate_matrix.csv & response_matrix.csv ((147, 89))
+
+=== Building Binary Response Matrix ===
+Saved binary_response_matrix.json ((147, 89))
+
+=== Building Majority-Vote Binary Matrix ===
+Saved binary_majority_matrix.csv ((147, 89))
+
+=== Building Trials Count Matrix ===
+
+=== Per-Model Summary ===
+Saved agent_model_summary.csv (147 combos)
+
+=== Task Difficulty (empirical) ===
+Saved task_empirical_difficulty.csv
+
+=== Overall Statistics ===
+Tasks: 89
+Agent-model combos: 147 (full=142, partial=5)
+Individual trials: 68352
+Matrix density: 98.0%
+Trials per cell: min=1, max=11, median=5
+
+============================================================
+Merging metadata
+============================================================
+DB tasks (TB 2.0 evaluated): 89
+HuggingFace tasks: 112
+Saved tasks_complete_metadata.csv / .json (89 tasks)
+
+=== Saving item_content.csv ===
+Saved item_content.csv (89 tasks)
+
+=== Metadata Summary (89 tasks) ===
+Category distribution:
+category
+software-engineering     26
+system-administration     9
+security                  8
+data-science              8
+scientific-computing      8
+file-operations           5
+debugging                 5
+model-training            4
+mathematics               4
+data-processing           4
+machine-learning          3
+video-processing          1
+games                     1
+data-querying             1
+optimization              1
+personal-assistant        1
+
+Human difficulty:
+difficulty
+medium    55
+hard      30
+easy       4
+
+Empirical difficulty:
+empirical_difficulty
+medium       25
+easy         19
+hard         17
+very_easy    17
+very_hard    11
+
+Done!
+Found 1 response matrices across 1 benchmarks.
+
+  [rewardbench]  rewardbench/processed/response_matrix.csv
+    heatmap  (151 x 2985)
+
+Done.
+
+[rewardbench]
+  Loaded 2985 item contents
+  Loaded metadata for 118 subjects (2 fields)
+  rewardbench.pt: 151x2985, 100% fill, 118 with metadata
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  .../processed/rewardbench.pt: 100%|██████████| 1.91MB / 1.91MB            [A[A
+
+  .../processed/rewardbench.pt: 100%|██████████| 1.91MB / 1.91MB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 1.91MB / 1.91MB, 2.42MB/s  
+New Data Upload               : 100%|██████████| 1.91MB / 1.91MB, 2.42MB/s  [A
+
+  .../processed/rewardbench.pt: 100%|██████████| 1.91MB / 1.91MB            [A[A
+
+  .../processed/rewardbench.pt: 100%|██████████| 1.91MB / 1.91MB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 1.91MB / 1.91MB, 1.94MB/s  
+New Data Upload               : 100%|██████████| 1.91MB / 1.91MB, 1.94MB/s  
+  .../processed/rewardbench.pt: 100%|██████████| 1.91MB / 1.91MB            
+  uploaded rewardbench.pt
+
+Done.
+RewardBench Response Matrix Builder
+============================================================
+  Raw data dir:       /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/rewardbench/raw
+  Processed data dir: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/rewardbench/processed
+
+STEP 1: Enumerating model files from HuggingFace
+------------------------------------------------------------
+Enumerating model files from HuggingFace API ...
+  Found 39 organizations
+  Found 151 total JSON files
+
+STEP 2: Downloading model JSON files
+------------------------------------------------------------
+
+Downloading 151 model files ...
+  Downloaded: 0, Cached: 151, Failed: 0
+
+STEP 3: Extracting reference item IDs
+------------------------------------------------------------
+  2985 items across 23 subsets
+
+STEP 4: Building response matrix
+------------------------------------------------------------
+  Loaded: 151, Skipped: 0
+
+============================================================
+  RESPONSE MATRIX STATISTICS
+============================================================
+  Models (subjects):   151
+  Items:               2985
+  Matrix dimensions:   151 x 2985
+  Total cells:         450,735
+  All values binary:   True
+
+  Overall accuracy:    0.7058 (70.6%)
+
+  Per-model accuracy:
+    Mean:   0.7058
+    Median: 0.7156
+    Std:    0.1436
+    Min:    0.0335 (google/gemini-1.5-pro-exp-0801)
+    Max:    0.9615 (infly/INF-ORM-Llama3.1-70B)
+
+  Per-item accuracy (difficulty):
+    Mean:   0.7058
+    Median: 0.7550
+    Std:    0.1848
+    Min:    0.0728
+    Max:    0.9801
+
+  Item difficulty distribution:
+    Easy (>=90%):     339
+    Medium (50-90%):  2199
+    Hard (<50%):      447
+
+  Per-subset accuracy:
+    alpacaeval-easy                 n= 100  acc=0.818  (chat)
+    alpacaeval-hard                 n=  95  acc=0.839  (chat)
+    alpacaeval-length               n=  95  acc=0.803  (chat)
+    donotanswer                     n= 136  acc=0.471  (safety)
+    hep-cpp                         n= 164  acc=0.811  (reasoning)
+    hep-go                          n= 164  acc=0.829  (reasoning)
+    hep-java                        n= 164  acc=0.844  (reasoning)
+    hep-js                          n= 164  acc=0.832  (reasoning)
+    hep-python                      n= 164  acc=0.833  (reasoning)
+    hep-rust                        n= 164  acc=0.804  (reasoning)
+    llmbar-adver-GPTInst            n=  92  acc=0.435  (chat_hard)
+    llmbar-adver-GPTOut             n=  47  acc=0.541  (chat_hard)
+    llmbar-adver-manual             n=  46  acc=0.484  (chat_hard)
+    llmbar-adver-neighbor           n= 134  acc=0.509  (chat_hard)
+    llmbar-natural                  n= 100  acc=0.722  (chat_hard)
+    math-prm                        n= 447  acc=0.600  (reasoning)
+    mt-bench-easy                   n=  28  acc=0.782  (chat)
+    mt-bench-hard                   n=  37  acc=0.648  (chat_hard)
+    mt-bench-med                    n=  40  acc=0.775  (chat)
+    refusals-dangerous              n= 100  acc=0.529  (safety)
+    refusals-offensive              n= 100  acc=0.687  (safety)
+    xstest-should-refuse            n= 154  acc=0.636  (safety)
+    xstest-should-respond           n= 250  acc=0.800  (safety)
+
+  Per-category accuracy:
+    chat             n= 358  acc=0.812
+    chat_hard        n= 456  acc=0.553
+    safety           n= 740  acc=0.654
+    reasoning        n=1431  acc=0.755
+
+  Model type distribution:
+    DPO                        81
+    Seq. Classifier            52
+    Generative RM              18
+
+  Top 10 models (by accuracy):
+    infly/INF-ORM-Llama3.1-70B                               0.9615
+    nicolinho/QRM-Gemma-2-27B                                0.9518
+    Skywork/Skywork-Reward-Gemma-2-27B-v0.2                  0.9497
+    Skywork/Skywork-Reward-Gemma-2-27B                       0.9451
+    Skywork/Skywork-Reward-Llama-3.1-8B-v0.2                 0.9404
+    nicolinho/QRM-Llama3.1-8B-v2                             0.9390
+    LxzGordon/URM-LLaMa-3.1-8B                               0.9374
+    Skywork/Skywork-Reward-Llama-3.1-8B                      0.9333
+    Ray2333/GRM-Llama3-8B-rewardmodel-ft                     0.9240
+    Ray2333/GRM-llama3.2-3B-rewardmodel-ft                   0.9209
+
+  Bottom 10 models (by accuracy):
+    ContextualAI/archangel_sft-dpo_pythia1-4b                0.5183
+    ContextualAI/archangel_sft-dpo_pythia2-8b                0.5065
+    ContextualAI/archangel_sft-dpo_pythia6-9b                0.5022
+    allenai/tulu-v2.5-13b-uf-rm                              0.4955
+    SultanR/SmolTulu-1.7b-RM                                 0.4797
+    ContextualAI/archangel_sft-dpo_pythia12-0b               0.4740
+    ContextualAI/archangel_sft-kto_pythia12-0b               0.4667
+    weqweasdas/hh_rlhf_rm_open_llama_3b                      0.4549
+    PKU-Alignment/beaver-7b-v1.0-reward                      0.4476
+    google/gemini-1.5-pro-exp-0801                           0.0335
+
+============================================================
+  SAVING OUTPUTS
+============================================================
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/rewardbench/processed/response_matrix.csv
+    Shape: (151, 2985)
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/rewardbench/processed/item_metadata.csv
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/rewardbench/processed/model_summary.csv
+
+============================================================
+  FINAL SUMMARY
+============================================================
+  Response matrix: 151 models x 2985 items (binary 0/1)
+  Overall accuracy: 0.7058
+  Output files:
+    item_content.csv                               880.1 KB
+    item_metadata.csv                              189.8 KB
+    model_summary.csv                              9.1 KB
+    response_matrix.csv                            939.8 KB
+    rewardbench.pt                                 1868.9 KB
+Found 3 response matrices across 1 benchmarks.
+
+  [prism]  prism/processed/response_matrix.csv
+    heatmap  (1396 x 21)
+  [prism / chosen]  prism/processed/response_matrix_chosen.csv
+    heatmap  (1396 x 68371)
+  [prism / scores]  prism/processed/response_matrix_scores.csv
+    heatmap  (1396 x 68371)
+
+Done.
+
+[prism]
+  Loaded 68371 item contents
+  prism.pt: 1396x21, 66% fill
+  prism_chosen.pt: 1396x68371, 0% fill
+  prism_scores.pt: 1396x68371, 0% fill
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  .../prism/processed/prism.pt: 100%|██████████|  143kB /  143kB            [A[A
+
+  .../prism/processed/prism.pt: 100%|██████████|  143kB /  143kB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  143kB /  143kB,   ???B/s  
+
+  .../prism/processed/prism.pt: 100%|██████████|  143kB /  143kB            [A[A
+
+  .../prism/processed/prism.pt: 100%|██████████|  143kB /  143kB            [A[A
+
+  .../prism/processed/prism.pt: 100%|██████████|  143kB /  143kB            [A[A
+
+  .../prism/processed/prism.pt: 100%|██████████|  143kB /  143kB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  143kB /  143kB,  0.00B/s  
+New Data Upload               : |          |  0.00B /  0.00B,  0.00B/s  
+  .../prism/processed/prism.pt: 100%|██████████|  143kB /  143kB            
+  uploaded prism.pt
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...processed/prism_chosen.pt:   0%|          | 1.01MB /  384MB            [A[A
+
+  ...processed/prism_chosen.pt:   0%|          | 1.01MB /  384MB            [A[AProcessing Files (0 / 1)      :   0%|          | 1.01MB /  384MB,   ???B/s  
+
+  ...processed/prism_chosen.pt:  12%|█▏        | 44.5MB /  384MB            [A[AProcessing Files (0 / 1)      :  12%|█▏        | 44.5MB /  384MB,  217MB/s  
+New Data Upload               :  65%|██████▍   | 43.5MB / 67.1MB,  217MB/s  [A
+
+  ...processed/prism_chosen.pt:  12%|█▏        | 44.5MB /  384MB            [A[A
+
+  ...processed/prism_chosen.pt:  12%|█▏        | 44.5MB /  384MB            [A[A
+
+  ...processed/prism_chosen.pt:  18%|█▊        | 68.1MB /  384MB            [A[AProcessing Files (0 / 1)      :  18%|█▊        | 68.1MB /  384MB, 83.9MB/s  
+New Data Upload               :  50%|████▉     | 67.1MB /  134MB, 83.9MB/s  [A
+
+  ...processed/prism_chosen.pt:  35%|███▌      |  135MB /  384MB            [A[AProcessing Files (0 / 1)      :  35%|███▌      |  135MB /  384MB,  134MB/s  
+New Data Upload               :  67%|██████▋   |  134MB /  201MB,  134MB/s  [A
+
+  ...processed/prism_chosen.pt:  53%|█████▎    |  202MB /  384MB            [A[AProcessing Files (0 / 1)      :  53%|█████▎    |  202MB /  384MB,  168MB/s  
+New Data Upload               :  75%|███████▍  |  201MB /  268MB,  168MB/s  [A
+
+  ...processed/prism_chosen.pt:  88%|████████▊ |  337MB /  384MB            [A[AProcessing Files (0 / 1)      :  88%|████████▊ |  337MB /  384MB,  240MB/s  
+New Data Upload               :  88%|████████▊ |  336MB /  383MB,  240MB/s  [A
+
+  ...processed/prism_chosen.pt:  88%|████████▊ |  337MB /  384MB            [A[A
+
+  ...processed/prism_chosen.pt: 100%|██████████|  384MB /  384MB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  384MB /  384MB,  213MB/s  
+New Data Upload               : 100%|██████████|  383MB /  383MB,  213MB/s  [A
+
+  ...processed/prism_chosen.pt: 100%|██████████|  384MB /  384MB            [A[A
+
+  ...processed/prism_chosen.pt: 100%|██████████|  384MB /  384MB            [A[A
+
+  ...processed/prism_chosen.pt: 100%|██████████|  384MB /  384MB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  384MB /  384MB,  174MB/s  
+New Data Upload               : 100%|██████████|  383MB /  383MB,  174MB/s  
+  ...processed/prism_chosen.pt: 100%|██████████|  384MB /  384MB            
+  uploaded prism_chosen.pt
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...processed/prism_scores.pt:   1%|          | 2.19MB /  384MB            [A[A
+
+  ...processed/prism_scores.pt:   1%|          | 2.19MB /  384MB            [A[AProcessing Files (0 / 1)      :   1%|          | 2.19MB /  384MB,   ???B/s  
+
+  ...processed/prism_scores.pt:   1%|          | 2.19MB /  384MB            [A[A
+
+  ...processed/prism_scores.pt:   1%|          | 2.19MB /  384MB            [A[A
+
+  ...processed/prism_scores.pt:   1%|          | 2.19MB /  384MB            [A[A
+
+  ...processed/prism_scores.pt:  18%|█▊        | 69.3MB /  384MB            [A[AProcessing Files (0 / 1)      :  18%|█▊        | 69.3MB /  384MB, 83.9MB/s  
+New Data Upload               :  50%|████▉     | 67.1MB /  134MB, 83.9MB/s  [A
+
+  ...processed/prism_scores.pt:  36%|███▌      |  136MB /  384MB            [A[AProcessing Files (0 / 1)      :  36%|███▌      |  136MB /  384MB,  134MB/s  
+New Data Upload               :  67%|██████▋   |  134MB /  201MB,  134MB/s  [A
+
+  ...processed/prism_scores.pt:  53%|█████▎    |  203MB /  384MB            [A[AProcessing Files (0 / 1)      :  53%|█████▎    |  203MB /  384MB,  168MB/s  
+New Data Upload               :  75%|███████▍  |  201MB /  268MB,  168MB/s  [A
+
+  ...processed/prism_scores.pt:  70%|███████   |  271MB /  384MB            [A[A
+
+  ...processed/prism_scores.pt:  88%|████████▊ |  338MB /  384MB            [A[AProcessing Files (0 / 1)      :  88%|████████▊ |  338MB /  384MB,  210MB/s  
+New Data Upload               :  88%|████████▊ |  336MB /  382MB,  210MB/s  [A
+
+  ...processed/prism_scores.pt: 100%|██████████|  384MB /  384MB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  384MB /  384MB,  212MB/s  
+New Data Upload               : 100%|██████████|  382MB /  382MB,  212MB/s  [A
+
+  ...processed/prism_scores.pt: 100%|██████████|  384MB /  384MB            [A[A
+
+  ...processed/prism_scores.pt: 100%|██████████|  384MB /  384MB            [A[A
+
+  ...processed/prism_scores.pt: 100%|██████████|  384MB /  384MB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  384MB /  384MB,  174MB/s  
+New Data Upload               : 100%|██████████|  382MB /  382MB,  174MB/s  
+  ...processed/prism_scores.pt: 100%|██████████|  384MB /  384MB            
+  uploaded prism_scores.pt
+
+Done.
+Dataset already exists at /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/raw/dataset, skipping
+PRISM Alignment Response Matrix Builder
+============================================================
+  Raw data dir:       /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/raw
+  Processed data dir: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/processed
+
+STEP 1: Downloading PRISM utterances
+------------------------------------------------------------
+  Using cached data: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/raw/utterances_raw.parquet
+
+STEP 2: Downloading PRISM survey (demographics)
+------------------------------------------------------------
+  Using cached data: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/raw/survey_raw.parquet
+
+STEP 3: Building response matrices
+------------------------------------------------------------
+
+Building response matrices ...
+  Unique participants: 1396
+  Unique utterances:   68371
+  Total records:       68,371
+
+  Building scores matrix ...
+    Shape: (1396, 68371)
+    Valid cells: 68,371 / 95,445,916 (0.07%)
+
+  Building chosen matrix ...
+    Shape: (1396, 68371)
+    Valid cells: 68,371 / 95,445,916 (0.07%)
+
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/processed/response_matrix_scores.csv
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/processed/response_matrix_chosen.csv
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/processed/item_content.csv (68371 utterances)
+
+STEP 4: Building utterance metadata
+------------------------------------------------------------
+
+Building utterance metadata ...
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/processed/utterance_metadata.csv (68,371 utterances)
+
+  Model distribution:
+    command                                   4,812
+    claude-instant-1                          4,292
+    models/chat-bison-001                     4,168
+    HuggingFaceH4/zephyr-7b-beta              4,133
+    meta-llama/Llama-2-7b-chat-hf             3,995
+    command-light                             3,929
+    command-nightly                           3,816
+    gpt-4-1106-preview                        3,735
+    gpt-4                                     3,515
+    meta-llama/Llama-2-70b-chat-hf            3,493
+    gpt-3.5-turbo                             3,471
+    timdettmers/guanaco-33b-merged            3,468
+    claude-2.1                                3,338
+    mistralai/Mistral-7B-Instruct-v0.1        3,261
+    claude-2                                  3,209
+    tiiuae/falcon-7b-instruct                 2,608
+    OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5  2,314
+    meta-llama/Llama-2-13b-chat-hf            1,744
+    luminous-supreme-control                  1,722
+    google/flan-t5-xxl                        1,715
+    luminous-extended-control                 1,633
+
+STEP 5: Building participant metadata
+------------------------------------------------------------
+
+Building participant metadata ...
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/prism/processed/participant_metadata.csv (1,396 participants)
+  Matched survey data: 1396/1396 participants
+
+  Gender distribution:
+    Male                  697
+    Female                677
+    Non-binary / third gender  20
+    Prefer not to say     2
+
+STEP 6: Detailed statistics
+------------------------------------------------------------
+
+============================================================
+  PRISM RESPONSE MATRIX STATISTICS
+============================================================
+
+  Matrix dimensions:
+    Participants:  1396
+    Utterances:    68,371
+    Total cells:   95,445,916
+    Valid cells:   68,371 (0.07%)
+    Fill rate:     0.07%
+
+  Score distribution (normalized [0,1]):
+    Mean:   0.6478
+    Median: 0.7172
+    Std:    0.2962
+    Min:    0.0000
+    Max:    1.0000
+    P10:    0.1414
+    P25:    0.4949
+    P50:    0.7172
+    P75:    0.8889
+    P90:    0.9899
+
+  Chosen distribution:
+    Chosen (1):     27,437 (40.1%)
+    Not chosen (0): 40,934 (59.9%)
+
+  Per-participant statistics:
+    Ratings per participant:
+      Mean:   49.0
+      Median: 48.0
+      Min:    4
+      Max:    144
+    Mean score per participant:
+      Mean:   0.6468
+      Std:    0.1159
+
+  Per-utterance statistics:
+    Raters per utterance:
+      Mean:   1.0
+      Median: 1.0
+      Min:    1
+      Max:    1
+
+  Inter-participant agreement (sampled):
+
+  Output files:
+    item_content.csv                               1046.6 KB
+    model_means.csv                                0.8 KB
+    participant_metadata.csv                       182.0 KB
+    prism.pt                                       139.7 KB
+    prism_chosen.pt                                375108.8 KB
+    response_matrix.csv                            162.7 KB
+    response_matrix_chosen.csv                     93943.8 KB
+    response_matrix_scores.csv                     94797.5 KB
+    summary_statistics.csv                         0.0 KB
+    utterance_metadata.csv                         8636.6 KB
+
+============================================================
+  FINAL SUMMARY
+============================================================
+  Scores matrix:  1396 participants x 68,371 utterances
+  Chosen matrix:  1396 participants x 68,371 utterances
+  Participant metadata: 1396 entries
+  Utterance metadata:   68,371 entries
+
+============================================================
+Downloading: African MMLU + Winogrande (11 languages)
+============================================================
+Available versions: ['v1.0.0', 'v1.1.0-preview', 'v1.1.0']
+  v1.0.0: 660 runs
+  v1.1.0-preview: 132 runs
+  v1.1.0: 308 runs
+Total runs: 1100
+
+Downloading to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_afr/raw/afr...
+  [10/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=am,method=multiple_choice_joint,model=google_gemma-2-9b-it: 6 files
+  [20/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=bm,method=multiple_choice_joint,model=openai_gpt-3.5-turbo-0125: 6 files
+  [30/1100] mmlu_clinical_afr:subject=college_medicine,lang=bm,method=multiple_choice_joint,model=google_gemma-2-9b-it: 6 files
+  [40/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=zu,method=multiple_choice_joint,model=qwen_qwen2.5-7b-instruct-turbo: 6 files
+  [50/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=ts,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [60/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=ts,method=multiple_choice_joint,model=openai_gpt-4-turbo-2024-04-09: 6 files
+  [70/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=nso,method=multiple_choice_joint,model=meta_llama-3.1-405b-instruct-turbo: 6 files
+  [80/1100] mmlu_clinical_afr:subject=college_medicine,lang=am,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [90/1100] mmlu_clinical_afr:subject=college_medicine,lang=am,method=multiple_choice_joint,model=openai_gpt-4-turbo-2024-04-09: 6 files
+  [100/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=st,method=multiple_choice_joint,model=google_gemma-2b-it: 6 files
+  [110/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=zu,method=multiple_choice_joint,model=meta_llama-3.1-405b-instruct-turbo: 6 files
+  [120/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=am,method=multiple_choice_joint,model=openai_gpt2: 6 files
+  [130/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=am,method=multiple_choice_joint,model=meta_llama-3.1-405b-instruct-turbo: 6 files
+  [140/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=ig,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [150/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=zu,method=multiple_choice_joint,model=deepseek-ai_deepseek-v3: 6 files
+  [160/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=ig,method=multiple_choice_joint,model=mistralai_mixtral-8x7b-instruct-v0.1: 6 files
+  [170/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=tn,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [180/1100] mmlu_clinical_afr:subject=college_medicine,lang=af,method=multiple_choice_joint,model=openai_gpt2: 6 files
+  [190/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=ig,method=multiple_choice_joint,model=meta_llama-3-8b-instruct-turbo: 6 files
+  [200/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=sn,method=multiple_choice_joint,model=meta_llama-3.1-405b-instruct-turbo: 6 files
+  [210/1100] mmlu_clinical_afr:subject=college_medicine,lang=af,method=multiple_choice_joint,model=openai_gpt-3.5-turbo-0125: 6 files
+  [220/1100] mmlu_clinical_afr:subject=college_medicine,lang=af,method=multiple_choice_joint,model=mistralai_mixtral-8x7b-instruct-v0.1: 6 files
+  [230/1100] mmlu_clinical_afr:subject=college_medicine,lang=nso,method=multiple_choice_joint,model=openai_gpt-4-turbo-2024-04-09: 6 files
+  [240/1100] mmlu_clinical_afr:subject=college_medicine,lang=bm,method=multiple_choice_joint,model=mistralai_mistral-7b-instruct-v0.3: 6 files
+  [250/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=tn,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [260/1100] mmlu_clinical_afr:subject=college_medicine,lang=st,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [270/1100] mmlu_clinical_afr:subject=college_medicine,lang=st,method=multiple_choice_joint,model=mistralai_mixtral-8x7b-instruct-v0.1: 6 files
+  [280/1100] mmlu_clinical_afr:subject=college_medicine,lang=ts,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [290/1100] mmlu_clinical_afr:subject=college_medicine,lang=tn,method=multiple_choice_joint,model=openai_gpt-4-turbo-2024-04-09: 6 files
+  [300/1100] mmlu_clinical_afr:subject=college_medicine,lang=xh,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [310/1100] mmlu_clinical_afr:subject=college_medicine,lang=zu,method=multiple_choice_joint,model=deepseek-ai_deepseek-v3: 6 files
+  [320/1100] mmlu_clinical_afr:subject=college_medicine,lang=ts,method=multiple_choice_joint,model=mistralai_mistral-7b-instruct-v0.3: 6 files
+  [330/1100] mmlu_clinical_afr:subject=virology,lang=af,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [340/1100] mmlu_clinical_afr:subject=virology,lang=af,method=multiple_choice_joint,model=openai_gpt-4o-mini-2024-07-18: 6 files
+  [350/1100] mmlu_clinical_afr:subject=virology,lang=am,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [360/1100] mmlu_clinical_afr:subject=virology,lang=bm,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [370/1100] mmlu_clinical_afr:subject=virology,lang=ig,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [380/1100] mmlu_clinical_afr:subject=virology,lang=ig,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [390/1100] mmlu_clinical_afr:subject=virology,lang=nso,method=multiple_choice_joint,model=google_gemma-2b-it: 6 files
+  [400/1100] mmlu_clinical_afr:subject=virology,lang=sn,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [410/1100] mmlu_clinical_afr:subject=virology,lang=sn,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [420/1100] mmlu_clinical_afr:subject=virology,lang=st,method=multiple_choice_joint,model=google_gemma-2-9b-it: 6 files
+  [430/1100] mmlu_clinical_afr:subject=virology,lang=tn,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [440/1100] mmlu_clinical_afr:subject=virology,lang=tn,method=multiple_choice_joint,model=openai_gpt-4-turbo-2024-04-09: 6 files
+  [450/1100] mmlu_clinical_afr:subject=virology,lang=ts,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [460/1100] mmlu_clinical_afr:subject=virology,lang=xh,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [470/1100] mmlu_clinical_afr:subject=virology,lang=xh,method=multiple_choice_joint,model=openai_gpt-3.5-turbo-0125: 6 files
+  [480/1100] mmlu_clinical_afr:subject=virology,lang=zu,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [490/1100] winogrande_afr:lang=af,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [500/1100] winogrande_afr:lang=af,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [510/1100] winogrande_afr:lang=am,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [520/1100] winogrande_afr:lang=am,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [530/1100] winogrande_afr:lang=bm,method=multiple_choice_joint,model=google_gemma-2b-it: 6 files
+  [540/1100] winogrande_afr:lang=ig,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [550/1100] mmlu_clinical_afr:subject=virology,lang=zu,method=multiple_choice_joint,model=openai_gpt-3.5-turbo-0125: 6 files
+  [560/1100] winogrande_afr:lang=nso,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [570/1100] winogrande_afr:lang=sn,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [580/1100] winogrande_afr:lang=st,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [590/1100] winogrande_afr:lang=st,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [600/1100] winogrande_afr:lang=tn,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [610/1100] winogrande_afr:lang=tn,method=multiple_choice_joint,model=mistralai_mistral-7b-instruct-v0.3: 6 files
+  [620/1100] winogrande_afr:lang=ts,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [630/1100] winogrande_afr:lang=xh,method=multiple_choice_joint,model=meta_llama-3.3-70b-instruct-turbo: 6 files
+  [640/1100] winogrande_afr:lang=zu,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [650/1100] winogrande_afr:lang=zu,method=multiple_choice_joint,model=openai_gpt-4o-2024-08-06: 6 files
+  [660/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=bm,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+  [670/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=sn,method=multiple_choice_joint,model=anthropic_claude-3-5-sonnet-20241022: 6 files
+  [680/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=st,method=multiple_choice_joint,model=anthropic_claude-3-7-sonnet-20250219: 6 files
+  [690/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=xh,method=multiple_choice_joint,model=google_gemma-2-27b-it: 6 files
+  [700/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=xh,method=multiple_choice_joint,model=anthropic_claude-3-5-sonnet-20241022: 6 files
+  [710/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=bm,method=multiple_choice_joint,model=anthropic_claude-3-5-sonnet-20241022: 6 files
+  [720/1100] mmlu_clinical_afr:subject=virology,lang=af,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+  [730/1100] mmlu_clinical_afr:subject=virology,lang=ig,method=multiple_choice_joint,model=anthropic_claude-3-5-sonnet-20241022: 6 files
+  [740/1100] mmlu_clinical_afr:subject=virology,lang=st,method=multiple_choice_joint,model=anthropic_claude-3-7-sonnet-20250219: 6 files
+  [750/1100] mmlu_clinical_afr:subject=virology,lang=zu,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+  [760/1100] winogrande_afr:lang=bm,method=multiple_choice_joint,model=anthropic_claude-3-5-sonnet-20241022: 6 files
+  [770/1100] winogrande_afr:lang=sn,method=multiple_choice_joint,model=anthropic_claude-3-5-sonnet-20241022: 6 files
+  [780/1100] winogrande_afr:lang=xh,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+  [790/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=af,method=multiple_choice_joint,model=meta_llama-3.1-70b-instruct-turbo: 6 files
+  [800/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=bm,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+  [810/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=am,method=multiple_choice_joint,model=meta_llama-3.1-8b-instruct-turbo: 6 files
+  [820/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=nso,method=multiple_choice_joint,model=qwen_qwen2.5-72b-instruct-turbo: 6 files
+  [830/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=ig,method=multiple_choice_joint,model=google_gemini-2.0-flash-001: 6 files
+  [840/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=tn,method=multiple_choice_joint,model=meta_llama-3.1-8b-instruct-turbo: 6 files
+  [850/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=xh,method=multiple_choice_joint,model=anthropic_claude-3-7-sonnet-20250219: 6 files
+  [860/1100] mmlu_clinical_afr:subject=clinical_knowledge,lang=zu,method=multiple_choice_joint,model=meta_llama-3.1-70b-instruct-turbo: 6 files
+  [870/1100] mmlu_clinical_afr:subject=college_medicine,lang=am,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+  [880/1100] mmlu_clinical_afr:subject=college_medicine,lang=bm,method=multiple_choice_joint,model=google_gemini-2.0-flash-lite-001: 6 files
+  [890/1100] mmlu_clinical_afr:subject=college_medicine,lang=ig,method=multiple_choice_joint,model=qwen_qwen2.5-72b-instruct-turbo: 6 files
+  [900/1100] mmlu_clinical_afr:subject=college_medicine,lang=sn,method=multiple_choice_joint,model=google_gemini-2.0-flash-001: 6 files
+  [910/1100] mmlu_clinical_afr:subject=college_medicine,lang=st,method=multiple_choice_joint,model=meta_llama-3.1-8b-instruct-turbo: 6 files
+  [920/1100] mmlu_clinical_afr:subject=college_medicine,lang=ts,method=multiple_choice_joint,model=anthropic_claude-3-7-sonnet-20250219: 6 files
+  [930/1100] mmlu_clinical_afr:subject=college_medicine,lang=xh,method=multiple_choice_joint,model=meta_llama-3.1-70b-instruct-turbo: 6 files
+  [940/1100] mmlu_clinical_afr:subject=virology,lang=af,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+  [950/1100] mmlu_clinical_afr:subject=virology,lang=am,method=multiple_choice_joint,model=google_gemini-2.0-flash-lite-001: 6 files
+  [960/1100] mmlu_clinical_afr:subject=virology,lang=bm,method=multiple_choice_joint,model=qwen_qwen2.5-72b-instruct-turbo: 6 files
+  [970/1100] mmlu_clinical_afr:subject=virology,lang=nso,method=multiple_choice_joint,model=google_gemini-2.0-flash-001: 6 files
+  [980/1100] mmlu_clinical_afr:subject=virology,lang=sn,method=multiple_choice_joint,model=meta_llama-3.1-8b-instruct-turbo: 6 files
+  [990/1100] mmlu_clinical_afr:subject=virology,lang=st,method=multiple_choice_joint,model=meta_llama-3.1-70b-instruct-turbo: 6 files
+  [1000/1100] mmlu_clinical_afr:subject=virology,lang=ts,method=multiple_choice_joint,model=meta_llama-3.1-70b-instruct-turbo: 6 files
+  [1010/1100] mmlu_clinical_afr:subject=virology,lang=ts,method=multiple_choice_joint,model=google_gemini-2.0-flash-001: 6 files
+  [1020/1100] winogrande_afr:lang=af,method=multiple_choice_joint,model=google_gemini-2.0-flash-001: 6 files
+  [1030/1100] winogrande_afr:lang=am,method=multiple_choice_joint,model=qwen_qwen2.5-72b-instruct-turbo: 6 files
+  [1040/1100] winogrande_afr:lang=ig,method=multiple_choice_joint,model=google_gemini-2.0-flash-001: 6 files
+  [1050/1100] winogrande_afr:lang=nso,method=multiple_choice_joint,model=meta_llama-3.1-8b-instruct-turbo: 6 files
+  [1060/1100] winogrande_afr:lang=st,method=multiple_choice_joint,model=anthropic_claude-3-7-sonnet-20250219: 6 files
+  [1070/1100] winogrande_afr:lang=st,method=multiple_choice_joint,model=google_gemini-2.0-flash-lite-001: 6 files
+  [1080/1100] winogrande_afr:lang=xh,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+  [1090/1100] winogrande_afr:lang=zu,method=multiple_choice_joint,model=google_gemini-2.0-flash-lite-001: 6 files
+  [1100/1100] mmlu_clinical_afr:subject=college_medicine,lang=tn,method=multiple_choice_joint,model=anthropic_claude-3-5-haiku-20241022: 6 files
+
+Done. Data saved to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_afr/raw/afr
+
+============================================================
+Processing: African MMLU + Winogrande (11 languages)
+Data dir: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_afr/raw/afr
+============================================================
+  Found 3 version(s): ['v1.0.0', 'v1.1.0', 'v1.1.0-preview']
+    v1.0.0: 660 runs
+    v1.1.0: 308 runs
+    v1.1.0-preview: 132 runs
+  Extracted 751960 item-model records
+  Unique items: 33880
+  Response matrix: 23 models x 33880 items
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_afr/processed/response_matrix.csv
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_afr/processed/item_content.csv (33880 items)
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_afr/processed/task_metadata.csv (33880 items)
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_afr/processed/model_summary.csv (23 models)
+
+============================================================
+Summary Statistics
+============================================================
+Total items: 33880
+Total models: 23
+Models: ['anthropic_claude-3-5-haiku-20241022', 'anthropic_claude-3-5-sonnet-20241022', 'anthropic_claude-3-7-sonnet-20250219', 'deepseek-ai_deepseek-v3', 'google_gemini-2.0-flash-001', 'google_gemini-2.0-flash-lite-001', 'google_gemma-2-27b-it', 'google_gemma-2-9b-it', 'google_gemma-2b-it', 'meta_llama-3-8b-instruct-turbo', 'meta_llama-3.1-405b-instruct-turbo', 'meta_llama-3.1-70b-instruct-turbo', 'meta_llama-3.1-8b-instruct-turbo', 'meta_llama-3.3-70b-instruct-turbo', 'mistralai_mistral-7b-instruct-v0.3', 'mistralai_mixtral-8x7b-instruct-v0.1', 'openai_gpt-3.5-turbo-0125', 'openai_gpt-4-turbo-2024-04-09', 'openai_gpt-4o-2024-08-06', 'openai_gpt-4o-mini-2024-07-18', 'openai_gpt2', 'qwen_qwen2.5-72b-instruct-turbo', 'qwen_qwen2.5-7b-instruct-turbo']Found 1 response matrices across 1 benchmarks.
+
+  [helm_afr]  helm_afr/processed/response_matrix.csv
+    heatmap  (23 x 33880)
+
+Done.
+
+[helm_afr]
+  Loaded 33880 item contents
+  Loaded metadata for 23 subjects (3 fields)
+  helm_afr.pt: 23x33880, 96% fill, 23 with metadata
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...afr/processed/helm_afr.pt:  63%|██████▎   | 3.86MB / 6.13MB            [A[A
+
+  ...afr/processed/helm_afr.pt:  63%|██████▎   | 3.86MB / 6.13MB            [A[AProcessing Files (0 / 1)      :  63%|██████▎   | 3.86MB / 6.13MB, 10.5MB/s  
+New Data Upload               :  51%|█████     | 2.38MB / 4.65MB, 6.47MB/s  [A
+
+  ...afr/processed/helm_afr.pt:  63%|██████▎   | 3.86MB / 6.13MB            [A[A
+
+  ...afr/processed/helm_afr.pt:  63%|██████▎   | 3.86MB / 6.13MB            [A[A
+
+  ...afr/processed/helm_afr.pt:  63%|██████▎   | 3.86MB / 6.13MB            [A[A
+
+  ...afr/processed/helm_afr.pt: 100%|██████████| 6.13MB / 6.13MB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 6.13MB / 6.13MB, 5.26MB/s  
+New Data Upload               : 100%|██████████| 4.65MB / 4.65MB, 3.99MB/s  [A
+
+  ...afr/processed/helm_afr.pt: 100%|██████████| 6.13MB / 6.13MB            [A[A
+
+  ...afr/processed/helm_afr.pt: 100%|██████████| 6.13MB / 6.13MB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 6.13MB / 6.13MB, 4.49MB/s  
+New Data Upload               : 100%|██████████| 4.65MB / 4.65MB, 3.40MB/s  
+  ...afr/processed/helm_afr.pt: 100%|██████████| 6.13MB / 6.13MB            
+  uploaded helm_afr.pt
+
+Done.
+
+
+Items per language:
+  af: 3080
+  am: 3080
+  bm: 3080
+  ig: 3080
+  nso: 3080
+  sn: 3080
+  st: 3080
+  tn: 3080
+  ts: 3080
+  xh: 3080
+  zu: 3080
+
+Items per benchmark:
+  mmlu_afr: 7403
+  winogrande_afr: 26477
+
+Model accuracies:
+  google_gemini-2.0-flash-001: 0.6974 (23627/33880)
+  anthropic_claude-3-7-sonnet-20250219: 0.6901 (23382/33880)
+  openai_gpt-4o-2024-08-06: 0.6672 (22605/33880)
+  anthropic_claude-3-5-sonnet-20241022: 0.6400 (1408/2200)
+  google_gemini-2.0-flash-lite-001: 0.6372 (21590/33880)
+  deepseek-ai_deepseek-v3: 0.6208 (21033/33880)
+  openai_gpt-4-turbo-2024-04-09: 0.6032 (20436/33880)
+  meta_llama-3.1-405b-instruct-turbo: 0.5668 (19202/33880)
+  meta_llama-3.1-70b-instruct-turbo: 0.5395 (18278/33880)
+  google_gemma-2-27b-it: 0.5252 (17795/33880)
+  anthropic_claude-3-5-haiku-20241022: 0.5170 (17516/33880)
+  qwen_qwen2.5-72b-instruct-turbo: 0.5158 (17476/33880)
+  meta_llama-3.3-70b-instruct-turbo: 0.5009 (16971/33880)
+  openai_gpt-3.5-turbo-0125: 0.4847 (16423/33880)
+  meta_llama-3-8b-instruct-turbo: 0.4837 (16387/33880)
+  google_gemma-2-9b-it: 0.4795 (16246/33880)
+  qwen_qwen2.5-7b-instruct-turbo: 0.4754 (16107/33880)
+  mistralai_mixtral-8x7b-instruct-v0.1: 0.4665 (15804/33880)
+  mistralai_mistral-7b-instruct-v0.3: 0.4621 (15655/33880)
+  meta_llama-3.1-8b-instruct-turbo: 0.4602 (15593/33880)
+  google_gemma-2b-it: 0.4478 (15173/33880)
+  openai_gpt2: 0.4432 (15017/33880)
+  openai_gpt-4o-mini-2024-07-18: 0.3681 (12472/33880)
+Found 1 response matrices across 1 benchmarks.
+
+  [helm_cleva]  helm_cleva/processed/response_matrix.csv
+    heatmap  (4 x 5828)
+
+Done.
+
+[helm_cleva]
+  Loaded 5828 item contents
+  Loaded metadata for 4 subjects (3 fields)
+  helm_cleva.pt: 4x5828, 100% fill, 4 with metadata
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...a/processed/helm_cleva.pt:  22%|██▏       |  162kB /  733kB            [A[A
+
+  ...a/processed/helm_cleva.pt:  22%|██▏       |  162kB /  733kB            [A[AProcessing Files (0 / 1)      :  22%|██▏       |  162kB /  733kB,  404kB/s  
+
+  ...a/processed/helm_cleva.pt:  22%|██▏       |  162kB /  733kB            [A[A
+
+  ...a/processed/helm_cleva.pt: 100%|██████████|  733kB /  733kB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  733kB /  733kB,  916kB/s  
+New Data Upload               : 100%|██████████|  571kB /  571kB,  714kB/s  [A
+
+  ...a/processed/helm_cleva.pt: 100%|██████████|  733kB /  733kB            [A[A
+
+  ...a/processed/helm_cleva.pt: 100%|██████████|  733kB /  733kB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  733kB /  733kB,  732kB/s  
+New Data Upload               : 100%|██████████|  571kB /  571kB,  571kB/s  
+  ...a/processed/helm_cleva.pt: 100%|██████████|  733kB /  733kB            
+  uploaded helm_cleva.pt
+
+Done.
+
+============================================================
+Downloading: CLEVA Chinese evaluation (21 tasks)
+============================================================
+Available versions: ['v1.0.0']
+  v1.0.0: 84 runs
+Total runs: 84
+
+Downloading to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_cleva/raw/cleva...
+  [10/84] cleva:task=coreference_resolution,version=v1,prompt_id=3,model=openai_gpt-3.5-turbo-0613: 6 files
+  [20/84] cleva:task=mathematical_calculation,version=v1,prompt_id=0,subtask=add,model=meta_llama-65b: 6 files
+  [30/84] cleva:task=mathematical_calculation,version=v1,prompt_id=0,subtask=sub,model=lmsys_vicuna-13b-v1.3: 6 files
+  [40/84] cleva:task=paraphrase_identification,version=v1,prompt_id=3,subtask=short_utterance,model=meta_llama-65b: 6 files
+  [50/84] cleva:task=pinyin_transliteration,version=v1,prompt_id=0,subtask=pinyin2zh,model=openai_gpt-4-0613: 6 files
+  [60/84] cleva:task=summarization,version=v1,prompt_id=0,subtask=dialogue_summarization,model=openai_gpt-3.5-turbo-0613: 6 files
+  [70/84] cleva:task=text_classification,version=v1,prompt_id=3,subtask=news,model=openai_gpt-3.5-turbo-0613: 6 files
+  [80/84] cleva:task=translation,version=v1,prompt_id=0,subtask=zh2en,model=meta_llama-65b: 6 files
+  [84/84] cleva:task=translation,version=v1,prompt_id=0,subtask=zh2en,model=openai_gpt-4-0613: 6 files
+
+Done. Data saved to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_cleva/raw/cleva
+
+============================================================
+Processing: CLEVA Chinese evaluation (21 tasks)
+Data dir: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_cleva/raw/cleva
+============================================================
+  Found 1 version(s): ['v1.0.0']
+    v1.0.0: 84 runs
+  Extracted 23312 item-model records
+  Unique items: 5828
+  Response matrix: 4 models x 5828 items
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_cleva/processed/response_matrix.csv
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_cleva/processed/item_content.csv (5828 items)
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_cleva/processed/task_metadata.csv (5828 items)
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_cleva/processed/model_summary.csv (4 models)
+
+============================================================
+Summary Statistics
+============================================================
+Total items: 5828
+Total models: 4
+Models: ['lmsys_vicuna-13b-v1.3', 'meta_llama-65b', 'openai_gpt-3.5-turbo-0613', 'openai_gpt-4-0613']
+
+Items per language:
+  zh: 5828
+
+Items per benchmark:
+  cleva: 5828
+
+Model accuracies:
+  openai_gpt-4-0613: 0.8121 (4733/5828)
+  openai_gpt-3.5-turbo-0613: 0.6709 (3910/5828)
+  meta_llama-65b: 0.5870 (3421/5828)
+  lmsys_vicuna-13b-v1.3: 0.5455 (3179/5828)
+Found 1 response matrices across 1 benchmarks.
+
+  [helm_thaiexam]  helm_thaiexam/processed/response_matrix.csv
+    heatmap  (42 x 565)
+
+Done.
+
+[helm_thaiexam]
+  Loaded 565 item contents
+  Loaded metadata for 42 subjects (3 fields)
+  helm_thaiexam.pt: 42x565, 100% fill, 42 with metadata
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...rocessed/helm_thaiexam.pt: 100%|██████████|  136kB /  136kB            [A[A
+
+  ...rocessed/helm_thaiexam.pt: 100%|██████████|  136kB /  136kB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  136kB /  136kB,  238kB/s  
+New Data Upload               : 100%|██████████|  136kB /  136kB,  238kB/s  [A
+
+  ...rocessed/helm_thaiexam.pt: 100%|██████████|  136kB /  136kB            [A[AProcessing Files (1 / 1)      : 100%|██████████|  136kB /  136kB,  231kB/s  
+New Data Upload               : 100%|██████████|  136kB /  136kB,  231kB/s  
+  ...rocessed/helm_thaiexam.pt: 100%|██████████|  136kB /  136kB            
+  uploaded helm_thaiexam.pt
+
+Done.
+
+============================================================
+Downloading: Thai examination benchmarks (A-Level, IC, ONET, TGAT, TPAT1)
+============================================================
+Available versions: ['v1.0.0', 'v1.1.0', 'v1.2.0-preview', 'v1.2.0', 'v1.3.0-preview']
+  v1.0.0: 170 runs
+  v1.1.0: 30 runs
+  v1.2.0-preview: 10 runs
+  v1.2.0: 10 runs
+  v1.3.0-preview: 5 runs
+Total runs: 225
+
+Downloading to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_thaiexam/raw/thaiexam...
+  [10/225] thai_exam:exam=a_level,method=multiple_choice_joint,model=anthropic_claude-3-5-sonnet-20240620: 6 files
+  [20/225] thai_exam:exam=a_level,method=multiple_choice_joint,model=sail_sailor-14b-chat: 6 files
+  [30/225] thai_exam:exam=ic,method=multiple_choice_joint,model=anthropic_claude-3-haiku-20240307: 6 files
+  [40/225] thai_exam:exam=ic,method=multiple_choice_joint,model=google_gemini-1.0-pro-002: 6 files
+  [50/225] thai_exam:exam=ic,method=multiple_choice_joint,model=mistralai_mixtral-8x7b-instruct-v0.1: 6 files
+  [60/225] thai_exam:exam=ic,method=multiple_choice_joint,model=openai_gpt-4-turbo-2024-04-09: 6 files
+  [70/225] thai_exam:exam=onet,method=multiple_choice_joint,model=cohere_command-r-plus: 6 files
+  [80/225] thai_exam:exam=onet,method=multiple_choice_joint,model=meta_llama-3-8b-chat: 6 files
+  [90/225] thai_exam:exam=onet,method=multiple_choice_joint,model=openthaigpt_openthaigpt-1.0.0-7b-chat: 6 files
+  [100/225] thai_exam:exam=onet,method=multiple_choice_joint,model=scb10x_llama-3-typhoon-v1.5x-8b-instruct: 6 files
+  [110/225] thai_exam:exam=tgat,method=multiple_choice_joint,model=mistralai_mistral-7b-instruct-v0.3: 6 files
+  [120/225] thai_exam:exam=tgat,method=multiple_choice_joint,model=openai_gpt-4-turbo-2024-04-09: 6 files
+  [130/225] thai_exam:exam=tgat,method=multiple_choice_joint,model=sail_sailor-14b-chat: 6 files
+  [140/225] thai_exam:exam=tgat,method=multiple_choice_joint,model=sambanova_sambalingo-thai-chat-70b: 6 files
+  [150/225] thai_exam:exam=tpat1,method=multiple_choice_joint,model=meta_llama-3-8b-chat: 6 files
+  [160/225] thai_exam:exam=tpat1,method=multiple_choice_joint,model=sail_sailor-14b-chat: 6 files
+  [170/225] thai_exam:exam=a_level,method=multiple_choice_joint,model=aisingapore_llama3-8b-cpt-sea-lionv2.1-instruct: 6 files
+  [180/225] thai_exam:exam=onet,method=multiple_choice_joint,model=meta_llama-3.1-8b-instruct-turbo: 6 files
+  [190/225] thai_exam:exam=onet,method=multiple_choice_joint,model=meta_llama-3.1-70b-instruct-turbo: 6 files
+  [200/225] thai_exam:exam=a_level,method=multiple_choice_joint,model=nectec_Pathumma-llm-text-1.0.0: 6 files
+  [210/225] thai_exam:exam=tpat1,method=multiple_choice_joint,model=meta_llama-3.1-405b-instruct-turbo: 6 files
+  [220/225] thai_exam:exam=ic,method=multiple_choice_joint,model=nectec_Pathumma-llm-text-1.0.0: 6 files
+  [225/225] thai_exam:exam=tgat,method=multiple_choice_joint,model=nectec_Pathumma-llm-text-1.0.0: 6 files
+
+Done. Data saved to /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_thaiexam/raw/thaiexam
+
+============================================================
+Processing: Thai examination benchmarks
+Data dir: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_thaiexam/raw/thaiexam
+============================================================
+  Found 5 version(s): ['v1.0.0', 'v1.1.0', 'v1.2.0', 'v1.2.0-preview', 'v1.3.0-preview']
+    v1.0.0: 170 runs
+    v1.1.0: 30 runs
+    v1.2.0: 10 runs
+    v1.2.0-preview: 10 runs
+    v1.3.0-preview: 5 runs
+  Extracted 24795 item-model records
+  Unique items: 565
+  Response matrix: 42 models x 565 items
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_thaiexam/processed/response_matrix.csv
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_thaiexam/processed/item_content.csv (565 items)
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_thaiexam/processed/task_metadata.csv (565 items)
+  Saved: /lfs/skampere1/0/sttruong/aimslab/torch_measure/data/helm_thaiexam/processed/model_summary.csv (42 models)
+
+============================================================
+Summary Statistics
+============================================================
+Total items: 565
+Total models: 42
+Models: ['aisingapore_llama3-8b-cpt-sea-lionv2-base', 'aisingapore_llama3-8b-cpt-sea-lionv2.1-instruct', 'aisingapore_sea-lion-7b-instruct', 'anthropic_claude-3-5-sonnet-20240620', 'anthropic_claude-3-haiku-20240307', 'anthropic_claude-3-opus-20240229', 'anthropic_claude-3-sonnet-20240229', 'cohere_command-r', 'cohere_command-r-plus', 'damo_seallm-7b-v2', 'damo_seallm-7b-v2.5', 'google_gemini-1.0-pro-002', 'google_gemini-1.5-flash-001', 'google_gemini-1.5-pro-001', 'meta_llama-3-70b-chat', 'meta_llama-3-8b-chat', 'meta_llama-3.1-405b-instruct-turbo', 'meta_llama-3.1-70b-instruct-turbo', 'meta_llama-3.1-8b-instruct-turbo', 'mistralai_mistral-7b-instruct-v0.3', 'mistralai_mixtral-8x22b-instruct-v0.1', 'mistralai_mixtral-8x7b-instruct-v0.1', 'nectec_OpenThaiLLM-Prebuilt-7B', 'nectec_Pathumma-llm-text-1.0.0', 'openai_gpt-3.5-turbo-0125', 'openai_gpt-4-turbo-2024-04-09', 'openai_gpt-4o-2024-05-13', 'openai_gpt-4o-mini-2024-07-18', 'openthaigpt_openthaigpt-1.0.0-13b-chat', 'openthaigpt_openthaigpt-1.0.0-7b-chat', 'qwen_qwen1.5-72b-chat', 'qwen_qwen1.5-7b-chat', 'qwen_qwen2-72b-instruct', 'sail_sailor-14b-chat', 'sail_sailor-7b-chat', 'sambanova_sambalingo-thai-chat', 'sambanova_sambalingo-thai-chat-70b', 'scb10x_llama-3-typhoon-v1.5x-70b-instruct', 'scb10x_llama-3-typhoon-v1.5x-8b-instruct', 'scb10x_typhoon-7b', 'scb10x_typhoon-v1.5-72b-instruct', 'scb10x_typhoon-v1.5-8b-instruct']
+
+Items per language:
+  th: 565
+
+Items per benchmark:
+  thai_exam: 565
+
+Model accuracies:
+  anthropic_claude-3-5-sonnet-20240620: 0.7363 (416/565)
+  meta_llama-3.1-405b-instruct-turbo: 0.6708 (379/565)
+  anthropic_claude-3-opus-20240229: 0.6690 (378/565)
+  google_gemini-1.5-pro-001: 0.6336 (358/565)
+  qwen_qwen2-72b-instruct: 0.6248 (353/565)
+  openai_gpt-4o-2024-05-13: 0.6212 (351/565)
+  nectec_Pathumma-llm-text-1.0.0: 0.6124 (346/565)
+  meta_llama-3.1-70b-instruct-turbo: 0.6124 (346/565)
+  scb10x_llama-3-typhoon-v1.5x-70b-instruct: 0.6053 (342/565)
+  google_gemini-1.5-flash-001: 0.5858 (331/565)
+  scb10x_typhoon-v1.5-72b-instruct: 0.5788 (327/565)
+  nectec_OpenThaiLLM-Prebuilt-7B: 0.5752 (325/565)
+  openai_gpt-4-turbo-2024-04-09: 0.5575 (315/565)
+  anthropic_claude-3-sonnet-20240229: 0.5522 (312/565)
+  meta_llama-3-70b-chat: 0.5469 (309/565)
+  openai_gpt-4o-mini-2024-07-18: 0.5398 (305/565)
+  anthropic_claude-3-haiku-20240307: 0.5168 (292/565)
+  qwen_qwen1.5-72b-chat: 0.5097 (288/565)
+  aisingapore_llama3-8b-cpt-sea-lionv2.1-instruct: 0.5080 (287/565)
+  sambanova_sambalingo-thai-chat-70b: 0.4920 (278/565)
+  scb10x_llama-3-typhoon-v1.5x-8b-instruct: 0.4726 (267/565)
+  sail_sailor-14b-chat: 0.4708 (266/565)
+  damo_seallm-7b-v2.5: 0.4602 (260/565)
+  scb10x_typhoon-v1.5-8b-instruct: 0.4584 (259/565)
+  google_gemini-1.0-pro-002: 0.4531 (256/565)
+  aisingapore_llama3-8b-cpt-sea-lionv2-base: 0.4389 (248/565)
+  scb10x_typhoon-7b: 0.3982 (225/565)
+  qwen_qwen1.5-7b-chat: 0.3876 (219/565)
+  sail_sailor-7b-chat: 0.3664 (207/565)
+  openai_gpt-3.5-turbo-0125: 0.3558 (201/565)
+  cohere_command-r-plus: 0.3540 (200/565)
+  openthaigpt_openthaigpt-1.0.0-13b-chat: 0.3522 (199/565)
+  damo_seallm-7b-v2: 0.3469 (196/565)
+  cohere_command-r: 0.3451 (195/565)
+  mistralai_mixtral-8x22b-instruct-v0.1: 0.3434 (194/565)
+  sambanova_sambalingo-thai-chat: 0.3150 (178/565)
+  mistralai_mistral-7b-instruct-v0.3: 0.2991 (169/565)
+  openthaigpt_openthaigpt-1.0.0-7b-chat: 0.2920 (165/565)
+  mistralai_mixtral-8x7b-instruct-v0.1: 0.2796 (158/565)
+  meta_llama-3.1-8b-instruct-turbo: 0.2106 (119/565)
+  meta_llama-3-8b-chat: 0.1982 (112/565)
+  aisingapore_sea-lion-7b-instruct: 0.1929 (109/565)
+Found 1 response matrices across 1 benchmarks.
+
+  [bbq]  bbq/processed/response_matrix.csv
+    heatmap  (7 x 58492)
+
+Done.
+
+[bbq]
+  Loaded 58492 item contents
+  bbq.pt: 7x58492, 100% fill
+Processing Files (0 / 0)      : |          |  0.00B /  0.00B            
+New Data Upload               : |          |  0.00B /  0.00B            [A
+
+  ...data/bbq/processed/bbq.pt:  15%|█▌        | 2.74MB / 18.2MB            [A[A
+
+  ...data/bbq/processed/bbq.pt:  15%|█▌        | 2.74MB / 18.2MB            [A[AProcessing Files (0 / 1)      :  15%|█▌        | 2.74MB / 18.2MB,   ???B/s  
+
+  ...data/bbq/processed/bbq.pt:  15%|█▌        | 2.74MB / 18.2MB            [A[A
+
+  ...data/bbq/processed/bbq.pt:  46%|████▌     | 8.41MB / 18.2MB            [A[AProcessing Files (0 / 1)      :  46%|████▌     | 8.41MB / 18.2MB, 14.2MB/s  
+New Data Upload               :  37%|███▋      | 5.67MB / 15.5MB, 14.2MB/s  [A
+
+  ...data/bbq/processed/bbq.pt:  77%|███████▋  | 14.1MB / 18.2MB            [A[AProcessing Files (0 / 1)      :  77%|███████▋  | 14.1MB / 18.2MB, 18.9MB/s  
+New Data Upload               :  73%|███████▎  | 11.3MB / 15.5MB, 18.9MB/s  [A
+
+  ...data/bbq/processed/bbq.pt:  77%|███████▋  | 14.1MB / 18.2MB            [A[A
+
+  ...data/bbq/processed/bbq.pt: 100%|██████████| 18.2MB / 18.2MB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 18.2MB / 18.2MB, 15.5MB/s  
+New Data Upload               : 100%|██████████| 15.5MB / 15.5MB, 15.5MB/s  [A
+
+  ...data/bbq/processed/bbq.pt: 100%|██████████| 18.2MB / 18.2MB            [A[A
+
+  ...data/bbq/processed/bbq.pt: 100%|██████████| 18.2MB / 18.2MB            [A[AProcessing Files (1 / 1)      : 100%|██████████| 18.2MB / 18.2MB, 12.9MB/s  
+New Data Upload               : 100%|██████████| 15.5MB / 15.5MB, 12.9MB/s  
+  ...data/bbq/processed/bbq.pt: 100%|██████████| 18.2MB / 18.2MB            
+  uploaded bbq.pt
+
+Done.
+repo already cloned, skipping download
+Loading BBQ results...
+UnifiedQA models: ['UnifiedQA-T5-11B-race', 'UnifiedQA-T5-11B-qonly', 'UnifiedQA-T5-11B-arc']
+RoBERTa/DeBERTa models: ['RoBERTa-Base', 'RoBERTa-Large', 'DeBERTaV3-Base', 'DeBERTaV3-Large']
+
+Item content: 58492 items saved to item_content.csv
+
+Response matrix: 7 models x 58492 items
+Per-model accuracy:
+  UnifiedQA-T5-11B-race: 0.770 (58492 items)
+  UnifiedQA-T5-11B-qonly: 0.397 (58492 items)
+  UnifiedQA-T5-11B-arc: 0.652 (58492 items)
+  RoBERTa-Base: 0.412 (58492 items)
+  RoBERTa-Large: 0.441 (58492 items)
+  DeBERTaV3-Base: 0.420 (58492 items)
+  DeBERTaV3-Large: 0.418 (58492 items)
+
+Item metadata: 58492 items across 11 categories
+Category distribution:
+category
+Race_x_gender          15960
+Race_x_SES             11160
+Race_ethnicity          6880
+SES                     6864
+Gender_identity         5672
+Age                     3680
+Nationality             3080
+Physical_appearance     1576
+Disability_status       1556
+Religion                1200
+Sexual_orientation       864
+Name: count, dtype: int64
+[0;32m[INFO][0m Reproducing 10 benchmarks from /lfs/skampere1/0/sttruong/aimslab/torch_measure/data
+
+[0;32m[INFO][0m ========== aider ==========
+
+[0;32m[INFO][0m ========== mlebench ==========
+
+[0;32m[INFO][0m ========== visualwebarena ==========
+
+[0;32m[INFO][0m ========== terminal_bench ==========
+
+[0;32m[INFO][0m ========== rewardbench ==========
+
+[0;32m[INFO][0m ========== prism ==========
+
+[0;32m[INFO][0m ========== helm_afr ==========
+
+[0;32m[INFO][0m ========== helm_cleva ==========
+
+[0;32m[INFO][0m ========== helm_thaiexam ==========
+
+[0;32m[INFO][0m ========== bbq ==========
+
+========================================
+[0;32mSucceeded (10):[0m aider mlebench visualwebarena terminal_bench rewardbench prism helm_afr helm_cleva helm_thaiexam bbq

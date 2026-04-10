@@ -202,7 +202,7 @@ def build_response_matrices(eval_set, reviews):
     # Save overall matrix
     overall_df = pd.DataFrame(overall_data, index=model_names, columns=item_ids)
     overall_df.index.name = "model"
-    overall_path = os.path.join(PROCESSED_DIR, "response_matrix_overall.csv")
+    overall_path = os.path.join(PROCESSED_DIR, "response_matrix.csv")
     overall_df.to_csv(overall_path)
     print(f"\n  Overall matrix saved: {overall_path}")
 

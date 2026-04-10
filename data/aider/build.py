@@ -374,14 +374,29 @@ def main():
     # Build the combined dataframe from all YAML files
     combined_df = build_response_matrix()
 
-    # Save the full response matrix (all entries, all metrics)
-    response_matrix_path = PROCESSED_DIR / "response_matrix.csv"
-    combined_df.to_csv(response_matrix_path, index=False)
-    print(f"\nFull response matrix saved to: {response_matrix_path}")
+    # Save the raw long-format table for reference
+    long_path = PROCESSED_DIR / "leaderboard_long.csv"
+    combined_df.to_csv(long_path, index=False)
+    print(f"\nLong-format leaderboard saved to: {long_path}")
     print(f"  Shape: {combined_df.shape}")
 
-    # Save item_content.csv — items are the benchmark names (long-format rows)
-    benchmarks = combined_df["benchmark"].unique().tolist()
+    # Build the proper response matrix: rows = models, cols = benchmarks,
+    # values = pass_rate_2 / 100 (score in [0, 1]). Aider only publishes
+    # aggregate scores per (model, benchmark), not per-exercise results.
+    pass_df = combined_df.copy()
+    pass_df["pass_rate_2"] = pd.to_numeric(pass_df["pass_rate_2"], errors="coerce")
+    # For (model, benchmark) duplicates, keep the best score
+    pass_df = pass_df.groupby(["model", "benchmark"], as_index=False)["pass_rate_2"].max()
+    response_matrix = pass_df.pivot(index="model", columns="benchmark", values="pass_rate_2") / 100
+    response_matrix.index.name = "model"
+
+    response_matrix_path = PROCESSED_DIR / "response_matrix.csv"
+    response_matrix.to_csv(response_matrix_path)
+    print(f"\nResponse matrix saved to: {response_matrix_path}")
+    print(f"  Shape: {response_matrix.shape} (models x benchmarks)")
+
+    # Save item_content.csv — items are the benchmark names
+    benchmarks = sorted(response_matrix.columns.tolist())
     item_content_df = pd.DataFrame({
         "item_id": benchmarks,
         "content": benchmarks,
@@ -397,14 +412,6 @@ def main():
     summary_df.to_csv(summary_path, index=False)
     print(f"\nModel summary saved to: {summary_path}")
     print(f"  Shape: {summary_df.shape}")
-
-    # Build and save the polyglot pivot matrix
-    pivot_df = build_pivot_response_matrix(combined_df)
-    if pivot_df is not None:
-        pivot_path = PROCESSED_DIR / "polyglot_response_matrix.csv"
-        pivot_df.to_csv(pivot_path)
-        print(f"\nPolyglot response matrix saved to: {pivot_path}")
-        print(f"  Shape: {pivot_df.shape}")
 
     # Write data availability report
     write_data_availability_report(combined_df)
@@ -428,7 +435,9 @@ def main():
             print(f"  Pass rate (try 2) median: "
                   f"{bench_df['pass_rate_2'].median():.1f}%")
 
-        # Top 5 models
+        # Top 5 models (coerce pass_rate_2 to numeric — may contain strings)
+        bench_df = bench_df.copy()
+        bench_df["pass_rate_2"] = pd.to_numeric(bench_df["pass_rate_2"], errors="coerce")
         top5 = bench_df.nlargest(5, "pass_rate_2")[["model", "pass_rate_2", "edit_format"]]
         print("  Top 5 models:")
         for _, row in top5.iterrows():

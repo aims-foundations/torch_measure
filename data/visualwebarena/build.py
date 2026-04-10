@@ -47,43 +47,37 @@ PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ============================================================
-# Step 1: Load task metadata from BrowserGym's test_raw.json
+# Step 1: Load task metadata from the VWA repo's config_files
 # ============================================================
+_VWA_CONFIG_FILES = [
+    "test_classifieds.raw.json",
+    "test_reddit.raw.json",
+    "test_shopping.raw.json",
+]
+_VWA_BASE_URL = (
+    "https://raw.githubusercontent.com/web-arena-x/visualwebarena/main/config_files/vwa"
+)
+
+
 def load_task_metadata():
-    """Load the 910 VWA task configs with global IDs (0-909)."""
-    # Try installed package first
-    json_path = None
-    for candidate in [
-        "/lfs/local/0/sttruong/miniconda3/lib/python3.12/site-packages/visualwebarena/test_raw.json",
-        str(RAW_DIR / "test_raw.json"),
-    ]:
-        if os.path.exists(candidate):
-            json_path = candidate
-            break
-
-    if json_path is None:
-        # Download from BrowserGym GitHub
-        print("Downloading test_raw.json from BrowserGym...")
-        url = ("https://raw.githubusercontent.com/ServiceNow/BrowserGym/main/"
-               "browsergym/visualwebarena/src/browsergym/visualwebarena/test_raw.json")
-        try:
-            urllib.request.urlretrieve(url, str(RAW_DIR / "test_raw.json"))
-            json_path = str(RAW_DIR / "test_raw.json")
-        except Exception:
-            # Fall back to libvisualwebarena package path
+    """Load the 910 VWA task configs from web-arena-x/visualwebarena."""
+    all_configs = []
+    for name in _VWA_CONFIG_FILES:
+        local_path = RAW_DIR / name
+        if not local_path.exists():
+            url = f"{_VWA_BASE_URL}/{name}"
+            print(f"Downloading {name} from {url}...")
             try:
-                import importlib.resources
-                json_path = str(
-                    importlib.resources.files("visualwebarena").joinpath("test_raw.json")
-                )
-            except Exception:
-                print("ERROR: Cannot find test_raw.json. Install browsergym-visualwebarena.")
+                urllib.request.urlretrieve(url, str(local_path))
+            except Exception as e:
+                print(f"ERROR: Failed to download {name}: {e}")
                 sys.exit(1)
+        with open(local_path) as f:
+            configs = json.load(f)
+        all_configs.extend(configs)
+        print(f"  Loaded {len(configs)} tasks from {name}")
 
-    with open(json_path) as f:
-        all_configs = json.load(f)
-
-    print(f"Loaded {len(all_configs)} VWA tasks from {json_path}")
+    print(f"Total: {len(all_configs)} VWA tasks")
     return all_configs
 
 

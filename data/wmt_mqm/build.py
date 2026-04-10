@@ -227,22 +227,18 @@ def main():
         if matrix_df is None:
             continue
 
-        # Create output directory for this split
-        split_dir = os.path.join(PROCESSED_DIR, key)
-        os.makedirs(split_dir, exist_ok=True)
-
-        # Save response matrix
-        matrix_path = os.path.join(split_dir, "response_matrix.csv")
+        # Save response matrix at top level of processed/ with variant suffix
+        # (so upload_to_hf.py and visualize_response_matrix.py discover them)
+        matrix_path = os.path.join(PROCESSED_DIR, f"response_matrix_{key}.csv")
         matrix_df.to_csv(matrix_path)
         print(f"\n  Saved: {matrix_path}")
 
-        # Save item metadata
-        item_meta_path = os.path.join(split_dir, "item_metadata.csv")
+        # Save item metadata and system summary with unique names
+        item_meta_path = os.path.join(PROCESSED_DIR, f"item_metadata_{key}.csv")
         item_meta_df.to_csv(item_meta_path, index=False)
         print(f"  Saved: {item_meta_path}")
 
-        # Save system summary
-        sys_summary_path = os.path.join(split_dir, "system_summary.csv")
+        sys_summary_path = os.path.join(PROCESSED_DIR, f"system_summary_{key}.csv")
         sys_summary_df.to_csv(sys_summary_path, index=False)
         print(f"  Saved: {sys_summary_path}")
 

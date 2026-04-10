@@ -206,6 +206,12 @@ def build_final_answer_matrices(df, comp_name, comp_label):
     print(f"    Hard (<10%):     {hard}")
     print(f"    Easy (>90%):     {easy}")
 
+    # Skip matrices with fewer than 2 models or 2 problems (IRT-invalid)
+    if avg_df.shape[0] < 2 or avg_df.shape[1] < 2:
+        print(f"\n  Skipping {comp_name}: only {avg_df.shape[0]} models x "
+              f"{avg_df.shape[1]} problems (too small for IRT)")
+        return None
+
     # Save average accuracy matrix
     out_avg = os.path.join(PROCESSED_DIR, f"response_matrix_{comp_name}.csv")
     avg_df.to_csv(out_avg)

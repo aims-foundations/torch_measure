@@ -75,18 +75,67 @@ def extract_preferences(df):
 
     records = []
 
-    # The dataset structure may vary. Common patterns:
-    # 1. Each row = one pair, columns for each judge's preference
-    # 2. Each row = one judgment (judge, pair_id, preference)
+    # Ensure a pair_id column
+    pair_id_col = None
+    for col in ["id", "pair_id", "instance_id", "index"]:
+        if col in df.columns:
+            pair_id_col = col
+            break
+    if pair_id_col is None:
+        df = df.copy()
+        df["_pair_id"] = df.index.astype(str)
+        pair_id_col = "_pair_id"
 
-    # Check if judge preferences are in separate columns
+    # GAIR/preference-dissection: each row has a 'preference_labels' dict
+    # mapping judge -> "response_1"/"response_2". 33 judges (incl. 'human').
+    if "preference_labels" in df.columns:
+        print("  Using 'preference_labels' dict column (judge -> response_N)")
+        for _, row in df.iterrows():
+            pair_id = str(row[pair_id_col])
+            labels = row["preference_labels"]
+            if not isinstance(labels, dict):
+                continue
+            for judge, label in labels.items():
+                if label in ("response_1", "response_A", 1, "1"):
+                    pref = 1
+                elif label in ("response_2", "response_B", 0, "2"):
+                    pref = 0
+                else:
+                    try:
+                        pref = int(float(label))
+                    except (ValueError, TypeError):
+                        continue
+                records.append({
+                    "judge": str(judge),
+                    "pair_id": pair_id,
+                    "preference": pref,
+                })
+
+        prefs_df = pd.DataFrame(records)
+        if len(prefs_df) > 0:
+            print(f"  Extracted {len(prefs_df):,} preference records")
+            print(f"  Unique judges: {prefs_df['judge'].nunique()}")
+            print(f"  Unique pairs:  {prefs_df['pair_id'].nunique()}")
+            return prefs_df
+
+    # Fallback: Check if judge preferences are in separate columns
     # Look for columns that might be judge names/IDs with binary values
     potential_judge_cols = []
     for col in df.columns:
         if col.startswith("_"):
             continue
+        # Skip nested/dict-valued columns
+        try:
+            first_valid = df[col].dropna().iloc[0] if df[col].notna().any() else None
+        except Exception:
+            continue
+        if isinstance(first_valid, (dict, list)) or hasattr(first_valid, "__array_interface__"):
+            continue
         # Check if column has binary-like values
-        unique_vals = df[col].dropna().unique()
+        try:
+            unique_vals = df[col].dropna().unique()
+        except TypeError:
+            continue
         if len(unique_vals) <= 5:
             vals_set = set()
             for v in unique_vals:
@@ -97,19 +146,7 @@ def extract_preferences(df):
             if vals_set <= {0, 1, 0.0, 1.0, True, False}:
                 potential_judge_cols.append(col)
 
-    # Also check for nested preference structures
     has_preferences_col = "preferences" in df.columns or "annotations" in df.columns
-
-    pair_id_col = None
-    for col in ["id", "pair_id", "instance_id", "index"]:
-        if col in df.columns:
-            pair_id_col = col
-            break
-
-    if pair_id_col is None:
-        # Use row index as pair ID
-        df["_pair_id"] = df.index.astype(str)
-        pair_id_col = "_pair_id"
 
     if len(potential_judge_cols) > 5:
         # Columns are judge names

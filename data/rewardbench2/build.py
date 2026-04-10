@@ -39,7 +39,7 @@ PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-HF_TOKEN = os.environ.get("HF_TOKEN", "")
+HF_TOKEN = os.environ.get("HF_TOKEN") or None
 
 SRC_RESULTS_REPO = "allenai/reward-bench-2-results"
 SRC_ITEMS_REPO = "allenai/reward-bench-2"
@@ -158,7 +158,15 @@ def build_response_matrix(scores):
     """Build binary response matrix from per-item score data."""
     # Determine item ordering from first judge
     first_judge = next(iter(scores.values()))
-    item_ids = [str(x) for x in first_judge["id"]]
+    raw_ids = [str(x) for x in first_judge["id"]]
+    # Deduplicate while preserving order.
+    seen = set()
+    item_ids = []
+    for iid in raw_ids:
+        if iid in seen:
+            continue
+        seen.add(iid)
+        item_ids.append(iid)
     item_id_to_idx = {iid: idx for idx, iid in enumerate(item_ids)}
     n_items = len(item_ids)
 
@@ -178,7 +186,13 @@ def build_response_matrix(scores):
         judge_results = judge_data["results"]
         for k, iid in enumerate(judge_ids):
             if iid in item_id_to_idx:
-                matrix[j, item_id_to_idx[iid]] = float(judge_results[k])
+                val = judge_results[k]
+                if val is None:
+                    continue
+                try:
+                    matrix[j, item_id_to_idx[iid]] = float(val)
+                except (TypeError, ValueError):
+                    continue
 
     # Create DataFrame
     matrix_df = pd.DataFrame(matrix, index=judge_names, columns=item_ids)
@@ -271,7 +285,7 @@ def build_judge_summary(matrix_df, summaries):
 
     judge_df = pd.DataFrame(rows)
     judge_df = judge_df.sort_values("accuracy", ascending=False)
-    output_path = os.path.join(PROCESSED_DIR, "judge_summary.csv")
+    output_path = os.path.join(PROCESSED_DIR, "model_summary.csv")
     judge_df.to_csv(output_path, index=False)
     print(f"\n  Judge summary saved: {output_path}")
     return judge_df
@@ -313,13 +327,18 @@ def main():
     print("\nSTEP 6: Saving enriched item metadata")
     print("-" * 60)
     if item_meta_df is not None:
-        per_item_acc = matrix_df.mean(axis=0)
+        # Compute per-item mean/count using the underlying numpy array
+        # directly to avoid pandas alignment quirks with duplicate item IDs.
+        arr = matrix_df.to_numpy()
+        per_item_mean = np.nanmean(arr, axis=0)
+        per_item_n = (~np.isnan(arr)).sum(axis=0)
         item_stats = pd.DataFrame({
             "id": item_ids,
-            "mean_accuracy": [per_item_acc.get(iid, np.nan) for iid in item_ids],
-            "n_judges": [matrix_df[iid].notna().sum() for iid in item_ids],
+            "mean_accuracy": per_item_mean.astype(np.float64),
+            "n_judges": per_item_n.astype(int),
         })
         merged = item_stats.merge(item_meta_df, on="id", how="left")
+        merged["mean_accuracy"] = pd.to_numeric(merged["mean_accuracy"], errors="coerce")
         merged_path = os.path.join(PROCESSED_DIR, "item_metadata.csv")
         merged.to_csv(merged_path, index=False)
         print(f"  Item metadata saved: {merged_path}")
@@ -328,7 +347,8 @@ def main():
         print(f"\n  Per-domain accuracy (across all judges):")
         for domain in DOMAINS:
             domain_items = merged[merged["subset"] == domain]
-            mean_acc = domain_items["mean_accuracy"].mean()
+            vals = pd.to_numeric(domain_items["mean_accuracy"], errors="coerce")
+            mean_acc = float(vals.mean()) if len(vals) else float("nan")
             print(f"    {domain:15s}  n={len(domain_items):4d}  mean_acc={mean_acc:.4f}")
 
     # Final summary
