@@ -118,6 +118,15 @@ def visualize_one(csv_path: Path):
         print("    SKIPPED (empty matrix)")
         return
 
+    # Coerce all columns to numeric, dropping non-numeric metadata columns
+    # (e.g. scienceagentbench's `domain`, `subtask_categories` cols mixed in).
+    matrix = matrix.apply(pd.to_numeric, errors="coerce")
+    matrix = matrix.dropna(axis=1, how="all")  # drop fully-NaN columns
+    matrix = matrix.dropna(axis=0, how="all")  # drop fully-NaN rows
+    if matrix.empty or matrix.shape[0] < 2 or matrix.shape[1] < 2:
+        print("    SKIPPED (matrix too small after coercion)")
+        return
+
     plot_heatmap(matrix, label, out_path)
 
 

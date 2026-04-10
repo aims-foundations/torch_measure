@@ -6,22 +6,22 @@ as `(subjects × items)` matrices for IRT / psychometric analysis with
 that downloads raw data, builds the response matrix, generates a heatmap,
 converts to `.pt`, and uploads to HuggingFace Hub.
 
-- **98 ready benchmarks** (`BENCHMARKS`) — real per-(model, item) response matrices
-- **13 aggregate-only benchmarks** (`BENCHMARKS_AGGREGATE`) — multi-model data but
+- **97 ready benchmarks** (`BENCHMARKS`) — real per-(model, item) response matrices
+- **14 aggregate-only benchmarks** (`BENCHMARKS_AGGREGATE`) — multi-model data but
   at the level of conditions/categories, not individual items
 - **35 pending benchmarks** (`BENCHMARKS_PENDING`) — questions/catalogs with no
   multi-model evaluation data yet
 
 ## Statistics
 
-Across the **98 ready benchmarks** (as of the latest run):
+Across the **97 ready benchmarks** (as of the latest run):
 
 | Metric | Count |
 |--------|-------|
-| Unique items (largest variant per benchmark) | **1,037,045** |
-| Total items (summed across all variants) | 1,278,791 |
-| Total cells (subject × item values) | 250,392,642 |
-| Response matrices (including variants) | 320 |
+| Unique items (largest variant per benchmark) | **1,036,986** |
+| Total items (summed across all variants) | 1,278,732 |
+| Total cells (subject × item values) | 250,386,624 |
+| Response matrices (including variants) | 319 |
 | Binary matrices | 171 |
 | Continuous matrices | 145 |
 
@@ -130,6 +130,12 @@ python data/scripts/visualize_response_matrix.py
 
 # Regenerate one benchmark
 python data/scripts/visualize_response_matrix.py bfcl
+```
+
+To regenerate `GALLERY.md` after adding or removing benchmarks:
+
+```bash
+python data/scripts/build_gallery.py
 ```
 
 ## Registered Datasets

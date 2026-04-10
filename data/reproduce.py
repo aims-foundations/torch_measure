@@ -34,7 +34,7 @@ BENCHMARKS = [
     "swepolybench", "editbench",
     # Agent benchmarks
     "dpai", "agentdojo", "mlebench", "taubench", "cybench", "corebench",
-    "paperbench", "visualwebarena", "appworld", "scienceagentbench",
+    "paperbench", "visualwebarena", "appworld",
     "androidworld", "toolbench", "workarena",
     "theagentcompany", "terminal_bench",
     # General knowledge & reasoning
@@ -91,6 +91,7 @@ BENCHMARKS_AGGREGATE = [
     "ai_safety_index",         # 8 companies x 6 policy domains
     "ca_dmv_disengagement",    # 16 manufacturers x 7 location types
     "nhtsa_sgo",               # 27 manufacturers x 17 vehicle types
+    "scienceagentbench",       # 57 model configs x 4 aggregate metrics (aggregate_results.csv)
 ]
 
 # Benchmarks without any multi-model evaluation data yet — questions-only
