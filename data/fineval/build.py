@@ -153,6 +153,27 @@ datasets that have downloadable per-item test data: FinEval and CFLUE.
 All paths use Path(__file__).resolve().parent
 """
 
+INFO = {
+    'description': 'Build task metadata, item content, and response matrix for FINANCE benchmarks',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2308.09975',
+    'data_source_url': 'https://github.com/SUFE-AIFLM-Lab/FinEval',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{guo2024finevalchinesefinancialdomain,
+      title={FinEval: A Chinese Financial Domain Knowledge Evaluation Benchmark for Large Language Models}, 
+      author={Xin Guo and Haotian Xia and Zhaowei Liu and Hanyang Cao and Zhi Yang and Zhiqiang Liu and Sizhe Wang and Jinyi Niu and Chuqi Wang and Yanhui Wang and Xiaolong Liang and Xiaoming Huang and Bing Zhu and Zhongyu Wei and Yun Chen and Weining Shen and Liwen Zhang},
+      year={2024},
+      eprint={2308.09975},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2308.09975}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import json
 import sys
 import warnings

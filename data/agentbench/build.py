@@ -36,6 +36,27 @@ Outputs:
 
 """
 
+INFO = {
+    'description': 'Build AgentBench response matrices from published evaluation data',
+    'testing_condition': """Cells are aggregate success rates per environment type (29 models × 8 environments: OS, DB, KG, ...). Use for model-level comparison only.""",
+    'paper_url': 'https://arxiv.org/abs/2308.03688',
+    'data_source_url': 'https://github.com/THUDM/AgentBench',
+    'subject_type': 'agent',
+    'item_type': 'environment',
+    'license': 'Apache-2.0',
+    'citation': """@misc{liu2025agentbenchevaluatingllmsagents,
+      title={AgentBench: Evaluating LLMs as Agents}, 
+      author={Xiao Liu and Hao Yu and Hanchen Zhang and Yifan Xu and Xuanyu Lei and Hanyu Lai and Yu Gu and Hangliang Ding and Kaiwen Men and Kejuan Yang and Shudan Zhang and Xiang Deng and Aohan Zeng and Zhengxiao Du and Chenhui Zhang and Sheng Shen and Tianjun Zhang and Yu Su and Huan Sun and Minlie Huang and Yuxiao Dong and Jie Tang},
+      year={2025},
+      eprint={2308.03688},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2308.03688}, 
+}""",
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 from pathlib import Path
 import os

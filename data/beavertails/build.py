@@ -33,6 +33,27 @@ Outputs:
   - processed/category_stats.csv: Per-category aggregate statistics.
 """
 
+INFO = {
+    'description': 'Build BeaverTails binary safety classification response matrices',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2307.04657',
+    'data_source_url': 'https://huggingface.co/datasets/PKU-Alignment/BeaverTails',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-NC-4.0',
+    'citation': """@misc{ji2023beavertailsimprovedsafetyalignment,
+      title={BeaverTails: Towards Improved Safety Alignment of LLM via a Human-Preference Dataset}, 
+      author={Jiaming Ji and Mickel Liu and Juntao Dai and Xuehai Pan and Chi Zhang and Ce Bian and Chi Zhang and Ruiyang Sun and Yizhou Wang and Yaodong Yang},
+      year={2023},
+      eprint={2307.04657},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2307.04657}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import sys
 from pathlib import Path
 import os

@@ -19,6 +19,27 @@ Source: https://github.com/facebookresearch/cruxeval
 Paper: https://arxiv.org/abs/2401.03065
 """
 
+INFO = {
+    'description': 'Build response matrices for CRUXEval benchmark',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2401.03065',
+    'data_source_url': 'https://github.com/facebookresearch/cruxeval',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{gu2024cruxevalbenchmarkcodereasoning,
+      title={CRUXEval: A Benchmark for Code Reasoning, Understanding and Execution}, 
+      author={Alex Gu and Baptiste Rozière and Hugh Leather and Armando Solar-Lezama and Gabriel Synnaeve and Sida I. Wang},
+      year={2024},
+      eprint={2401.03065},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2401.03065}, 
+}""",
+    'tags': ['coding'],
+}
+
+
 import json
 import os
 import subprocess

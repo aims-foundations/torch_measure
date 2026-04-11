@@ -9,6 +9,19 @@ This script downloads the methodology documentation as a reference and creates
 a placeholder noting that manual download is required.
 """
 
+INFO = {
+    'description': 'OECD AI Incidents Monitor (AIM) placeholder',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://oecd.ai/en/incidents',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{oecd_aim,\n  title={OECD AI Incidents Monitor},\n  howpublished={\\url{https://oecd.ai/en/incidents}},\n}',
+    'tags': ['pending'],
+}
+
+
 import sys
 import urllib.request
 from pathlib import Path

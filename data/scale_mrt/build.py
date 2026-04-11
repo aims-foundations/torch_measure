@@ -5,6 +5,19 @@ Source: https://huggingface.co/datasets/ScaleAI/mrt
 Monitoring and Red-Teaming trajectories for evaluating AI agent safety.
 """
 
+INFO = {
+    'description': 'Download ScaleAI MRT dataset (agent monitoring trajectories)',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://huggingface.co/datasets/ScaleAI/mrt',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{scale_mrt,\n  title={Scale Mrt},\n  howpublished={\\url{https://huggingface.co/datasets/ScaleAI/mrt}},\n}',
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 

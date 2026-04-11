@@ -26,6 +26,27 @@ Output files:
     processed/per_seed_details.json          -- per-seed raw data
 """
 
+INFO = {
+    'description': "Build a response matrix for MLE-bench (OpenAI's Kaggle ML competition benchmark)",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2410.07095',
+    'data_source_url': 'https://github.com/openai/mle-bench',
+    'subject_type': 'agent',
+    'item_type': 'kaggle_competition',
+    'license': 'unknown',
+    'citation': """@misc{chan2025mlebenchevaluatingmachinelearning,
+      title={MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering}, 
+      author={Jun Shern Chan and Neil Chowdhury and Oliver Jaffe and James Aung and Dane Sherburn and Evan Mays and Giulio Starace and Kevin Liu and Leon Maksin and Tejal Patwardhan and Lilian Weng and Aleksander Mądry},
+      year={2025},
+      eprint={2410.07095},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2410.07095}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import csv
 import json
 import os

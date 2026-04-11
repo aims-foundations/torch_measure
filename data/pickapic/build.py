@@ -38,6 +38,27 @@ Outputs:
                                        mean preference score in [0,1] per (model, prompt)
 """
 
+INFO = {
+    'description': 'Build Pick-a-Pic pairwise preference data from yuvalkirstain/pickapic_v2',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2305.01569',
+    'data_source_url': 'https://huggingface.co/datasets/yuvalkirstain/pickapic_v2',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{kirstain2023pickapicopendatasetuser,
+      title={Pick-a-Pic: An Open Dataset of User Preferences for Text-to-Image Generation}, 
+      author={Yuval Kirstain and Adam Polyak and Uriel Singer and Shahbuland Matiana and Joe Penna and Omer Levy},
+      year={2023},
+      eprint={2305.01569},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2305.01569}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 from pathlib import Path
 import os
 import sys

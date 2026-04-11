@@ -22,6 +22,19 @@ Outputs:
   - processed/item_content.csv: Full item content
 """
 
+INFO = {
+    'description': 'Build PerMedCQA item metadata from Persian Medical Consumer QA',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://github.com/PerMedCQA/PerMedCQA',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{permedcqa,\n  title={Permedcqa},\n  howpublished={\\url{https://github.com/PerMedCQA/PerMedCQA}},\n}',
+    'tags': ['pending'],
+}
+
+
 import csv
 import json
 import os

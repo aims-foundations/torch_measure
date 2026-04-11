@@ -24,6 +24,27 @@ Outputs:
   - processed/subset_stats.csv: Aggregate statistics per subset
 """
 
+INFO = {
+    'description': 'Build HH-RLHF pairwise preference data from Anthropic/hh-rlhf',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2204.05862',
+    'data_source_url': 'https://huggingface.co/datasets/Anthropic/hh-rlhf',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{bai2022traininghelpfulharmlessassistant,
+      title={Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback}, 
+      author={Yuntao Bai and Andy Jones and Kamal Ndousse and Amanda Askell and Anna Chen and Nova DasSarma and Dawn Drain and Stanislav Fort and Deep Ganguli and Tom Henighan and Nicholas Joseph and Saurav Kadavath and Jackson Kernion and Tom Conerly and Sheer El-Showk and Nelson Elhage and Zac Hatfield-Dodds and Danny Hernandez and Tristan Hume and Scott Johnston and Shauna Kravec and Liane Lovitt and Neel Nanda and Catherine Olsson and Dario Amodei and Tom Brown and Jack Clark and Sam McCandlish and Chris Olah and Ben Mann and Jared Kaplan},
+      year={2022},
+      eprint={2204.05862},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2204.05862}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 from pathlib import Path
 import gzip
 import json

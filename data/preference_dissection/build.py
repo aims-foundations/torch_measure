@@ -16,6 +16,27 @@ Outputs:
   - processed/response_matrix.csv: Judges (rows) x pairs (columns), binary {0,1}
 """
 
+INFO = {
+    'description': 'Build Preference Dissection response matrix from per-judge binary preferences',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2310.11523',
+    'data_source_url': 'https://huggingface.co/datasets/GAIR/preference-dissection',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{zhao2024grouppreferenceoptimizationfewshot,
+      title={Group Preference Optimization: Few-Shot Alignment of Large Language Models}, 
+      author={Siyan Zhao and John Dang and Aditya Grover},
+      year={2024},
+      eprint={2310.11523},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2310.11523}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 from pathlib import Path
 import os
 import sys

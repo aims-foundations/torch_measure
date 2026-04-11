@@ -22,6 +22,27 @@ Outputs:
   - processed/response_matrix_sampled_pairs.csv: Response positions (rows) x pairs (columns)
 """
 
+INFO = {
+    'description': 'Build SHP-2 response matrices from Stanford Human Preferences v2',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2310.01377',
+    'data_source_url': 'https://huggingface.co/datasets/stanfordnlp/SHP-2',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{cui2024ultrafeedbackboostinglanguagemodels,
+      title={UltraFeedback: Boosting Language Models with Scaled AI Feedback}, 
+      author={Ganqu Cui and Lifan Yuan and Ning Ding and Guanming Yao and Bingxiang He and Wei Zhu and Yuan Ni and Guotong Xie and Ruobing Xie and Yankai Lin and Zhiyuan Liu and Maosong Sun},
+      year={2024},
+      eprint={2310.01377},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2310.01377}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 from pathlib import Path
 import math
 import os

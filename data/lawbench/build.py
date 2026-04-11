@@ -15,6 +15,27 @@ Outputs:
   - processed/item_content.csv: Per-item metadata (task + prompt text)
 """
 
+INFO = {
+    'description': 'Build LawBench response matrix from per-model per-question predictions',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2309.16289',
+    'data_source_url': 'https://github.com/open-compass/LawBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{fei2023lawbenchbenchmarkinglegalknowledge,
+      title={LawBench: Benchmarking Legal Knowledge of Large Language Models}, 
+      author={Zhiwei Fei and Xiaoyu Shen and Dawei Zhu and Fengzhe Zhou and Zhuo Han and Songyang Zhang and Kai Chen and Zongwen Shen and Jidong Ge},
+      year={2023},
+      eprint={2309.16289},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2309.16289}, 
+}""",
+    'tags': ['domain-specific'],
+}
+
+
 from pathlib import Path
 import json
 import os

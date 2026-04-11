@@ -14,6 +14,27 @@ Outputs:
   - processed/response_matrix.csv: Models (rows) x questions (columns), raw 1-10 scores
 """
 
+INFO = {
+    'description': 'Build MT-Bench response matrix from GPT-4 single-answer judgment data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2306.05685',
+    'data_source_url': """https://huggingface.co/spaces/lmsys/mt-bench/resolve/main/data/mt_bench/model_judgment/gpt-4_single.jsonl""",
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{zheng2023judgingllmasajudgemtbenchchatbot,
+      title={Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena}, 
+      author={Lianmin Zheng and Wei-Lin Chiang and Ying Sheng and Siyuan Zhuang and Zhanghao Wu and Yonghao Zhuang and Zi Lin and Zhuohan Li and Dacheng Li and Eric P. Xing and Hao Zhang and Joseph E. Gonzalez and Ion Stoica},
+      year={2023},
+      eprint={2306.05685},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2306.05685}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 import sys
 from pathlib import Path
 import os

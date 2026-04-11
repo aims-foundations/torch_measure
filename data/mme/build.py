@@ -16,6 +16,27 @@ Outputs:
   - processed/item_content.csv: Per-item metadata
 """
 
+INFO = {
+    'description': 'Build MME response matrix from VLMEval/OpenVLMRecords',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2306.13394',
+    'data_source_url': 'https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{fu2025mmecomprehensiveevaluationbenchmark,
+      title={MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models}, 
+      author={Chaoyou Fu and Peixian Chen and Yunhang Shen and Yulei Qin and Mengdan Zhang and Xu Lin and Jinrui Yang and Xiawu Zheng and Ke Li and Xing Sun and Yunsheng Wu and Rongrong Ji and Caifeng Shan and Ran He},
+      year={2025},
+      eprint={2306.13394},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2306.13394}, 
+}""",
+    'tags': ['vision-language'],
+}
+
+
 from pathlib import Path
 import os
 import re

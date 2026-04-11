@@ -29,6 +29,27 @@ Outputs (in ../processed/):
 All paths use Path(__file__).resolve().parent
 """
 
+INFO = {
+    'description': 'Build task metadata, item content, and response matrix for CMMLU (Chinese MMLU)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2306.09212',
+    'data_source_url': 'https://huggingface.co/datasets/opencompass/compass_academic_predictions',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-NC-SA-4.0',
+    'citation': """@misc{li2024cmmlumeasuringmassivemultitask,
+      title={CMMLU: Measuring massive multitask language understanding in Chinese}, 
+      author={Haonan Li and Yixuan Zhang and Fajri Koto and Yifei Yang and Hai Zhao and Yeyun Gong and Nan Duan and Timothy Baldwin},
+      year={2024},
+      eprint={2306.09212},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2306.09212}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import json
 import sys
 import warnings

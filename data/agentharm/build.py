@@ -18,6 +18,27 @@ We transcribe Table 9 into a response matrix with:
 We also download the HF dataset for reference metadata.
 """
 
+INFO = {
+    'description': 'Build AgentHarm response matrix',
+    'testing_condition': """Cells are aggregate refusal/harm rates from paper Table 9 (15 models × 9 conditions). Use for model-level comparison only.""",
+    'paper_url': 'https://arxiv.org/abs/2410.09024',
+    'data_source_url': 'https://huggingface.co/datasets/ai-safety-institute/AgentHarm',
+    'subject_type': 'model',
+    'item_type': 'condition',
+    'license': 'MIT',
+    'citation': """@misc{andriushchenko2025agentharmbenchmarkmeasuringharmfulness,
+      title={AgentHarm: A Benchmark for Measuring Harmfulness of LLM Agents}, 
+      author={Maksym Andriushchenko and Alexandra Souly and Mateusz Dziemian and Derek Duenas and Maxwell Lin and Justin Wang and Dan Hendrycks and Andy Zou and Zico Kolter and Matt Fredrikson and Eric Winsor and Jerome Wynne and Yarin Gal and Xander Davies},
+      year={2025},
+      eprint={2410.09024},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2410.09024}, 
+}""",
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 from pathlib import Path
 

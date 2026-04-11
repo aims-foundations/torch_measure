@@ -26,6 +26,27 @@ Website: https://matharena.ai
 Paper: "MathArena: Evaluating LLMs on Uncontaminated Math Competitions" (NeurIPS D&B 2025)
 """
 
+INFO = {
+    'description': """Build MathArena response matrices from HuggingFace per-model per-problem output data""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2505.23281',
+    'data_source_url': 'https://github.com/eth-sri/matharena',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{balunović2026matharenaevaluatingllmsuncontaminated,
+      title={MathArena: Evaluating LLMs on Uncontaminated Math Competitions}, 
+      author={Mislav Balunović and Jasper Dekoninck and Ivo Petrov and Nikola Jovanović and Martin Vechev},
+      year={2026},
+      eprint={2505.23281},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2505.23281}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 from pathlib import Path
 import os
 import sys

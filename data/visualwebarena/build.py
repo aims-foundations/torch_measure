@@ -28,6 +28,27 @@ Output:
 - processed/leaderboard_aggregate.csv: All models with aggregate success rates
 """
 
+INFO = {
+    'description': 'Build a response matrix for VisualWebArena (VWA) multimodal web agent benchmark',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2401.13649',
+    'data_source_url': 'https://github.com/web-arena-x/visualwebarena',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{koh2024visualwebarenaevaluatingmultimodalagents,
+      title={VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks}, 
+      author={Jing Yu Koh and Robert Lo and Lawrence Jang and Vikram Duvvur and Ming Chong Lim and Po-Yu Huang and Graham Neubig and Shuyan Zhou and Ruslan Salakhutdinov and Daniel Fried},
+      year={2024},
+      eprint={2401.13649},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2401.13649}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import csv
 import json
 import os

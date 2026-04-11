@@ -18,6 +18,27 @@ Output:
   - language_distribution.csv: conversation counts by language
 """
 
+INFO = {
+    'description': 'Download and process WildChat-1M monitoring data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2405.01470',
+    'data_source_url': 'https://huggingface.co/datasets/allenai/WildChat-1M',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'ODC-BY',
+    'citation': """@misc{zhao2024wildchat1mchatgptinteraction,
+      title={WildChat: 1M ChatGPT Interaction Logs in the Wild}, 
+      author={Wenting Zhao and Xiang Ren and Jack Hessel and Claire Cardie and Yejin Choi and Yuntian Deng},
+      year={2024},
+      eprint={2405.01470},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2405.01470}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 import os
 from pathlib import Path

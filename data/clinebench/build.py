@@ -16,6 +16,19 @@ Outputs:
   - task_metadata.json     : per-task structured metadata (difficulty, category, tests, etc.)
 """
 
+INFO = {
+    'description': 'Build response matrix and item content for ClineBench',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://github.com/cline/cline-bench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{clinebench,\n  title={Clinebench},\n  howpublished={\\url{https://github.com/cline/cline-bench}},\n}',
+    'tags': ['agent'],
+}
+
+
 import sys
 import json
 import os

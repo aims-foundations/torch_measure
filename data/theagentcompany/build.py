@@ -18,6 +18,27 @@ Outputs:
   - model_summary.csv: Per-model summary statistics
 """
 
+INFO = {
+    'description': 'Build TheAgentCompany response matrix from the experiments repo',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2412.14161',
+    'data_source_url': 'https://github.com/TheAgentCompany/experiments',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{xu2025theagentcompanybenchmarkingllmagents,
+      title={TheAgentCompany: Benchmarking LLM Agents on Consequential Real World Tasks}, 
+      author={Frank F. Xu and Yufan Song and Boxuan Li and Yuxuan Tang and Kritanjali Jain and Mengxue Bao and Zora Z. Wang and Xuhui Zhou and Zhitong Guo and Murong Cao and Mingyang Yang and Hao Yang Lu and Amaad Martin and Zhe Su and Leander Maben and Raj Mehta and Wayne Chi and Lawrence Jang and Yiqing Xie and Shuyan Zhou and Graham Neubig},
+      year={2025},
+      eprint={2412.14161},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2412.14161}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import json
 import os
 import subprocess

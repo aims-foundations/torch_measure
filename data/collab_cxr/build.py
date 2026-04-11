@@ -28,6 +28,19 @@ Output:
     One matrix per condition, aggregated across pathologies per case.
 """
 
+INFO = {
+    'description': 'Download and build intervention matrices from Collab-CXR data',
+    'testing_condition': """Subjects are radiologists (not models) and items are chest X-ray cases. Cells measure diagnostic accuracy under AI-assistance conditions.""",
+    'paper_url': 'https://www.nature.com/articles/s41597-025-05054-0',
+    'data_source_url': 'https://osf.io/z7apq/',
+    'subject_type': 'radiologist',
+    'item_type': 'cxr_case',
+    'license': 'CC-BY-4.0',
+    'citation': '@misc{moehring2025collabcxr,\n  title={Collab Cxr},\n  year={2025},\n  howpublished={\\url{https://www.nature.com/articles/s41597-025-05054-0}},\n}',
+    'tags': ['intervention'],
+}
+
+
 import sys
 import gzip
 import json

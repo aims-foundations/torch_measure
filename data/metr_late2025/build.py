@@ -15,6 +15,27 @@ Output:
   - response_matrix_no_ai.csv: developer x issue matrix (AI-disallowed, completed tasks)
 """
 
+INFO = {
+    'description': """Download and build intervention matrices from METR Late-2025 Developer Productivity RCT""",
+    'testing_condition': """METR agent task suite (late-2025 snapshot) — cells are pass rates on long-horizon coding tasks.""",
+    'paper_url': 'https://arxiv.org/abs/2503.14499',
+    'data_source_url': 'https://github.com/METR/Measuring-Late-2025-AI-on-OSS-Devs',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{kwa2026measuringaiabilitycomplete,
+      title={Measuring AI Ability to Complete Long Software Tasks}, 
+      author={Thomas Kwa and Ben West and Joel Becker and Amy Deng and Katharyn Garcia and Max Hasin and Sami Jawhar and Megan Kinniment and Nate Rush and Sydney Von Arx and Ryan Bloom and Thomas Broadley and Haoxing Du and Brian Goodrich and Nikola Jurkovic and Luke Harold Miles and Seraphina Nix and Tao Lin and Neev Parikh and David Rein and Lucas Jun Koba Sato and Hjalmar Wijk and Daniel M. Ziegler and Elizabeth Barnes and Lawrence Chan},
+      year={2026},
+      eprint={2503.14499},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2503.14499}, 
+}""",
+    'tags': ['intervention'],
+}
+
+
 import sys
 import subprocess
 from pathlib import Path

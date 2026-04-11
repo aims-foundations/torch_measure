@@ -11,6 +11,19 @@ Outputs:
   - item_content.csv                : task_id, task description
 """
 
+INFO = {
+    'description': 'Build response matrix for DPAI Arena from TeamCity API',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://dpaia.dev',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{dpai,\n  title={Dpai},\n  howpublished={\\url{https://dpaia.dev}},\n}',
+    'tags': ['agent'],
+}
+
+
 import sys
 import csv
 import json

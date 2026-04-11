@@ -20,6 +20,27 @@ Models with per-instance results:
   PB Full: iSWE-Agent (only 1 model)
 """
 
+INFO = {
+    'description': """Build per-instance response matrices for SWE-PolyBench from submission branch data""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2504.08703',
+    'data_source_url': 'https://github.com/amazon-science/SWE-PolyBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{rashid2025swepolybenchmultilanguagebenchmarkrepository,
+      title={SWE-PolyBench: A multi-language benchmark for repository level evaluation of coding agents}, 
+      author={Muhammad Shihab Rashid and Christian Bock and Yuan Zhuang and Alexander Buchholz and Tim Esler and Simon Valentin and Luca Franceschi and Martin Wistuba and Prabhu Teja Sivaprasad and Woo Jung Kim and Anoop Deoras and Giovanni Zappella and Laurent Callot},
+      year={2025},
+      eprint={2504.08703},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2504.08703}, 
+}""",
+    'tags': ['coding'],
+}
+
+
 import sys
 import json
 import os

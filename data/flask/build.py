@@ -26,6 +26,27 @@ Outputs:
   - model_summary.csv: Per-model aggregate statistics
 """
 
+INFO = {
+    'description': 'Build FLASK response matrices from GPT-4 evaluation review files',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2307.10928',
+    'data_source_url': 'https://github.com/kaistAI/FLASK',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{ye2024flaskfinegrainedlanguagemodel,
+      title={FLASK: Fine-grained Language Model Evaluation based on Alignment Skill Sets}, 
+      author={Seonghyeon Ye and Doyoung Kim and Sungdong Kim and Hyeonbin Hwang and Seungone Kim and Yongrae Jo and James Thorne and Juho Kim and Minjoon Seo},
+      year={2024},
+      eprint={2307.10928},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2307.10928}, 
+}""",
+    'tags': ['reward-model'],
+}
+
+
 import sys
 from pathlib import Path
 import json

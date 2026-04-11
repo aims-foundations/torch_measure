@@ -15,6 +15,27 @@ Output:
   - response_matrix_no_ai.csv: developer x issue matrix (AI-disallowed tasks only)
 """
 
+INFO = {
+    'description': """Download and build intervention matrices from METR Early-2025 Developer Productivity RCT""",
+    'testing_condition': """METR agent task suite — cells are pass rates on long-horizon coding tasks (many tasks take 30+ minutes of agent time).""",
+    'paper_url': 'https://arxiv.org/abs/2507.09089',
+    'data_source_url': 'https://github.com/METR/Measuring-Early-2025-AI-on-Exp-OSS-Devs',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{becker2025measuringimpactearly2025ai,
+      title={Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity}, 
+      author={Joel Becker and Nate Rush and Elizabeth Barnes and David Rein},
+      year={2025},
+      eprint={2507.09089},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2507.09089}, 
+}""",
+    'tags': ['intervention'],
+}
+
+
 import sys
 import subprocess
 from pathlib import Path

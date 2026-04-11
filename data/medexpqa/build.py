@@ -22,6 +22,28 @@ Outputs:
   - processed/item_content.csv: Full item content
 """
 
+INFO = {
+    'description': 'Build MedExpQA item metadata from Spanish Medical QA with explanations',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2404.05590',
+    'data_source_url': 'https://github.com/ixa-ehu/MedExpQA',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-NC-4.0',
+    'citation': """@misc{alonso2024medexpqamultilingualbenchmarkinglarge,
+      title={MedExpQA: Multilingual Benchmarking of Large Language Models for Medical Question Answering}, 
+      author={Iñigo Alonso and Maite Oronoz and Rodrigo Agerri},
+      year={2024},
+      eprint={2404.05590},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      doi={https://doi.org/10.1016/j.artmed.2024.102938},
+      url={https://arxiv.org/abs/2404.05590}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import csv
 import json
 import os

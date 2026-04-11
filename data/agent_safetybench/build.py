@@ -14,6 +14,27 @@ modes. We transcribe those tables to produce a response matrix with:
   - values = safety score in [0, 1] (higher = safer)
 """
 
+INFO = {
+    'description': 'Build Agent-SafetyBench response matrix',
+    'testing_condition': """Cells are aggregate pass rates extracted from paper Tables 5+6, not per-item responses. Rows are agents, columns are 18 risk categories. Use for model-level comparison only, not IRT.""",
+    'paper_url': 'https://arxiv.org/abs/2412.14470',
+    'data_source_url': 'https://huggingface.co/datasets/thu-coai/Agent-SafetyBench',
+    'subject_type': 'agent',
+    'item_type': 'risk_category',
+    'license': 'MIT',
+    'citation': """@misc{zhang2025agentsafetybenchevaluatingsafetyllm,
+      title={Agent-SafetyBench: Evaluating the Safety of LLM Agents}, 
+      author={Zhexin Zhang and Shiyao Cui and Yida Lu and Jingzhuo Zhou and Junxiao Yang and Hongning Wang and Minlie Huang},
+      year={2025},
+      eprint={2412.14470},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2412.14470}, 
+}""",
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 from pathlib import Path
 

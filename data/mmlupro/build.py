@@ -17,6 +17,27 @@ Outputs:
   - question_metadata.csv        : Question metadata (id, category, answer, src)
 """
 
+INFO = {
+    'description': 'Build MMLU-Pro response matrices from multiple data sources',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.01574',
+    'data_source_url': 'https://api.github.com/repos/TIGER-AI-Lab/MMLU-Pro/contents/eval_results',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{wang2024mmluprorobustchallengingmultitask,
+      title={MMLU-Pro: A More Robust and Challenging Multi-Task Language Understanding Benchmark}, 
+      author={Yubo Wang and Xueguang Ma and Ge Zhang and Yuansheng Ni and Abhranil Chandra and Shiguang Guo and Weiming Ren and Aaran Arulraj and Xuan He and Ziyan Jiang and Tianle Li and Max Ku and Kai Wang and Alex Zhuang and Rongqi Fan and Xiang Yue and Wenhu Chen},
+      year={2024},
+      eprint={2406.01574},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.01574}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 import os
 import re
 import sys

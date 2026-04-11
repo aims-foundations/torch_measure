@@ -23,6 +23,27 @@ Outputs:
   - model_summary.csv: Per-model aggregate statistics
 """
 
+INFO = {
+    'description': 'Build WildBench response matrices from per-model per-task evaluation scores',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.04770',
+    'data_source_url': 'https://huggingface.co/datasets/allenai/WildBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{lin2024wildbenchbenchmarkingllmschallenging,
+      title={WildBench: Benchmarking LLMs with Challenging Tasks from Real Users in the Wild}, 
+      author={Bill Yuchen Lin and Yuntian Deng and Khyathi Chandu and Faeze Brahman and Abhilasha Ravichander and Valentina Pyatkin and Nouha Dziri and Ronan Le Bras and Yejin Choi},
+      year={2024},
+      eprint={2406.04770},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.04770}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 from pathlib import Path
 import os
 import json

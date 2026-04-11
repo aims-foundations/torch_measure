@@ -16,6 +16,27 @@ Outputs:
   - processed/item_content.csv: Per-item metadata
 """
 
+INFO = {
+    'description': 'Build AI2D_TEST response matrix from VLMEval/OpenVLMRecords',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/1603.07396',
+    'data_source_url': 'https://allenai.org/data/diagrams',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-SA-4.0',
+    'citation': """@misc{kembhavi2016diagramworthdozenimages,
+      title={A Diagram Is Worth A Dozen Images}, 
+      author={Aniruddha Kembhavi and Mike Salvato and Eric Kolve and Minjoon Seo and Hannaneh Hajishirzi and Ali Farhadi},
+      year={2016},
+      eprint={1603.07396},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/1603.07396}, 
+}""",
+    'tags': ['vision-language'],
+}
+
+
 from pathlib import Path
 import os
 import re

@@ -5,6 +5,27 @@ Source: https://huggingface.co/datasets/Anthropic/alignment-faking-rl
 Transcripts studying alignment-faking behavior during RL training.
 """
 
+INFO = {
+    'description': 'Download Anthropic alignment-faking-rl dataset (~2.14M RL transcripts)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2412.14093',
+    'data_source_url': 'https://huggingface.co/datasets/Anthropic/alignment-faking-rl',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{greenblatt2024alignmentfakinglargelanguage,
+      title={Alignment faking in large language models}, 
+      author={Ryan Greenblatt and Carson Denison and Benjamin Wright and Fabien Roger and Monte MacDiarmid and Sam Marks and Johannes Treutlein and Tim Belonax and Jack Chen and David Duvenaud and Akbir Khan and Julian Michael and Sören Mindermann and Ethan Perez and Linda Petrini and Jonathan Uesato and Jared Kaplan and Buck Shlegeris and Samuel R. Bowman and Evan Hubinger},
+      year={2024},
+      eprint={2412.14093},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2412.14093}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 

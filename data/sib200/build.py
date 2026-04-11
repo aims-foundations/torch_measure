@@ -19,6 +19,27 @@ Outputs (in ../processed/):
   - model_summary.csv    : Per-model accuracy overall and per-language
 """
 
+INFO = {
+    'description': 'Build SIB-200 response matrix from published LLM per-item predictions',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2309.07445',
+    'data_source_url': 'https://github.com/dadelani/sib-200',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-SA-4.0',
+    'citation': """@misc{adelani2024sib200simpleinclusivebig,
+      title={SIB-200: A Simple, Inclusive, and Big Evaluation Dataset for Topic Classification in 200+ Languages and Dialects}, 
+      author={David Ifeoluwa Adelani and Hannah Liu and Xiaoyu Shen and Nikita Vassilyev and Jesujoba O. Alabi and Yanke Mao and Haonan Gao and Annie En-Shiun Lee},
+      year={2024},
+      eprint={2309.07445},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2309.07445}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 import os
 import re
 import subprocess

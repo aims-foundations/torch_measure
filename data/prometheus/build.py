@@ -24,6 +24,27 @@ Outputs:
   - processed/criteria_metadata.csv
 """
 
+INFO = {
+    'description': 'Build Prometheus response matrices from GPT-4 evaluation scores',
+    'testing_condition': """Subjects are 996 custom evaluation rubric criteria (not models) and items are instance indices within each criterion. Values are GPT-4 judgments normalized from the original 1-5 scale via (s-1)/4.""",
+    'paper_url': 'https://arxiv.org/abs/2310.08491',
+    'data_source_url': 'https://huggingface.co/datasets/prometheus-eval/Feedback-Collection',
+    'subject_type': 'rubric_criterion',
+    'item_type': 'instance',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{kim2024prometheusinducingfinegrainedevaluation,
+      title={Prometheus: Inducing Fine-grained Evaluation Capability in Language Models}, 
+      author={Seungone Kim and Jamin Shin and Yejin Cho and Joel Jang and Shayne Longpre and Hwaran Lee and Sangdoo Yun and Seongjin Shin and Sungdong Kim and James Thorne and Minjoon Seo},
+      year={2024},
+      eprint={2310.08491},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2310.08491}, 
+}""",
+    'tags': ['reward-model'],
+}
+
+
 import sys
 from pathlib import Path
 import os

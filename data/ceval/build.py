@@ -38,6 +38,27 @@ Outputs (in ../processed/):
 All paths use Path(__file__).resolve().parent
 """
 
+INFO = {
+    'description': 'Build task metadata, item content, and response matrix for C-Eval',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2305.08322',
+    'data_source_url': 'https://huggingface.co/datasets/ceval/ceval-exam',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-NC-SA-4.0',
+    'citation': """@misc{huang2023cevalmultilevelmultidisciplinechinese,
+      title={C-Eval: A Multi-Level Multi-Discipline Chinese Evaluation Suite for Foundation Models}, 
+      author={Yuzhen Huang and Yuzhuo Bai and Zhihao Zhu and Junlei Zhang and Jinghan Zhang and Tangjun Su and Junteng Liu and Chuancheng Lv and Yikai Zhang and Jiayi Lei and Yao Fu and Maosong Sun and Junxian He},
+      year={2023},
+      eprint={2305.08322},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2305.08322}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 import warnings
 from pathlib import Path

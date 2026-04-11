@@ -19,6 +19,27 @@ Both have:
   - columns = items, identified as "{task}__{index}"
 """
 
+INFO = {
+    'description': 'Build FaithCoT-BENCH response matrix',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2301.13379',
+    'data_source_url': 'https://github.com/se7esx/FaithCoT-BENCH',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{lyu2023faithfulchainofthoughtreasoning,
+      title={Faithful Chain-of-Thought Reasoning}, 
+      author={Qing Lyu and Shreya Havaldar and Adam Stein and Li Zhang and Delip Rao and Eric Wong and Marianna Apidianaki and Chris Callison-Burch},
+      year={2023},
+      eprint={2301.13379},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2301.13379}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import json
 import os
 import subprocess

@@ -44,6 +44,27 @@ Response matrix convention (matching torch_measure):
   - Values: 1.0 (correct), 0.0 (incorrect), empty (not evaluated)
 """
 
+INFO = {
+    'description': """Build task metadata, item content, and response matrices for African NLP benchmarks""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.02051',
+    'data_source_url': 'https://github.com/masakhane-io/afrimmlu',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{tuobang2024matrixdissimilaritiesbaseddifferences,
+      title={Matrix dissimilarities based on differences in moments and sparsity}, 
+      author={Li Tuobang},
+      year={2024},
+      eprint={2406.02051},
+      archivePrefix={arXiv},
+      primaryClass={q-bio.QM},
+      url={https://arxiv.org/abs/2406.02051}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 import os
 import sys
 import io

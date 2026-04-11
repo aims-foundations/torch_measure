@@ -21,6 +21,27 @@ Outputs:
   - processed/item_content.csv: Full item content
 """
 
+INFO = {
+    'description': """Build CMExam item metadata from the Chinese National Medical Licensing Examination""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2306.03030',
+    'data_source_url': 'https://huggingface.co/datasets/williamliu/CMExam',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{liu2023benchmarkinglargelanguagemodels,
+      title={Benchmarking Large Language Models on CMExam -- A Comprehensive Chinese Medical Exam Dataset}, 
+      author={Junling Liu and Peilin Zhou and Yining Hua and Dading Chong and Zhongyu Tian and Andrew Liu and Helin Wang and Chenyu You and Zhenhua Guo and Lei Zhu and Michael Lingzhi Li},
+      year={2023},
+      eprint={2306.03030},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2306.03030}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import csv
 import json
 import os

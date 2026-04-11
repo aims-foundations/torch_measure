@@ -16,6 +16,27 @@ Outputs:
   - processed/judge_agreement.csv: Inter-judge agreement statistics
 """
 
+INFO = {
+    'description': 'Build BiGGen-Bench response matrices from multi-judge evaluation data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.05761',
+    'data_source_url': 'https://huggingface.co/datasets/prometheus-eval/BiGGen-Bench-Results',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-SA-4.0',
+    'citation': """@misc{kim2025biggenbenchprincipledbenchmark,
+      title={The BiGGen Bench: A Principled Benchmark for Fine-grained Evaluation of Language Models with Language Models}, 
+      author={Seungone Kim and Juyoung Suk and Ji Yong Cho and Shayne Longpre and Chaeeun Kim and Dongkeun Yoon and Guijin Son and Yejin Cho and Sheikh Shafayat and Jinheon Baek and Sue Hyun Park and Hyeonbin Hwang and Jinkyung Jo and Hyowon Cho and Haebin Shin and Seongyun Lee and Hanseok Oh and Noah Lee and Namgyu Ho and Se June Joo and Miyoung Ko and Yoonjoo Lee and Hyungjoo Chae and Jamin Shin and Joel Jang and Seonghyeon Ye and Bill Yuchen Lin and Sean Welleck and Graham Neubig and Moontae Lee and Kyungjae Lee and Minjoon Seo},
+      year={2025},
+      eprint={2406.05761},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.05761}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 from pathlib import Path
 import os
 import sys

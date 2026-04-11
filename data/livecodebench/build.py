@@ -15,6 +15,27 @@ N=10 models have 11 discrete values (0, 0.1, ..., 1.0).
 Output: processed/response_matrix.csv (models × problems, pass@1 scores)
 """
 
+INFO = {
+    'description': 'Build a per-problem response matrix from LiveCodeBench submissions',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2403.07974',
+    'data_source_url': 'https://github.com/LiveCodeBench/submissions',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{jain2024livecodebenchholisticcontaminationfree,
+      title={LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code}, 
+      author={Naman Jain and King Han and Alex Gu and Wen-Ding Li and Fanjia Yan and Tianjun Zhang and Sida Wang and Armando Solar-Lezama and Koushik Sen and Ion Stoica},
+      year={2024},
+      eprint={2403.07974},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2403.07974}, 
+}""",
+    'tags': ['coding'],
+}
+
+
 import sys
 import json
 import os

@@ -10,6 +10,27 @@ Expected: ~279K prompt injection attempts across 7 difficulty levels (Gandalf ga
 Summarizes by level, saves labeled data.
 """
 
+INFO = {
+    'description': 'Download and process Gandalf Ignore Instructions dataset',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2501.07927',
+    'data_source_url': 'https://huggingface.co/datasets/Lakera/gandalf_ignore_instructions',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{pfister2025gandalfredadaptivesecurity,
+      title={Gandalf the Red: Adaptive Security for LLMs}, 
+      author={Niklas Pfister and Václav Volhejn and Manuel Knott and Santiago Arias and Julia Bazińska and Mykhailo Bichurin and Alan Commike and Janet Darling and Peter Dienes and Matthew Fiedler and David Haber and Matthias Kraft and Marco Lancini and Max Mathys and Damián Pascual-Ortiz and Jakub Podolak and Adrià Romero-López and Kyriacos Shiarlis and Andreas Signer and Zsolt Terek and Athanasios Theocharis and Daniel Timbrell and Samuel Trautwein and Samuel Watts and Yun-Han Wu and Mateo Rojas-Carulla},
+      year={2025},
+      eprint={2501.07927},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2501.07927}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 import os
 from pathlib import Path

@@ -16,6 +16,27 @@ Outputs:
   - processed/item_content.csv: Per-item metadata (question text)
 """
 
+INFO = {
+    'description': 'Build FinanceBench response matrix from per-model results',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2311.11944',
+    'data_source_url': 'https://github.com/patronus-ai/financebench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{islam2023financebenchnewbenchmarkfinancial,
+      title={FinanceBench: A New Benchmark for Financial Question Answering}, 
+      author={Pranab Islam and Anand Kannappan and Douwe Kiela and Rebecca Qian and Nino Scherrer and Bertie Vidgen},
+      year={2023},
+      eprint={2311.11944},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2311.11944}, 
+}""",
+    'tags': ['domain-specific'],
+}
+
+
 from pathlib import Path
 import json
 import os

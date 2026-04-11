@@ -33,6 +33,27 @@ Outputs:
   - summary_statistics.txt: Dataset statistics
 """
 
+INFO = {
+    'description': 'Build PRM800K response matrices from step-level human correctness labels',
+    'testing_condition': """Cells are step-level correctness judgments in process reward modeling data. Items are math problem solution steps; values are human labels in {-1, 0, 1} remapped to [0, 1].""",
+    'paper_url': 'https://arxiv.org/abs/2305.20050',
+    'data_source_url': 'https://github.com/openai/prm800k',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{lightman2023letsverifystepstep,
+      title={Let's Verify Step by Step}, 
+      author={Hunter Lightman and Vineet Kosaraju and Yura Burda and Harri Edwards and Bowen Baker and Teddy Lee and Jan Leike and John Schulman and Ilya Sutskever and Karl Cobbe},
+      year={2023},
+      eprint={2305.20050},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2305.20050}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 import sys
 from pathlib import Path
 import json

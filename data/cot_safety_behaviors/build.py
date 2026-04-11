@@ -5,6 +5,19 @@ Source: https://huggingface.co/datasets/AISafety-Student/reasoning-safety-behavi
 Labels for safety-relevant behaviors observed in chain-of-thought reasoning.
 """
 
+INFO = {
+    'description': 'Download reasoning safety behaviours dataset (CoT safety labels)',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://huggingface.co/datasets/AISafety-Student/reasoning-safety-behaviours',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{cot_safety_behaviors,\n  title={Cot Safety Behaviors},\n  howpublished={\\url{https://huggingface.co/datasets/AISafety-Student/reasoning-safety-behaviours}},\n}',
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 

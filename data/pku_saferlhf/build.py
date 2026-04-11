@@ -24,6 +24,27 @@ Outputs:
   - processed/harm_category_stats.csv: Harm category distribution
 """
 
+INFO = {
+    'description': 'Build PKU-SafeRLHF pairwise preference data from PKU-Alignment/PKU-SafeRLHF',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.15513',
+    'data_source_url': 'https://huggingface.co/datasets/PKU-Alignment/PKU-SafeRLHF',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-NC-4.0',
+    'citation': """@misc{ji2025pkusaferlhfmultilevelsafetyalignment,
+      title={PKU-SafeRLHF: Towards Multi-Level Safety Alignment for LLMs with Human Preference}, 
+      author={Jiaming Ji and Donghai Hong and Borong Zhang and Boyuan Chen and Juntao Dai and Boren Zheng and Tianyi Qiu and Jiayi Zhou and Kaile Wang and Boxuan Li and Sirui Han and Yike Guo and Yaodong Yang},
+      year={2025},
+      eprint={2406.15513},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2406.15513}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import sys
 from pathlib import Path
 import os

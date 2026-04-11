@@ -38,6 +38,27 @@ Outputs:
   - judge_summary.csv: Per-judge aggregate statistics
 """
 
+INFO = {
+    'description': 'Build JudgeBench response matrices from per-judge evaluation results',
+    'testing_condition': """Subjects are LLM judges (not models under test) and items are response-pair judgment tasks. Cells measure judge agreement with the reference answer.""",
+    'paper_url': 'https://arxiv.org/abs/2410.12784',
+    'data_source_url': 'https://api.github.com/repos/{SRC_GH_REPO}/contents/outputs',
+    'subject_type': 'judge',
+    'item_type': 'comparison',
+    'license': 'MIT',
+    'citation': """@misc{tan2025judgebenchbenchmarkevaluatingllmbased,
+      title={JudgeBench: A Benchmark for Evaluating LLM-based Judges}, 
+      author={Sijun Tan and Siyuan Zhuang and Kyle Montgomery and William Y. Tang and Alejandro Cuadron and Chenguang Wang and Raluca Ada Popa and Ion Stoica},
+      year={2025},
+      eprint={2410.12784},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2410.12784}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 import sys
 from pathlib import Path
 import json

@@ -21,6 +21,27 @@ Outputs:
   - processed/item_content.csv: Full item content with answer options
 """
 
+INFO = {
+    'description': 'Build FrenchMedMCQA item metadata from French medical specialization exam MCQs',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2304.04280',
+    'data_source_url': 'https://huggingface.co/datasets/qanastek/FrenchMedMCQA',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{labrak2023frenchmedmcqafrenchmultiplechoicequestion,
+      title={FrenchMedMCQA: A French Multiple-Choice Question Answering Dataset for Medical domain}, 
+      author={Yanis Labrak and Adrien Bazoge and Richard Dufour and Mickael Rouvier and Emmanuel Morin and Béatrice Daille and Pierre-Antoine Gourraud},
+      year={2023},
+      eprint={2304.04280},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2304.04280}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import csv
 import json
 import os

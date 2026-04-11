@@ -15,6 +15,19 @@ Output:
   - measures_by_principle_and_type.csv: cross-tabulation
 """
 
+INFO = {
+    'description': '- Download and process Responsible AI Measures Dataset',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://figshare.com/articles/dataset/29551001',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{responsible_ai_measures,\n  title={Responsible Ai Measures},\n  howpublished={\\url{https://figshare.com/articles/dataset/29551001}},\n}',
+    'tags': ['pending'],
+}
+
+
 import sys
 import subprocess
 import urllib.request

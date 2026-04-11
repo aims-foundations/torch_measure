@@ -16,6 +16,27 @@ Outputs:
   - processed/item_content.csv: Per-item metadata
 """
 
+INFO = {
+    'description': 'Build MMBench_V11 response matrix from VLMEval/OpenVLMRecords',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2307.06281',
+    'data_source_url': 'https://github.com/open-compass/MMBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{liu2024mmbenchmultimodalmodelallaround,
+      title={MMBench: Is Your Multi-modal Model an All-around Player?}, 
+      author={Yuan Liu and Haodong Duan and Yuanhan Zhang and Bo Li and Songyang Zhang and Wangbo Zhao and Yike Yuan and Jiaqi Wang and Conghui He and Ziwei Liu and Kai Chen and Dahua Lin},
+      year={2024},
+      eprint={2307.06281},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2307.06281}, 
+}""",
+    'tags': ['vision-language'],
+}
+
+
 from pathlib import Path
 import os
 import re

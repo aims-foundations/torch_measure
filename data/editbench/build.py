@@ -32,6 +32,27 @@ References:
   - Leaderboard: waynechi.com/edit-bench
 """
 
+INFO = {
+    'description': '01_build_response_matrix.py',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2212.06909',
+    'data_source_url': 'https://huggingface.co/datasets/copilot-arena/editbench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{wang2023imageneditoreditbenchadvancing,
+      title={Imagen Editor and EditBench: Advancing and Evaluating Text-Guided Image Inpainting}, 
+      author={Su Wang and Chitwan Saharia and Ceslee Montgomery and Jordi Pont-Tuset and Shai Noy and Stefano Pellegrini and Yasumasa Onoe and Sarah Laszlo and David J. Fleet and Radu Soricut and Jason Baldridge and Mohammad Norouzi and Peter Anderson and William Chan},
+      year={2023},
+      eprint={2212.06909},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2212.06909}, 
+}""",
+    'tags': ['coding'],
+}
+
+
 import json
 import shutil
 import subprocess

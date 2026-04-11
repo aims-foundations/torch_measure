@@ -26,6 +26,27 @@ Outputs:
   - judge_summary.csv: Per-judge aggregate statistics.
 """
 
+INFO = {
+    'description': 'Build VL-RewardBench response matrices from per-judge evaluation results',
+    'testing_condition': """Subjects are vision-language reward models. Items are (image, prompt, chosen, rejected) tuples; cells are 1 if the reward model prefers the chosen response.""",
+    'paper_url': 'https://arxiv.org/abs/2411.17451',
+    'data_source_url': 'https://huggingface.co/datasets/MMInstruction/VL-RewardBench',
+    'subject_type': 'reward_model',
+    'item_type': 'response_pair',
+    'license': 'MIT',
+    'citation': """@misc{li2025vlrewardbenchchallengingbenchmarkvisionlanguage,
+      title={VL-RewardBench: A Challenging Benchmark for Vision-Language Generative Reward Models}, 
+      author={Lei Li and Yuancheng Wei and Zhihui Xie and Xuqing Yang and Yifan Song and Peiyi Wang and Chenxin An and Tianyu Liu and Sujian Li and Bill Yuchen Lin and Lingpeng Kong and Qi Liu},
+      year={2025},
+      eprint={2411.17451},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2411.17451}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 from pathlib import Path
 import os
 import sys

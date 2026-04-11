@@ -30,6 +30,27 @@ Outputs:
   - subject_summary.csv: Per-reward-model aggregate statistics
 """
 
+INFO = {
+    'description': 'Build PersonalLLM response matrices from reward-model preference scores',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2409.20296',
+    'data_source_url': 'https://huggingface.co/datasets/namkoong-lab/PersonalLLM',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{zollo2025personalllmtailoringllmsindividual,
+      title={PersonalLLM: Tailoring LLMs to Individual Preferences}, 
+      author={Thomas P. Zollo and Andrew Wei Tung Siah and Naimeng Ye and Ang Li and Hongseok Namkoong},
+      year={2025},
+      eprint={2409.20296},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2409.20296}, 
+}""",
+    'tags': ['reward-model'],
+}
+
+
 from pathlib import Path
 import os
 import sys

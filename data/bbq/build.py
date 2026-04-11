@@ -17,6 +17,27 @@ Output:
   - item_metadata.csv: per-item category, polarity, context condition
 """
 
+INFO = {
+    'description': 'Download and build response matrix from BBQ (Bias Benchmark for QA)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2110.08193',
+    'data_source_url': 'https://github.com/nyu-mll/BBQ',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{parrish2022bbqhandbuiltbiasbenchmark,
+      title={BBQ: A Hand-Built Bias Benchmark for Question Answering}, 
+      author={Alicia Parrish and Angelica Chen and Nikita Nangia and Vishakh Padmakumar and Jason Phang and Jana Thompson and Phu Mon Htut and Samuel R. Bowman},
+      year={2022},
+      eprint={2110.08193},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2110.08193}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import json
 import subprocess
 import sys

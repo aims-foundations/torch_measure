@@ -27,6 +27,27 @@ NOTE ON RESPONSE MATRIX:
   the gold labels and item IDs needed for that alignment.
 """
 
+INFO = {
+    'description': 'Build IberBench and Latin American Spanish NLP benchmark item collection',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2504.16921',
+    'data_source_url': 'https://huggingface.co/datasets/jhovany/Homomex2024',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{gonzález2025iberbenchllmevaluationiberian,
+      title={IberBench: LLM Evaluation on Iberian Languages}, 
+      author={José Ángel González and Ian Borrego Obrador and Álvaro Romo Herrero and Areg Mikael Sarvazyan and Mara Chinea-Ríos and Angelo Basile and Marc Franco-Salvador},
+      year={2025},
+      eprint={2504.16921},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2504.16921}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 import warnings
 from pathlib import Path

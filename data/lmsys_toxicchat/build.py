@@ -16,6 +16,27 @@ Builds:
 Saves outputs to processed/.
 """
 
+INFO = {
+    'description': 'Download and process LMSYS ToxicChat dataset',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2310.17389',
+    'data_source_url': 'https://huggingface.co/datasets/lmsys/toxic-chat',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-NC-4.0',
+    'citation': """@misc{lin2023toxicchatunveilinghiddenchallenges,
+      title={ToxicChat: Unveiling Hidden Challenges of Toxicity Detection in Real-World User-AI Conversation}, 
+      author={Zi Lin and Zihan Wang and Yongqi Tong and Yangkun Wang and Yuxin Guo and Yujia Wang and Jingbo Shang},
+      year={2023},
+      eprint={2310.17389},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2310.17389}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 import ast
 import json

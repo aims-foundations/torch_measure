@@ -27,6 +27,27 @@ Outputs (in processed/):
   - model_summary.csv            : Per-model per-language accuracy statistics
 """
 
+INFO = {
+    'description': 'Build response matrix for the Bridging-the-Gap African Languages evaluation',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2412.03304',
+    'data_source_url': """https://github.com/InstituteforDiseaseModeling/Bridging-the-Gap-Low-Resource-African-Languages""",
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{singh2025globalmmluunderstandingaddressing,
+      title={Global MMLU: Understanding and Addressing Cultural and Linguistic Biases in Multilingual Evaluation}, 
+      author={Shivalika Singh and Angelika Romanou and Clémentine Fourrier and David I. Adelani and Jian Gang Ngui and Daniel Vila-Suero and Peerat Limkonchotiwat and Kelly Marchisio and Wei Qi Leong and Yosephine Susanto and Raymond Ng and Shayne Longpre and Wei-Yin Ko and Sebastian Ruder and Madeline Smith and Antoine Bosselut and Alice Oh and Andre F. T. Martins and Leshem Choshen and Daphne Ippolito and Enzo Ferrante and Marzieh Fadaee and Beyza Ermis and Sara Hooker},
+      year={2025},
+      eprint={2412.03304},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2412.03304}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 import os
 import subprocess
 import sys

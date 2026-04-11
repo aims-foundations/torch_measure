@@ -24,6 +24,27 @@ Outputs:
   - processed/model_summary.csv: Per-model summary statistics
 """
 
+INFO = {
+    'description': 'Build SummEval response matrices from per-annotator evaluation data',
+    'testing_condition': """Cells are human quality ratings (coherence, consistency, fluency, relevance) for summaries — continuous scores, not pass/fail. Average across 3 annotators per (system, item) pair.""",
+    'paper_url': 'https://arxiv.org/abs/2007.12626',
+    'data_source_url': 'https://github.com/Yale-LILY/SummEval',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{fabbri2021summevalreevaluatingsummarizationevaluation,
+      title={SummEval: Re-evaluating Summarization Evaluation}, 
+      author={Alexander R. Fabbri and Wojciech Kryściński and Bryan McCann and Caiming Xiong and Richard Socher and Dragomir Radev},
+      year={2021},
+      eprint={2007.12626},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2007.12626}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 import sys
 from pathlib import Path
 import json

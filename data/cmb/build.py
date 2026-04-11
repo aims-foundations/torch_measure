@@ -22,6 +22,27 @@ Outputs:
   - processed/item_content.csv: Full item content with options
 """
 
+INFO = {
+    'description': 'Build CMB (Chinese Medical Benchmark) item metadata',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2308.08833',
+    'data_source_url': 'https://github.com/FreedomIntelligence/CMB',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{wang2024cmbcomprehensivemedicalbenchmark,
+      title={CMB: A Comprehensive Medical Benchmark in Chinese}, 
+      author={Xidong Wang and Guiming Hardy Chen and Dingjie Song and Zhiyi Zhang and Zhihong Chen and Qingying Xiao and Feng Jiang and Jianquan Li and Xiang Wan and Benyou Wang and Haizhou Li},
+      year={2024},
+      eprint={2308.08833},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2308.08833}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import csv
 import json
 import os

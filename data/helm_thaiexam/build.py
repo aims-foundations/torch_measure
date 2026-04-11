@@ -17,6 +17,27 @@ Usage:
     python 01_build_response_matrix.py [--skip-download] [--workers 8]
 """
 
+INFO = {
+    'description': 'Download and build response matrix for HELM Thai examination benchmarks',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2312.13951',
+    'data_source_url': 'https://crfm.stanford.edu/helm/thai-exam/',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{pipatanakul2023typhoonthailargelanguage,
+      title={Typhoon: Thai Large Language Models}, 
+      author={Kunat Pipatanakul and Phatrasek Jirabovonvisut and Potsawee Manakul and Sittipong Sripaisarnmongkol and Ruangsak Patomwong and Pathomporn Chokchainant and Kasima Tharnpipitchai},
+      year={2023},
+      eprint={2312.13951},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2312.13951}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 from __future__ import annotations
 
 import argparse

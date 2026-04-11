@@ -5,6 +5,27 @@ Benchmark for evaluating safety of LLM-based agents.
 Source: https://huggingface.co/datasets/safeagentbench/SafeAgentBench
 """
 
+INFO = {
+    'description': 'Download SafeAgentBench dataset',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2412.13178',
+    'data_source_url': 'https://huggingface.co/datasets/safeagentbench/SafeAgentBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{yin2025safeagentbenchbenchmarksafetask,
+      title={SafeAgentBench: A Benchmark for Safe Task Planning of Embodied LLM Agents}, 
+      author={Sheng Yin and Xianghe Pang and Yuanzhuo Ding and Menglan Chen and Yutong Bi and Yichen Xiong and Wenhao Huang and Zhen Xiang and Jing Shao and Siheng Chen},
+      year={2025},
+      eprint={2412.13178},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2412.13178}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 

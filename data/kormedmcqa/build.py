@@ -21,6 +21,27 @@ Outputs:
   - processed/response_matrix.csv : models (rows) x items (columns) binary {0,1}
 """
 
+INFO = {
+    'description': 'Build KorMedMCQA response matrix (models x items, binary correct/incorrect)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2403.01469',
+    'data_source_url': 'https://huggingface.co/datasets/sean0042/KorMedMCQA',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{kweon2024kormedmcqamultichoicequestionanswering,
+      title={KorMedMCQA: Multi-Choice Question Answering Benchmark for Korean Healthcare Professional Licensing Examinations}, 
+      author={Sunjun Kweon and Byungjin Choi and Gyouk Chu and Junyeong Song and Daeun Hyeon and Sujin Gan and Jueon Kim and Minkyu Kim and Rae Woong Park and Edward Choi},
+      year={2024},
+      eprint={2403.01469},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2403.01469}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 import csv
 import os
 import subprocess

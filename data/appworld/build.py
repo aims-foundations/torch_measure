@@ -32,6 +32,27 @@ Output files:
   - processed/ACCESS_NOTES.txt            (how to get per-task data)
 """
 
+INFO = {
+    'description': 'Build response matrix for AppWorld benchmark (Stony Brook NLP)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2407.18901',
+    'data_source_url': 'https://github.com/StonyBrookNLP/appworld-leaderboard',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{trivedi2024appworldcontrollableworldapps,
+      title={AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents}, 
+      author={Harsh Trivedi and Tushar Khot and Mareike Hartmann and Ruskin Manku and Vinty Dong and Edward Li and Shashank Gupta and Ashish Sabharwal and Niranjan Balasubramanian},
+      year={2024},
+      eprint={2407.18901},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2407.18901}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 from pathlib import Path
 import json
 import os

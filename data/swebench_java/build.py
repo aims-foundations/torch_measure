@@ -28,6 +28,27 @@ Outputs:
   - model_summary.csv: Per-model summary statistics
 """
 
+INFO = {
+    'description': 'Build the SWE-bench Java response matrix from multiple data sources',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2408.14354',
+    'data_source_url': 'https://huggingface.co/datasets/Daoguang/Multi-SWE-bench',
+    'subject_type': 'agent',
+    'item_type': 'issue',
+    'license': 'Apache-2.0',
+    'citation': """@misc{zan2024swebenchjavagithubissueresolving,
+      title={SWE-bench-java: A GitHub Issue Resolving Benchmark for Java}, 
+      author={Daoguang Zan and Zhirong Huang and Ailun Yu and Shaoxin Lin and Yifan Shi and Wei Liu and Dong Chen and Zongshuai Qi and Hao Yu and Lei Yu and Dezhi Ran and Muhan Zeng and Bo Shen and Pan Bian and Guangtai Liang and Bei Guan and Pengjie Huang and Tao Xie and Yongji Wang and Qianxiang Wang},
+      year={2024},
+      eprint={2408.14354},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2408.14354}, 
+}""",
+    'tags': ['coding'],
+}
+
+
 import json
 import os
 import re

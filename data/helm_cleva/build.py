@@ -17,6 +17,27 @@ Usage:
     python 01_build_response_matrix.py [--skip-download] [--workers 8]
 """
 
+INFO = {
+    'description': 'Download and build response matrix for HELM CLEVA Chinese evaluation',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2308.04813',
+    'data_source_url': 'https://crfm.stanford.edu/helm/cleva/',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{li2023clevachineselanguagemodels,
+      title={CLEVA: Chinese Language Models EVAluation Platform}, 
+      author={Yanyang Li and Jianqiao Zhao and Duo Zheng and Zi-Yuan Hu and Zhi Chen and Xiaohui Su and Yongfeng Huang and Shijia Huang and Dahua Lin and Michael R. Lyu and Liwei Wang},
+      year={2023},
+      eprint={2308.04813},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2308.04813}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 from __future__ import annotations
 
 import argparse

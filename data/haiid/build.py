@@ -22,6 +22,19 @@ Output:
     - response_matrix_{domain}_post_human.csv: participant x item -> binary correct (after human-labeled advice)
 """
 
+INFO = {
+    'description': """Download and build intervention matrices from HAIID (Human-AI Interactions Dataset)""",
+    'testing_condition': """Human-AI interaction dataset — cells may represent human decisions influenced by AI recommendations, not model responses directly.""",
+    'paper_url': '',
+    'data_source_url': 'https://github.com/kailas-v/human-ai-interactions',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': '@misc{haiid,\n  title={Haiid},\n  howpublished={\\url{https://github.com/kailas-v/human-ai-interactions}},\n}',
+    'tags': ['intervention'],
+}
+
+
 import sys
 import json
 import subprocess

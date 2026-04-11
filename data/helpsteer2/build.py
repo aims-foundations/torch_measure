@@ -24,6 +24,27 @@ Outputs (in processed/):
   - prompt_metadata.csv:             Per-prompt metadata (prompt text, etc.)
 """
 
+INFO = {
+    'description': 'Build HelpSteer2 response matrices from NVIDIA HelpSteer2 human preference data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.08673',
+    'data_source_url': 'https://huggingface.co/datasets/nvidia/HelpSteer2',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{wang2024helpsteer2opensourcedatasettraining,
+      title={HelpSteer2: Open-source dataset for training top-performing reward models}, 
+      author={Zhilin Wang and Yi Dong and Olivier Delalleau and Jiaqi Zeng and Gerald Shen and Daniel Egert and Jimmy J. Zhang and Makesh Narsimhan Sreedhar and Oleksii Kuchaiev},
+      year={2024},
+      eprint={2406.08673},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.08673}, 
+}""",
+    'tags': ['reward-model'],
+}
+
+
 import sys
 import os
 from pathlib import Path

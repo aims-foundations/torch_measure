@@ -27,6 +27,28 @@ Outputs:
   - model_summary.csv: Per-model accuracy and coverage statistics
 """
 
+INFO = {
+    'description': 'Build AfriMed-QA response matrix from per-model per-item evaluation results',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2411.15640',
+    'data_source_url': 'https://github.com/intron-innovation/AfriMed-QA',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-NC-SA-4.0',
+    'citation': """@misc{olatunji2025afrimedqapanafricanmultispecialtymedical,
+      title={AfriMed-QA: A Pan-African, Multi-Specialty, Medical Question-Answering Benchmark Dataset}, 
+      author={Tobi Olatunji and Charles Nimo and Abraham Owodunni and Tassallah Abdullahi and Emmanuel Ayodele and Mardhiyah Sanni and Chinemelu Aka and Folafunmi Omofoye and Foutse Yuehgoh and Timothy Faniran and Bonaventure F. P. Dossou and Moshood Yekini and Jonas Kemp and Katherine Heller and Jude Chidubem Omeke and Chidi Asuzu MD and Naome A. Etori and Aimérou Ndiaye and Ifeoma Okoh and Evans Doe Ocansey and Wendy Kinara and Michael Best and Irfan Essa and Stephen Edward Moore and Chris Fourie and Mercy Nyamewaa Asiedu},
+      year={2025},
+      eprint={2411.15640},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      doi={https://doi.org/10.18653/v1/2025.acl-long.96},
+      url={https://arxiv.org/abs/2411.15640}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 from pathlib import Path
 import os
 import sys

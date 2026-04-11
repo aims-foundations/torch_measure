@@ -17,6 +17,27 @@ Usage:
     python 01_build_response_matrix.py [--skip-download] [--workers 8]
 """
 
+INFO = {
+    'description': """Download and build response matrix for HELM African MMLU + Winogrande (11 languages)""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.03368',
+    'data_source_url': 'https://crfm.stanford.edu/helm/afrihelm/',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{adelani2025irokobenchnewbenchmarkafrican,
+      title={IrokoBench: A New Benchmark for African Languages in the Age of Large Language Models}, 
+      author={David Ifeoluwa Adelani and Jessica Ojo and Israel Abebe Azime and Jian Yun Zhuang and Jesujoba O. Alabi and Xuanli He and Millicent Ochieng and Sara Hooker and Andiswa Bukula and En-Shiun Annie Lee and Chiamaka Chukwuneke and Happy Buzaaba and Blessing Sibanda and Godson Kalipe and Jonathan Mukiibi and Salomon Kabongo and Foutse Yuehgoh and Mmasibidi Setaka and Lolwethu Ndolela and Nkiruka Odu and Rooweither Mabuya and Shamsuddeen Hassan Muhammad and Salomey Osei and Sokhar Samb and Tadesse Kebede Guge and Tombekai Vangoni Sherman and Pontus Stenetorp},
+      year={2025},
+      eprint={2406.03368},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.03368}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 from __future__ import annotations
 
 import argparse

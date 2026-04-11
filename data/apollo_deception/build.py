@@ -8,6 +8,27 @@ Geometry of Truth, TruthfulQA, and Rollouts. Summarizes honest/deceptive/ambiguo
 labels per dataset.
 """
 
+INFO = {
+    'description': 'Download and process Apollo Deception Detection dataset',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2502.03407',
+    'data_source_url': 'https://github.com/ApolloResearch/deception-detection',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{goldowskydill2025detectingstrategicdeceptionusing,
+      title={Detecting Strategic Deception Using Linear Probes}, 
+      author={Nicholas Goldowsky-Dill and Bilal Chughtai and Stefan Heimersheim and Marius Hobbhahn},
+      year={2025},
+      eprint={2502.03407},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2502.03407}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import json
 import os
 import subprocess

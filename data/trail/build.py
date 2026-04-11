@@ -5,6 +5,27 @@ Source: https://huggingface.co/datasets/PatronusAI/TRAIL
 Structured agent traces in OpenTelemetry format for evaluating agentic systems.
 """
 
+INFO = {
+    'description': 'Download PatronusAI TRAIL dataset (OpenTelemetry agent traces)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2505.08638',
+    'data_source_url': 'https://huggingface.co/datasets/PatronusAI/TRAIL',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{deshpande2025trailtracereasoningagentic,
+      title={TRAIL: Trace Reasoning and Agentic Issue Localization}, 
+      author={Darshan Deshpande and Varun Gangal and Hersh Mehta and Jitin Krishnan and Anand Kannappan and Rebecca Qian},
+      year={2025},
+      eprint={2505.08638},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2505.08638}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 

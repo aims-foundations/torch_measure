@@ -19,6 +19,27 @@ Output:
   - item_metadata.csv: per-behavior goal, category
 """
 
+INFO = {
+    'description': 'Download JailbreakBench artifacts and build response matrices',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2404.01318',
+    'data_source_url': 'https://github.com/JailbreakBench/artifacts',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{chao2024jailbreakbenchopenrobustnessbenchmark,
+      title={JailbreakBench: An Open Robustness Benchmark for Jailbreaking Large Language Models}, 
+      author={Patrick Chao and Edoardo Debenedetti and Alexander Robey and Maksym Andriushchenko and Francesco Croce and Vikash Sehwag and Edgar Dobriban and Nicolas Flammarion and George J. Pappas and Florian Tramer and Hamed Hassani and Eric Wong},
+      year={2024},
+      eprint={2404.01318},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2404.01318}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import sys
 import json
 import subprocess

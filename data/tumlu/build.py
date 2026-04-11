@@ -17,6 +17,27 @@ Outputs:
   - processed/item_content.csv: Per-item metadata (question + choices)
 """
 
+INFO = {
+    'description': 'Build TUMLU response matrix from Turkic Multilingual Language Understanding data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2502.11020',
+    'data_source_url': 'https://github.com/TURNA-NLP/TUMLU',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{isbarov2025tumluunifiednativelanguage,
+      title={TUMLU: A Unified and Native Language Understanding Benchmark for Turkic Languages}, 
+      author={Jafar Isbarov and Arofat Akhundjanova and Mammad Hajili and Kavsar Huseynova and Dmitry Gaynullin and Anar Rzayev and Osman Tursun and Aizirek Turdubaeva and Ilshat Saetov and Rinat Kharisov and Saule Belginova and Ariana Kenbayeva and Amina Alisheva and Abdullatif Köksal and Samir Rustamov and Duygu Ataman},
+      year={2025},
+      eprint={2502.11020},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2502.11020}, 
+}""",
+    'tags': ['domain-specific'],
+}
+
+
 from pathlib import Path
 import csv
 import json

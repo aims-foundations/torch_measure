@@ -20,6 +20,27 @@ The response matrix has:
 Column naming: {behavior}_{goal}_{threat}, e.g. "blackmail_explicit_replacement".
 """
 
+INFO = {
+    'description': 'Build Agentic Misalignment response matrix',
+    'testing_condition': """Cells are aggregate misalignment rates from the paper appendix (18 models × 18 scenario conditions). Use for model-level comparison only, not IRT.""",
+    'paper_url': 'https://arxiv.org/abs/2510.05179',
+    'data_source_url': 'https://github.com/anthropic-experimental/agentic-misalignment',
+    'subject_type': 'model',
+    'item_type': 'scenario',
+    'license': 'MIT',
+    'citation': """@misc{lynch2025agenticmisalignmentllmsinsider,
+      title={Agentic Misalignment: How LLMs Could Be Insider Threats}, 
+      author={Aengus Lynch and Benjamin Wright and Caleb Larson and Stuart J. Ritchie and Soren Mindermann and Evan Hubinger and Ethan Perez and Kevin Troy},
+      year={2025},
+      eprint={2510.05179},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2510.05179}, 
+}""",
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 from pathlib import Path
 

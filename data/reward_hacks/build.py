@@ -5,6 +5,27 @@ Dataset of reward hacking behaviors in LLM agents.
 Source: https://huggingface.co/datasets/longtermrisk/school-of-reward-hacks
 """
 
+INFO = {
+    'description': 'Download School of Reward Hacks dataset',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2507.03336',
+    'data_source_url': 'https://huggingface.co/datasets/longtermrisk/school-of-reward-hacks',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{hathidara2025disambiguationcentricfinetuningmakesenterprise,
+      title={Disambiguation-Centric Finetuning Makes Enterprise Tool-Calling LLMs More Realistic and Less Risky}, 
+      author={Ashutosh Hathidara and Julien Yu and Sebastian Schreiber},
+      year={2025},
+      eprint={2507.03336},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2507.03336}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 

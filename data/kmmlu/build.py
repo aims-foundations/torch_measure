@@ -24,6 +24,27 @@ Outputs:
                          plus a 'human_baseline' pseudo-row
 """
 
+INFO = {
+    'description': 'Build KMMLU response matrix (models x items, binary correct/incorrect)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2402.11548',
+    'data_source_url': 'https://huggingface.co/datasets/HAERAE-HUB/KMMLU',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-ND-4.0',
+    'citation': """@misc{son2024kmmlumeasuringmassivemultitask,
+      title={KMMLU: Measuring Massive Multitask Language Understanding in Korean}, 
+      author={Guijin Son and Hanwool Lee and Sungdong Kim and Seungone Kim and Niklas Muennighoff and Taekyoon Choi and Cheonbok Park and Kang Min Yoo and Stella Biderman},
+      year={2024},
+      eprint={2402.11548},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2402.11548}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 import os
 import subprocess
 import sys

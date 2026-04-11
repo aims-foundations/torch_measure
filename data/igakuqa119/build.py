@@ -21,6 +21,27 @@ Outputs:
   - processed/item_content.csv: Full item content (question text, choices)
 """
 
+INFO = {
+    'description': 'Build IgakuQA119 response matrix from the 119th Japanese Medical Licensing Exam',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2303.18027',
+    'data_source_url': 'https://github.com/jungokasai/IgakuQA',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{kasai2023evaluatinggpt4chatgptjapanese,
+      title={Evaluating GPT-4 and ChatGPT on Japanese Medical Licensing Examinations}, 
+      author={Jungo Kasai and Yuhei Kasai and Keisuke Sakaguchi and Yutaro Yamada and Dragomir Radev},
+      year={2023},
+      eprint={2303.18027},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2303.18027}, 
+}""",
+    'tags': ['domain-specific'],
+}
+
+
 import csv
 import glob
 import json

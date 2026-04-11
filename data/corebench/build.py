@@ -27,6 +27,27 @@ Also outputs:
   - hal_leaderboard.csv: 49 entries from the HAL CORE-Bench-Hard leaderboard (March 2026)
 """
 
+INFO = {
+    'description': '01_build_response_matrix.py',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2409.11363',
+    'data_source_url': 'https://github.com/siegelz/core-bench',
+    'subject_type': 'agent',
+    'item_type': 'research_task',
+    'license': 'MIT',
+    'citation': """@misc{siegel2024corebenchfosteringcredibilitypublished,
+      title={CORE-Bench: Fostering the Credibility of Published Research Through a Computational Reproducibility Agent Benchmark}, 
+      author={Zachary S. Siegel and Sayash Kapoor and Nitya Nagdir and Benedikt Stroebl and Arvind Narayanan},
+      year={2024},
+      eprint={2409.11363},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2409.11363}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import json
 import os
 import subprocess

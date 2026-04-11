@@ -26,6 +26,27 @@ Requirements:
   pip install pdfplumber
 """
 
+INFO = {
+    'description': 'Build a PaperBench response matrix by extracting Tables 10-18 from the paper PDF',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2504.01848v3',
+    'data_source_url': 'https://github.com/openai/preparedness/tree/main/project/paperbench',
+    'subject_type': 'agent',
+    'item_type': 'paper_replication_task',
+    'license': 'MIT',
+    'citation': """@misc{starace2025paperbenchevaluatingaisability,
+      title={PaperBench: Evaluating AI's Ability to Replicate AI Research}, 
+      author={Giulio Starace and Oliver Jaffe and Dane Sherburn and James Aung and Jun Shern Chan and Leon Maksin and Rachel Dias and Evan Mays and Benjamin Kinsella and Wyatt Thompson and Johannes Heidecke and Amelia Glaese and Tejal Patwardhan},
+      year={2025},
+      eprint={2504.01848},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2504.01848}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import os
 import csv
 import json

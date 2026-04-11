@@ -16,6 +16,27 @@ Expected structure:
 Summarizes CoT unfaithfulness rates across models and conditions.
 """
 
+INFO = {
+    'description': 'Download and process CoT Unfaithfulness dataset',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2305.04388',
+    'data_source_url': 'https://github.com/milesaturpin/cot-unfaithfulness',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{turpin2023languagemodelsdontsay,
+      title={Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting}, 
+      author={Miles Turpin and Julian Michael and Ethan Perez and Samuel R. Bowman},
+      year={2023},
+      eprint={2305.04388},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2305.04388}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import json
 import os
 import subprocess

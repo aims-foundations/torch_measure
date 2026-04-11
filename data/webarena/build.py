@@ -24,6 +24,27 @@ Output:
   - webarena_response_matrix_summary.csv (aggregate stats per model)
 """
 
+INFO = {
+    'description': 'Build a per-task response matrix for WebArena benchmark',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2307.13854',
+    'data_source_url': 'https://github.com/anthropics/agent-evals',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{zhou2024webarenarealisticwebenvironment,
+      title={WebArena: A Realistic Web Environment for Building Autonomous Agents}, 
+      author={Shuyan Zhou and Frank F. Xu and Hao Zhu and Xuhui Zhou and Robert Lo and Abishek Sridhar and Xianyi Cheng and Tianyue Ou and Yonatan Bisk and Daniel Fried and Uri Alon and Graham Neubig},
+      year={2024},
+      eprint={2307.13854},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2307.13854}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import json
 import os
 import re

@@ -19,6 +19,19 @@ Output:
   - data_availability_report.txt: Documentation of what data is/isn't available
 """
 
+INFO = {
+    'description': 'Build the Aider Leaderboard response matrix from published YAML data',
+    'testing_condition': """Cells are pass_rate_2 aggregates across the 6 Aider sub-benchmarks (178 models × 6 benchmarks). Use for model-level comparison only.""",
+    'paper_url': '',
+    'data_source_url': 'https://github.com/Aider-AI/aider/tree/main/aider/website/_data/',
+    'subject_type': 'model',
+    'item_type': 'sub_benchmark',
+    'license': 'Apache-2.0',
+    'citation': '@misc{aider2024leaderboard,\n  title={Aider},\n  year={2024},\n  howpublished={\\url{https://github.com/Aider-AI/aider/tree/main/aider/website/_data/}},\n}',
+    'tags': ['aggregate-only'],
+}
+
+
 import os
 import sys
 import urllib.request

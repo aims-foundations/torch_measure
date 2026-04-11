@@ -33,6 +33,27 @@ Outputs:
   - processed/utterance_metadata.csv: Per-utterance metadata (model, turn, etc.)
 """
 
+INFO = {
+    'description': 'Download and build PRISM alignment response matrices',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2404.16019',
+    'data_source_url': 'https://huggingface.co/datasets/HannahRoseKirk/prism-alignment',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{kirk2024prismalignmentdatasetparticipatory,
+      title={The PRISM Alignment Dataset: What Participatory, Representative and Individualised Human Feedback Reveals About the Subjective and Multicultural Alignment of Large Language Models}, 
+      author={Hannah Rose Kirk and Alexander Whitefield and Paul Röttger and Andrew Bean and Katerina Margatina and Juan Ciro and Rafael Mosquera and Max Bartolo and Adina Williams and He He and Bertie Vidgen and Scott A. Hale},
+      year={2024},
+      eprint={2404.16019},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2404.16019}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 import os
 import sys
 from pathlib import Path

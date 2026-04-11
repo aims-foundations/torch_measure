@@ -11,6 +11,27 @@ machiavelli, tensor_trust, etc.). Loads JSONL files from raw/bells_datasets/
 and/or raw/BELLS/ repo. Counts traces per dataset, summarizes labels.
 """
 
+INFO = {
+    'description': 'Download and process BELLS benchmark data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.01364',
+    'data_source_url': 'https://github.com/CentreSecuriteIA/BELLS',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{dorn2024bellsframeworkfutureproof,
+      title={BELLS: A Framework Towards Future Proof Benchmarks for the Evaluation of LLM Safeguards}, 
+      author={Diego Dorn and Alexandre Variengien and Charbel-Raphaël Segerie and Vincent Corruble},
+      year={2024},
+      eprint={2406.01364},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2406.01364}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 import json
 import os

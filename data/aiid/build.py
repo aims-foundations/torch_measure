@@ -16,6 +16,27 @@ Output:
   - classifications_summary.csv: CSET taxonomy summary
 """
 
+INFO = {
+    'description': 'Download and process AI Incident Database (AIID)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2011.08512',
+    'data_source_url': 'https://incidentdatabase.ai/research/snapshots/',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-SA-4.0',
+    'citation': """@misc{mcgregor2020preventingrepeatedrealworld,
+      title={Preventing Repeated Real World AI Failures by Cataloging Incidents: The AI Incident Database}, 
+      author={Sean McGregor},
+      year={2020},
+      eprint={2011.08512},
+      archivePrefix={arXiv},
+      primaryClass={cs.CY},
+      url={https://arxiv.org/abs/2011.08512}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 import ast
 import json

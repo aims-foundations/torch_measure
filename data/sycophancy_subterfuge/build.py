@@ -18,6 +18,27 @@ Expected structure:
     - reward_tampering.jsonl.gz
 """
 
+INFO = {
+    'description': 'Download and process Sycophancy to Subterfuge dataset',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.10162',
+    'data_source_url': 'https://github.com/anthropics/sycophancy-to-subterfuge-paper',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{denison2024sycophancysubterfugeinvestigatingrewardtampering,
+      title={Sycophancy to Subterfuge: Investigating Reward-Tampering in Large Language Models}, 
+      author={Carson Denison and Monte MacDiarmid and Fazl Barez and David Duvenaud and Shauna Kravec and Samuel Marks and Nicholas Schiefer and Ryan Soklaski and Alex Tamkin and Jared Kaplan and Buck Shlegeris and Samuel R. Bowman and Ethan Perez and Evan Hubinger},
+      year={2024},
+      eprint={2406.10162},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2406.10162}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import gzip
 import json
 import os

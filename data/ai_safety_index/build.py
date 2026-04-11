@@ -17,6 +17,19 @@ Output:
   - response_matrix_normalized.csv: company x domain -> GPA / 4.3 (normalized to [0, 1])
 """
 
+INFO = {
+    'description': '- Download and build AI Safety Index response matrix',
+    'testing_condition': """Subjects are AI companies (not models) and items are 6 policy domains scored by expert evaluators. Cells are aggregate scores from the Future of Life Institute's AI Safety Index report.""",
+    'paper_url': 'https://futureoflife.org/document/fli-ai-safety-index-2024/',
+    'data_source_url': 'https://futureoflife.org/ai-safety-index-winter-2025/',
+    'subject_type': 'company',
+    'item_type': 'policy_domain',
+    'license': 'unknown',
+    'citation': '@misc{fli2024aisafetyindex,\n  title={AI Safety Index},\n  year={2024},\n  howpublished={\\url{https://futureoflife.org/document/fli-ai-safety-index-2024/}},\n}',
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 import urllib.request
 from pathlib import Path

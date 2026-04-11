@@ -24,6 +24,27 @@ Outputs:
   - model_summary.csv: Per-model aggregate statistics
 """
 
+INFO = {
+    'description': 'Build AlpacaEval 2.0 response matrices from per-model per-item annotations',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2404.04475',
+    'data_source_url': 'https://github.com/tatsu-lab/alpaca_eval',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{dubois2025lengthcontrolledalpacaevalsimpleway,
+      title={Length-Controlled AlpacaEval: A Simple Way to Debias Automatic Evaluators}, 
+      author={Yann Dubois and Balázs Galambosi and Percy Liang and Tatsunori B. Hashimoto},
+      year={2025},
+      eprint={2404.04475},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2404.04475}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 from pathlib import Path
 import os
 import json

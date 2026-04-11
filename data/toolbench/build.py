@@ -34,6 +34,27 @@ Note on data availability:
   aggregate success rates (not per-item), so it is stored separately.
 """
 
+INFO = {
+    'description': """Build ToolBench response matrices from publicly available per-item evaluation data""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2307.16789',
+    'data_source_url': 'https://github.com/OpenBMB/ToolBench',
+    'subject_type': 'agent',
+    'item_type': 'api_call_task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{qin2023toolllmfacilitatinglargelanguage,
+      title={ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs}, 
+      author={Yujia Qin and Shihao Liang and Yining Ye and Kunlun Zhu and Lan Yan and Yaxi Lu and Yankai Lin and Xin Cong and Xiangru Tang and Bill Qian and Sihan Zhao and Lauren Hong and Runchu Tian and Ruobing Xie and Jie Zhou and Mark Gerstein and Dahai Li and Zhiyuan Liu and Maosong Sun},
+      year={2023},
+      eprint={2307.16789},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2307.16789}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 from pathlib import Path
 import os
 import sys

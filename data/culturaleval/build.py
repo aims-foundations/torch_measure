@@ -39,6 +39,27 @@ Notes:
   - No trust_remote_code is used.
 """
 
+INFO = {
+    'description': """Build task metadata, item content, and response matrices for cultural eval benchmarks""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2410.02677',
+    'data_source_url': 'https://huggingface.co/datasets/kellycyy/CulturalBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{chiu2025culturalbenchrobustdiversechallenging,
+      title={CulturalBench: A Robust, Diverse, and Challenging Cultural Benchmark by Human-AI CulturalTeaming}, 
+      author={Yu Ying Chiu and Liwei Jiang and Bill Yuchen Lin and Chan Young Park and Shuyue Stella Li and Sahithya Ravi and Mehar Bhatia and Maria Antoniak and Yulia Tsvetkov and Vered Shwartz and Yejin Choi},
+      year={2025},
+      eprint={2410.02677},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2410.02677}, 
+}""",
+    'tags': ['multilingual'],
+}
+
+
 import json
 import os
 import sys

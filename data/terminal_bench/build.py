@@ -21,6 +21,19 @@ Outputs (all under processed/):
   - item_content.csv              (task_id, description)
 """
 
+INFO = {
+    'description': 'Build the Terminal-Bench response matrix end-to-end',
+    'testing_condition': """Cells in response_matrix.csv are resolution rates across multiple agent trials on each task, not single pass/fail outcomes — so continuous [0, 1] values are expected. The binary variant (`response_matrix_binary.csv`) uses majority voting across trials.""",
+    'paper_url': '',
+    'data_source_url': 'https://huggingface.co/datasets/ia03/terminal-bench',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': '@misc{terminal_bench,\n  title={Terminal Bench},\n  howpublished={\\url{https://huggingface.co/datasets/ia03/terminal-bench}},\n}',
+    'tags': ['agent'],
+}
+
+
 import sys
 import ast
 import json
@@ -286,11 +299,11 @@ def build_response_matrix():
     response_wide.to_json(OUT_DIR / "binary_response_matrix.json", orient="index")
     print(f"Saved binary_response_matrix.json ({response_wide.shape})")
 
-    # ---- Majority-vote binary matrix ----
+    # ---- Majority-vote binary matrix (cell = 1 if resolution_rate >= 0.5) ----
     print("\n=== Building Majority-Vote Binary Matrix ===")
     binary_matrix = (rate_matrix >= 0.5).astype(int)
-    binary_matrix.to_csv(OUT_DIR / "binary_majority_matrix.csv")
-    print(f"Saved binary_majority_matrix.csv ({binary_matrix.shape})")
+    binary_matrix.to_csv(OUT_DIR / "response_matrix_binary.csv")
+    print(f"Saved response_matrix_binary.csv ({binary_matrix.shape})")
 
     # ---- Trials count matrix ----
     print("\n=== Building Trials Count Matrix ===")

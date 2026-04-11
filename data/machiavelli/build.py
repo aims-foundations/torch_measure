@@ -15,6 +15,27 @@ Expected structure:
   - machiavelli/agent/ — agent configs including game2beta.json
 """
 
+INFO = {
+    'description': 'Download and process Machiavelli Benchmark dataset',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2304.03279',
+    'data_source_url': 'https://github.com/aypan17/machiavelli',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{pan2023rewardsjustifymeansmeasuring,
+      title={Do the Rewards Justify the Means? Measuring Trade-Offs Between Rewards and Ethical Behavior in the MACHIAVELLI Benchmark}, 
+      author={Alexander Pan and Jun Shern Chan and Andy Zou and Nathaniel Li and Steven Basart and Thomas Woodside and Jonathan Ng and Hanlin Zhang and Scott Emmons and Dan Hendrycks},
+      year={2023},
+      eprint={2304.03279},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2304.03279}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import json
 import os
 import subprocess

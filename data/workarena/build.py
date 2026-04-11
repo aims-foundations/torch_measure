@@ -32,6 +32,27 @@ Note on per-item data availability:
   functional evaluation results for 4 agents on a subset of WorkArena tasks.
 """
 
+INFO = {
+    'description': """Build WorkArena / WorkArena++ response matrices from multiple public data sources""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2403.07718',
+    'data_source_url': 'https://github.com/ServiceNow/WorkArena',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{drouin2024workarenacapablewebagents,
+      title={WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?}, 
+      author={Alexandre Drouin and Maxime Gasse and Massimo Caccia and Issam H. Laradji and Manuel Del Verme and Tom Marty and Léo Boisvert and Megh Thakkar and Quentin Cappart and David Vazquez and Nicolas Chapados and Alexandre Lacoste},
+      year={2024},
+      eprint={2403.07718},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2403.07718}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import os
 import json
 import sys

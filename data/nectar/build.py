@@ -22,6 +22,27 @@ Outputs:
   - processed/response_matrix.csv: Models (rows) x prompts (columns), normalized scores [0,1]
 """
 
+INFO = {
+    'description': 'Build Nectar response matrix from GPT-4 ranking data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2404.10719',
+    'data_source_url': 'https://huggingface.co/datasets/berkeley-nest/Nectar',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{xu2024dposuperiorppollm,
+      title={Is DPO Superior to PPO for LLM Alignment? A Comprehensive Study}, 
+      author={Shusheng Xu and Wei Fu and Jiaxuan Gao and Wenjie Ye and Weilin Liu and Zhiyu Mei and Guangju Wang and Chao Yu and Yi Wu},
+      year={2024},
+      eprint={2404.10719},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2404.10719}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 from pathlib import Path
 import os
 import sys

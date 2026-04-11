@@ -35,6 +35,27 @@ Outputs:
   - agent_metadata.csv: Per-agent summary and metadata
 """
 
+INFO = {
+    'description': 'Build BrowserGym response matrices from the official BrowserGym leaderboard data',
+    'testing_condition': """Cells are aggregate success rates across 8 web-agent sub-benchmarks (18 agents × 8 benchmarks). Use for model-level comparison only.""",
+    'paper_url': 'https://arxiv.org/abs/2412.05467',
+    'data_source_url': 'https://huggingface.co/spaces/ServiceNow/browsergym-leaderboard',
+    'subject_type': 'agent',
+    'item_type': 'sub_benchmark',
+    'license': 'Apache-2.0',
+    'citation': """@misc{dechezelles2025browsergymecosystemwebagent,
+      title={The BrowserGym Ecosystem for Web Agent Research}, 
+      author={Thibault Le Sellier De Chezelles and Maxime Gasse and Alexandre Drouin and Massimo Caccia and Léo Boisvert and Megh Thakkar and Tom Marty and Rim Assouel and Sahar Omidi Shayegan and Lawrence Keunho Jang and Xing Han Lù and Ori Yoran and Dehan Kong and Frank F. Xu and Siva Reddy and Quentin Cappart and Graham Neubig and Ruslan Salakhutdinov and Nicolas Chapados and Alexandre Lacoste},
+      year={2025},
+      eprint={2412.05467},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2412.05467}, 
+}""",
+    'tags': ['aggregate-only'],
+}
+
+
 from pathlib import Path
 import os
 import sys

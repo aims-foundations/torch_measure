@@ -18,6 +18,27 @@ Outputs:
   - processed/item_content.csv: Per-item metadata
 """
 
+INFO = {
+    'description': 'Build MathVista_MINI response matrix from VLMEval/OpenVLMRecords',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2310.02255',
+    'data_source_url': 'https://huggingface.co/datasets/AI4Math/MathVista',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-SA-4.0',
+    'citation': """@misc{lu2024mathvistaevaluatingmathematicalreasoning,
+      title={MathVista: Evaluating Mathematical Reasoning of Foundation Models in Visual Contexts}, 
+      author={Pan Lu and Hritik Bansal and Tony Xia and Jiacheng Liu and Chunyuan Li and Hannaneh Hajishirzi and Hao Cheng and Kai-Wei Chang and Michel Galley and Jianfeng Gao},
+      year={2024},
+      eprint={2310.02255},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2310.02255}, 
+}""",
+    'tags': ['vision-language'],
+}
+
+
 from pathlib import Path
 import os
 import re

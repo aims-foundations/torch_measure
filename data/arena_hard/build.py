@@ -17,6 +17,27 @@ Outputs:
   - processed/response_matrix.csv: Models (rows) x prompts (columns), scores 0-1
 """
 
+INFO = {
+    'description': 'Build Arena-Hard-Auto response matrix from GPT-4 judgment files',
+    'testing_condition': """Cells are 5-level GPT-4 judgments vs a fixed baseline (GPT-4-0314) mapped to [0, 1]: A>>B→1.0, A>B→0.75, tie→0.5, B>A→0.25, B>>A→0.0. Not independent model responses.""",
+    'paper_url': 'https://arxiv.org/abs/2406.11939',
+    'data_source_url': 'https://huggingface.co/spaces/lmarena-ai/arena-hard-auto',
+    'subject_type': 'model',
+    'item_type': 'prompt',
+    'license': 'Apache-2.0',
+    'citation': """@misc{li2024crowdsourceddatahighqualitybenchmarks,
+      title={From Crowdsourced Data to High-Quality Benchmarks: Arena-Hard and BenchBuilder Pipeline}, 
+      author={Tianle Li and Wei-Lin Chiang and Evan Frick and Lisa Dunlap and Tianhao Wu and Banghua Zhu and Joseph E. Gonzalez and Ion Stoica},
+      year={2024},
+      eprint={2406.11939},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2406.11939}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 from pathlib import Path
 import os
 import json

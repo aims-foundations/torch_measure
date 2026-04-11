@@ -22,6 +22,27 @@ across different API versions (0301/0314 vs 0613) to measure performance drift.
 Saves outputs to processed/.
 """
 
+INFO = {
+    'description': 'Download and process ChatGPT/LLM Drift evaluation data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2307.09009',
+    'data_source_url': 'https://github.com/lchen001/LLMDrift',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{chen2023chatgptsbehaviorchangingtime,
+      title={How is ChatGPT's behavior changing over time?}, 
+      author={Lingjiao Chen and Matei Zaharia and James Zou},
+      year={2023},
+      eprint={2307.09009},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2307.09009}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import sys
 import re
 import subprocess

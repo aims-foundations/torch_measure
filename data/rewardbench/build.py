@@ -28,6 +28,27 @@ Outputs:
   - processed/model_summary.csv: Per-model aggregate statistics
 """
 
+INFO = {
+    'description': 'Build RewardBench response matrices from per-model per-item evaluation scores',
+    'testing_condition': """Subjects are reward models (not LLMs). Items are chosen/rejected response pairs; cells are 1 if the reward model prefers the chosen response.""",
+    'paper_url': 'https://arxiv.org/abs/2403.13787',
+    'data_source_url': 'https://huggingface.co/datasets/allenai/reward-bench',
+    'subject_type': 'reward_model',
+    'item_type': 'response_pair',
+    'license': 'ODC-BY',
+    'citation': """@misc{lambert2024rewardbenchevaluatingrewardmodels,
+      title={RewardBench: Evaluating Reward Models for Language Modeling}, 
+      author={Nathan Lambert and Valentina Pyatkin and Jacob Morrison and LJ Miranda and Bill Yuchen Lin and Khyathi Chandu and Nouha Dziri and Sachin Kumar and Tom Zick and Yejin Choi and Noah A. Smith and Hannaneh Hajishirzi},
+      year={2024},
+      eprint={2403.13787},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2403.13787}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 from pathlib import Path
 import json
 import os

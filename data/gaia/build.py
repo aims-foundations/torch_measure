@@ -36,6 +36,27 @@ Notes:
     gaia-benchmark/submissions_public dataset is required.
 """
 
+INFO = {
+    'description': 'Build GAIA (General AI Assistants) response matrices from multiple data sources',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2311.12983',
+    'data_source_url': 'https://huggingface.co/datasets/gaia-benchmark/submissions_public',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{mialon2023gaiabenchmarkgeneralai,
+      title={GAIA: a benchmark for General AI Assistants}, 
+      author={Grégoire Mialon and Clémentine Fourrier and Craig Swift and Thomas Wolf and Yann LeCun and Thomas Scialom},
+      year={2023},
+      eprint={2311.12983},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2311.12983}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 import json
 import os
 import re

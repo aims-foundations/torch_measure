@@ -17,6 +17,27 @@ Loads CSV exports from raw/ and builds:
 Saves outputs to processed/.
 """
 
+INFO = {
+    'description': '- Download and process MIT AI Risk Repository data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2408.12622',
+    'data_source_url': 'https://airisk.mit.edu/',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{slattery2025airiskrepositorycomprehensive,
+      title={The AI Risk Repository: A Comprehensive Meta-Review, Database, and Taxonomy of Risks From Artificial Intelligence}, 
+      author={Peter Slattery and Alexander K. Saeri and Emily A. C. Grundy and Jess Graham and Michael Noetel and Risto Uuk and James Dao and Soroush Pour and Stephen Casper and Neil Thompson},
+      year={2025},
+      eprint={2408.12622},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2408.12622}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 import json
 import subprocess

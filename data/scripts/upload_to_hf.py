@@ -79,10 +79,47 @@ def _load_subject_metadata(processed_dir: Path) -> dict[str, dict] | None:
     }
 
 
+def _load_info(benchmark_dir: Path) -> dict | None:
+    """Extract dataset-level metadata from the benchmark's build.py.
+
+    Looks for a module-level ``INFO = {...}`` assignment and returns its
+    literal value via :func:`ast.literal_eval`.  This avoids importing
+    build.py (which would require the full set of per-benchmark
+    dependencies to be installed).  Returns ``None`` if no INFO is found.
+    """
+    import ast
+
+    build_py = benchmark_dir / "build.py"
+    if not build_py.exists():
+        return None
+    try:
+        tree = ast.parse(build_py.read_text(encoding="utf-8"))
+    except (SyntaxError, UnicodeDecodeError) as e:
+        print(f"  WARNING: failed to parse {build_py}: {e}")
+        return None
+
+    for node in tree.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        if len(node.targets) != 1 or not isinstance(node.targets[0], ast.Name):
+            continue
+        if node.targets[0].id != "INFO":
+            continue
+        try:
+            data = ast.literal_eval(node.value)
+        except (ValueError, SyntaxError) as e:
+            print(f"  WARNING: INFO in {build_py} is not a literal: {e}")
+            return None
+        return data if isinstance(data, dict) else None
+
+    return None
+
+
 def _csv_to_payload(
     csv_path: Path,
     item_content: dict[str, str],
     subject_metadata: dict[str, dict] | None,
+    info: dict | None,
 ) -> dict | None:
     """Convert a response_matrix*.csv to a .pt payload dict."""
     df = pd.read_csv(csv_path, index_col=0)
@@ -116,6 +153,7 @@ def _csv_to_payload(
         "item_ids": item_ids,
         "item_contents": item_contents,
         "subject_metadata": payload_metadata,
+        "info": info,
     }
 
 
@@ -156,9 +194,13 @@ def convert_benchmark(benchmark_dir: Path) -> list[Path]:
         n_cols = len(next(iter(subject_metadata.values())))
         print(f"  Loaded metadata for {len(subject_metadata)} subjects ({n_cols} fields)")
 
+    info = _load_info(benchmark_dir)
+    if info:
+        print(f"  Loaded INFO from build.py ({len(info)} fields)")
+
     pt_files = []
     for csv_path in csvs:
-        payload = _csv_to_payload(csv_path, item_content, subject_metadata)
+        payload = _csv_to_payload(csv_path, item_content, subject_metadata, info)
         if payload is None:
             continue
 

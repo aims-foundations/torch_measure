@@ -16,6 +16,19 @@ Loads disengagement CSVs from raw/ (general and driverless reports), builds:
 Saves outputs to processed/.
 """
 
+INFO = {
+    'description': '- Download and process CA DMV autonomous vehicle disengagement reports',
+    'testing_condition': """Subjects are autonomous vehicle manufacturers (not models) and items are road-type location categories. Cells are disengagement rates per mile as reported to the CA DMV.""",
+    'paper_url': '',
+    'data_source_url': """https://www.dmv.ca.gov/portal/vehicle-industry-services/autonomous-vehicles/disengagement-reports/""",
+    'subject_type': 'manufacturer',
+    'item_type': 'location_type',
+    'license': 'unknown',
+    'citation': '@misc{ca_dmv_disengagement,\n  title={California DMV Autonomous Vehicle Disengagement Reports},\n  howpublished={\\url{https://www.dmv.ca.gov/portal/vehicle-industry-services/autonomous-vehicles/disengagement-reports/}},\n}',
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 import json
 import subprocess

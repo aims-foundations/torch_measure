@@ -15,6 +15,19 @@ Outputs:
   - collection_summary.txt    : Human-readable summary
 """
 
+INFO = {
+    'description': 'Build task-level response matrix from La Leaderboard results',
+    'testing_condition': """Cells are aggregate scores per Latin/Iberian benchmark (69 models × 70 benchmarks). Use for model-level comparison only.""",
+    'paper_url': '',
+    'data_source_url': 'https://huggingface.co/datasets/la-leaderboard/results',
+    'subject_type': 'model',
+    'item_type': 'sub_benchmark',
+    'license': 'Apache-2.0',
+    'citation': '@misc{la_leaderboard,\n  title={Latin/Iberian LLM Leaderboard},\n  howpublished={\\url{https://huggingface.co/datasets/la-leaderboard/results}},\n}',
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 import json
 import warnings

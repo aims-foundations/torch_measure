@@ -154,6 +154,28 @@ Domain benchmarks in OpenCompass configs/datasets:
 NO agriculture benchmarks in OpenCompass as of March 2026.
 """
 
+INFO = {
+    'description': 'Download agriculture benchmark datasets and build item collections',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2404.02611',
+    'data_source_url': 'https://github.com/OneOneLiu/AgrEval',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': """@misc{sevillanogarcía2025xshieldregularizationexplainableartificial,
+      title={X-SHIELD: Regularization for eXplainable Artificial Intelligence}, 
+      author={Iván Sevillano-García and Julián Luengo and Francisco Herrera},
+      year={2025},
+      eprint={2404.02611},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      doi={https://doi.org/10.1007/s11633-025-1576-y},
+      url={https://arxiv.org/abs/2404.02611}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 import os

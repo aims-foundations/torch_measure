@@ -39,6 +39,27 @@ References:
   - HF org: https://huggingface.co/livebench
 """
 
+INFO = {
+    'description': """Build LiveBench response matrices from HuggingFace per-model per-question judgment data""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.19314',
+    'data_source_url': 'https://huggingface.co/datasets/livebench/model_judgment',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{white2025livebenchchallengingcontaminationlimitedllm,
+      title={LiveBench: A Challenging, Contamination-Limited LLM Benchmark}, 
+      author={Colin White and Samuel Dooley and Manley Roberts and Arka Pal and Ben Feuer and Siddhartha Jain and Ravid Shwartz-Ziv and Neel Jain and Khalid Saifullah and Sreemanti Dey and Shubh-Agrawal and Sandeep Singh Sandha and Siddartha Naidu and Chinmay Hegde and Yann LeCun and Tom Goldstein and Willie Neiswanger and Micah Goldblum},
+      year={2025},
+      eprint={2406.19314},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.19314}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 from pathlib import Path
 import os
 import sys

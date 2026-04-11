@@ -12,6 +12,19 @@ Outputs:
   - item_content.csv    : item_id, Japanese question text
 """
 
+INFO = {
+    'description': 'Build response matrix for Rakuda benchmark (Japanese open-ended QA)',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://github.com/shisa-ai/shaberi',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-SA-4.0',
+    'citation': '@misc{rakuda,\n  title={Rakuda},\n  howpublished={\\url{https://github.com/shisa-ai/shaberi}},\n}',
+    'tags': ['multilingual'],
+}
+
+
 import sys
 import json
 import subprocess

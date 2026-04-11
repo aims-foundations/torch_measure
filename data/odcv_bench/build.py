@@ -13,6 +13,19 @@ Expected structure:
   - incentivized_scenarios/ and mandated_scenarios/ — scenario definitions
 """
 
+INFO = {
+    'description': 'Download and process ODCV-Bench dataset',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://github.com/McGill-DMaS/ODCV-Bench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{odcv_bench,\n  title={Odcv Bench},\n  howpublished={\\url{https://github.com/McGill-DMaS/ODCV-Bench}},\n}',
+    'tags': ['pending'],
+}
+
+
 import json
 import os
 import subprocess

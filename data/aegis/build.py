@@ -16,6 +16,27 @@ Builds:
 Saves outputs to processed/.
 """
 
+INFO = {
+    'description': 'Download and process NVIDIA AEGIS AI Safety dataset',
+    'testing_condition': """Subjects are human-written prompts (not models) and items are the 13 NVIDIA AEGIS hazard categories. A cell is 1 if human annotators labeled the prompt as belonging to that hazard category. The `_unsafe_only` variant restricts to prompts labeled unsafe. Use this dataset for item analysis of the hazard taxonomy itself, not to benchmark model safety.""",
+    'paper_url': 'https://arxiv.org/abs/2501.09004',
+    'data_source_url': 'https://huggingface.co/datasets/nvidia/Aegis-AI-Content-Safety-Dataset-2.0',
+    'subject_type': 'prompt',
+    'item_type': 'hazard_category',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{ghosh2025aegis20diverseaisafety,
+      title={Aegis2.0: A Diverse AI Safety Dataset and Risks Taxonomy for Alignment of LLM Guardrails}, 
+      author={Shaona Ghosh and Prasoon Varshney and Makesh Narsimhan Sreedhar and Aishwarya Padmakumar and Traian Rebedea and Jibin Rajan Varghese and Christopher Parisien},
+      year={2025},
+      eprint={2501.09004},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2501.09004}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import sys
 from pathlib import Path
 

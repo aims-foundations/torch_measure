@@ -27,6 +27,27 @@ defense strength. The dataset name is kept for consistency with the
 challenge.
 """
 
+INFO = {
+    'description': 'Build LLMail-Inject response matrix',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2506.09956',
+    'data_source_url': 'https://huggingface.co/datasets/microsoft/llmail-inject-challenge',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{abdelnabi2025llmailinjectdatasetrealisticadaptive,
+      title={LLMail-Inject: A Dataset from a Realistic Adaptive Prompt Injection Challenge}, 
+      author={Sahar Abdelnabi and Aideen Fay and Ahmed Salem and Egor Zverev and Kai-Chieh Liao and Chi-Huang Liu and Chun-Chih Kuo and Jannis Weigend and Danyael Manlangit and Alex Apostolov and Haris Umair and João Donato and Masayuki Kawakita and Athar Mahboob and Tran Huu Bach and Tsun-Han Chiang and Myeongjin Cho and Hajin Choi and Byeonghyeon Kim and Hyeonjin Lee and Benjamin Pannell and Conor McCauley and Mark Russinovich and Andrew Paverd and Giovanni Cherubin},
+      year={2025},
+      eprint={2506.09956},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2506.09956}, 
+}""",
+    'tags': ['safety'],
+}
+
+
 import json
 import os
 import sys

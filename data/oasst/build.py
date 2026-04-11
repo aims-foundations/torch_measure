@@ -24,6 +24,27 @@ Outputs:
   - processed/prompt_metadata.csv: Per-prompt metadata (language, n_alternatives, tree_id)
 """
 
+INFO = {
+    'description': 'Build OpenAssistant OASST1 response matrix from human-ranked conversation data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2304.07327',
+    'data_source_url': 'https://huggingface.co/datasets/OpenAssistant/oasst1',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{köpf2023openassistantconversationsdemocratizing,
+      title={OpenAssistant Conversations -- Democratizing Large Language Model Alignment}, 
+      author={Andreas Köpf and Yannic Kilcher and Dimitri von Rütte and Sotiris Anagnostidis and Zhi-Rui Tam and Keith Stevens and Abdullah Barhoum and Nguyen Minh Duc and Oliver Stanley and Richárd Nagyfi and Shahul ES and Sameer Suri and David Glushkov and Arnav Dantuluri and Andrew Maguire and Christoph Schuhmann and Huu Nguyen and Alexander Mattick},
+      year={2023},
+      eprint={2304.07327},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2304.07327}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 from pathlib import Path
 import os
 import sys

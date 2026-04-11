@@ -24,6 +24,28 @@ Outputs per (year, language_pair):
   - system_summary.csv: Per-system aggregate statistics
 """
 
+INFO = {
+    'description': """Build WMT MQM response matrices from expert human translation quality evaluations""",
+    'testing_condition': """Subjects are MT systems and items are source segments. Values are MQM quality scores normalized to [0, 1] (higher = better), averaged across human raters per (system, segment) pair.""",
+    'paper_url': 'https://arxiv.org/abs/2104.14478',
+    'data_source_url': 'https://github.com/google/wmt-mqm-human-evaluation',
+    'subject_type': 'mt_system',
+    'item_type': 'source_segment',
+    'license': 'Apache-2.0',
+    'citation': """@misc{freitag2021expertserrorscontextlargescale,
+      title={Experts, Errors, and Context: A Large-Scale Study of Human Evaluation for Machine Translation}, 
+      author={Markus Freitag and George Foster and David Grangier and Viresh Ratnakar and Qijun Tan and Wolfgang Macherey},
+      year={2021},
+      eprint={2104.14478},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      doi={https://doi.org/10.1162/tacl_a_00437},
+      url={https://arxiv.org/abs/2104.14478}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 from pathlib import Path
 import hashlib
 import os

@@ -23,6 +23,19 @@ Output:
   - response_matrix_exam_{condition}.csv: student x problem -> score (Part 3, post-treatment exam)
 """
 
+INFO = {
+    'description': 'Download and build intervention matrices from GenAICanHarmLearning',
+    'testing_condition': """Subjects are students (not models) and items are learning tasks. Cells measure student performance under AI-assistance conditions.""",
+    'paper_url': '',
+    'data_source_url': 'https://github.com/obastani/GenAICanHarmLearning',
+    'subject_type': 'student',
+    'item_type': 'learning_task',
+    'license': 'unknown',
+    'citation': '@misc{genai_learning,\n  title={Genai Learning},\n  howpublished={\\url{https://github.com/obastani/GenAICanHarmLearning}},\n}',
+    'tags': ['intervention'],
+}
+
+
 import sys
 import subprocess
 from pathlib import Path

@@ -19,6 +19,27 @@ Outputs:
   - model_summary.csv: Per-model statistics across all variants
 """
 
+INFO = {
+    'description': 'Build BigCodeBench response matrices from HuggingFace per-model per-task data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.15877',
+    'data_source_url': 'https://huggingface.co/datasets/bigcode/bigcodebench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{zhuo2025bigcodebenchbenchmarkingcodegeneration,
+      title={BigCodeBench: Benchmarking Code Generation with Diverse Function Calls and Complex Instructions}, 
+      author={Terry Yue Zhuo and Minh Chien Vu and Jenny Chim and Han Hu and Wenhao Yu and Ratnadira Widyasari and Imam Nur Bani Yusuf and Haolan Zhan and Junda He and Indraneil Paul and Simon Brunner and Chen Gong and Thong Hoang and Armel Randy Zebaze and Xiaoheng Hong and Wen-Ding Li and Jean Kaddour and Ming Xu and Zhihan Zhang and Prateek Yadav and Naman Jain and Alex Gu and Zhoujun Cheng and Jiawei Liu and Qian Liu and Zijian Wang and Binyuan Hui and Niklas Muennighoff and David Lo and Daniel Fried and Xiaoning Du and Harm de Vries and Leandro Von Werra},
+      year={2025},
+      eprint={2406.15877},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2406.15877}, 
+}""",
+    'tags': ['coding'],
+}
+
+
 import sys
 from pathlib import Path
 import os

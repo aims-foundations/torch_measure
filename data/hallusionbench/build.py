@@ -16,6 +16,27 @@ Outputs:
   - processed/item_content.csv: Per-item metadata
 """
 
+INFO = {
+    'description': 'Build HallusionBench response matrix from VLMEval/OpenVLMRecords',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2310.14566',
+    'data_source_url': 'https://github.com/tianyi-lab/HallusionBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'BSD-3-Clause',
+    'citation': """@misc{guan2024hallusionbenchadvanceddiagnosticsuite,
+      title={HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models}, 
+      author={Tianrui Guan and Fuxiao Liu and Xiyang Wu and Ruiqi Xian and Zongxia Li and Xiaoyu Liu and Xijun Wang and Lichang Chen and Furong Huang and Yaser Yacoob and Dinesh Manocha and Tianyi Zhou},
+      year={2024},
+      eprint={2310.14566},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2310.14566}, 
+}""",
+    'tags': ['vision-language'],
+}
+
+
 from pathlib import Path
 import os
 import re

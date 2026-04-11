@@ -12,6 +12,19 @@ Outputs:
   - item_content.csv    : item_id, Japanese task text
 """
 
+INFO = {
+    'description': 'Build response matrix for Tengu-Bench (Japanese multi-category evaluation)',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://github.com/shisa-ai/shaberi',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': '@misc{tengu,\n  title={Tengu},\n  howpublished={\\url{https://github.com/shisa-ai/shaberi}},\n}',
+    'tags': ['multilingual'],
+}
+
+
 import sys
 import json
 import subprocess

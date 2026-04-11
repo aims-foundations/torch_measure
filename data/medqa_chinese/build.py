@@ -22,6 +22,27 @@ Outputs:
   - processed/item_content.csv: Full item content with all options
 """
 
+INFO = {
+    'description': 'Build MedQA Chinese item metadata from Chinese medical licensing exam',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2009.13081',
+    'data_source_url': 'https://huggingface.co/datasets/bigbio/med_qa',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{jin2020diseasedoespatienthave,
+      title={What Disease does this Patient Have? A Large-scale Open Domain Question Answering Dataset from Medical Exams}, 
+      author={Di Jin and Eileen Pan and Nassim Oufattole and Wei-Hung Weng and Hanyi Fang and Peter Szolovits},
+      year={2020},
+      eprint={2009.13081},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2009.13081}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import csv
 import json
 import os

@@ -123,6 +123,19 @@ Additional outputs (in processed/):
   - alignment_report.json  : alignment statistics
 """
 
+INFO = {
+    'description': """Build task metadata, item content CSVs, and response matrices for Southeast Asian and South Asian NLP benchmarks""",
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://huggingface.co/datasets/thonyyy/nusax_sentiment',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{asiaeval,\n  title={Asiaeval},\n  howpublished={\\url{https://huggingface.co/datasets/thonyyy/nusax_sentiment}},\n}',
+    'tags': ['pending'],
+}
+
+
 import os
 import sys
 import json

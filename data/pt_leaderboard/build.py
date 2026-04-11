@@ -22,6 +22,27 @@ Outputs:
   - collection_summary.txt    : Human-readable summary
 """
 
+INFO = {
+    'description': 'Build task-level response matrix from Portuguese LLM Leaderboard results',
+    'testing_condition': """Cells are aggregate scores per Portuguese benchmark (1148 models × 10 benchmarks). Use for model-level comparison only.""",
+    'paper_url': 'https://arxiv.org/abs/2406.00371',
+    'data_source_url': 'https://huggingface.co/datasets/eduagarcia-temp/llm_pt_leaderboard_raw_results',
+    'subject_type': 'model',
+    'item_type': 'sub_benchmark',
+    'license': 'Apache-2.0',
+    'citation': """@misc{hiraki2024alternativemethodsshapderived,
+      title={Alternative Methods to SHAP Derived from Properties of Kernels: A Note on Theoretical Analysis}, 
+      author={Kazuhiro Hiraki and Shinichi Ishihara and Junnosuke Shino},
+      year={2024},
+      eprint={2406.00371},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2406.00371}, 
+}""",
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 import json
 import warnings

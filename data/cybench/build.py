@@ -29,6 +29,27 @@ Requirements:
   pip install pdfplumber
 """
 
+INFO = {
+    'description': 'Build response matrix for Cybench (cybersecurity CTF agent benchmark)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2408.08926',
+    'data_source_url': 'https://github.com/andyzorigin/cybench',
+    'subject_type': 'agent',
+    'item_type': 'ctf_challenge',
+    'license': 'Apache-2.0',
+    'citation': """@misc{zhang2025cybenchframeworkevaluatingcybersecurity,
+      title={Cybench: A Framework for Evaluating Cybersecurity Capabilities and Risks of Language Models}, 
+      author={Andy K. Zhang and Neil Perry and Riya Dulepet and Joey Ji and Celeste Menders and Justin W. Lin and Eliot Jones and Gashon Hussein and Samantha Liu and Donovan Jasper and Pura Peetathawatchai and Ari Glenn and Vikram Sivashankar and Daniel Zamoshchin and Leo Glikbarg and Derek Askaryar and Mike Yang and Teddy Zhang and Rishi Alluri and Nathan Tran and Rinnara Sangpisit and Polycarpos Yiorkadjis and Kenny Osele and Gautham Raghupathi and Dan Boneh and Daniel E. Ho and Percy Liang},
+      year={2025},
+      eprint={2408.08926},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2408.08926}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import csv
 import json
 import os

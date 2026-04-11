@@ -24,6 +24,27 @@ Outputs:
   - judge_summary.csv: Per-judge aggregate statistics and metadata
 """
 
+INFO = {
+    'description': 'Build RewardBench 2 response matrices from per-judge per-item evaluation results',
+    'testing_condition': """Subjects are reward models (not LLMs). Items are response pairs from the updated benchmark; cells are 1 if the reward model picks the intended response.""",
+    'paper_url': 'https://arxiv.org/abs/2506.01937',
+    'data_source_url': 'https://huggingface.co/datasets/allenai/reward-bench-2',
+    'subject_type': 'reward_model',
+    'item_type': 'response_pair',
+    'license': 'ODC-BY',
+    'citation': """@misc{malik2025rewardbench2advancingreward,
+      title={RewardBench 2: Advancing Reward Model Evaluation}, 
+      author={Saumya Malik and Valentina Pyatkin and Sander Land and Jacob Morrison and Noah A. Smith and Hannaneh Hajishirzi and Nathan Lambert},
+      year={2025},
+      eprint={2506.01937},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2506.01937}, 
+}""",
+    'tags': ['reward-model'],
+}
+
+
 from pathlib import Path
 import json
 import os

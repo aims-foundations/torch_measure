@@ -148,12 +148,14 @@ def _load_response_matrix(payload: dict | torch.Tensor, filename: str) -> Respon
         item_ids = payload.get("item_ids")
         item_contents = payload.get("item_contents")
         subject_metadata = payload.get("subject_metadata")
+        info = payload.get("info")
     elif isinstance(payload, torch.Tensor):
         data = payload
         subject_ids = None
         item_ids = None
         item_contents = None
         subject_metadata = None
+        info = None
     else:
         raise TypeError(f"Unexpected payload type in {filename}: {type(payload)}")
 
@@ -163,6 +165,7 @@ def _load_response_matrix(payload: dict | torch.Tensor, filename: str) -> Respon
         item_ids=item_ids,
         item_contents=item_contents,
         subject_metadata=subject_metadata,
+        info=info,
     )
 
 

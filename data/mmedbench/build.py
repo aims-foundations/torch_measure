@@ -23,6 +23,27 @@ Outputs:
   - processed/item_content.csv: Full item content with options
 """
 
+INFO = {
+    'description': 'Build MMedBench item metadata from Multilingual Medical Benchmark',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2402.13963',
+    'data_source_url': 'https://huggingface.co/datasets/Henrychur/MMedBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{qiu2024buildingmultilinguallanguagemodel,
+      title={Towards Building Multilingual Language Model for Medicine}, 
+      author={Pengcheng Qiu and Chaoyi Wu and Xiaoman Zhang and Weixiong Lin and Haicheng Wang and Ya Zhang and Yanfeng Wang and Weidi Xie},
+      year={2024},
+      eprint={2402.13963},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2402.13963}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import csv
 import json
 import os

@@ -22,6 +22,27 @@ Outputs:
   - collection_summary.txt    : Human-readable summary
 """
 
+INFO = {
+    'description': 'Build task-level response matrix from Open Ko-LLM Leaderboard results',
+    'testing_condition': """Cells are aggregate scores per Korean evaluation benchmark (1159 models × 9 benchmarks). Use for model-level comparison only.""",
+    'paper_url': 'https://arxiv.org/abs/2405.20574',
+    'data_source_url': 'https://huggingface.co/datasets/open-ko-llm-leaderboard/results',
+    'subject_type': 'model',
+    'item_type': 'sub_benchmark',
+    'license': 'unknown',
+    'citation': """@misc{park2024openkollmleaderboardevaluating,
+      title={Open Ko-LLM Leaderboard: Evaluating Large Language Models in Korean with Ko-H5 Benchmark}, 
+      author={Chanjun Park and Hyeonwoo Kim and Dahyun Kim and Seonghwan Cho and Sanghoon Kim and Sukyung Lee and Yungi Kim and Hwalsuk Lee},
+      year={2024},
+      eprint={2405.20574},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2405.20574}, 
+}""",
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 import json
 import warnings

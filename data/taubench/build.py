@@ -29,6 +29,19 @@ Outputs (all in processed/):
   summary_stats.json                  Dimensions, fill rates, model lists
 """
 
+INFO = {
+    'description': 'Build TAU-bench response matrices from multiple data sources',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.12045',
+    'data_source_url': 'https://github.com/sierra-research/tau-bench',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': '@misc{yao2024taubenchbenchmarktoolagentuserinteraction,\n      title={$\\tau$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains}, \n      author={Shunyu Yao and Noah Shinn and Pedram Razavi and Karthik Narasimhan},\n      year={2024},\n      eprint={2406.12045},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2406.12045}, \n}',
+    'tags': ['agent'],
+}
+
+
 import sys
 import json
 import os

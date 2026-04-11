@@ -5,6 +5,19 @@ Source: https://huggingface.co/datasets/AI45Research/ATBench
 Benchmark for evaluating safety of agent trajectories across diverse tasks.
 """
 
+INFO = {
+    'description': 'Download AI45Research ATBench dataset (agent trajectory safety)',
+    'testing_condition': '',
+    'paper_url': '',
+    'data_source_url': 'https://huggingface.co/datasets/AI45Research/ATBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'unknown',
+    'citation': '@misc{atbench,\n  title={Atbench},\n  howpublished={\\url{https://huggingface.co/datasets/AI45Research/ATBench}},\n}',
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 

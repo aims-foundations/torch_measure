@@ -5,6 +5,27 @@ Source: https://huggingface.co/datasets/qxcv/tensor-trust
 Large-scale dataset of prompt injection attacks from the Tensor Trust game.
 """
 
+INFO = {
+    'description': 'Download Tensor Trust dataset (~563K prompt injection attacks)',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2311.01011',
+    'data_source_url': 'https://huggingface.co/datasets/qxcv/tensor-trust',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{toyer2023tensortrustinterpretableprompt,
+      title={Tensor Trust: Interpretable Prompt Injection Attacks from an Online Game}, 
+      author={Sam Toyer and Olivia Watkins and Ethan Adrian Mendes and Justin Svegliato and Luke Bailey and Tiffany Wang and Isaac Ong and Karim Elmaaroufi and Pieter Abbeel and Trevor Darrell and Alan Ritter and Stuart Russell},
+      year={2023},
+      eprint={2311.01011},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2311.01011}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import sys
 from pathlib import Path
 

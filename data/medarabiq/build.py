@@ -22,6 +22,27 @@ Outputs:
   - processed/item_content.csv: Full item content
 """
 
+INFO = {
+    'description': 'Build MedArabiQ item metadata from Arabic Medical Tasks',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2505.03427',
+    'data_source_url': 'https://github.com/Harithaaaa/MedArabiQ',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-NC-SA-4.0',
+    'citation': """@misc{daoud2025medarabiqbenchmarkinglargelanguage,
+      title={MedArabiQ: Benchmarking Large Language Models on Arabic Medical Tasks}, 
+      author={Mouath Abu Daoud and Chaimae Abouzahir and Leen Kharouf and Walid Al-Eisawi and Nizar Habash and Farah E. Shamout},
+      year={2025},
+      eprint={2505.03427},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2505.03427}, 
+}""",
+    'tags': ['pending'],
+}
+
+
 import csv
 import os
 import subprocess

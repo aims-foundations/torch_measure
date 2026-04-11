@@ -34,6 +34,27 @@ Output files in processed/:
 All paths use Path(__file__).resolve().parent
 """
 
+INFO = {
+    'description': 'Build response matrices for legal benchmarks from per-item model predictions',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2308.09033',
+    'data_source_url': 'https://huggingface.co/datasets/opennyaiorg/InLegalNER',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'CC-BY-4.0',
+    'citation': """@misc{sammani2023uninlxunifyingtextualexplanations,
+      title={Uni-NLX: Unifying Textual Explanations for Vision and Vision-Language Tasks}, 
+      author={Fawaz Sammani and Nikos Deligiannis},
+      year={2023},
+      eprint={2308.09033},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2308.09033}, 
+}""",
+    'tags': ['domain-specific'],
+}
+
+
 import json
 import os
 import re

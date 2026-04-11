@@ -18,6 +18,19 @@ Outputs:
   - collection_summary.txt    : Human-readable summary
 """
 
+INFO = {
+    'description': 'Build task-level response matrix from ThaiLLM Leaderboard results',
+    'testing_condition': """Cells are aggregate scores per Thai benchmark (72 models × 19 benchmarks). Use for model-level comparison only.""",
+    'paper_url': '',
+    'data_source_url': 'https://huggingface.co/datasets/ThaiLLM-Leaderboard/results',
+    'subject_type': 'model',
+    'item_type': 'sub_benchmark',
+    'license': 'unknown',
+    'citation': '@misc{thai_leaderboard,\n  title={Thai LLM Leaderboard},\n  howpublished={\\url{https://huggingface.co/datasets/ThaiLLM-Leaderboard/results}},\n}',
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 import json
 import warnings

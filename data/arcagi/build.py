@@ -20,6 +20,27 @@ truth exactly), 0.0 = unsolved. For tasks with multiple test outputs, score can 
 some test outputs were solved. We binarize at threshold >= 0.5.
 """
 
+INFO = {
+    'description': """Build ARC-AGI response matrices from ARC Prize Foundation per-model per-task evaluation data""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/1911.01547',
+    'data_source_url': 'https://github.com/fchollet/ARC-AGI',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{chollet2019measureintelligence,
+      title={On the Measure of Intelligence}, 
+      author={François Chollet},
+      year={2019},
+      eprint={1911.01547},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/1911.01547}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 import os
 import subprocess
 import sys

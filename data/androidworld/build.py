@@ -26,6 +26,27 @@ Notes:
   - AndroidWorld tasks are dynamically parameterized, so results may vary across runs
 """
 
+INFO = {
+    'description': """Build AndroidWorld response matrices from publicly available per-task evaluation data""",
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2405.14573',
+    'data_source_url': """https://docs.google.com/spreadsheets/d/1cchzP9dlTZ3WXQTfYNhh3avxoLipqHN75v1Tb86uhHo""",
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{rawles2025androidworlddynamicbenchmarkingenvironment,
+      title={AndroidWorld: A Dynamic Benchmarking Environment for Autonomous Agents}, 
+      author={Christopher Rawles and Sarah Clinckemaillie and Yifan Chang and Jonathan Waltz and Gabrielle Lau and Marybeth Fair and Alice Li and William Bishop and Wei Li and Folawiyo Campbell-Ajala and Daniel Toyama and Robert Berry and Divya Tyamagundlu and Timothy Lillicrap and Oriana Riva},
+      year={2025},
+      eprint={2405.14573},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2405.14573}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import sys
 from pathlib import Path
 import os

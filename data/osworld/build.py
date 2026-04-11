@@ -29,6 +29,27 @@ Outputs:
   - leaderboard_self_reported.csv: Parsed self-reported leaderboard from Excel
 """
 
+INFO = {
+    'description': 'Build OSWorld response matrices from HuggingFace verified trajectory data',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2404.07972',
+    'data_source_url': 'https://github.com/xlang-ai/OSWorld',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{xie2024osworldbenchmarkingmultimodalagents,
+      title={OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments}, 
+      author={Tianbao Xie and Danyang Zhang and Jixuan Chen and Xiaochuan Li and Siheng Zhao and Ruisheng Cao and Toh Jing Hua and Zhoujun Cheng and Dongchan Shin and Fangyu Lei and Yitao Liu and Yiheng Xu and Shuyan Zhou and Silvio Savarese and Caiming Xiong and Victor Zhong and Tao Yu},
+      year={2024},
+      eprint={2404.07972},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2404.07972}, 
+}""",
+    'tags': ['reasoning'],
+}
+
+
 import json
 import os
 import re

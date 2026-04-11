@@ -21,6 +21,19 @@ Outputs:
   - processed/error_type_coarse_matrix.csv (models x tasks, coarse error categories)
 """
 
+INFO = {
+    'description': """Build a per-task binary response matrix and extract per-task error types from BFCL score files""",
+    'testing_condition': '',
+    'paper_url': 'https://gorilla.cs.berkeley.edu/blogs/13_bfcl_v3_multi_turn.html',
+    'data_source_url': 'https://github.com/HuanzhiMao/BFCL-Result',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': '@misc{patil2025bfcl,\n  title={BFCL},\n  year={2025},\n  howpublished={\\url{https://gorilla.cs.berkeley.edu/blogs/13_bfcl_v3_multi_turn.html}},\n}',
+    'tags': ['coding'],
+}
+
+
 import json
 import os
 import subprocess

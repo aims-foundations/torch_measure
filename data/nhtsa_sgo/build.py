@@ -17,6 +17,19 @@ Loads ADS and ADAS incident CSVs, explores their structure, builds:
 Saves outputs to processed/.
 """
 
+INFO = {
+    'description': '- Download and process NHTSA SGO crash report data',
+    'testing_condition': """Subjects are autonomous vehicle manufacturers (not models) and items are vehicle types. Cells are crash counts from NHTSA Standing General Order incident reports.""",
+    'paper_url': '',
+    'data_source_url': 'https://www.nhtsa.gov/technology-innovation/automated-vehicles-safety',
+    'subject_type': 'manufacturer',
+    'item_type': 'vehicle_type',
+    'license': 'unknown',
+    'citation': '@misc{nhtsa_sgo,\n  title={NHTSA Standing General Order Crash Reports},\n  howpublished={\\url{https://www.nhtsa.gov/technology-innovation/automated-vehicles-safety}},\n}',
+    'tags': ['aggregate-only'],
+}
+
+
 import sys
 import urllib.request
 from pathlib import Path

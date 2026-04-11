@@ -24,6 +24,27 @@ Outputs:
   - processed/pair_summary.csv: Per (model_a, model_b) win/loss/tie counts
 """
 
+INFO = {
+    'description': 'Build Arena 140K response matrix from pairwise human preferences',
+    'testing_condition': """Pairwise preference data — loaded as a PairwiseComparisons, not a ResponseMatrix. Each row is (model_a, model_b, winner) on a user prompt.""",
+    'paper_url': 'https://arxiv.org/abs/2403.04132',
+    'data_source_url': 'https://huggingface.co/datasets/lmarena-ai/arena-human-preference-140k',
+    'subject_type': 'model',
+    'item_type': 'prompt',
+    'license': 'Apache-2.0',
+    'citation': """@misc{chiang2024chatbotarenaopenplatform,
+      title={Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference}, 
+      author={Wei-Lin Chiang and Lianmin Zheng and Ying Sheng and Anastasios Nikolas Angelopoulos and Tianle Li and Dacheng Li and Hao Zhang and Banghua Zhu and Michael Jordan and Joseph E. Gonzalez and Ion Stoica},
+      year={2024},
+      eprint={2403.04132},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2403.04132}, 
+}""",
+    'tags': ['preference', 'pairwise'],
+}
+
+
 from pathlib import Path
 import os
 import sys

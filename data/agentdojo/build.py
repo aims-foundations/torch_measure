@@ -24,6 +24,27 @@ The response matrices focus on the primary "important_instructions" attack
 Author: auto-generated
 """
 
+INFO = {
+    'description': 'Build response matrices from AgentDojo benchmark results',
+    'testing_condition': '',
+    'paper_url': 'https://arxiv.org/abs/2406.13352',
+    'data_source_url': 'https://github.com/ethz-spylab/agentdojo',
+    'subject_type': 'agent',
+    'item_type': 'task',
+    'license': 'MIT',
+    'citation': """@misc{debenedetti2024agentdojodynamicenvironmentevaluate,
+      title={AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents}, 
+      author={Edoardo Debenedetti and Jie Zhang and Mislav Balunović and Luca Beurer-Kellner and Marc Fischer and Florian Tramèr},
+      year={2024},
+      eprint={2406.13352},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2406.13352}, 
+}""",
+    'tags': ['agent'],
+}
+
+
 import argparse
 import json
 import os

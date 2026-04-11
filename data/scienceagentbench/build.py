@@ -27,6 +27,27 @@ This script therefore:
 Output directory: ../processed/
 """
 
+INFO = {
+    'description': 'Build a response matrix for ScienceAgentBench (SAB)',
+    'testing_condition': """Cells are aggregate metrics over 4 score categories (57 model configs × 4 metrics from aggregate_results.csv), not per-item outcomes.""",
+    'paper_url': 'https://arxiv.org/abs/2410.05080',
+    'data_source_url': 'https://huggingface.co/datasets/osunlp/ScienceAgentBench',
+    'subject_type': 'model',
+    'item_type': 'task',
+    'license': 'Apache-2.0',
+    'citation': """@misc{chen2025scienceagentbenchrigorousassessmentlanguage,
+      title={ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery}, 
+      author={Ziru Chen and Shijie Chen and Yuting Ning and Qianheng Zhang and Boshi Wang and Botao Yu and Yifei Li and Zeyi Liao and Chen Wei and Zitong Lu and Vishal Dey and Mingyi Xue and Frazier N. Baker and Benjamin Burns and Daniel Adu-Ampratwum and Xuhui Huang and Xia Ning and Song Gao and Yu Su and Huan Sun},
+      year={2025},
+      eprint={2410.05080},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2410.05080}, 
+}""",
+    'tags': ['aggregate-only'],
+}
+
+
 import csv
 import json
 import os

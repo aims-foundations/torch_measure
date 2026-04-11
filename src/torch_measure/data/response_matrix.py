@@ -27,6 +27,13 @@ class ResponseMatrix:
         Optional structured metadata for each subject (one dict per row).
         For HELM datasets, each dict has keys: ``org``, ``model``,
         ``param_count``, ``is_instruct``.
+    info : dict | None
+        Optional dataset-level metadata (interpretation notes, paper URL,
+        data source URL, license, etc.). Usually loaded from
+        ``data/<benchmark>/info.yaml``. Common keys include:
+        ``description``, ``testing_condition``, ``paper_url``,
+        ``data_source_url``, ``subject_type``, ``item_type``, ``license``,
+        ``citation``, ``tags``.
     """
 
     def __init__(
@@ -36,6 +43,7 @@ class ResponseMatrix:
         item_ids: list[str] | None = None,
         item_contents: list[str] | None = None,
         subject_metadata: list[dict] | None = None,
+        info: dict | None = None,
     ) -> None:
         if data.ndim != 2:
             raise ValueError(f"Expected 2D tensor, got {data.ndim}D")
@@ -44,6 +52,7 @@ class ResponseMatrix:
         self.item_ids = item_ids
         self.item_contents = item_contents
         self.subject_metadata = subject_metadata
+        self.info = info
 
     @property
     def n_rows(self) -> int:
@@ -104,13 +113,17 @@ class ResponseMatrix:
             item_ids=self.item_ids,
             item_contents=self.item_contents,
             subject_metadata=self.subject_metadata,
+            info=self.info,
         )
 
     def binarize(self, threshold: float = 0.5) -> ResponseMatrix:
         """Convert continuous responses to binary using a threshold."""
         binary = (self.data >= threshold).float()
         binary[~self.observed_mask] = float("nan")
-        return ResponseMatrix(binary, self.subject_ids, self.item_ids, self.item_contents, self.subject_metadata)
+        return ResponseMatrix(
+            binary, self.subject_ids, self.item_ids,
+            self.item_contents, self.subject_metadata, self.info,
+        )
 
     @classmethod
     def from_numpy(cls, array, **kwargs) -> ResponseMatrix:
