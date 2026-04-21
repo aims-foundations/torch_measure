@@ -35,14 +35,14 @@ def _register_openllm_datasets() -> dict[str, DatasetInfo]:
 
     # --- Reasoning ---
 
-    datasets["openllm/bbh"] = DatasetInfo(
-        name="openllm/bbh",
+    datasets["bbh"] = DatasetInfo(
+        name="bbh",
         family="openllm",
         description="BIG-Bench Hard (23 challenging BIG-Bench tasks requiring multi-step reasoning)",
         response_type="binary",
         n_subjects=_N_SUBJECTS,
         n_items=5758,
-        filename="openllm/bbh.pt",
+        filename="bbh.pt",
         citation=(
             "@article{suzgun2022challenging,\n"
             "  title={Challenging BIG-Bench Tasks and Whether Chain-of-Thought Can Solve Them},\n"
@@ -60,14 +60,14 @@ def _register_openllm_datasets() -> dict[str, DatasetInfo]:
 
     # --- Knowledge ---
 
-    datasets["openllm/mmlu_pro"] = DatasetInfo(
-        name="openllm/mmlu_pro",
+    datasets["mmlu_pro"] = DatasetInfo(
+        name="mmlu_pro",
         family="openllm",
         description="MMLU-Pro (harder MMLU variant with 10-choice questions across 14 disciplines)",
         response_type="binary",
         n_subjects=_N_SUBJECTS,
         n_items=11864,
-        filename="openllm/mmlu_pro.pt",
+        filename="mmlu_pro.pt",
         citation=(
             "@article{wang2024mmlu,\n"
             "  title={MMLU-Pro: A More Robust and Challenging Multi-Task Language Understanding Benchmark},\n"
@@ -85,14 +85,14 @@ def _register_openllm_datasets() -> dict[str, DatasetInfo]:
 
     # --- Aggregate ---
 
-    datasets["openllm/all"] = DatasetInfo(
-        name="openllm/all",
+    datasets["all"] = DatasetInfo(
+        name="all",
         family="openllm",
         description="All Open LLM Leaderboard benchmarks concatenated (4,232 models x 17,622 items across 2 benchmarks)",
         response_type="binary",
         n_subjects=_N_SUBJECTS,
         n_items=17622,
-        filename="openllm/all.pt",
+        filename="all.pt",
         citation=_OPENLLM_CITATION,
         url=_OPENLLM_URL,
         license="Apache-2.0",

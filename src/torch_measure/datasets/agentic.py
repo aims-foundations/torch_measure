@@ -42,8 +42,8 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
 
     # --- Pre-revision binary response matrices (10 benchmarks) ---
 
-    datasets["agentic/swebench"] = DatasetInfo(
-        name="agentic/swebench",
+    datasets["swebench"] = DatasetInfo(
+        name="swebench",
         family="agentic",
         description="SWE-bench Verified Mini (real-world GitHub issue resolution)",
         response_type="binary",
@@ -51,7 +51,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=50,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/swebench.pt",
+        filename="swebench.pt",
         citation=(
             "@article{jimenez2024swebench,\n"
             "  title={SWE-bench: Can Language Models Resolve Real-World GitHub Issues?},\n"
@@ -66,8 +66,8 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         tags=["agentic", "code", "software-engineering", "github"],
     )
 
-    datasets["agentic/assistantbench"] = DatasetInfo(
-        name="agentic/assistantbench",
+    datasets["assistantbench"] = DatasetInfo(
+        name="assistantbench",
         family="agentic",
         description="AssistantBench (realistic web assistant tasks)",
         response_type="binary",
@@ -75,15 +75,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=33,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/assistantbench.pt",
+        filename="assistantbench.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "web", "assistant"],
     )
 
-    datasets["agentic/colbench"] = DatasetInfo(
-        name="agentic/colbench",
+    datasets["colbench"] = DatasetInfo(
+        name="colbench",
         family="agentic",
         description="ColBench (collaborative backend programming)",
         response_type="binary",
@@ -91,15 +91,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=1000,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/colbench.pt",
+        filename="colbench.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "code", "collaborative-programming"],
     )
 
-    datasets["agentic/corebench_hard"] = DatasetInfo(
-        name="agentic/corebench_hard",
+    datasets["corebench_hard"] = DatasetInfo(
+        name="corebench_hard",
         family="agentic",
         description="CORE-Bench Hard (computational reproducibility of scientific papers)",
         response_type="binary",
@@ -107,7 +107,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=45,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/corebench_hard.pt",
+        filename="corebench_hard.pt",
         citation=(
             "@article{siegel2024corebench,\n"
             "  title={CORE-Bench: Fostering the Credibility of Published Research "
@@ -122,8 +122,8 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         tags=["agentic", "science", "reproducibility"],
     )
 
-    datasets["agentic/gaia"] = DatasetInfo(
-        name="agentic/gaia",
+    datasets["gaia"] = DatasetInfo(
+        name="gaia",
         family="agentic",
         description="GAIA (General AI Assistants benchmark)",
         response_type="binary",
@@ -131,7 +131,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=165,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/gaia.pt",
+        filename="gaia.pt",
         citation=(
             "@article{mialon2023gaia,\n"
             "  title={GAIA: A Benchmark for General AI Assistants},\n"
@@ -146,8 +146,8 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         tags=["agentic", "general", "assistant", "web"],
     )
 
-    datasets["agentic/mind2web"] = DatasetInfo(
-        name="agentic/mind2web",
+    datasets["mind2web"] = DatasetInfo(
+        name="mind2web",
         family="agentic",
         description="Mind2Web Online (web navigation and interaction)",
         response_type="binary",
@@ -155,15 +155,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=336,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/mind2web.pt",
+        filename="mind2web.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "web", "navigation"],
     )
 
-    datasets["agentic/scicode"] = DatasetInfo(
-        name="agentic/scicode",
+    datasets["scicode"] = DatasetInfo(
+        name="scicode",
         family="agentic",
         description="SciCode (scientific code generation)",
         response_type="binary",
@@ -171,15 +171,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=65,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scicode.pt",
+        filename="scicode.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "code", "science"],
     )
 
-    datasets["agentic/scienceagentbench"] = DatasetInfo(
-        name="agentic/scienceagentbench",
+    datasets["scienceagentbench"] = DatasetInfo(
+        name="scienceagentbench",
         family="agentic",
         description="ScienceAgentBench (data-driven scientific discovery)",
         response_type="binary",
@@ -187,7 +187,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=102,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scienceagentbench.pt",
+        filename="scienceagentbench.pt",
         citation=(
             "@article{chen2024scienceagentbench,\n"
             "  title={ScienceAgentBench: Toward Rigorous Assessment of "
@@ -202,8 +202,8 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         tags=["agentic", "science", "data-analysis"],
     )
 
-    datasets["agentic/taubench_airline"] = DatasetInfo(
-        name="agentic/taubench_airline",
+    datasets["taubench_airline"] = DatasetInfo(
+        name="taubench_airline",
         family="agentic",
         description="Tau-bench Airline (customer service agent benchmark)",
         response_type="binary",
@@ -211,15 +211,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=50,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/taubench_airline.pt",
+        filename="taubench_airline.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "customer-service", "dialogue"],
     )
 
-    datasets["agentic/usaco"] = DatasetInfo(
-        name="agentic/usaco",
+    datasets["usaco"] = DatasetInfo(
+        name="usaco",
         family="agentic",
         description="USACO (competitive programming problems)",
         response_type="binary",
@@ -227,7 +227,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=307,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/usaco.pt",
+        filename="usaco.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
@@ -236,8 +236,8 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
 
     # --- Pre-revision continuous score variants ---
 
-    datasets["agentic/colbench_raw_score"] = DatasetInfo(
-        name="agentic/colbench_raw_score",
+    datasets["colbench_raw_score"] = DatasetInfo(
+        name="colbench_raw_score",
         family="agentic",
         description="ColBench raw scores (continuous 0-1, partial credit)",
         response_type="continuous",
@@ -245,15 +245,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=1000,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/colbench_raw_score.pt",
+        filename="colbench_raw_score.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "code", "collaborative-programming", "continuous"],
     )
 
-    datasets["agentic/corebench_hard_vision_score"] = DatasetInfo(
-        name="agentic/corebench_hard_vision_score",
+    datasets["corebench_hard_vision_score"] = DatasetInfo(
+        name="corebench_hard_vision_score",
         family="agentic",
         description="CORE-Bench Hard vision scores (figure reproduction accuracy)",
         response_type="continuous",
@@ -261,15 +261,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=45,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/corebench_hard_vision_score.pt",
+        filename="corebench_hard_vision_score.pt",
         citation=_HAL_CITATION,
         url="https://github.com/siegelz/core-bench",
         license="MIT",
         tags=["agentic", "science", "reproducibility", "continuous"],
     )
 
-    datasets["agentic/corebench_hard_written_score"] = DatasetInfo(
-        name="agentic/corebench_hard_written_score",
+    datasets["corebench_hard_written_score"] = DatasetInfo(
+        name="corebench_hard_written_score",
         family="agentic",
         description="CORE-Bench Hard written scores (text reproduction accuracy)",
         response_type="continuous",
@@ -277,15 +277,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=45,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/corebench_hard_written_score.pt",
+        filename="corebench_hard_written_score.pt",
         citation=_HAL_CITATION,
         url="https://github.com/siegelz/core-bench",
         license="MIT",
         tags=["agentic", "science", "reproducibility", "continuous"],
     )
 
-    datasets["agentic/scienceagentbench_codebert_score"] = DatasetInfo(
-        name="agentic/scienceagentbench_codebert_score",
+    datasets["scienceagentbench_codebert_score"] = DatasetInfo(
+        name="scienceagentbench_codebert_score",
         family="agentic",
         description="ScienceAgentBench CodeBERT similarity scores (continuous 0-1)",
         response_type="continuous",
@@ -293,15 +293,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=102,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scienceagentbench_codebert_score.pt",
+        filename="scienceagentbench_codebert_score.pt",
         citation=_HAL_CITATION,
         url="https://osu-nlp-group.github.io/ScienceAgentBench/",
         license="MIT",
         tags=["agentic", "science", "code-similarity", "continuous"],
     )
 
-    datasets["agentic/scienceagentbench_success_rate"] = DatasetInfo(
-        name="agentic/scienceagentbench_success_rate",
+    datasets["scienceagentbench_success_rate"] = DatasetInfo(
+        name="scienceagentbench_success_rate",
         family="agentic",
         description="ScienceAgentBench success rate (binary execution success)",
         response_type="binary",
@@ -309,15 +309,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=102,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scienceagentbench_success_rate.pt",
+        filename="scienceagentbench_success_rate.pt",
         citation=_HAL_CITATION,
         url="https://osu-nlp-group.github.io/ScienceAgentBench/",
         license="MIT",
         tags=["agentic", "science", "execution"],
     )
 
-    datasets["agentic/scienceagentbench_valid_program"] = DatasetInfo(
-        name="agentic/scienceagentbench_valid_program",
+    datasets["scienceagentbench_valid_program"] = DatasetInfo(
+        name="scienceagentbench_valid_program",
         family="agentic",
         description="ScienceAgentBench valid program (binary program validity)",
         response_type="binary",
@@ -325,7 +325,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=102,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scienceagentbench_valid_program.pt",
+        filename="scienceagentbench_valid_program.pt",
         citation=_HAL_CITATION,
         url="https://osu-nlp-group.github.io/ScienceAgentBench/",
         license="MIT",
@@ -334,8 +334,8 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
 
     # --- Post-revision rerun averages (continuous pass rates) ---
 
-    datasets["agentic/colbench_rerun"] = DatasetInfo(
-        name="agentic/colbench_rerun",
+    datasets["colbench_rerun"] = DatasetInfo(
+        name="colbench_rerun",
         family="agentic",
         description="ColBench rerun pass rates (averaged across 54 runs)",
         response_type="continuous",
@@ -343,15 +343,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=1000,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/colbench_rerun.pt",
+        filename="colbench_rerun.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "code", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/colbench_rerun_raw_score"] = DatasetInfo(
-        name="agentic/colbench_rerun_raw_score",
+    datasets["colbench_rerun_raw_score"] = DatasetInfo(
+        name="colbench_rerun_raw_score",
         family="agentic",
         description="ColBench rerun raw scores (averaged across 54 runs, continuous 0-1)",
         response_type="continuous",
@@ -359,15 +359,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=1000,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/colbench_rerun_raw_score.pt",
+        filename="colbench_rerun_raw_score.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "code", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/corebench_hard_rerun"] = DatasetInfo(
-        name="agentic/corebench_hard_rerun",
+    datasets["corebench_hard_rerun"] = DatasetInfo(
+        name="corebench_hard_rerun",
         family="agentic",
         description="CORE-Bench Hard rerun pass rates (averaged across 11 runs)",
         response_type="continuous",
@@ -375,15 +375,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=45,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/corebench_hard_rerun.pt",
+        filename="corebench_hard_rerun.pt",
         citation=_HAL_CITATION,
         url="https://github.com/siegelz/core-bench",
         license="MIT",
         tags=["agentic", "science", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/corebench_hard_rerun_vision_score"] = DatasetInfo(
-        name="agentic/corebench_hard_rerun_vision_score",
+    datasets["corebench_hard_rerun_vision_score"] = DatasetInfo(
+        name="corebench_hard_rerun_vision_score",
         family="agentic",
         description="CORE-Bench Hard rerun vision scores (averaged across 11 runs)",
         response_type="continuous",
@@ -391,15 +391,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=45,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/corebench_hard_rerun_vision_score.pt",
+        filename="corebench_hard_rerun_vision_score.pt",
         citation=_HAL_CITATION,
         url="https://github.com/siegelz/core-bench",
         license="MIT",
         tags=["agentic", "science", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/corebench_hard_rerun_written_score"] = DatasetInfo(
-        name="agentic/corebench_hard_rerun_written_score",
+    datasets["corebench_hard_rerun_written_score"] = DatasetInfo(
+        name="corebench_hard_rerun_written_score",
         family="agentic",
         description="CORE-Bench Hard rerun written scores (averaged across 11 runs)",
         response_type="continuous",
@@ -407,15 +407,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=45,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/corebench_hard_rerun_written_score.pt",
+        filename="corebench_hard_rerun_written_score.pt",
         citation=_HAL_CITATION,
         url="https://github.com/siegelz/core-bench",
         license="MIT",
         tags=["agentic", "science", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/scicode_rerun"] = DatasetInfo(
-        name="agentic/scicode_rerun",
+    datasets["scicode_rerun"] = DatasetInfo(
+        name="scicode_rerun",
         family="agentic",
         description="SciCode rerun pass rates (averaged across 11 runs)",
         response_type="continuous",
@@ -423,15 +423,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=29,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scicode_rerun.pt",
+        filename="scicode_rerun.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "code", "science", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/scicode_rerun_subtask_score"] = DatasetInfo(
-        name="agentic/scicode_rerun_subtask_score",
+    datasets["scicode_rerun_subtask_score"] = DatasetInfo(
+        name="scicode_rerun_subtask_score",
         family="agentic",
         description="SciCode rerun subtask scores (averaged across 11 runs, continuous 0-1)",
         response_type="continuous",
@@ -439,15 +439,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=29,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scicode_rerun_subtask_score.pt",
+        filename="scicode_rerun_subtask_score.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",
         tags=["agentic", "code", "science", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/scienceagentbench_rerun"] = DatasetInfo(
-        name="agentic/scienceagentbench_rerun",
+    datasets["scienceagentbench_rerun"] = DatasetInfo(
+        name="scienceagentbench_rerun",
         family="agentic",
         description="ScienceAgentBench rerun pass rates (averaged across 11 runs)",
         response_type="continuous",
@@ -455,15 +455,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=1212,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scienceagentbench_rerun.pt",
+        filename="scienceagentbench_rerun.pt",
         citation=_HAL_CITATION,
         url="https://osu-nlp-group.github.io/ScienceAgentBench/",
         license="MIT",
         tags=["agentic", "science", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/scienceagentbench_rerun_codebert_score"] = DatasetInfo(
-        name="agentic/scienceagentbench_rerun_codebert_score",
+    datasets["scienceagentbench_rerun_codebert_score"] = DatasetInfo(
+        name="scienceagentbench_rerun_codebert_score",
         family="agentic",
         description="ScienceAgentBench rerun CodeBERT scores (averaged across 11 runs)",
         response_type="continuous",
@@ -471,15 +471,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=1212,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scienceagentbench_rerun_codebert_score.pt",
+        filename="scienceagentbench_rerun_codebert_score.pt",
         citation=_HAL_CITATION,
         url="https://osu-nlp-group.github.io/ScienceAgentBench/",
         license="MIT",
         tags=["agentic", "science", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/scienceagentbench_rerun_success_rate"] = DatasetInfo(
-        name="agentic/scienceagentbench_rerun_success_rate",
+    datasets["scienceagentbench_rerun_success_rate"] = DatasetInfo(
+        name="scienceagentbench_rerun_success_rate",
         family="agentic",
         description="ScienceAgentBench rerun success rates (averaged across 11 runs)",
         response_type="continuous",
@@ -487,15 +487,15 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=1212,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scienceagentbench_rerun_success_rate.pt",
+        filename="scienceagentbench_rerun_success_rate.pt",
         citation=_HAL_CITATION,
         url="https://osu-nlp-group.github.io/ScienceAgentBench/",
         license="MIT",
         tags=["agentic", "science", "rerun", "reliability", "continuous"],
     )
 
-    datasets["agentic/scienceagentbench_rerun_valid_program"] = DatasetInfo(
-        name="agentic/scienceagentbench_rerun_valid_program",
+    datasets["scienceagentbench_rerun_valid_program"] = DatasetInfo(
+        name="scienceagentbench_rerun_valid_program",
         family="agentic",
         description="ScienceAgentBench rerun valid program rates (averaged across 11 runs)",
         response_type="continuous",
@@ -503,7 +503,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=1212,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/scienceagentbench_rerun_valid_program.pt",
+        filename="scienceagentbench_rerun_valid_program.pt",
         citation=_HAL_CITATION,
         url="https://osu-nlp-group.github.io/ScienceAgentBench/",
         license="MIT",
@@ -512,8 +512,8 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
 
     # --- Aggregate ---
 
-    datasets["agentic/all"] = DatasetInfo(
-        name="agentic/all",
+    datasets["all"] = DatasetInfo(
+        name="all",
         family="agentic",
         description="All agentic benchmarks concatenated (pre-revision binary, 10 benchmarks)",
         response_type="binary",
@@ -521,7 +521,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
         n_items=2153,
         subject_entity="LLM",
         item_entity="task",
-        filename="agentic/all.pt",
+        filename="all.pt",
         citation=_HAL_CITATION,
         url=_HAL_URL,
         license="MIT",

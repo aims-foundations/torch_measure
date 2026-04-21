@@ -31,8 +31,8 @@ def _register_arena_datasets() -> dict[str, DatasetInfo]:
     """
     datasets: dict[str, DatasetInfo] = {}
 
-    datasets["arena/chatbot_arena"] = DatasetInfo(
-        name="arena/chatbot_arena",
+    datasets["chatbot_arena"] = DatasetInfo(
+        name="chatbot_arena",
         family="arena",
         description="LMSYS Chatbot Arena human preference comparisons (pairwise A/B tests)",
         response_type="pairwise",
@@ -41,7 +41,24 @@ def _register_arena_datasets() -> dict[str, DatasetInfo]:
         n_comparisons=23294,
         subject_entity="LLM",
         item_entity="prompt",
-        filename="arena/chatbot_arena.pt",
+        filename="chatbot_arena.pt",
+        citation=_ARENA_CITATION,
+        url=_ARENA_URL,
+        license="CC-BY-4.0",
+        tags=["nlp", "pairwise", "preference", "human-evaluation", "chatbot"],
+    )
+
+    datasets["chatbot_arena_140k"] = DatasetInfo(
+        name="chatbot_arena_140k",
+        family="arena",
+        description="LMSYS Chatbot Arena 140K human preference comparisons (pairwise A/B tests, 53 models)",
+        response_type="pairwise",
+        n_subjects=53,
+        n_items=0,
+        n_comparisons=135634,
+        subject_entity="LLM",
+        item_entity="prompt",
+        filename="chatbot_arena_140k.pt",
         citation=_ARENA_CITATION,
         url=_ARENA_URL,
         license="CC-BY-4.0",
