@@ -3,24 +3,34 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+[![Discord](https://img.shields.io/badge/Discord-join%20chat-5865F2.svg)](https://discord.gg/F6xbEwvvhb)
 
 **PyTorch-native measurement science toolkit for AI evaluation.**
 
-`torch_measure` brings Item Response Theory (IRT), Computerized Adaptive Testing (CAT), psychometric metrics, and factor models to the PyTorch ecosystem — GPU-accelerated, differentiable, and designed for modern AI benchmark analysis.
+Benchmark scores increasingly gate deployment decisions but rarely predict how a model will behave in production. `torch_measure` brings the measurement-science apparatus — item response theory, adaptive testing, psychometric metrics, and factor models — to the PyTorch ecosystem, so AI evaluations can be designed and interpreted with the rigor the stakes now demand.
 
 ## Installation
 
+With **pip**:
+
 ```bash
-pip install torch-measure
+pip install torch_measure
 ```
 
-With optional dependencies:
+With **[uv](https://docs.astral.sh/uv/)** (faster; drop-in replacement for pip):
 
 ```bash
-pip install torch-measure[all]          # Everything
-pip install torch-measure[bayesian]     # Pyro-based Bayesian IRT
-pip install torch-measure[data]         # HuggingFace data loaders
-pip install torch-measure[viz]          # Visualization
+uv pip install torch_measure        # into the active environment
+uv add torch_measure                # into a uv-managed project
+```
+
+With optional dependencies (same syntax for both — just prefix `uv` if desired):
+
+```bash
+pip install torch_measure[all]          # Everything
+pip install torch_measure[bayesian]     # Pyro-based Bayesian IRT
+pip install torch_measure[data]         # HuggingFace data loaders
+pip install torch_measure[viz]          # Visualization
 ```
 
 ## Quick Start
@@ -84,11 +94,13 @@ ece = expected_calibration_error(predicted_probs, rm.data)
 
 ## Why torch_measure?
 
-- **GPU-accelerated**: All models are PyTorch `nn.Module`s — train on GPU, use autograd
-- **Amortized inference**: Predict item parameters from embeddings without per-item calibration
-- **Modern AI evaluation**: Built for LLM benchmarks, not just educational testing
-- **Composable**: Mix IRT models, factor models, and adaptive testing freely
-- **Research-ready**: Powers 6+ published papers from the [AIMS Foundation](https://github.com/aims-foundation)
+AI benchmark scores increasingly decide which models get deployed, but rarely predict how those models will behave in production. Measurement science — item response theory, adaptive testing, reliability, validity — has answered "how much should I trust this score?" for decades in education, psychology, and clinical assessment. `torch_measure` brings that apparatus to the PyTorch ecosystem, so evaluation can be done with the same rigor as training.
+
+- **GPU-accelerated**: All models are PyTorch `nn.Module`s — train on GPU, use autograd.
+- **Amortized inference**: Predict item parameters from embeddings without per-item calibration.
+- **Built for LLM-era data**: Scales to large benchmark matrices, handles missing responses, composes with modern ML pipelines.
+- **Composable**: Mix IRT, factor models, and adaptive testing freely.
+- **Research-ready**: Powers 6+ published papers from [AIMS Foundations](https://github.com/aims-foundations).
 
 ## Citation
 
@@ -97,15 +109,15 @@ If you use `torch_measure` in your research, please cite:
 ```bibtex
 @software{torch_measure,
   title={torch\_measure: PyTorch-native Measurement Science Toolkit},
-  author={AIMS Foundation},
-  url={https://github.com/aims-foundation/torch_measure},
+  author={AIMS Foundations},
+  url={https://github.com/aims-foundations/torch_measure},
   year={2026}
 }
 ```
 
 ## Contributing
 
-We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.md) for details.
+We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.md) for details, or drop by our [Discord](https://discord.gg/F6xbEwvvhb) to chat.
 
 ## License
 

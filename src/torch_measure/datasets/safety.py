@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Safety, bias, and red teaming dataset definitions."""
 
@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from torch_measure.datasets._info import DatasetInfo
 
-_REPO = "aims-foundation/torch-measure-data"
+_REPO = "aims-foundations/measurement-db"
 
 _BBQ_CITATION = (
     "@inproceedings{parrish2022bbq,\n"

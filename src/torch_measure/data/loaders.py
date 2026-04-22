@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Data loaders for common benchmark datasets (requires huggingface_hub)."""
 
@@ -53,7 +53,7 @@ def from_huggingface(repo_id: str, filename: str | None = None, **kwargs) -> Res
     try:
         from huggingface_hub import hf_hub_download
     except ImportError as err:
-        raise ImportError("Loading from HuggingFace requires huggingface_hub. Install with: pip install torch-measure[data]") from err
+        raise ImportError("Loading from HuggingFace requires huggingface_hub. Install with: pip install torch_measure[data]") from err
 
     from torch_measure.data.response_matrix import ResponseMatrix
 

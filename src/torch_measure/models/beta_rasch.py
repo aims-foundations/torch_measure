@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Beta-Rasch (1PL) IRT model for continuous (0, 1) responses."""
 

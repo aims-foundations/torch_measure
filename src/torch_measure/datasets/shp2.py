@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Stanford Human Preferences v2 (SHP-2) dataset definitions.
 

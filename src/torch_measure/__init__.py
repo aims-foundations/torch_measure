@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """torch_measure: PyTorch-native measurement science toolkit for AI evaluation."""
 

@@ -6,7 +6,7 @@ Basic Install
 
 .. code-block:: bash
 
-   pip install torch-measure
+   pip install torch_measure
 
 Optional Dependencies
 ---------------------
@@ -14,22 +14,22 @@ Optional Dependencies
 .. code-block:: bash
 
    # Bayesian estimation (Pyro SVI)
-   pip install torch-measure[bayesian]
+   pip install torch_measure[bayesian]
 
    # Visualization (matplotlib, seaborn)
-   pip install torch-measure[viz]
+   pip install torch_measure[viz]
 
    # Data loaders (HuggingFace Hub)
-   pip install torch-measure[data]
+   pip install torch_measure[data]
 
    # Everything
-   pip install torch-measure[all]
+   pip install torch_measure[all]
 
 Development Install
 -------------------
 
 .. code-block:: bash
 
-   git clone https://github.com/aims-foundation/torch_measure.git
+   git clone https://github.com/aims-foundations/torch_measure.git
    cd torch_measure
    pip install -e ".[dev,test]"

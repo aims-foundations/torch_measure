@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Manifest-based dataset discovery.
 
@@ -26,7 +26,7 @@ from typing import Any
 
 from torch_measure.datasets._info import DatasetInfo
 
-MANIFEST_REPO = "aims-foundation/torch-measure-data"
+MANIFEST_REPO = "aims-foundations/measurement-db"
 MANIFEST_FILENAME = "manifest.json"
 
 # Process-local cache. Use ``load_manifest(force_download=True)`` to refresh.

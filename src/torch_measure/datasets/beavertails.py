@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """BeaverTails (PKU-Alignment) safety classification dataset definitions.
 
@@ -14,7 +14,7 @@ Each response matrix follows the standard torch_measure convention:
 - **Values**: Binary {0, 1} where 1 = unsafe (flagged for that category),
   0 = safe.  For the ``overall`` dataset, 1 = unsafe (``is_safe=False``).
 
-Data files live on HuggingFace Hub at ``aims-foundation/torch-measure-data``
+Data files live on HuggingFace Hub at ``aims-foundations/measurement-db``
 under the ``beavertails/`` prefix (e.g. ``beavertails/overall.pt``).
 
 Source data: ``PKU-Alignment/BeaverTails`` on HuggingFace Hub.

@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """FLASK (Fine-grained Language Model Evaluation based on Alignment Skill Sets) dataset definitions.
 

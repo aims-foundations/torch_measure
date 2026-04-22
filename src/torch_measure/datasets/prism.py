@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """PRISM (Preference, Reflection, and Ideological Signal Measurement) dataset definitions."""
 

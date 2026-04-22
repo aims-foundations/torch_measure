@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """UltraFeedback dataset definitions.
 
@@ -14,7 +14,7 @@ Each response matrix follows the standard torch_measure convention:
 - **Values**: GPT-4 ratings normalized to [0, 1] (from original 1-5 scale).
   NaN for missing entries (each prompt has responses from only 4 of 17 models).
 
-Data files live on HuggingFace Hub at ``aims-foundation/torch-measure-data``
+Data files live on HuggingFace Hub at ``aims-foundations/measurement-db``
 under the ``ultrafeedback/`` prefix.
 """
 

@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """DatasetInfo metadata class for the dataset registry."""
 
@@ -51,7 +51,7 @@ class DatasetInfo:
     n_items: int
     subject_entity: str = "LLM"
     item_entity: str = "question"
-    repo_id: str = "aims-foundation/torch-measure-data"
+    repo_id: str = "aims-foundations/measurement-db"
     filename: str = ""
     citation: str = ""
     url: str = ""

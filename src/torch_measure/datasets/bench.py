@@ -12,7 +12,7 @@ These datasets complement the existing ``agentic`` family (sourced from the HAL
 leaderboard) and cover a wider set of coding, agentic, and knowledge benchmarks
 with generally larger model counts.
 
-Data files live on HuggingFace Hub at ``aims-foundation/torch-measure-data``
+Data files live on HuggingFace Hub at ``aims-foundations/measurement-db``
 (e.g. ``swebench.pt``).
 """
 
@@ -20,7 +20,7 @@ from __future__ import annotations
 
 from torch_measure.datasets._info import DatasetInfo
 
-_BENCH_REPO = "aims-foundation/torch-measure-data"
+_BENCH_REPO = "aims-foundations/measurement-db"
 
 
 def _register_bench_datasets() -> dict[str, DatasetInfo]:

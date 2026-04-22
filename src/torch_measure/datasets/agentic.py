@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Agentic benchmark dataset definitions (HAL Leaderboard)."""
 
@@ -36,7 +36,7 @@ def _register_agentic_datasets() -> dict[str, DatasetInfo]:
     Post-revision reruns average multiple evaluation runs per (agent, task)
     pair, producing continuous [0, 1] pass-rate values for reliability analysis.
 
-    Source data: ``aims-foundation/eval_response_matrix`` on HuggingFace Hub.
+    Source data: ``aims-foundations/measurement-db`` on HuggingFace Hub.
     """
     datasets: dict[str, DatasetInfo] = {}
 

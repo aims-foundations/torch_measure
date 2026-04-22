@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Prometheus evaluation dataset definitions.
 
@@ -77,7 +77,7 @@ def _register_prometheus_datasets() -> dict[str, DatasetInfo]:
         n_items=100,
         subject_entity="rubric_criteria",
         item_entity="instance",
-        repo_id="aims-foundation/torch-measure-data",
+        repo_id="aims-foundations/measurement-db",
         filename="feedback.pt",
         citation=_PROMETHEUS_CITATION,
         url="https://huggingface.co/datasets/prometheus-eval/Feedback-Collection",
@@ -99,7 +99,7 @@ def _register_prometheus_datasets() -> dict[str, DatasetInfo]:
         n_items=200,
         subject_entity="rubric_criteria",
         item_entity="instance",
-        repo_id="aims-foundation/torch-measure-data",
+        repo_id="aims-foundations/measurement-db",
         filename="preference.pt",
         citation=_PROMETHEUS2_CITATION,
         url="https://huggingface.co/datasets/prometheus-eval/Preference-Collection",

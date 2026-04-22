@@ -3,14 +3,14 @@ requires = ["setuptools>=64", "setuptools_scm[toml]>=8", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "torch-measure"
+name = "torch_measure"
 description = "PyTorch-native measurement science toolkit: IRT, CAT, psychometric metrics, and factor models for AI evaluation"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 dynamic = ["version"]
 authors = [
-    {name = "AIMS Foundation"},
+    {name = "AIMS Foundations"},
 ]
 keywords = [
     "pytorch",
@@ -45,7 +45,7 @@ bayesian = ["pyro-ppl>=1.8"]
 data = ["huggingface_hub>=0.16", "datasets>=2.10", "pandas>=2.0"]
 viz = ["matplotlib>=3.7", "seaborn>=0.12", "tueplots>=0.0.14"]
 dev = [
-    "torch-measure[test,docs]",
+    "torch_measure[test,docs]",
     "pre-commit",
     "ruff",
 ]
@@ -61,14 +61,14 @@ docs = [
     "myst-parser",
 ]
 all = [
-    "torch-measure[bayesian,data,viz,dev]",
+    "torch_measure[bayesian,data,viz,dev]",
 ]
 
 [project.urls]
-Homepage = "https://github.com/aims-foundation/torch_measure"
+Homepage = "https://github.com/aims-foundations/torch_measure"
 Documentation = "https://torch-measure.readthedocs.io"
-Repository = "https://github.com/aims-foundation/torch_measure"
-Issues = "https://github.com/aims-foundation/torch_measure/issues"
+Repository = "https://github.com/aims-foundations/torch_measure"
+Issues = "https://github.com/aims-foundations/torch_measure/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

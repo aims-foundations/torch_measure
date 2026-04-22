@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Dataset download and loading pipeline."""
 
@@ -72,7 +72,7 @@ def load(
         from huggingface_hub import hf_hub_download
     except ImportError as err:
         raise ImportError(
-            "Loading datasets requires huggingface_hub. Install with: pip install torch-measure[data]"
+            "Loading datasets requires huggingface_hub. Install with: pip install torch_measure[data]"
         ) from err
 
     path = hf_hub_download(

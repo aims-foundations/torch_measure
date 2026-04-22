@@ -1,8 +1,8 @@
 # Configuration file for the Sphinx documentation builder.
 
 project = "torch_measure"
-copyright = "2026, AIMS Foundation"
-author = "AIMS Foundation"
+copyright = "2026, AIMS Foundations"
+author = "AIMS Foundations"
 
 extensions = [
     "sphinx.ext.autodoc",
@@ -22,7 +22,7 @@ exclude_patterns = []
 html_theme = "furo"
 html_static_path = ["_static"]
 html_theme_options = {
-    "source_repository": "https://github.com/aims-foundation/torch_measure",
+    "source_repository": "https://github.com/aims-foundations/torch_measure",
     "source_branch": "main",
     "source_directory": "docs/source/",
 }

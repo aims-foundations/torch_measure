@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Tests for the dataset registry (offline — no network required)."""
 
@@ -215,7 +215,7 @@ class TestDatasetInfo:
         )
         assert di.subject_entity == "LLM"
         assert di.item_entity == "question"
-        assert di.repo_id == "sangttruong/torch-measure-data"
+        assert di.repo_id == "aims-foundations/measurement-db"
         assert di.tags == []
         assert di.citation == ""
         assert di.url == ""

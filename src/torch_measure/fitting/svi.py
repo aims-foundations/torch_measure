@@ -1,9 +1,9 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Stochastic Variational Inference fitting via Pyro (optional dependency).
 
 Consolidated from safety-irt/model/irt.py.
-Requires: pip install torch-measure[bayesian]
+Requires: pip install torch_measure[bayesian]
 """
 
 from __future__ import annotations
@@ -97,7 +97,7 @@ def svi_fit(
     except ImportError as err:
         raise ImportError(
             "Bayesian SVI fitting requires pyro-ppl. "
-            "Install with: pip install torch-measure[bayesian]"
+            "Install with: pip install torch_measure[bayesian]"
         ) from err
 
     if mask is None:

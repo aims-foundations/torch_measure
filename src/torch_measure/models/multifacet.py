@@ -1,4 +1,4 @@
-# Copyright (c) 2026 AIMS Foundation. MIT License.
+# Copyright (c) 2026 AIMS Foundations. MIT License.
 
 """Many-Facet Rasch Model (requires pyro-ppl).
 
@@ -45,7 +45,7 @@ class MultiFacetRasch(IRTModel):
     Notes
     -----
     For Bayesian estimation via Pyro SVI, install pyro-ppl:
-        pip install torch-measure[bayesian]
+        pip install torch_measure[bayesian]
     """
 
     def __init__(
@@ -115,6 +115,6 @@ class MultiFacetRasch(IRTModel):
         """Fit the model.
 
         Supports all fitting methods: 'mle', 'em', 'jml', 'svi'.
-        For Bayesian SVI, install pyro-ppl: ``pip install torch-measure[bayesian]``
+        For Bayesian SVI, install pyro-ppl: ``pip install torch_measure[bayesian]``
         """
         return super().fit(response_matrix, mask, method=method, **kwargs)
