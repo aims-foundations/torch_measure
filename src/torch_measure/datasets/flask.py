@@ -78,8 +78,7 @@ def _register_flask_datasets() -> dict[str, DatasetInfo]:
         name="overall",
         family="flask",
         description=(
-            f"FLASK overall mean score across applicable skills "
-            f"({_N_MODELS} models x {_N_ITEMS} instructions)"
+            f"FLASK overall mean score across applicable skills ({_N_MODELS} models x {_N_ITEMS} instructions)"
         ),
         response_type="continuous",
         n_subjects=_N_MODELS,
@@ -100,10 +99,7 @@ def _register_flask_datasets() -> dict[str, DatasetInfo]:
         datasets[name] = DatasetInfo(
             name=name,
             family="flask",
-            description=(
-                f"FLASK {skill.replace('_', ' ')} scores "
-                f"({_N_MODELS} models x {n_items} instructions)"
-            ),
+            description=(f"FLASK {skill.replace('_', ' ')} scores ({_N_MODELS} models x {n_items} instructions)"),
             response_type="continuous",
             n_subjects=_N_MODELS,
             n_items=n_items,

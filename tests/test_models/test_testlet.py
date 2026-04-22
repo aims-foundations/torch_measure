@@ -2,6 +2,7 @@
 
 """Tests for the Testlet Rasch model."""
 
+import pytest
 import torch
 
 from torch_measure.models.testlet import TestletRasch, build_testlet_map
@@ -58,11 +59,8 @@ class TestTestletRasch:
 
     def test_invalid_testlet_map_shape(self):
         tmap = torch.zeros(10, dtype=torch.long)  # wrong size
-        try:
+        with pytest.raises(ValueError):
             TestletRasch(n_subjects=5, n_items=30, testlet_map=tmap)
-            assert False, "Should have raised ValueError"
-        except ValueError:
-            pass
 
     def test_predict_shape(self):
         tmap = _make_testlet_map()

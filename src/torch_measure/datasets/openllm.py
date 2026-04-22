@@ -46,7 +46,7 @@ def _register_openllm_datasets() -> dict[str, DatasetInfo]:
         citation=(
             "@article{suzgun2022challenging,\n"
             "  title={Challenging BIG-Bench Tasks and Whether Chain-of-Thought Can Solve Them},\n"
-            "  author={Suzgun, Mirac and Scales, Nathan and Sch{\\\"a}rli, Nathanael and Gehrmann, Sebastian and "
+            '  author={Suzgun, Mirac and Scales, Nathan and Sch{\\"a}rli, Nathanael and Gehrmann, Sebastian and '
             "Tay, Yi and Chung, Hyung Won and Chowdhery, Aakanksha and Le, Quoc V and Chi, Ed H and "
             "Zhou, Denny and Wei, Jason},\n"
             "  journal={arXiv preprint arXiv:2210.09261},\n"

@@ -24,8 +24,6 @@ class TestJMLFit:
 class TestJMLFitBeta:
     def test_beta_reduces_loss(self, small_beta_response_matrix):
         model = BetaRasch(n_subjects=20, n_items=30)
-        history = model.fit(
-            small_beta_response_matrix, method="jml", max_epochs=50, verbose=False
-        )
+        history = model.fit(small_beta_response_matrix, method="jml", max_epochs=50, verbose=False)
         assert len(history["losses"]) > 0
         assert history["losses"][-1] < history["losses"][0]

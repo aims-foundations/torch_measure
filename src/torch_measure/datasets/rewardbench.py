@@ -46,9 +46,7 @@ def _register_rewardbench_datasets() -> dict[str, DatasetInfo]:
     datasets["results"] = DatasetInfo(
         name="results",
         family="rewardbench",
-        description=(
-            "RewardBench full eval set, binary correct/incorrect per reward model"
-        ),
+        description=("RewardBench full eval set, binary correct/incorrect per reward model"),
         response_type="binary",
         n_subjects=151,
         n_items=2985,

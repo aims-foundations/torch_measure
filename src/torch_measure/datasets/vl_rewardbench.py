@@ -73,10 +73,7 @@ def _register_vl_rewardbench_datasets() -> dict[str, DatasetInfo]:
     d["general"] = DatasetInfo(
         name="general",
         family="vl_rewardbench",
-        description=(
-            "VL-RewardBench General category — general multimodal instruction "
-            "pairs (16 judges x 183 pairs)"
-        ),
+        description=("VL-RewardBench General category — general multimodal instruction pairs (16 judges x 183 pairs)"),
         response_type="binary",
         n_subjects=16,
         n_items=183,
@@ -93,8 +90,7 @@ def _register_vl_rewardbench_datasets() -> dict[str, DatasetInfo]:
         name="hallucination",
         family="vl_rewardbench",
         description=(
-            "VL-RewardBench Hallucination category — visual hallucination "
-            "detection pairs (16 judges x 746 pairs)"
+            "VL-RewardBench Hallucination category — visual hallucination detection pairs (16 judges x 746 pairs)"
         ),
         response_type="binary",
         n_subjects=16,
@@ -111,10 +107,7 @@ def _register_vl_rewardbench_datasets() -> dict[str, DatasetInfo]:
     d["reasoning"] = DatasetInfo(
         name="reasoning",
         family="vl_rewardbench",
-        description=(
-            "VL-RewardBench Reasoning category — multimodal reasoning "
-            "pairs (16 judges x 318 pairs)"
-        ),
+        description=("VL-RewardBench Reasoning category — multimodal reasoning pairs (16 judges x 318 pairs)"),
         response_type="binary",
         n_subjects=16,
         n_items=318,

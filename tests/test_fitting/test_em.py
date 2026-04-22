@@ -32,9 +32,7 @@ class TestEMFit:
 class TestEMFitBeta:
     def test_beta_returns_both_phases(self, small_beta_response_matrix):
         model = BetaRasch(n_subjects=20, n_items=30)
-        history = model.fit(
-            small_beta_response_matrix, method="em", max_epochs=20, verbose=False
-        )
+        history = model.fit(small_beta_response_matrix, method="em", max_epochs=20, verbose=False)
         assert "losses_item" in history
         assert "losses_ability" in history
         assert len(history["losses_item"]) > 0

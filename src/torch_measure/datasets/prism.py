@@ -13,7 +13,7 @@ _PRISM_CITATION = (
     "  title={The PRISM Alignment Dataset: What Participatory, Representative "
     "and Individualised Human Feedback Reveals About the Subjective and "
     "Multicultural Alignment of Large Language Models},\n"
-    "  author={Kirk, Hannah Rose and Whitefield, Alexander and R{\\\"o}ttger, Paul and "
+    '  author={Kirk, Hannah Rose and Whitefield, Alexander and R{\\"o}ttger, Paul and '
     "Bean, Andrew and Margatina, Katerina and Ciro, Juan and Mosquera, Rafael and "
     "Bartolo, Max and Williams, Adina and He, He and Vidgen, Bertie and Hale, Scott A.},\n"
     "  year={2024},\n"
@@ -124,10 +124,7 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
     datasets["crossed_scores"] = DatasetInfo(
         name="crossed_scores",
         family="prism",
-        description=(
-            "PRISM -- utterances x participants continuous scores, "
-            "transposed for G-theory facet analysis"
-        ),
+        description=("PRISM -- utterances x participants continuous scores, transposed for G-theory facet analysis"),
         response_type="continuous",
         n_subjects=_N_UTTERANCES,
         n_items=_N_PARTICIPANTS,
@@ -152,10 +149,7 @@ def _register_prism_datasets() -> dict[str, DatasetInfo]:
     datasets["crossed_chosen"] = DatasetInfo(
         name="crossed_chosen",
         family="prism",
-        description=(
-            "PRISM -- utterances x participants binary chosen, "
-            "transposed for G-theory facet analysis"
-        ),
+        description=("PRISM -- utterances x participants binary chosen, transposed for G-theory facet analysis"),
         response_type="binary",
         n_subjects=_N_UTTERANCES,
         n_items=_N_PARTICIPANTS,

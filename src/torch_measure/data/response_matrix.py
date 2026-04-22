@@ -121,8 +121,12 @@ class ResponseMatrix:
         binary = (self.data >= threshold).float()
         binary[~self.observed_mask] = float("nan")
         return ResponseMatrix(
-            binary, self.subject_ids, self.item_ids,
-            self.item_contents, self.subject_metadata, self.info,
+            binary,
+            self.subject_ids,
+            self.item_ids,
+            self.item_contents,
+            self.subject_metadata,
+            self.info,
         )
 
     @classmethod
@@ -140,7 +144,4 @@ class ResponseMatrix:
         )
 
     def __repr__(self) -> str:
-        return (
-            f"ResponseMatrix(n_subjects={self.n_subjects}, n_items={self.n_items}, "
-            f"density={self.density:.2%})"
-        )
+        return f"ResponseMatrix(n_subjects={self.n_subjects}, n_items={self.n_items}, density={self.density:.2%})"

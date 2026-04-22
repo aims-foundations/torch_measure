@@ -2,9 +2,25 @@
 
 """Tests for the dataset registry (offline — no network required)."""
 
+from unittest.mock import patch
+
 import pytest
 
 from torch_measure.datasets import DatasetInfo, info, list_datasets
+
+
+def _manifest_entry(*, family: str, description: str = "manifest dataset") -> dict[str, object]:
+    return {
+        "response_type": "binary",
+        "n_subjects": 1,
+        "n_items": 2,
+        "filename": "test.pt",
+        "info": {
+            "family": family,
+            "tags": [family],
+            "description": description,
+        },
+    }
 
 
 class TestListDatasets:
@@ -146,6 +162,29 @@ class TestListDatasets:
         for name in expected:
             assert name in names, f"{name} missing from registry"
 
+    @pytest.mark.parametrize("manifest_key", ["foo", "newfam/foo"])
+    def test_family_filter_includes_manifest_only_datasets(self, manifest_key):
+        manifest = {
+            "datasets": {
+                manifest_key: _manifest_entry(family="newfam"),
+            }
+        }
+
+        with patch("torch_measure.datasets._manifest.load_manifest", return_value=manifest):
+            assert "newfam/foo" in list_datasets()
+            assert list_datasets(family="newfam") == ["newfam/foo"]
+
+    def test_family_filter_uses_canonical_name_for_slash_keyed_manifest_entries(self):
+        manifest = {
+            "datasets": {
+                "weird/foo": _manifest_entry(family="other"),
+            }
+        }
+
+        with patch("torch_measure.datasets._manifest.load_manifest", return_value=manifest):
+            assert list_datasets(family="weird") == ["weird/foo"]
+            assert list_datasets(family="other") == []
+
 
 class TestInfo:
     def test_returns_dataset_info(self):
@@ -181,6 +220,67 @@ class TestInfo:
     def test_error_lists_available(self):
         with pytest.raises(ValueError, match="helm/mmlu"):
             info("nonexistent/dataset")
+
+    @pytest.mark.parametrize("manifest_key", ["foo", "newfam/foo"])
+    def test_manifest_bare_lookup_is_key_shape_independent(self, manifest_key):
+        manifest = {
+            "datasets": {
+                manifest_key: _manifest_entry(family="newfam"),
+            }
+        }
+
+        with patch("torch_measure.datasets._manifest.load_manifest", return_value=manifest):
+            result = info("foo")
+
+        assert result.name == "newfam/foo"
+        assert result.family == "newfam"
+
+    def test_manifest_slash_key_family_matches_canonical_name(self):
+        manifest = {
+            "datasets": {
+                "weird/foo": _manifest_entry(family="other"),
+            }
+        }
+
+        with patch("torch_measure.datasets._manifest.load_manifest", return_value=manifest):
+            result = info("weird/foo")
+
+        assert result.name == "weird/foo"
+        assert result.family == "weird"
+
+    def test_manifest_collision_makes_registry_alias_ambiguous(self):
+        manifest = {
+            "datasets": {
+                "mmlu": _manifest_entry(family="newfam"),
+            }
+        }
+
+        with (
+            patch("torch_measure.datasets._manifest.load_manifest", return_value=manifest),
+            pytest.raises(ValueError, match="Ambiguous dataset name") as exc_info,
+        ):
+            info("mmlu")
+
+        message = str(exc_info.value)
+        assert "helm/mmlu" in message
+        assert "newfam/mmlu" in message
+
+    def test_manifest_cannot_bypass_ambiguous_registry_bare_name(self):
+        manifest = {
+            "datasets": {
+                "swebench": _manifest_entry(family="bench"),
+            }
+        }
+
+        with (
+            patch("torch_measure.datasets._manifest.load_manifest", return_value=manifest),
+            pytest.raises(ValueError, match="Ambiguous dataset name") as exc_info,
+        ):
+            info("swebench")
+
+        message = str(exc_info.value)
+        assert "agentic/swebench" in message
+        assert "bench/swebench" in message
 
     def test_all_entries_consistent(self):
         """Every dataset in the registry should have a name matching its key."""

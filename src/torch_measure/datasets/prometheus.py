@@ -91,8 +91,7 @@ def _register_prometheus_datasets() -> dict[str, DatasetInfo]:
         name="preference",
         family="prometheus",
         description=(
-            "Prometheus Preference-Collection — GPT-4 pairwise preferences, "
-            "binary (996 criteria x 200 instances)"
+            "Prometheus Preference-Collection — GPT-4 pairwise preferences, binary (996 criteria x 200 instances)"
         ),
         response_type="binary",
         n_subjects=996,

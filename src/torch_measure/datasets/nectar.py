@@ -62,10 +62,7 @@ def _register_nectar_datasets() -> dict[str, DatasetInfo]:
     datasets["all"] = DatasetInfo(
         name="all",
         family="nectar",
-        description=(
-            "Nectar — all prompts, normalized rank scores "
-            "(40 models x 182,954 prompts, 83.8% missing)"
-        ),
+        description=("Nectar — all prompts, normalized rank scores (40 models x 182,954 prompts, 83.8% missing)"),
         response_type="continuous",
         n_subjects=40,
         n_items=182954,
@@ -83,8 +80,7 @@ def _register_nectar_datasets() -> dict[str, DatasetInfo]:
         name="50k",
         family="nectar",
         description=(
-            "Nectar — 50K random prompt subset, normalized rank scores "
-            "(40 models x 50,000 prompts, 83.8% missing)"
+            "Nectar — 50K random prompt subset, normalized rank scores (40 models x 50,000 prompts, 83.8% missing)"
         ),
         response_type="continuous",
         n_subjects=40,

@@ -52,6 +52,8 @@ dev = [
 test = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
+    "pandas>=2.0",
+    "huggingface_hub>=0.16",
 ]
 docs = [
     "sphinx>=7.0",

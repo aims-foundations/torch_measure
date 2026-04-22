@@ -87,10 +87,7 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
     datasets["helpfulness"] = DatasetInfo(
         name="helpfulness",
         family="pku_saferlhf",
-        description=(
-            "PKU-SafeRLHF helpfulness preference pairs "
-            "(default config, train+test, 82118 comparisons)"
-        ),
+        description=("PKU-SafeRLHF helpfulness preference pairs (default config, train+test, 82118 comparisons)"),
         response_type="pairwise",
         n_subjects=2,
         n_items=82118,
@@ -108,10 +105,7 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
     datasets["safety"] = DatasetInfo(
         name="safety",
         family="pku_saferlhf",
-        description=(
-            "PKU-SafeRLHF safety preference pairs "
-            "(default config, train+test, 82118 comparisons)"
-        ),
+        description=("PKU-SafeRLHF safety preference pairs (default config, train+test, 82118 comparisons)"),
         response_type="pairwise",
         n_subjects=2,
         n_items=82118,
@@ -141,8 +135,7 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
             name=f"{friendly_name}_helpfulness",
             family="pku_saferlhf",
             description=(
-                f"PKU-SafeRLHF helpfulness preference pairs "
-                f"({config} config, train+test, {total} comparisons)"
+                f"PKU-SafeRLHF helpfulness preference pairs ({config} config, train+test, {total} comparisons)"
             ),
             response_type="pairwise",
             n_subjects=2,
@@ -161,10 +154,7 @@ def _register_pku_saferlhf_datasets() -> dict[str, DatasetInfo]:
         datasets[f"{friendly_name}_safety"] = DatasetInfo(
             name=f"{friendly_name}_safety",
             family="pku_saferlhf",
-            description=(
-                f"PKU-SafeRLHF safety preference pairs "
-                f"({config} config, train+test, {total} comparisons)"
-            ),
+            description=(f"PKU-SafeRLHF safety preference pairs ({config} config, train+test, {total} comparisons)"),
             response_type="pairwise",
             n_subjects=2,
             n_items=total,

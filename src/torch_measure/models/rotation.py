@@ -10,7 +10,9 @@ from __future__ import annotations
 import torch
 
 
-def varimax_rotation(loadings: torch.Tensor, max_iter: int = 100, tol: float = 1e-6) -> tuple[torch.Tensor, torch.Tensor]:
+def varimax_rotation(
+    loadings: torch.Tensor, max_iter: int = 100, tol: float = 1e-6
+) -> tuple[torch.Tensor, torch.Tensor]:
     """Apply Varimax rotation to factor loadings.
 
     Varimax maximizes the variance of squared loadings within each factor,
@@ -87,9 +89,7 @@ def _varimax_torch(loadings: torch.Tensor, max_iter: int = 100, tol: float = 1e-
     return rotated, rotation
 
 
-def promax_rotation(
-    loadings: torch.Tensor, power: int = 4, **kwargs
-) -> tuple[torch.Tensor, torch.Tensor]:
+def promax_rotation(loadings: torch.Tensor, power: int = 4, **kwargs) -> tuple[torch.Tensor, torch.Tensor]:
     """Apply Promax (oblique) rotation to factor loadings.
 
     Promax starts with Varimax and then applies a power transformation

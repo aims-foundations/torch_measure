@@ -110,8 +110,7 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
         name="all",
         family="judgebench",
         description=(
-            "JudgeBench all categories — LLM-as-judge evaluation on "
-            "challenging response pairs (33 judges x 350 pairs)"
+            "JudgeBench all categories — LLM-as-judge evaluation on challenging response pairs (33 judges x 350 pairs)"
         ),
         response_type="binary",
         n_subjects=33,
@@ -130,10 +129,7 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
     d["knowledge"] = DatasetInfo(
         name="knowledge",
         family="judgebench",
-        description=(
-            "JudgeBench knowledge category — MMLU-Pro subjects "
-            "(33 judges x 143 pairs)"
-        ),
+        description=("JudgeBench knowledge category — MMLU-Pro subjects (33 judges x 143 pairs)"),
         response_type="binary",
         n_subjects=33,
         n_items=143,
@@ -149,10 +145,7 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
     d["reasoning"] = DatasetInfo(
         name="reasoning",
         family="judgebench",
-        description=(
-            "JudgeBench reasoning category — LiveBench reasoning "
-            "(33 judges x 98 pairs)"
-        ),
+        description=("JudgeBench reasoning category — LiveBench reasoning (33 judges x 98 pairs)"),
         response_type="binary",
         n_subjects=33,
         n_items=98,
@@ -168,10 +161,7 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
     d["math"] = DatasetInfo(
         name="math",
         family="judgebench",
-        description=(
-            "JudgeBench math category — LiveBench math + MMLU-Pro math "
-            "(33 judges x 67 pairs)"
-        ),
+        description=("JudgeBench math category — LiveBench math + MMLU-Pro math (33 judges x 67 pairs)"),
         response_type="binary",
         n_subjects=33,
         n_items=67,
@@ -187,10 +177,7 @@ def _register_judgebench_datasets() -> dict[str, DatasetInfo]:
     d["coding"] = DatasetInfo(
         name="coding",
         family="judgebench",
-        description=(
-            "JudgeBench coding category — LiveCodeBench "
-            "(33 judges x 42 pairs)"
-        ),
+        description=("JudgeBench coding category — LiveCodeBench (33 judges x 42 pairs)"),
         response_type="binary",
         n_subjects=33,
         n_items=42,

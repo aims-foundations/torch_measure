@@ -96,8 +96,7 @@ def svi_fit(
         from pyro.optim import ClippedAdam
     except ImportError as err:
         raise ImportError(
-            "Bayesian SVI fitting requires pyro-ppl. "
-            "Install with: pip install torch_measure[bayesian]"
+            "Bayesian SVI fitting requires pyro-ppl. Install with: pip install torch_measure[bayesian]"
         ) from err
 
     if mask is None:

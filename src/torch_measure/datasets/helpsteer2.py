@@ -114,8 +114,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         name="coherence",
         family="helpsteer2",
         description=(
-            "HelpSteer2 -- human coherence rating, "
-            f"normalized to [0,1] ({_N_SUBJECTS} responses x {_N_ITEMS} prompts)"
+            f"HelpSteer2 -- human coherence rating, normalized to [0,1] ({_N_SUBJECTS} responses x {_N_ITEMS} prompts)"
         ),
         response_type="continuous",
         n_subjects=_N_SUBJECTS,
@@ -134,8 +133,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         name="complexity",
         family="helpsteer2",
         description=(
-            "HelpSteer2 -- human complexity rating, "
-            f"normalized to [0,1] ({_N_SUBJECTS} responses x {_N_ITEMS} prompts)"
+            f"HelpSteer2 -- human complexity rating, normalized to [0,1] ({_N_SUBJECTS} responses x {_N_ITEMS} prompts)"
         ),
         response_type="continuous",
         n_subjects=_N_SUBJECTS,
@@ -154,8 +152,7 @@ def _register_helpsteer2_datasets() -> dict[str, DatasetInfo]:
         name="verbosity",
         family="helpsteer2",
         description=(
-            "HelpSteer2 -- human verbosity rating, "
-            f"normalized to [0,1] ({_N_SUBJECTS} responses x {_N_ITEMS} prompts)"
+            f"HelpSteer2 -- human verbosity rating, normalized to [0,1] ({_N_SUBJECTS} responses x {_N_ITEMS} prompts)"
         ),
         response_type="continuous",
         n_subjects=_N_SUBJECTS,

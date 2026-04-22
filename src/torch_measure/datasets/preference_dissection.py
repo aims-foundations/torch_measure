@@ -41,10 +41,7 @@ def _register_preference_dissection_datasets() -> dict[str, DatasetInfo]:
     datasets["all_judges"] = DatasetInfo(
         name="all_judges",
         family="preference_dissection",
-        description=(
-            "GAIR Preference Dissection — 33 judges x 5,240 Chatbot Arena "
-            "pairs, binary pairwise preferences"
-        ),
+        description=("GAIR Preference Dissection — 33 judges x 5,240 Chatbot Arena pairs, binary pairwise preferences"),
         response_type="binary",
         n_subjects=33,
         n_items=5240,
@@ -60,10 +57,7 @@ def _register_preference_dissection_datasets() -> dict[str, DatasetInfo]:
     datasets["crossed"] = DatasetInfo(
         name="crossed",
         family="preference_dissection",
-        description=(
-            "GAIR Preference Dissection — 5,240 pairs x 33 judges, "
-            "transposed for G-theory facet analysis"
-        ),
+        description=("GAIR Preference Dissection — 5,240 pairs x 33 judges, transposed for G-theory facet analysis"),
         response_type="binary",
         n_subjects=5240,
         n_items=33,

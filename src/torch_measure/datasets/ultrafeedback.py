@@ -52,8 +52,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
         name="overall",
         family="ultrafeedback",
         description=(
-            "UltraFeedback — mean GPT-4 rating across all aspects, "
-            "normalized to [0,1] (17 models x 63,967 prompts)"
+            "UltraFeedback — mean GPT-4 rating across all aspects, normalized to [0,1] (17 models x 63,967 prompts)"
         ),
         response_type="continuous",
         n_subjects=17,
@@ -71,10 +70,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
     datasets["helpfulness"] = DatasetInfo(
         name="helpfulness",
         family="ultrafeedback",
-        description=(
-            "UltraFeedback — GPT-4 helpfulness rating, "
-            "normalized to [0,1] (17 models x 63,967 prompts)"
-        ),
+        description=("UltraFeedback — GPT-4 helpfulness rating, normalized to [0,1] (17 models x 63,967 prompts)"),
         response_type="continuous",
         n_subjects=17,
         n_items=63967,
@@ -91,10 +87,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
     datasets["honesty"] = DatasetInfo(
         name="honesty",
         family="ultrafeedback",
-        description=(
-            "UltraFeedback — GPT-4 honesty rating, "
-            "normalized to [0,1] (17 models x 63,967 prompts)"
-        ),
+        description=("UltraFeedback — GPT-4 honesty rating, normalized to [0,1] (17 models x 63,967 prompts)"),
         response_type="continuous",
         n_subjects=17,
         n_items=63967,
@@ -112,8 +105,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
         name="instruction_following",
         family="ultrafeedback",
         description=(
-            "UltraFeedback — GPT-4 instruction-following rating, "
-            "normalized to [0,1] (17 models x 63,967 prompts)"
+            "UltraFeedback — GPT-4 instruction-following rating, normalized to [0,1] (17 models x 63,967 prompts)"
         ),
         response_type="continuous",
         n_subjects=17,
@@ -131,10 +123,7 @@ def _register_ultrafeedback_datasets() -> dict[str, DatasetInfo]:
     datasets["truthfulness"] = DatasetInfo(
         name="truthfulness",
         family="ultrafeedback",
-        description=(
-            "UltraFeedback — GPT-4 truthfulness rating, "
-            "normalized to [0,1] (17 models x 63,967 prompts)"
-        ),
+        description=("UltraFeedback — GPT-4 truthfulness rating, normalized to [0,1] (17 models x 63,967 prompts)"),
         response_type="continuous",
         n_subjects=17,
         n_items=63967,

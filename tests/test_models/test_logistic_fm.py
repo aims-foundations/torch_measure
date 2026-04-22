@@ -1,7 +1,5 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
-import torch
-
 from torch_measure.models import LogisticFM
 
 

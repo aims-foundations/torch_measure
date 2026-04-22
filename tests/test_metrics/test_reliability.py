@@ -2,7 +2,12 @@
 
 import torch
 
-from torch_measure.metrics.reliability import cronbach_alpha, infit_statistics, item_total_correlation, outfit_statistics
+from torch_measure.metrics.reliability import (
+    cronbach_alpha,
+    infit_statistics,
+    item_total_correlation,
+    outfit_statistics,
+)
 
 
 class TestInfitStatistics:

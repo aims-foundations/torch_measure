@@ -48,10 +48,7 @@ def _register_indeterminacy_datasets() -> dict[str, DatasetInfo]:
     datasets["all"] = DatasetInfo(
         name="all",
         family="indeterminacy",
-        description=(
-            "All task groups combined, P(cat 0) across reps "
-            "(9 judges x 800 items)"
-        ),
+        description=("All task groups combined, P(cat 0) across reps (9 judges x 800 items)"),
         response_type="continuous",
         n_subjects=9,
         n_items=800,

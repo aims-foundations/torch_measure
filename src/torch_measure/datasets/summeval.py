@@ -67,10 +67,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
         datasets[name] = DatasetInfo(
             name=name,
             family="summeval",
-            description=(
-                f"SummEval expert {dim} ratings, "
-                f"mean across 3 experts ({_N_MODELS} models x {_N_DOCS} docs)"
-            ),
+            description=(f"SummEval expert {dim} ratings, mean across 3 experts ({_N_MODELS} models x {_N_DOCS} docs)"),
             response_type="continuous",
             n_subjects=_N_MODELS,
             n_items=_N_DOCS,
@@ -110,10 +107,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
         datasets[name] = DatasetInfo(
             name=name,
             family="summeval",
-            description=(
-                f"SummEval crowd {dim} ratings, "
-                f"mean across 5 turkers ({_N_MODELS} models x {_N_DOCS} docs)"
-            ),
+            description=(f"SummEval crowd {dim} ratings, mean across 5 turkers ({_N_MODELS} models x {_N_DOCS} docs)"),
             response_type="continuous",
             n_subjects=_N_MODELS,
             n_items=_N_DOCS,
@@ -164,8 +158,7 @@ def _register_summeval_datasets() -> dict[str, DatasetInfo]:
         citation=_SUMMEVAL_CITATION,
         url=_SUMMEVAL_URL,
         license="MIT",
-        tags=["nlp", "summarization", "expert-rated", "3d-tensor",
-              "fully-crossed", "g-theory"],
+        tags=["nlp", "summarization", "expert-rated", "3d-tensor", "fully-crossed", "g-theory"],
     )
 
     return datasets

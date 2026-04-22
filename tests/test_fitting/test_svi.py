@@ -81,9 +81,7 @@ class TestSVIFitBeta:
 
     def test_beta_via_model_fit(self, small_beta_response_matrix):
         model = BetaRasch(n_subjects=20, n_items=30)
-        history = model.fit(
-            small_beta_response_matrix, method="svi", max_epochs=100, verbose=False
-        )
+        history = model.fit(small_beta_response_matrix, method="svi", max_epochs=100, verbose=False)
         assert "losses" in history
         assert len(history["losses"]) == 100
 
