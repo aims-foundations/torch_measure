@@ -23,9 +23,7 @@ class TestMLEFit:
     def test_convergence_stops_early(self, small_response_matrix):
         model = Rasch(n_subjects=20, n_items=30)
         mask = torch.ones_like(small_response_matrix, dtype=torch.bool)
-        history = mle_fit(
-            model, small_response_matrix, mask, max_epochs=10000, convergence_tol=1e-4, verbose=False
-        )
+        history = mle_fit(model, small_response_matrix, mask, max_epochs=10000, convergence_tol=1e-4, verbose=False)
         # Should stop well before 10000 epochs
         assert len(history["losses"]) < 10000
 
@@ -45,7 +43,5 @@ class TestMLEFitBeta:
 
     def test_beta_lbfgs(self, small_beta_response_matrix):
         model = BetaRasch(n_subjects=20, n_items=30)
-        history = model.fit(
-            small_beta_response_matrix, max_epochs=50, verbose=False, optimizer_cls="lbfgs"
-        )
+        history = model.fit(small_beta_response_matrix, max_epochs=50, verbose=False, optimizer_cls="lbfgs")
         assert len(history["losses"]) > 0

@@ -28,7 +28,7 @@ _OASST_URL = "https://huggingface.co/datasets/OpenAssistant/oasst1"
 _OASST_CITATION = (
     "@inproceedings{kopf2023openassistant,\n"
     "  title={OpenAssistant Conversations -- Democratizing Large Language Model Alignment},\n"
-    "  author={K{\\\"o}pf, Andreas and Kilcher, Yannic and von R{\\\"u}tte, Dimitri and "
+    '  author={K{\\"o}pf, Andreas and Kilcher, Yannic and von R{\\"u}tte, Dimitri and '
     "Anagnostidis, Sotiris and Tam, Zhi-Rui and Stevens, Keith and "
     "Barhoum, Abdullah and Nguyen, Duc and Stanley, Oliver and "
     "Nagyfi, Rich{\\'a}rd and others},\n"

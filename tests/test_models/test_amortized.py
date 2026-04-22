@@ -1,5 +1,6 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
+import pytest
 import torch
 
 from torch_measure.models import AmortizedIRT
@@ -23,11 +24,8 @@ class TestAmortizedIRT:
     def test_set_embeddings_wrong_size(self):
         model = AmortizedIRT(n_subjects=5, n_items=10, embedding_dim=32)
         embeddings = torch.randn(5, 32)  # wrong n_items
-        try:
+        with pytest.raises(ValueError):
             model.set_embeddings(embeddings)
-            assert False, "Should have raised ValueError"
-        except ValueError:
-            pass
 
     def test_predict_shape(self):
         model = AmortizedIRT(n_subjects=5, n_items=10, embedding_dim=32, pl=2)
@@ -40,11 +38,8 @@ class TestAmortizedIRT:
 
     def test_predict_requires_embeddings(self):
         model = AmortizedIRT(n_subjects=5, n_items=10, embedding_dim=32)
-        try:
+        with pytest.raises(RuntimeError):
             model.predict()
-            assert False, "Should have raised RuntimeError"
-        except RuntimeError:
-            pass
 
     def test_pl_modes(self):
         """Test 1PL, 2PL, and 3PL amortized modes."""

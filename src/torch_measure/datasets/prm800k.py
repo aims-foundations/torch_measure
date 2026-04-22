@@ -91,10 +91,7 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
     d["train"] = DatasetInfo(
         name="train",
         family="prm800k",
-        description=(
-            "PRM800K train split — step-level correctness labels "
-            "(98731 solutions x 107 steps)"
-        ),
+        description=("PRM800K train split — step-level correctness labels (98731 solutions x 107 steps)"),
         response_type="binary",
         n_subjects=98731,
         n_items=107,
@@ -111,10 +108,7 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
     d["test"] = DatasetInfo(
         name="test",
         family="prm800k",
-        description=(
-            "PRM800K test split — step-level correctness labels "
-            "(2868 solutions x 53 steps)"
-        ),
+        description=("PRM800K test split — step-level correctness labels (2868 solutions x 53 steps)"),
         response_type="binary",
         n_subjects=2868,
         n_items=53,
@@ -131,10 +125,7 @@ def _register_prm800k_datasets() -> dict[str, DatasetInfo]:
     d["phase2"] = DatasetInfo(
         name="phase2",
         family="prm800k",
-        description=(
-            "PRM800K phase 2 only — active-learning-selected solutions "
-            "(100544 solutions x 107 steps)"
-        ),
+        description=("PRM800K phase 2 only — active-learning-selected solutions (100544 solutions x 107 steps)"),
         response_type="binary",
         n_subjects=100544,
         n_items=107,

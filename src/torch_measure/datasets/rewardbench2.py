@@ -48,8 +48,7 @@ def _register_rewardbench2_datasets() -> dict[str, DatasetInfo]:
         name="all",
         family="rewardbench2",
         description=(
-            "RewardBench 2 all domains — reward model evaluation on harder "
-            "preference triples (188 judges x 1865 items)"
+            "RewardBench 2 all domains — reward model evaluation on harder preference triples (188 judges x 1865 items)"
         ),
         response_type="binary",
         n_subjects=188,

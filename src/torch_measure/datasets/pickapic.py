@@ -68,8 +68,7 @@ def _register_pickapic_datasets() -> dict[str, DatasetInfo]:
         name="sampled_100k",
         family="pickapic",
         description=(
-            "Pick-a-Pic v2 — 100K sampled human preference comparisons "
-            "over text-to-image model outputs (14 models)"
+            "Pick-a-Pic v2 — 100K sampled human preference comparisons over text-to-image model outputs (14 models)"
         ),
         response_type="pairwise",
         n_subjects=14,
@@ -81,8 +80,7 @@ def _register_pickapic_datasets() -> dict[str, DatasetInfo]:
         citation=_PICKAPIC_CITATION,
         url=_PICKAPIC_URL,
         license="CC0-1.0",
-        tags=["multimodal", "text-to-image", "pairwise", "preference",
-              "human-evaluation", "sampled"],
+        tags=["multimodal", "text-to-image", "pairwise", "preference", "human-evaluation", "sampled"],
     )
 
     return datasets

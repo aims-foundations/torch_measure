@@ -19,6 +19,7 @@ is the source of truth; when it isn't (air-gapped environments, CI
 without HF access), the hardcoded registry still works for all legacy
 dataset names.
 """
+
 from __future__ import annotations
 
 import json
@@ -31,6 +32,13 @@ MANIFEST_FILENAME = "manifest.json"
 
 # Process-local cache. Use ``load_manifest(force_download=True)`` to refresh.
 _manifest_cache: dict[str, Any] | None = None
+
+
+def _canonical_dataset_name(name: str, family: str) -> str:
+    """Return the public dataset name in ``family/name`` form."""
+    if "/" in name:
+        return name
+    return f"{family}/{name}"
 
 
 def load_manifest(*, force_download: bool = False) -> dict[str, Any] | None:
@@ -72,9 +80,9 @@ def load_manifest(*, force_download: bool = False) -> dict[str, Any] | None:
         return None
 
     try:
-        with open(path) as f:
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
-    except (OSError, json.JSONDecodeError):
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
         return None
 
     if not isinstance(data, dict) or "datasets" not in data:
@@ -94,11 +102,18 @@ def manifest_to_info(name: str, entry: dict[str, Any]) -> DatasetInfo:
     """
     info = entry.get("info") or {}
     tags = list(info.get("tags") or [])
-    # Use the first tag as the `family` (loose convention matching the
-    # old per-family registry). Fallback to "misc" if there are no tags.
-    family = tags[0] if tags else "misc"
+    if "/" in name:
+        # Slash-qualified manifest keys already encode the public family.
+        canonical_name = name
+        family = name.split("/", 1)[0]
+    else:
+        # Use the first tag as the `family` (loose convention matching the
+        # old per-family registry). Fallback to "misc" if there are no tags.
+        family = info.get("family") or (tags[0] if tags else "misc")
+        canonical_name = _canonical_dataset_name(name, family)
+    base_name = canonical_name.split("/", 1)[-1]
     return DatasetInfo(
-        name=name,
+        name=canonical_name,
         family=family,
         description=info.get("description", ""),
         response_type=entry.get("response_type", "binary"),
@@ -107,7 +122,7 @@ def manifest_to_info(name: str, entry: dict[str, Any]) -> DatasetInfo:
         subject_entity=info.get("subject_type", "LLM"),
         item_entity=info.get("item_type", "question"),
         repo_id=MANIFEST_REPO,
-        filename=entry.get("filename", f"{name}.pt"),
+        filename=entry.get("filename", f"{base_name}.pt"),
         citation=info.get("citation", ""),
         url=info.get("paper_url") or info.get("data_source_url", ""),
         license=info.get("license", ""),
@@ -116,28 +131,47 @@ def manifest_to_info(name: str, entry: dict[str, Any]) -> DatasetInfo:
     )
 
 
+def _manifest_dataset_infos() -> dict[str, DatasetInfo]:
+    """Return canonical manifest entries keyed by public dataset name."""
+    manifest = load_manifest()
+    if manifest is None:
+        return {}
+
+    datasets = manifest.get("datasets") or {}
+    infos: dict[str, DatasetInfo] = {}
+    for name, entry in datasets.items():
+        if not isinstance(entry, dict):
+            continue
+        dataset_info = manifest_to_info(name, entry)
+        infos[dataset_info.name] = dataset_info
+    return infos
+
+
 def manifest_info(name: str) -> DatasetInfo | None:
     """Return :class:`DatasetInfo` for ``name`` from the manifest.
 
-    Returns ``None`` if the manifest is unavailable or ``name`` is not
-    in it. Callers should fall back to the hardcoded registry on ``None``.
+    Canonical ``family/name`` lookups are matched directly. Bare names
+    only resolve when they are unambiguous after canonicalizing manifest
+    entries.
     """
-    manifest = load_manifest()
-    if manifest is None:
-        return None
-    datasets = manifest.get("datasets") or {}
-    entry = datasets.get(name)
-    if not isinstance(entry, dict):
-        return None
-    return manifest_to_info(name, entry)
+    infos = _manifest_dataset_infos()
+    if "/" in name:
+        return infos.get(name)
+
+    matches = [
+        dataset_info for canonical_name, dataset_info in infos.items() if canonical_name.split("/", 1)[1] == name
+    ]
+    if len(matches) == 1:
+        return matches[0]
+    return None
 
 
-def manifest_dataset_names() -> list[str]:
+def manifest_dataset_names(family: str | None = None) -> list[str]:
     """Return the sorted list of dataset names in the manifest.
 
     Returns an empty list if the manifest is unavailable.
     """
-    manifest = load_manifest()
-    if manifest is None:
-        return []
-    return sorted(manifest.get("datasets") or {})
+    infos = _manifest_dataset_infos()
+    if family is not None:
+        return sorted(name for name, entry in infos.items() if entry.family == family)
+    return sorted(infos)

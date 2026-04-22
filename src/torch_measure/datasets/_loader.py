@@ -122,9 +122,7 @@ def load_csv(
     try:
         import pandas as pd
     except ImportError as err:
-        raise ImportError(
-            "load_csv requires pandas. Install with: pip install pandas"
-        ) from err
+        raise ImportError("load_csv requires pandas. Install with: pip install pandas") from err
 
     from torch_measure.data.response_matrix import ResponseMatrix
 

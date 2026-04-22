@@ -56,10 +56,7 @@ def _register_shp2_datasets() -> dict[str, DatasetInfo]:
     datasets["domain_stats"] = DatasetInfo(
         name="domain_stats",
         family="shp2",
-        description=(
-            "SHP-2 — per-domain preference statistics from 4.3M Reddit/SE pairs "
-            "(124 domains x 5 metrics)"
-        ),
+        description=("SHP-2 — per-domain preference statistics from 4.3M Reddit/SE pairs (124 domains x 5 metrics)"),
         response_type="continuous",
         n_subjects=124,
         n_items=5,
@@ -76,8 +73,7 @@ def _register_shp2_datasets() -> dict[str, DatasetInfo]:
         name="sampled_pairs",
         family="shp2",
         description=(
-            "SHP-2 — 100K sampled preference pairs, binary preferred label "
-            "(2 response positions x 100,000 pairs)"
+            "SHP-2 — 100K sampled preference pairs, binary preferred label (2 response positions x 100,000 pairs)"
         ),
         response_type="binary",
         n_subjects=2,

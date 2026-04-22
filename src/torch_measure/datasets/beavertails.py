@@ -127,9 +127,7 @@ def _register_beavertails_datasets() -> dict[str, DatasetInfo]:
     datasets["overall"] = DatasetInfo(
         name="overall",
         family="beavertails",
-        description=(
-            f"BeaverTails — overall binary safety label (1 x {_N_ITEMS:,} QA pairs)"
-        ),
+        description=(f"BeaverTails — overall binary safety label (1 x {_N_ITEMS:,} QA pairs)"),
         response_type="binary",
         n_subjects=1,
         n_items=_N_ITEMS,
@@ -149,10 +147,7 @@ def _register_beavertails_datasets() -> dict[str, DatasetInfo]:
         datasets[name] = DatasetInfo(
             name=name,
             family="beavertails",
-            description=(
-                f"BeaverTails — {category} binary safety label "
-                f"(1 x {_N_ITEMS:,} QA pairs)"
-            ),
+            description=(f"BeaverTails — {category} binary safety label (1 x {_N_ITEMS:,} QA pairs)"),
             response_type="binary",
             n_subjects=1,
             n_items=_N_ITEMS,

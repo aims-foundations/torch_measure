@@ -45,7 +45,9 @@ def infit_statistics(predicted: torch.Tensor, observed: torch.Tensor, mask: torc
     return numerator / denominator
 
 
-def outfit_statistics(predicted: torch.Tensor, observed: torch.Tensor, mask: torch.Tensor | None = None) -> torch.Tensor:
+def outfit_statistics(
+    predicted: torch.Tensor, observed: torch.Tensor, mask: torch.Tensor | None = None
+) -> torch.Tensor:
     """Compute Rasch outfit (unweighted) mean square statistics per item.
 
     Outfit is sensitive to unexpected responses far from item difficulty.

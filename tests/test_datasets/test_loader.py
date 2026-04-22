@@ -138,6 +138,8 @@ class TestLoadPairwise:
     def test_load_pairwise_rejects_bare_tensor(self, tmp_path):
         pt_path = self._make_pt_file(tmp_path, torch.rand(3, 5))
 
-        with patch("huggingface_hub.hf_hub_download", return_value=pt_path):
-            with pytest.raises(TypeError, match="dict payload"):
-                load("arena/chatbot_arena")
+        with (
+            patch("huggingface_hub.hf_hub_download", return_value=pt_path),
+            pytest.raises(TypeError, match="dict payload"),
+        ):
+            load("arena/chatbot_arena")

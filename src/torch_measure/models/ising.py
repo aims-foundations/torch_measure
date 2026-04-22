@@ -72,9 +72,7 @@ class IsingModel(NetworkModel):
         self.thresholds = nn.Parameter(torch.zeros(n_items, device=self._device))
         # Full (n_items, n_items) raw weight matrix; symmetrised on the fly.
         # Initialise near zero so the network starts sparse.
-        self._weights_raw = nn.Parameter(
-            torch.zeros(n_items, n_items, device=self._device)
-        )
+        self._weights_raw = nn.Parameter(torch.zeros(n_items, n_items, device=self._device))
 
     def _get_weights(self) -> torch.Tensor:
         """Symmetric weight matrix with zero diagonal (gradient-tracked)."""

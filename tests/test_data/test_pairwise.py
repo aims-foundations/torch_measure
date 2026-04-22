@@ -8,7 +8,6 @@ import torch
 
 from torch_measure.data.pairwise import PairwiseComparisons
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
@@ -270,22 +269,26 @@ class TestTo:
 
 class TestFromDataframe:
     def test_basic(self):
-        df = pd.DataFrame({
-            "model_a": ["gpt-4", "gpt-4", "claude"],
-            "model_b": ["claude", "gemini", "gemini"],
-            "outcome": [1.0, 0.5, 0.0],
-        })
+        df = pd.DataFrame(
+            {
+                "model_a": ["gpt-4", "gpt-4", "claude"],
+                "model_b": ["claude", "gemini", "gemini"],
+                "outcome": [1.0, 0.5, 0.0],
+            }
+        )
         pc = PairwiseComparisons.from_dataframe(df)
         assert pc.n_comparisons == 3
         assert pc.n_subjects == 3
         assert sorted(pc.subject_ids) == ["claude", "gemini", "gpt-4"]
 
     def test_custom_columns(self):
-        df = pd.DataFrame({
-            "a": ["x", "y"],
-            "b": ["y", "x"],
-            "result": [1.0, 0.0],
-        })
+        df = pd.DataFrame(
+            {
+                "a": ["x", "y"],
+                "b": ["y", "x"],
+                "result": [1.0, 0.0],
+            }
+        )
         pc = PairwiseComparisons.from_dataframe(df, subject_a_col="a", subject_b_col="b", outcome_col="result")
         assert pc.n_comparisons == 2
         assert pc.n_subjects == 2

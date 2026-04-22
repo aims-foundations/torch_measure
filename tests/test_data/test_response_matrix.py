@@ -1,6 +1,7 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
 import numpy as np
+import pytest
 import torch
 
 from torch_measure.data import ResponseMatrix
@@ -21,11 +22,8 @@ class TestResponseMatrix:
         assert rm.shape == (10, 20)
 
     def test_rejects_1d(self):
-        try:
+        with pytest.raises(ValueError):
             ResponseMatrix(torch.randn(10))
-            assert False, "Should have raised ValueError"
-        except ValueError:
-            pass
 
     def test_observed_mask(self):
         data = torch.tensor([[1.0, float("nan")], [0.0, 1.0]])

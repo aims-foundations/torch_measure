@@ -225,11 +225,16 @@ def _register_intervention_datasets() -> dict[str, DatasetInfo]:
 
         for source in ["ai", "human"]:
             n_subj = {
-                ("art", "ai"): 278, ("art", "human"): 280,
-                ("census", "ai"): 43, ("census", "human"): 49,
-                ("cities", "ai"): 79, ("cities", "human"): 63,
-                ("dermatology", "ai"): 20, ("dermatology", "human"): 17,
-                ("sarcasm", "ai"): 147, ("sarcasm", "human"): 149,
+                ("art", "ai"): 278,
+                ("art", "human"): 280,
+                ("census", "ai"): 43,
+                ("census", "human"): 49,
+                ("cities", "ai"): 79,
+                ("cities", "human"): 63,
+                ("dermatology", "ai"): 20,
+                ("dermatology", "human"): 17,
+                ("sarcasm", "ai"): 147,
+                ("sarcasm", "human"): 149,
             }[(domain, source)]
 
             d[f"haiid_{domain}_post_{source}"] = DatasetInfo(

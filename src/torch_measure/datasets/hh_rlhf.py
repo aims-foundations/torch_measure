@@ -79,10 +79,7 @@ def _register_hh_rlhf_datasets() -> dict[str, DatasetInfo]:
     datasets["harmless"] = DatasetInfo(
         name="harmless",
         family="hh_rlhf",
-        description=(
-            "Anthropic HH-RLHF harmless subset — human preference pairs "
-            "from harmless-base"
-        ),
+        description=("Anthropic HH-RLHF harmless subset — human preference pairs from harmless-base"),
         response_type="pairwise",
         n_subjects=2,
         n_items=44849,

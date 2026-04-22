@@ -5,10 +5,10 @@
 import pytest
 import torch
 
-pyro = pytest.importorskip("pyro", reason="pyro-ppl required for SVI tests")
-
 from torch_measure.fitting.svi import svi_fit
 from torch_measure.models.testlet import TestletRasch
+
+pytest.importorskip("pyro", reason="pyro-ppl required for SVI tests")
 
 
 class TestSVIFitTestletRasch:
