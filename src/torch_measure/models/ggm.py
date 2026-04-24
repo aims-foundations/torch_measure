@@ -163,7 +163,7 @@ class GaussianGraphicalModel(NetworkModel):
 
     def fit(
         self,
-        response_matrix: torch.Tensor,
+        data,
         mask: torch.Tensor | None = None,
         max_epochs: int = 1000,
         lr: float = 0.01,
@@ -179,10 +179,12 @@ class GaussianGraphicalModel(NetworkModel):
 
         Parameters
         ----------
-        response_matrix : torch.Tensor
-            Continuous response matrix (n_subjects, n_items). NaN/-1 for missing.
+        data : LongFormData | torch.Tensor
+            Long-form dataset (preferred) or wide-form continuous response
+            tensor of shape ``(n_subjects, n_items)``. NaN or -1 marks missing.
         mask : torch.Tensor | None
-            Boolean mask. Inferred from NaNs if None.
+            Only used with wide-form input — boolean mask. Inferred from
+            NaNs if None.
         max_epochs : int
             Maximum optimisation epochs.
         lr : float
@@ -202,10 +204,7 @@ class GaussianGraphicalModel(NetworkModel):
         if lam is None:
             lam = self.lam
 
-        response_matrix = response_matrix.to(self._device)
-        if mask is None:
-            mask = ~torch.isnan(response_matrix) & (response_matrix != -1)
-        mask = mask.to(self._device)
+        response_matrix, mask = self._normalize_fit_inputs_to_matrix(data, mask)
 
         X = response_matrix.float()
         S = self._sample_covariance(X, mask).to(self._device)

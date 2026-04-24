@@ -20,6 +20,25 @@ Fitting a Rasch Model
    print("Abilities:", model.ability)
    print("Difficulties:", model.difficulty)
 
+Loading a Benchmark Dataset
+---------------------------
+
+``torch_measure.datasets.load()`` returns long-form tables from the
+`measurement-db <https://huggingface.co/datasets/aims-foundations/measurement-db>`_
+HuggingFace bucket. Pivot into a wide-form ``ResponseMatrix`` on demand.
+
+.. code-block:: python
+
+   from torch_measure.datasets import list_datasets, info, load
+
+   list_datasets()                       # all available benchmark ids
+   list_datasets(family="preference")    # filter by domain / modality / tags
+   info("mtbench")                       # DatasetInfo from benchmarks.parquet
+
+   data = load("mtbench")                # LongFormData (responses, items, subjects, traces, info)
+   data.responses.head()
+   rm = data.to_response_matrix()        # opt-in pivot to the legacy ResponseMatrix
+
 Running Adaptive Testing
 ------------------------
 

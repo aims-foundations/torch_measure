@@ -111,7 +111,7 @@ class IsingModel(NetworkModel):
 
     def fit(
         self,
-        response_matrix: torch.Tensor,
+        data,
         mask: torch.Tensor | None = None,
         max_epochs: int = 1000,
         lr: float = 0.01,
@@ -126,10 +126,12 @@ class IsingModel(NetworkModel):
 
         Parameters
         ----------
-        response_matrix : torch.Tensor
-            Binary response matrix (n_subjects, n_items). NaN or -1 for missing.
+        data : LongFormData | torch.Tensor
+            Long-form dataset (preferred) or wide-form binary response tensor
+            of shape ``(n_subjects, n_items)``. NaN or -1 marks missing.
         mask : torch.Tensor | None
-            Boolean mask (n_subjects, n_items). Inferred if None.
+            Only used with wide-form input — boolean mask of observed
+            entries. Inferred from NaNs if None.
         max_epochs : int
             Maximum optimisation epochs.
         lr : float
@@ -144,10 +146,7 @@ class IsingModel(NetworkModel):
         dict
             ``{"losses": [float, ...]}``.
         """
-        response_matrix = response_matrix.to(self._device)
-        if mask is None:
-            mask = ~torch.isnan(response_matrix) & (response_matrix != -1)
-        mask = mask.to(self._device)
+        response_matrix, mask = self._normalize_fit_inputs_to_matrix(data, mask)
 
         # Replace missing values with 0 for conditioning (excluded from loss)
         X = response_matrix.float().clone()

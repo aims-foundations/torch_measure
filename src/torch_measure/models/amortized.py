@@ -131,7 +131,7 @@ class AmortizedIRT(IRTModel):
 
     def fit(
         self,
-        response_matrix: torch.Tensor,
+        data,
         embeddings: torch.Tensor,
         mask: torch.Tensor | None = None,
         max_epochs: int = 1000,
@@ -144,12 +144,12 @@ class AmortizedIRT(IRTModel):
 
         Parameters
         ----------
-        response_matrix : torch.Tensor
-            Binary response matrix (n_subjects, n_items).
+        data : LongFormData | torch.Tensor
+            Long-form dataset (preferred) or wide-form response tensor.
         embeddings : torch.Tensor
-            Item embeddings (n_items, embedding_dim).
+            Item embeddings ``(n_items, embedding_dim)``.
         mask : torch.Tensor | None
-            Boolean mask for observed entries.
+            Boolean mask for observed entries (only used with wide-form input).
         max_epochs : int
             Maximum training epochs.
         lr : float
@@ -168,15 +168,12 @@ class AmortizedIRT(IRTModel):
 
         from torch_measure.fitting.mle import mle_fit
 
-        response_matrix = response_matrix.to(self._device)
-        if mask is None:
-            mask = ~torch.isnan(response_matrix) & (response_matrix != -1)
-        mask = mask.to(self._device)
-
+        subject_idx, item_idx, response = self._normalize_fit_inputs(data, mask)
         return mle_fit(
             self,
-            response_matrix,
-            mask,
+            subject_idx,
+            item_idx,
+            response,
             max_epochs=max_epochs,
             lr=lr,
             weight_decay=weight_decay,

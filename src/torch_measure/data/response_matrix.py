@@ -139,6 +139,107 @@ class ResponseMatrix:
             item_ids=list(df.columns.astype(str)),
         )
 
+    @classmethod
+    def from_long(cls, data) -> ResponseMatrix:
+        """Pivot a :class:`LongFormData` into a wide :class:`ResponseMatrix`.
+
+        When multiple trials or non-null ``test_condition`` values exist per
+        (subject, item) cell, the response is averaged across those
+        dimensions. The legacy ``load()`` path used to do this automatically;
+        consumers who want polytomous / per-trial / multi-condition analysis
+        should work with the :class:`LongFormData` directly.
+
+        Parameters
+        ----------
+        data : LongFormData
+            The long-form dataset returned by
+            :func:`torch_measure.datasets.load`.
+
+        Returns
+        -------
+        ResponseMatrix
+            Subject-by-item matrix with subjects rendered as their
+            ``display_name`` (when the subjects registry is populated) and
+            items keyed by ``item_id``. ``item_contents`` carries the item
+            ``content`` strings from the items registry.
+        """
+        import pandas as pd  # noqa: F401 — required for pivot
+
+        responses = data.responses
+        items = data.items
+        subjects = data.subjects
+        name = data.name
+
+        if "benchmark_id" in items.columns:
+            items_bench = items[items["benchmark_id"] == name]
+        else:
+            items_bench = items
+        items_bench = items_bench.set_index("item_id")
+        present_items = set(responses["item_id"].unique())
+        items_bench = items_bench[items_bench.index.isin(present_items)]
+
+        needs_agg = (
+            responses["trial"].nunique() > 1
+            or (
+                "test_condition" in responses.columns
+                and responses["test_condition"].notna().any()
+            )
+        )
+        if needs_agg:
+            agg = (
+                responses
+                .groupby(["subject_id", "item_id"], as_index=False)["response"]
+                .mean()
+            )
+        else:
+            agg = responses[["subject_id", "item_id", "response"]]
+
+        matrix = agg.pivot(index="subject_id", columns="item_id", values="response")
+
+        ordered_item_ids = [iid for iid in items_bench.index if iid in matrix.columns]
+        matrix = matrix.reindex(columns=ordered_item_ids)
+
+        subjects_by_id = (
+            subjects.set_index("subject_id")
+            if "subject_id" in subjects.columns
+            else subjects
+        )
+        subject_ids = list(matrix.index)
+        display_names = [
+            str(subjects_by_id.at[sid, "display_name"])
+            if (
+                hasattr(subjects_by_id, "index")
+                and sid in subjects_by_id.index
+                and "display_name" in getattr(subjects_by_id, "columns", [])
+            )
+            else sid
+            for sid in subject_ids
+        ]
+        item_contents = [
+            (
+                items_bench.at[iid, "content"]
+                if (iid in items_bench.index and "content" in items_bench.columns)
+                else None
+            )
+            or ""
+            for iid in ordered_item_ids
+        ]
+        item_contents = [str(c) for c in item_contents]
+
+        tensor = torch.tensor(matrix.values, dtype=torch.float32)
+
+        info = dict(data.info) if data.info is not None else {}
+        info.setdefault("benchmark_id", name)
+
+        return cls(
+            data=tensor,
+            subject_ids=display_names,
+            item_ids=ordered_item_ids,
+            item_contents=item_contents,
+            subject_metadata=None,
+            info=info,
+        )
+
     def __repr__(self) -> str:
         return (
             f"ResponseMatrix(n_subjects={self.n_subjects}, n_items={self.n_items}, "

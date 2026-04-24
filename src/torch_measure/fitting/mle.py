@@ -1,6 +1,6 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
-"""Maximum Likelihood Estimation for IRT models."""
+"""Maximum Likelihood Estimation for IRT models (long-form)."""
 
 from __future__ import annotations
 
@@ -11,8 +11,9 @@ from torch_measure.fitting._losses import bernoulli_nll
 
 def mle_fit(
     model,
-    response_matrix: torch.Tensor,
-    mask: torch.Tensor,
+    subject_idx: torch.Tensor,
+    item_idx: torch.Tensor,
+    response: torch.Tensor,
     max_epochs: int = 1000,
     lr: float = 0.01,
     weight_decay: float = 0.0,
@@ -21,19 +22,23 @@ def mle_fit(
     optimizer_cls: str = "adam",
     loss_fn=None,
 ) -> dict:
-    """Fit an IRT model via maximum likelihood estimation.
+    """Fit an IRT model via maximum likelihood on long-form observations.
 
-    Minimizes the negative log-likelihood of observed responses under
-    a Bernoulli model: L = -sum log P(Y_ij | params) over observed entries.
+    Minimises the mean negative log-likelihood of observed responses under
+    a Bernoulli model::
+
+        L = -mean log P(Y_k | params)  over observed rows k
 
     Parameters
     ----------
     model : IRTModel
-        The IRT model to fit.
-    response_matrix : torch.Tensor
-        Response matrix (n_subjects, n_items).
-    mask : torch.Tensor
-        Boolean mask of entries to use for fitting.
+        The IRT model to fit. Must expose ``predict_at(s_idx, i_idx)``.
+    subject_idx : torch.LongTensor
+        Integer subject indices, shape ``(n_obs,)``.
+    item_idx : torch.LongTensor
+        Integer item indices, shape ``(n_obs,)``.
+    response : torch.Tensor
+        Observed responses, shape ``(n_obs,)``, dtype float.
     max_epochs : int
         Maximum optimization epochs.
     lr : float
@@ -45,12 +50,12 @@ def mle_fit(
     verbose : bool
         Show progress bar.
     optimizer_cls : str
-        Optimizer: "adam" or "lbfgs".
+        Optimizer: ``"adam"`` or ``"lbfgs"``.
 
     Returns
     -------
     dict
-        Training history with 'losses' key.
+        Training history with ``"losses"`` key.
     """
     if loss_fn is None:
         loss_fn = bernoulli_nll
@@ -60,7 +65,7 @@ def mle_fit(
     else:
         optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
 
-    masked_responses = response_matrix[mask].float()
+    response = response.float()
     history = {"losses": []}
 
     iterator = range(max_epochs)
@@ -79,9 +84,8 @@ def mle_fit(
 
             def closure():
                 optimizer.zero_grad()
-                probs = model.predict()
-                masked_probs = probs[mask].clamp(1e-7, 1 - 1e-7)
-                loss = loss_fn(masked_probs, masked_responses)
+                probs = model.predict_at(subject_idx, item_idx).clamp(1e-7, 1 - 1e-7)
+                loss = loss_fn(probs, response)
                 loss.backward()
                 return loss
 
@@ -89,9 +93,8 @@ def mle_fit(
             loss_val = loss.item()
         else:
             optimizer.zero_grad()
-            probs = model.predict()
-            masked_probs = probs[mask].clamp(1e-7, 1 - 1e-7)
-            loss = loss_fn(masked_probs, masked_responses)
+            probs = model.predict_at(subject_idx, item_idx).clamp(1e-7, 1 - 1e-7)
+            loss = loss_fn(probs, response)
             loss.backward()
             optimizer.step()
             loss_val = loss.item()

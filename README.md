@@ -56,6 +56,24 @@ difficulties = model.difficulty    # (200,) item difficulty parameters
 probs = model.predict()            # (50, 200) predicted P(correct)
 ```
 
+### Loading a Benchmark
+
+`torch_measure.datasets.load()` returns a `LongFormData` object backed by the
+[measurement-db](https://huggingface.co/datasets/aims-foundations/measurement-db)
+HuggingFace bucket. Pivot into the legacy wide-form `ResponseMatrix` only when
+you want to fit classical IRT on averaged-across-trial responses.
+
+```python
+from torch_measure.datasets import list_datasets, info, load
+
+list_datasets()                       # names sourced from benchmarks.parquet
+info("mtbench")                       # DatasetInfo with modality/domain/license/...
+
+data = load("mtbench")                # long-form: responses, items, subjects, traces, info
+data.responses.head()
+rm = data.to_response_matrix()        # opt-in pivot to ResponseMatrix
+```
+
 ### Adaptive Testing
 
 ```python

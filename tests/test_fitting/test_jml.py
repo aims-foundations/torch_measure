@@ -1,7 +1,6 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
-import torch
-
+from tests.conftest import to_long_triple
 from torch_measure.fitting.jml import jml_fit
 from torch_measure.models import BetaRasch, Rasch
 
@@ -9,15 +8,15 @@ from torch_measure.models import BetaRasch, Rasch
 class TestJMLFit:
     def test_reduces_loss(self, small_response_matrix):
         model = Rasch(n_subjects=20, n_items=30)
-        mask = torch.ones_like(small_response_matrix, dtype=torch.bool)
-        history = jml_fit(model, small_response_matrix, mask, max_epochs=50, verbose=False)
+        s_idx, i_idx, r = to_long_triple(small_response_matrix)
+        history = jml_fit(model, s_idx, i_idx, r, max_epochs=50, verbose=False)
         assert len(history["losses"]) > 0
         assert history["losses"][-1] < history["losses"][0]
 
     def test_with_regularization(self, small_response_matrix):
         model = Rasch(n_subjects=20, n_items=30)
-        mask = torch.ones_like(small_response_matrix, dtype=torch.bool)
-        history = jml_fit(model, small_response_matrix, mask, max_epochs=50, regularization=0.1, verbose=False)
+        s_idx, i_idx, r = to_long_triple(small_response_matrix)
+        history = jml_fit(model, s_idx, i_idx, r, max_epochs=50, regularization=0.1, verbose=False)
         assert len(history["losses"]) > 0
 
 

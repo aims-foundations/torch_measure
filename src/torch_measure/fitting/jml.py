@@ -1,9 +1,6 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
-"""Joint Maximum Likelihood estimation for factor models.
-
-Consolidated from factor-model/calibration/model.py JML_trainer.
-"""
+"""Joint Maximum Likelihood estimation for factor models (long-form)."""
 
 from __future__ import annotations
 
@@ -14,8 +11,9 @@ from torch_measure.fitting._losses import bernoulli_nll
 
 def jml_fit(
     model,
-    response_matrix: torch.Tensor,
-    mask: torch.Tensor,
+    subject_idx: torch.Tensor,
+    item_idx: torch.Tensor,
+    response: torch.Tensor,
     max_epochs: int = 500,
     lr: float = 0.1,
     regularization: float = 0.01,
@@ -26,23 +24,26 @@ def jml_fit(
 ) -> dict:
     """Fit a model via Joint Maximum Likelihood with LBFGS.
 
-    JML jointly estimates all parameters (abilities and item params)
-    simultaneously. Uses LBFGS optimizer with optional L2 regularization.
+    Jointly estimates all parameters (abilities and item params) by
+    minimizing the Bernoulli NLL plus an L2 regularization term scaled
+    by the parameter count.
 
     Parameters
     ----------
     model : IRTModel or LogisticFM
-        Model to fit.
-    response_matrix : torch.Tensor
-        Response matrix (n_subjects, n_items).
-    mask : torch.Tensor
-        Boolean mask of observed entries.
+        Model to fit. Must expose ``predict_at(s_idx, i_idx)``.
+    subject_idx : torch.LongTensor
+        Integer subject indices, shape ``(n_obs,)``.
+    item_idx : torch.LongTensor
+        Integer item indices, shape ``(n_obs,)``.
+    response : torch.Tensor
+        Observed responses, shape ``(n_obs,)``, dtype float.
     max_epochs : int
         Maximum LBFGS iterations.
     lr : float
         LBFGS learning rate.
     regularization : float
-        L2 regularization strength (Lambda).
+        L2 regularization strength (lambda).
     convergence_tol : float
         Stop when loss change is below this.
     verbose : bool
@@ -51,13 +52,13 @@ def jml_fit(
     Returns
     -------
     dict
-        Training history.
+        Training history with ``"losses"`` key.
     """
     if loss_fn is None:
         loss_fn = bernoulli_nll
 
     optimizer = torch.optim.LBFGS(model.parameters(), lr=lr, max_iter=20)
-    masked_responses = response_matrix[mask].float()
+    response = response.float()
     history = {"losses": []}
     prev_loss = float("inf")
 
@@ -74,9 +75,8 @@ def jml_fit(
 
         def closure():
             optimizer.zero_grad()
-            probs = model.predict()
-            masked_probs = probs[mask].clamp(1e-7, 1 - 1e-7)
-            nll = loss_fn(masked_probs, masked_responses)
+            probs = model.predict_at(subject_idx, item_idx).clamp(1e-7, 1 - 1e-7)
+            nll = loss_fn(probs, response)
 
             # L2 regularization on all parameters
             reg = sum(p.pow(2).sum() for p in model.parameters())

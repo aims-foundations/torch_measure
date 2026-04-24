@@ -40,8 +40,9 @@ def _is_testlet_model(model):
 
 def svi_fit(
     model,
-    response_matrix: torch.Tensor,
-    mask: torch.Tensor | None = None,
+    subject_idx: torch.Tensor,
+    item_idx: torch.Tensor,
+    response: torch.Tensor,
     max_epochs: int = 4000,
     lr: float = 0.01,
     verbose: bool = True,
@@ -54,16 +55,23 @@ def svi_fit(
     discrimination, Beta(1,4) on guessing, and a hierarchical
     LogNormal/Normal prior on testlet effects.
 
+    Operates natively on long-form observations: each row k contributes
+    one likelihood term ``P(response[k] | ability[subject_idx[k]],
+    difficulty[item_idx[k]], ...)``.
+
     Parameters
     ----------
     model : IRTModel
         The IRT model to fit (Rasch, TwoPL, ThreePL, BetaRasch, BetaTwoPL,
-        TestletRasch).
-    response_matrix : torch.Tensor
-        Response matrix (n_subjects, n_items). Binary for standard IRT,
-        continuous in (0,1) for Beta IRT.
-    mask : torch.Tensor | None
-        Boolean mask of observed entries.
+        TestletRasch). Binary-IRT models use Bernoulli likelihood;
+        :attr:`model.phi` marks Beta-IRT variants.
+    subject_idx : torch.LongTensor
+        Integer subject indices, shape ``(n_obs,)``.
+    item_idx : torch.LongTensor
+        Integer item indices, shape ``(n_obs,)``.
+    response : torch.Tensor
+        Observed responses, shape ``(n_obs,)``. Binary for standard IRT,
+        continuous in ``(0,1)`` for Beta IRT.
     max_epochs : int
         Number of SVI steps.
     lr : float
@@ -100,18 +108,10 @@ def svi_fit(
             "Install with: pip install torch_measure[bayesian]"
         ) from err
 
-    if mask is None:
-        mask = ~torch.isnan(response_matrix) & (response_matrix != -1)
-
-    device = response_matrix.device
-    observed_responses = response_matrix[mask].float()
-    n_subjects = response_matrix.shape[0]
-    n_items = response_matrix.shape[1]
-
-    # Extract indices of observed entries
-    obs_indices = mask.nonzero(as_tuple=False)
-    subject_idx = obs_indices[:, 0]
-    item_idx = obs_indices[:, 1]
+    device = response.device
+    observed_responses = response.float()
+    n_subjects = model.n_subjects
+    n_items = model.n_items
 
     model_type = _detect_model_type(model)
     beta_model = _is_beta_model(model)

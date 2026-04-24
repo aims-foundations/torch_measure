@@ -8,6 +8,18 @@ import torch
 from torch_measure.data.pairwise import PairwiseComparisons
 
 
+def to_long_triple(matrix: torch.Tensor, mask: torch.Tensor | None = None):
+    """Wide-form ``(matrix, mask)`` → long-form ``(s_idx, i_idx, response)``.
+
+    Test helper. Mirrors the normalisation that ``IRTModel.fit()`` applies
+    when the user passes a raw tensor.
+    """
+    if mask is None:
+        mask = ~torch.isnan(matrix) & (matrix != -1)
+    obs = mask.nonzero(as_tuple=False)
+    return obs[:, 0], obs[:, 1], matrix[mask].float()
+
+
 @pytest.fixture
 def seed():
     """Set random seeds for reproducibility."""

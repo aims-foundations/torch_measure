@@ -1,19 +1,20 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
-"""Dataset download and loading pipeline."""
+"""Long-form dataset loader for the measurement-db HF bucket.
+
+``load(name)`` returns a :class:`LongFormData` containing the raw long-form
+responses, the item + subject registries filtered to this benchmark, an
+optional traces table, and the ``benchmarks.parquet`` row as a dict. Wide-form
+:class:`~torch_measure.data.response_matrix.ResponseMatrix` is now opt-in via
+:meth:`LongFormData.to_response_matrix`.
+"""
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING
 
-import torch
-
-from torch_measure.datasets._registry import info as _info
-
-if TYPE_CHECKING:
-    from torch_measure.data.pairwise import PairwiseComparisons
-    from torch_measure.data.response_matrix import ResponseMatrix
+from torch_measure.datasets._long_form import LongFormData
+from torch_measure.datasets._manifest import MANIFEST_REPO, manifest_entry
 
 
 def load(
@@ -21,169 +22,133 @@ def load(
     *,
     force_download: bool = False,
     local_dir: str | Path | None = None,
-) -> ResponseMatrix | PairwiseComparisons:
-    """Load a dataset by name, downloading from HuggingFace Hub if needed.
+) -> LongFormData:
+    """Load a dataset by name from the measurement-db HF bucket.
+
+    The bucket holds one parquet per dataset (long-form rows with columns
+    ``subject_id, item_id, benchmark_id, trial, test_condition, response,
+    correct_answer, trace``) at the root, plus shared registry files
+    (``benchmarks.parquet``, ``subjects.parquet``, ``items.parquet``) also at
+    the root, and optionally ``{name}_traces.parquet`` for benchmarks that
+    published traces separately. This loader fetches all of these and wraps
+    them in a :class:`LongFormData`.
 
     Parameters
     ----------
     name : str
-        Dataset name (e.g., ``"swebench"`` or ``"chatbot_arena"``).
-        Use :func:`list_datasets` to see available names.
+        Dataset name (e.g., ``"mtbench"``, ``"swebench"``). Use
+        :func:`list_datasets` to see available names.
     force_download : bool
-        If ``True``, re-download even if cached locally.
+        Bypass the HF cache and re-download the parquets.
     local_dir : str | Path | None
-        If provided, look for ``.pt`` files in this directory before
-        downloading from HuggingFace Hub.  Useful for offline use or
-        loading data produced by ``data/scripts/upload_to_hf.py --no-upload``.
-        The file is expected at ``<local_dir>/<filename>`` where *filename*
-        is the ``filename`` field from the dataset registry (e.g.,
-        ``swebench.pt``).
+        If provided, load ``{local_dir}/{name}.parquet`` +
+        ``{local_dir}/{subjects,items,benchmarks}.parquet`` from the local
+        filesystem instead of downloading. Useful for the data-curation repo
+        itself (``measurement-db`` / ``measurement-db-private``) where those
+        parquets live at the root after ``merge_registry.py``.
 
     Returns
     -------
-    ResponseMatrix | PairwiseComparisons
-        A :class:`~torch_measure.data.ResponseMatrix` for binary/continuous
-        datasets, or a :class:`~torch_measure.data.PairwiseComparisons` for
-        pairwise preference datasets.
-
-    Raises
-    ------
-    ValueError
-        If *name* is not found in the registry.
-    ImportError
-        If ``huggingface_hub`` is not installed and no local file is found.
+    LongFormData
+        Container wrapping the long-form responses, benchmark-scoped item and
+        subject registries, optional traces, and the benchmark-registry row.
     """
-    dataset_info = _info(name)
-
-    # Determine filename — default convention: ``family/benchmark.pt``
-    filename = dataset_info.filename or f"{name}.pt"
-
-    # ── Try local directory first ──────────────────────────────────────
-    if local_dir is not None:
-        local_path = Path(local_dir) / filename
-        if local_path.exists():
-            payload = torch.load(local_path, weights_only=True)
-            if dataset_info.response_type == "pairwise":
-                return _load_pairwise(payload, filename)
-            return _load_response_matrix(payload, filename)
-
-    # ── Download from HuggingFace Hub ──────────────────────────────────
-    try:
-        from huggingface_hub import hf_hub_download
-    except ImportError as err:
-        raise ImportError(
-            "Loading datasets requires huggingface_hub. Install with: pip install torch_measure[data]"
-        ) from err
-
-    path = hf_hub_download(
-        repo_id=dataset_info.repo_id,
-        filename=filename,
-        repo_type="dataset",
-        force_download=force_download,
+    responses, items, subjects, traces, info = _load_frames(
+        name, force_download=force_download, local_dir=local_dir,
     )
-
-    payload = torch.load(path, weights_only=True)
-
-    if dataset_info.response_type == "pairwise":
-        return _load_pairwise(payload, filename)
-    return _load_response_matrix(payload, filename)
-
-
-def load_csv(
-    path: str | Path,
-    *,
-    index_col: int | str = 0,
-) -> ResponseMatrix:
-    """Load a CSV response matrix into a :class:`ResponseMatrix`.
-
-    This is a convenience function for loading CSV files produced by the
-    benchmark processing scripts (``data/<benchmark>_data/processed/response_matrix.csv``).
-
-    Parameters
-    ----------
-    path : str | Path
-        Path to the CSV file.  Expects rows = subjects (models),
-        columns = items (tasks), with the first column or a named column
-        as the subject index.
-    index_col : int | str
-        Column to use as subject IDs (passed to ``pd.read_csv``).
-
-    Returns
-    -------
-    ResponseMatrix
-
-    Examples
-    --------
-    >>> from torch_measure.datasets import load_csv
-    >>> rm = load_csv("data/bfcl_data/processed/response_matrix.csv")
-    >>> rm.shape
-    (93, 4751)
-    """
-    try:
-        import pandas as pd
-    except ImportError as err:
-        raise ImportError(
-            "load_csv requires pandas. Install with: pip install pandas"
-        ) from err
-
-    from torch_measure.data.response_matrix import ResponseMatrix
-
-    df = pd.read_csv(path, index_col=index_col)
-    data = torch.tensor(df.values, dtype=torch.float32)
-
-    return ResponseMatrix(
-        data=data,
-        subject_ids=list(df.index.astype(str)),
-        item_ids=list(df.columns.astype(str)),
-    )
-
-
-def _load_response_matrix(payload: dict | torch.Tensor, filename: str) -> ResponseMatrix:
-    """Deserialize a response matrix payload."""
-    from torch_measure.data.response_matrix import ResponseMatrix
-
-    if isinstance(payload, dict):
-        data = payload["data"]
-        subject_ids = payload.get("subject_ids")
-        item_ids = payload.get("item_ids")
-        item_contents = payload.get("item_contents")
-        subject_metadata = payload.get("subject_metadata")
-        info = payload.get("info")
-    elif isinstance(payload, torch.Tensor):
-        data = payload
-        subject_ids = None
-        item_ids = None
-        item_contents = None
-        subject_metadata = None
-        info = None
-    else:
-        raise TypeError(f"Unexpected payload type in {filename}: {type(payload)}")
-
-    return ResponseMatrix(
-        data=data,
-        subject_ids=subject_ids,
-        item_ids=item_ids,
-        item_contents=item_contents,
-        subject_metadata=subject_metadata,
+    return LongFormData(
+        name=name,
+        responses=responses,
+        items=items,
+        subjects=subjects,
+        traces=traces,
         info=info,
     )
 
 
-def _load_pairwise(payload: dict | torch.Tensor, filename: str) -> PairwiseComparisons:
-    """Deserialize a pairwise comparisons payload."""
-    from torch_measure.data.pairwise import PairwiseComparisons
+def _load_frames(
+    name: str,
+    *,
+    force_download: bool,
+    local_dir: str | Path | None,
+):
+    """Return (responses, items_for_bench, subjects_for_bench, traces, info)."""
+    try:
+        import pandas as pd
+    except ImportError as err:
+        raise ImportError(
+            "torch_measure.datasets.load requires pandas. "
+            "Install with: pip install pandas"
+        ) from err
 
-    if not isinstance(payload, dict):
-        raise TypeError(f"Pairwise dataset {filename} must be a dict payload, got {type(payload)}")
+    if local_dir is not None:
+        root = Path(local_dir)
+        responses = pd.read_parquet(root / f"{name}.parquet")
+        items = pd.read_parquet(root / "items.parquet")
+        subjects = pd.read_parquet(root / "subjects.parquet")
+        traces_path = root / f"{name}_traces.parquet"
+        traces = pd.read_parquet(traces_path) if traces_path.exists() else None
+        benchmarks_path = root / "benchmarks.parquet"
+        info: dict = {}
+        if benchmarks_path.exists():
+            benchmarks_df = pd.read_parquet(benchmarks_path)
+            info = _row_for_name(benchmarks_df, name)
+    else:
+        try:
+            from huggingface_hub import hf_hub_download
+        except ImportError as err:
+            raise ImportError(
+                "Loading datasets requires huggingface_hub. "
+                "Install with: pip install torch_measure[data]"
+            ) from err
 
-    return PairwiseComparisons(
-        subject_a=payload["subject_a"],
-        subject_b=payload["subject_b"],
-        outcome=payload["outcome"],
-        subject_ids=payload["subject_ids"],
-        item_ids=payload.get("item_ids"),
-        item_contents=payload.get("item_contents"),
-        item_idx=payload.get("item_idx"),
-        subject_metadata=payload.get("subject_metadata"),
-        comparison_metadata=payload.get("comparison_metadata"),
-    )
+        def _fetch(filename: str, *, optional: bool = False) -> Path | None:
+            try:
+                return Path(hf_hub_download(
+                    repo_id=MANIFEST_REPO,
+                    filename=filename,
+                    repo_type="dataset",
+                    force_download=force_download,
+                ))
+            except Exception:
+                if optional:
+                    return None
+                raise
+
+        responses_path = _fetch(f"{name}.parquet")
+        items_path = _fetch("items.parquet")
+        subjects_path = _fetch("subjects.parquet")
+        traces_path = _fetch(f"{name}_traces.parquet", optional=True)
+
+        responses = pd.read_parquet(responses_path)
+        items = pd.read_parquet(items_path)
+        subjects = pd.read_parquet(subjects_path)
+        traces = pd.read_parquet(traces_path) if traces_path is not None else None
+
+        manifest_row = manifest_entry(name)
+        info = manifest_row if manifest_row is not None else {}
+
+    # Filter registries down to just this benchmark.
+    if "benchmark_id" in items.columns:
+        items_for_bench = items[items["benchmark_id"] == name].reset_index(drop=True)
+    else:
+        items_for_bench = items.reset_index(drop=True)
+
+    present_subjects = set(responses["subject_id"].unique()) if "subject_id" in responses.columns else set()
+    if present_subjects and "subject_id" in subjects.columns:
+        subjects_for_bench = subjects[subjects["subject_id"].isin(present_subjects)].reset_index(drop=True)
+    else:
+        subjects_for_bench = subjects.reset_index(drop=True)
+
+    return responses, items_for_bench, subjects_for_bench, traces, info
+
+
+def _row_for_name(benchmarks_df, name: str) -> dict:
+    """Pull the benchmarks.parquet row for ``name`` as a plain dict."""
+    if "benchmark_id" not in benchmarks_df.columns:
+        return {}
+    row = benchmarks_df[benchmarks_df["benchmark_id"] == name]
+    if row.empty:
+        return {}
+    record = row.iloc[0].to_dict()
+    return record

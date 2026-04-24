@@ -1,7 +1,6 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
-import torch
-
+from tests.conftest import to_long_triple
 from torch_measure.fitting.em import em_fit
 from torch_measure.models import BetaRasch, Rasch
 
@@ -9,8 +8,8 @@ from torch_measure.models import BetaRasch, Rasch
 class TestEMFit:
     def test_returns_both_phases(self, small_response_matrix):
         model = Rasch(n_subjects=20, n_items=30)
-        mask = torch.ones_like(small_response_matrix, dtype=torch.bool)
-        history = em_fit(model, small_response_matrix, mask, max_epochs=20, verbose=False)
+        s_idx, i_idx, r = to_long_triple(small_response_matrix)
+        history = em_fit(model, s_idx, i_idx, r, max_epochs=20, verbose=False)
         assert "losses_item" in history
         assert "losses_ability" in history
         assert len(history["losses_item"]) > 0
@@ -18,14 +17,14 @@ class TestEMFit:
 
     def test_item_loss_decreases(self, small_response_matrix):
         model = Rasch(n_subjects=20, n_items=30)
-        mask = torch.ones_like(small_response_matrix, dtype=torch.bool)
-        history = em_fit(model, small_response_matrix, mask, max_epochs=50, verbose=False)
+        s_idx, i_idx, r = to_long_triple(small_response_matrix)
+        history = em_fit(model, s_idx, i_idx, r, max_epochs=50, verbose=False)
         assert history["losses_item"][-1] < history["losses_item"][0]
 
     def test_ability_loss_decreases(self, small_response_matrix):
         model = Rasch(n_subjects=20, n_items=30)
-        mask = torch.ones_like(small_response_matrix, dtype=torch.bool)
-        history = em_fit(model, small_response_matrix, mask, max_epochs=50, verbose=False)
+        s_idx, i_idx, r = to_long_triple(small_response_matrix)
+        history = em_fit(model, s_idx, i_idx, r, max_epochs=50, verbose=False)
         assert history["losses_ability"][-1] < history["losses_ability"][0]
 
 

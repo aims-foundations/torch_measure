@@ -2,6 +2,11 @@
 
 """Expectation-Maximization fitting for IRT models.
 
+Legacy fitter: E-step marginalises over latent abilities via Gauss-Hermite
+quadrature, which genuinely wants a dense ``(n_subjects, n_items)`` matrix
+at each quadrature node. Long-form observations are pivoted internally at
+``fit()`` entry; the matrix representation is never exposed.
+
 Consolidated from predictive-eval/train/amortized_irt/irt.py em() method.
 """
 
@@ -13,10 +18,37 @@ import torch
 from torch_measure.fitting._losses import bernoulli_nll
 
 
+def _pivot_long_to_matrix(
+    n_subjects: int,
+    n_items: int,
+    subject_idx: torch.Tensor,
+    item_idx: torch.Tensor,
+    response: torch.Tensor,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Build a dense ``(n_subjects, n_items)`` matrix + boolean mask from long-form.
+
+    Repeated ``(s, i)`` pairs are averaged (matches the semantics of
+    :meth:`torch_measure.data.response_matrix.ResponseMatrix.from_long`).
+    """
+    device = response.device
+    matrix = torch.zeros((n_subjects, n_items), dtype=torch.float32, device=device)
+    counts = torch.zeros((n_subjects, n_items), dtype=torch.float32, device=device)
+    matrix.index_put_((subject_idx, item_idx), response.float(), accumulate=True)
+    counts.index_put_(
+        (subject_idx, item_idx),
+        torch.ones_like(response, dtype=torch.float32),
+        accumulate=True,
+    )
+    mask = counts > 0
+    matrix[mask] = matrix[mask] / counts[mask]
+    return matrix, mask
+
+
 def em_fit(
     model,
-    response_matrix: torch.Tensor,
-    mask: torch.Tensor,
+    subject_idx: torch.Tensor,
+    item_idx: torch.Tensor,
+    response: torch.Tensor,
     max_epochs: int = 500,
     lr: float = 0.01,
     n_quadrature: int = 31,
@@ -30,14 +62,21 @@ def em_fit(
     M-step: Maximize likelihood over item parameters given expected abilities.
     Then estimate abilities given fixed item parameters.
 
+    Long-form observations are pivoted to a dense matrix internally — the
+    quadrature E-step needs the matrix at every ability node, so the pivot
+    is amortised over many epochs.
+
     Parameters
     ----------
     model : IRTModel
-        The IRT model to fit. Must have 'ability' and 'difficulty' parameters.
-    response_matrix : torch.Tensor
-        Response matrix (n_subjects, n_items).
-    mask : torch.Tensor
-        Boolean mask of observed entries.
+        The IRT model to fit. Must have ``ability`` and ``difficulty``
+        parameters.
+    subject_idx : torch.LongTensor
+        Integer subject indices, shape ``(n_obs,)``.
+    item_idx : torch.LongTensor
+        Integer item indices, shape ``(n_obs,)``.
+    response : torch.Tensor
+        Observed responses, shape ``(n_obs,)``, dtype float.
     max_epochs : int
         Maximum epochs per phase (item params, then abilities).
     lr : float
@@ -55,8 +94,12 @@ def em_fit(
     if loss_fn is None:
         loss_fn = bernoulli_nll
 
-    device = response_matrix.device
+    device = response.device
     history = {"losses_item": [], "losses_ability": []}
+
+    response_matrix, mask = _pivot_long_to_matrix(
+        model.n_subjects, model.n_items, subject_idx, item_idx, response
+    )
 
     # Phase 1: Estimate item parameters by marginalizing over abilities
     theta_nodes, weights = np.polynomial.hermite_e.hermegauss(n_quadrature)
