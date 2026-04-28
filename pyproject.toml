@@ -70,11 +70,131 @@ Documentation = "https://torch-measure.readthedocs.io"
 Repository = "https://github.com/aims-foundations/torch_measure"
 Issues = "https://github.com/aims-foundations/torch_measure/issues"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/torch_measure"]
 
-[tool.setuptools_scm]
-write_to = "src/torch_measure/_version.py"
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "/.github",
+    "/docs",
+    "/.vscode",
+    "*.pyc",
+]
+
+[tool.hatch.version]
+source = "vcs"  # Use git tags for versioning
+
+[tool.hatch.version.raw-options]
+version_file = "src/torch_measure/_version.py"
+
+[tool.hatch.envs.default]
+features = ["dev"]  # Install with dev optional dependencies
+
+[tool.hatch.envs.default.scripts]
+# Linting and formatting
+format = "ruff format src tests"
+lint = "ruff check src tests"
+lint-fix = "ruff check --fix src tests"
+
+# Type checking
+types = "mypy src"
+
+# Quick quality check
+check = [
+    "lint",
+    "types",
+]
+
+[tool.hatch.envs.test]
+features = ["test"]  # Install with test optional dependencies
+
+[tool.hatch.envs.test.scripts]
+# Basic test runs
+run = "pytest {args:tests}"
+cov = "pytest --cov=src/torch_measure --cov-report=term-missing --cov-report=html {args:tests}"
+cov-xml = "pytest --cov=src/torch_measure --cov-report=xml {args:tests}"
+
+# Filtered test runs
+fast = "pytest -m 'not slow and not gpu' {args:tests}"
+slow = "pytest -m slow {args:tests}"
+gpu = "pytest -m gpu {args:tests}"
+
+# Verbose output
+verbose = "pytest -vv {args:tests}"
+
+# Full test suite
+all = [
+    "cov",
+]
+
+# Matrix for multiple Python versions
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.docs]
+features = ["docs"]
+detached = false  # Include project dependencies
+dependencies = [
+    "sphinx>=7.0",
+    "furo",
+    "sphinx-autodoc-typehints>=1.23",
+    "sphinx-copybutton",
+    "myst-parser",
+    "sphinx-autobuild",  # For live serving
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "sphinx-build -W -b html docs docs/_build/html"
+serve = "python -m http.server --directory docs/_build/html 8000"
+clean = "rm -rf docs/_build"
+rebuild = [
+    "clean",
+    "build",
+]
+live = "sphinx-autobuild -W -b html docs docs/_build/html --port 8000"
+
+[tool.hatch.envs.lint]
+detached = true  # Don't install project dependencies
+dependencies = [
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[tool.hatch.envs.lint.scripts]
+check = [
+    "ruff check src tests",
+    "ruff format --check src tests",
+]
+format = [
+    "ruff format src tests",
+    "ruff check --fix src tests",
+]
+types = "mypy src"
+all = [
+    "check",
+    "types",
+]
+
+[tool.hatch.envs.bench]
+features = ["all"]  # Install all optional dependencies
+dependencies = [
+    "pytest-benchmark>=4.0",
+    "pytest-profiling>=1.7",
+]
+
+[tool.hatch.envs.bench.scripts]
+run = "pytest tests/benchmarks --benchmark-only {args}"
+profile = "pytest tests/benchmarks --profile {args}"
+
+[tool.hatch.envs.ci]
+features = ["test"]
+
+[tool.hatch.envs.ci.scripts]
+test = "pytest --cov=src/torch_measure --cov-report=xml --junitxml=junit.xml {args:tests}"
+
+# Environment variables for CI
+[tool.hatch.envs.ci.env-vars]
+COVERAGE_CORE = "sysmon"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -102,3 +222,10 @@ omit = ["*/tests/*", "*/_version.py"]
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+strict = false  # Set to true for stricter checking
+ignore_missing_imports = true  # Torch doesn't have complete type stubs
