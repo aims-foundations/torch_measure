@@ -12,7 +12,6 @@ from __future__ import annotations
 
 from torch_measure.datasets._info import DatasetInfo
 from torch_measure.datasets._manifest import (
-    load_manifest,
     manifest_dataset_names,
     manifest_info,
     manifest_to_info,
@@ -39,15 +38,13 @@ def list_datasets(family: str | None = None) -> list[str]:
     names = manifest_dataset_names()
     if family is None:
         return names
-    manifest = load_manifest() or {}
-    return sorted(n for n in names if _matches_family(n, family, manifest))
+    return sorted(n for n in names if _matches_family(n, family))
 
 
-def _matches_family(name: str, family: str, manifest: dict) -> bool:
-    entry = manifest.get(name)
-    if entry is None:
+def _matches_family(name: str, family: str) -> bool:
+    info_obj = manifest_info(name)
+    if info_obj is None:
         return False
-    info_obj = manifest_to_info(name, entry)
     if info_obj.family == family:
         return True
     if family in info_obj.domain:
