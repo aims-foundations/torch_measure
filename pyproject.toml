@@ -82,65 +82,65 @@ exclude = [
 ]
 
 [tool.hatch.version]
-source = "vcs"  # Use git tags for versioning
+source = "vcs"
 
 [tool.hatch.version.raw-options]
 version_file = "src/torch_measure/_version.py"
 
 [tool.hatch.envs.default]
-features = ["dev"]  # Install with dev optional dependencies
+features = ["dev"]
 
 [tool.hatch.envs.default.scripts]
-# Linting and formatting
+
 format = "ruff format src tests"
 lint = "ruff check src tests"
 lint-fix = "ruff check --fix src tests"
 
-# Type checking
+
 types = "mypy src"
 
-# Quick quality check
+
 check = [
     "lint",
     "types",
 ]
 
 [tool.hatch.envs.test]
-features = ["test"]  # Install with test optional dependencies
+features = ["test"]
 
 [tool.hatch.envs.test.scripts]
-# Basic test runs
+
 run = "pytest {args:tests}"
 cov = "pytest --cov=src/torch_measure --cov-report=term-missing --cov-report=html {args:tests}"
 cov-xml = "pytest --cov=src/torch_measure --cov-report=xml {args:tests}"
 
-# Filtered test runs
+
 fast = "pytest -m 'not slow and not gpu' {args:tests}"
 slow = "pytest -m slow {args:tests}"
 gpu = "pytest -m gpu {args:tests}"
 
-# Verbose output
+
 verbose = "pytest -vv {args:tests}"
 
-# Full test suite
+
 all = [
     "cov",
 ]
 
-# Matrix for multiple Python versions
+
 [[tool.hatch.envs.test.matrix]]
 python = ["3.10", "3.11", "3.12"]
 
 [tool.hatch.envs.docs]
 features = ["docs"]
-detached = false  # Include project dependencies
+detached = false
 dependencies = [
     "sphinx>=7.0",
     "furo",
     "sphinx-autodoc-typehints>=1.23",
     "sphinx-copybutton",
     "myst-parser",
-    "sphinx-autobuild",  # For live serving
+    "sphinx-autobuild",
 ]
 
 [tool.hatch.envs.docs.scripts]
@@ -154,7 +154,7 @@ rebuild = [
 live = "sphinx-autobuild -W -b html docs docs/_build/html --port 8000"
 
 [tool.hatch.envs.lint]
-detached = true  # Don't install project dependencies
+detached = true
 dependencies = [
     "ruff>=0.1.0",
     "mypy>=1.0.0",
@@ -176,7 +176,7 @@ all = [
 ]
 
 [tool.hatch.envs.bench]
-features = ["all"]  # Install all optional dependencies
+features = ["all"]
 dependencies = [
     "pytest-benchmark>=4.0",
     "pytest-profiling>=1.7",
@@ -192,7 +192,7 @@ features = ["test"]
 [tool.hatch.envs.ci.scripts]
 test = "pytest --cov=src/torch_measure --cov-report=xml --junitxml=junit.xml {args:tests}"
 
-# Environment variables for CI
+
 [tool.hatch.envs.ci.env-vars]
 COVERAGE_CORE = "sysmon"
 
@@ -235,5 +235,5 @@ show_missing = true
 python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
-strict = false  # Set to true for stricter checking
-ignore_missing_imports = true  # Torch doesn't have complete type stubs
+strict = false
+ignore_missing_imports = true
