@@ -25,7 +25,6 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -91,15 +90,10 @@ version_file = "src/torch_measure/_version.py"
 features = ["dev"]
 
 [tool.hatch.envs.default.scripts]
-
 format = "ruff format src tests"
 lint = "ruff check src tests"
 lint-fix = "ruff check --fix src tests"
-
-
 types = "mypy src"
-
-
 check = [
     "lint",
     "types",
@@ -109,24 +103,16 @@ check = [
 features = ["test"]
 
 [tool.hatch.envs.test.scripts]
-
 run = "pytest {args:tests}"
 cov = "pytest --cov=src/torch_measure --cov-report=term-missing --cov-report=html {args:tests}"
 cov-xml = "pytest --cov=src/torch_measure --cov-report=xml {args:tests}"
-
-
 fast = "pytest -m 'not slow and not gpu' {args:tests}"
 slow = "pytest -m slow {args:tests}"
 gpu = "pytest -m gpu {args:tests}"
-
-
 verbose = "pytest -vv {args:tests}"
-
-
 all = [
     "cov",
 ]
-
 
 [[tool.hatch.envs.test.matrix]]
 python = ["3.10", "3.11", "3.12"]
@@ -191,7 +177,6 @@ features = ["test"]
 
 [tool.hatch.envs.ci.scripts]
 test = "pytest --cov=src/torch_measure --cov-report=xml --junitxml=junit.xml {args:tests}"
-
 
 [tool.hatch.envs.ci.env-vars]
 COVERAGE_CORE = "sysmon"
