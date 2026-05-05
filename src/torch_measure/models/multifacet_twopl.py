@@ -2,6 +2,8 @@
 
 """Many-Facet 2PL IRT model with anchoring (requires pyro-ppl).
 
+Consolidated from safety-irt/model/irt.py.
+
 Extends :class:`MultiFacetRasch` with per-item discrimination (alpha) and a
 sparse Student-t prior on the item-by-facet interaction (tau). Supports
 anchor items whose tau is forced near zero — useful for cross-lingual safety
