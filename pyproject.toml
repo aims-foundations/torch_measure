@@ -43,6 +43,7 @@ dependencies = [
 [project.optional-dependencies]
 bayesian = ["pyro-ppl>=1.8"]
 data = ["huggingface_hub>=0.16", "datasets>=2.10", "pandas>=2.0"]
+tabpfn = ["tabpfn>=2.2,<3"]
 viz = ["matplotlib>=3.7", "seaborn>=0.12", "tueplots>=0.0.14"]
 dev = [
     "torch_measure[test,docs]",
@@ -61,7 +62,7 @@ docs = [
     "myst-parser",
 ]
 all = [
-    "torch_measure[bayesian,data,viz,dev]",
+    "torch_measure[bayesian,data,tabpfn,viz,dev]",
 ]
 
 [project.urls]

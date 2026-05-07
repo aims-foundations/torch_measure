@@ -23,6 +23,10 @@ IRT Models
    :members:
    :undoc-members:
 
+.. autoclass:: torch_measure.models.TabPFNPredictor
+   :members:
+   :undoc-members:
+
 .. autoclass:: torch_measure.models.MultiFacetRasch
    :members:
    :undoc-members:
