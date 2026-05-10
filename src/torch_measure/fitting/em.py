@@ -101,11 +101,16 @@ def em_fit(
         model.n_subjects, model.n_items, subject_idx, item_idx, response
     )
 
+    # Multiply mean NLL by ``n_obs`` to get summed ``log p`` at each theta node before
+    # log-sum-exp.
+    n_obs = mask.sum().to(dtype=response_matrix.dtype)
+
     # Phase 1: Estimate item parameters by marginalizing over abilities
     theta_nodes, weights = np.polynomial.hermite_e.hermegauss(n_quadrature)
     theta_nodes = torch.tensor(theta_nodes, dtype=torch.float32, device=device)
     weights = torch.tensor(weights, dtype=torch.float32, device=device)
     weights = weights / weights.sum()
+    log_weights = torch.log(weights)
 
     # Freeze ability, optimize item params
     item_params = [p for name, p in model.named_parameters() if "ability" not in name]
@@ -123,8 +128,8 @@ def em_fit(
 
         for _ in iterator:
             optimizer_item.zero_grad()
-            total_loss = torch.tensor(0.0, device=device)
 
+            quad_log_terms = []
             for q in range(n_quadrature):
                 # Set all abilities to this quadrature point
                 with torch.no_grad():
@@ -133,7 +138,12 @@ def em_fit(
                 probs = model.predict()
                 masked_probs = probs[mask].clamp(1e-7, 1 - 1e-7)
                 nll = loss_fn(masked_probs, response_matrix[mask].float())
-                total_loss = total_loss + weights[q] * nll
+                quad_log_terms.append(log_weights[q] - n_obs * nll)
+
+            # MML quadrature: ``log(sum_q w_q p(X | theta_q))`` with stable ``log-sum-exp``.
+            # With mean NLL each term contributes ``log w_q - n_obs * nll_q``.
+            neg_marginal_ll = torch.logsumexp(torch.stack(quad_log_terms), dim=0)
+            total_loss = -neg_marginal_ll
 
             total_loss.backward()
             optimizer_item.step()

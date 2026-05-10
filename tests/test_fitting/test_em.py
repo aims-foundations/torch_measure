@@ -16,6 +16,7 @@ class TestEMFit:
         assert len(history["losses_ability"]) > 0
 
     def test_item_loss_decreases(self, small_response_matrix):
+        # Regression for GH issue #3: item phase marginalizes latent ability correctly.
         model = Rasch(n_subjects=20, n_items=30)
         s_idx, i_idx, r = to_long_triple(small_response_matrix)
         history = em_fit(model, s_idx, i_idx, r, max_epochs=50, verbose=False)
