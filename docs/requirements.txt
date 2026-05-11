@@ -3,3 +3,4 @@ furo
 sphinx-autodoc-typehints
 sphinx-copybutton
 myst-parser
+pandas>=2.3.3
