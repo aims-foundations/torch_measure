@@ -13,6 +13,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pandas as pd
+
 from torch_measure.datasets._long_form import LongFormData
 from torch_measure.datasets._manifest import MANIFEST_REPO, manifest_entry
 
@@ -54,7 +56,9 @@ def load(
         subject registries, optional traces, and the benchmark-registry row.
     """
     responses, items, subjects, traces, info = _load_frames(
-        name, force_download=force_download, local_dir=local_dir,
+        name,
+        force_download=force_download,
+        local_dir=local_dir,
     )
     return LongFormData(
         name=name,
@@ -73,14 +77,6 @@ def _load_frames(
     local_dir: str | Path | None,
 ):
     """Return (responses, items_for_bench, subjects_for_bench, traces, info)."""
-    try:
-        import pandas as pd
-    except ImportError as err:
-        raise ImportError(
-            "torch_measure.datasets.load requires pandas. "
-            "Install with: pip install pandas"
-        ) from err
-
     if local_dir is not None:
         root = Path(local_dir)
         responses = pd.read_parquet(root / f"{name}.parquet")
@@ -94,22 +90,18 @@ def _load_frames(
             benchmarks_df = pd.read_parquet(benchmarks_path)
             info = _row_for_name(benchmarks_df, name)
     else:
-        try:
-            from huggingface_hub import hf_hub_download
-        except ImportError as err:
-            raise ImportError(
-                "Loading datasets requires huggingface_hub. "
-                "Install with: pip install torch_measure[data]"
-            ) from err
+        from huggingface_hub import hf_hub_download
 
         def _fetch(filename: str, *, optional: bool = False) -> Path | None:
             try:
-                return Path(hf_hub_download(
-                    repo_id=MANIFEST_REPO,
-                    filename=filename,
-                    repo_type="dataset",
-                    force_download=force_download,
-                ))
+                return Path(
+                    hf_hub_download(
+                        repo_id=MANIFEST_REPO,
+                        filename=filename,
+                        repo_type="dataset",
+                        force_download=force_download,
+                    )
+                )
             except Exception:
                 if optional:
                     return None

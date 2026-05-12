@@ -25,7 +25,7 @@ class TestAmortizedIRT:
         embeddings = torch.randn(5, 32)  # wrong n_items
         try:
             model.set_embeddings(embeddings)
-            assert False, "Should have raised ValueError"
+            raise AssertionError("Should have raised ValueError")
         except ValueError:
             pass
 
@@ -42,7 +42,7 @@ class TestAmortizedIRT:
         model = AmortizedIRT(n_subjects=5, n_items=10, embedding_dim=32)
         try:
             model.predict()
-            assert False, "Should have raised RuntimeError"
+            raise AssertionError("Should have raised RuntimeError")
         except RuntimeError:
             pass
 

@@ -17,9 +17,13 @@ and to populate :class:`DatasetInfo` without having to download each dataset.
 ``benchmarks.parquet`` is the single source of truth — there is no
 hardcoded fallback.
 """
+
 from __future__ import annotations
 
 from typing import Any
+
+import pandas as pd
+from huggingface_hub import hf_hub_download
 
 from torch_measure.datasets._info import DatasetInfo
 
@@ -32,16 +36,6 @@ _manifest_cache: dict[str, dict[str, Any]] | None = None
 def _fetch_parquet(filename: str, *, force_download: bool = False):
     """Download a parquet file from the manifest repo; return a DataFrame or None."""
     try:
-        from huggingface_hub import hf_hub_download
-    except ImportError:
-        return None
-
-    try:
-        import pandas as pd  # noqa: F401
-    except ImportError:
-        return None
-
-    try:
         path = hf_hub_download(
             repo_id=MANIFEST_REPO,
             filename=filename,
@@ -52,8 +46,6 @@ def _fetch_parquet(filename: str, *, force_download: bool = False):
         return None
 
     try:
-        import pandas as pd
-
         return pd.read_parquet(path)
     except Exception:
         return None
@@ -69,10 +61,7 @@ def load_manifest(*, force_download: bool = False) -> dict[str, dict[str, Any]] 
     if df is None or df.empty or "benchmark_id" not in df.columns:
         return None
 
-    _manifest_cache = {
-        str(row["benchmark_id"]): {k: row[k] for k in df.columns}
-        for _, row in df.iterrows()
-    }
+    _manifest_cache = {str(row["benchmark_id"]): {k: row[k] for k in df.columns} for _, row in df.iterrows()}
     return _manifest_cache
 
 
@@ -80,11 +69,9 @@ def _coerce_str(v) -> str:
     if v is None:
         return ""
     try:
-        import pandas as pd
-
         if pd.isna(v):
             return ""
-    except (ImportError, ValueError, TypeError):
+    except (ValueError, TypeError):
         pass
     return str(v)
 
@@ -92,16 +79,11 @@ def _coerce_str(v) -> str:
 def _coerce_bool(v, default: bool = True) -> bool:
     if v is None:
         return default
-    try:
-        import pandas as pd
-
-        if isinstance(v, float) and pd.isna(v):
-            return default
-    except ImportError:
-        pass
+    if isinstance(v, float) and pd.isna(v):
+        return default
     if isinstance(v, bool):
         return v
-    if isinstance(v, (int, float)):
+    if isinstance(v, int | float):
         return bool(v)
     s = str(v).strip().lower()
     if s in ("true", "1", "yes", "y"):
@@ -122,7 +104,7 @@ def _coerce_list(v) -> list[str]:
             return [str(x) for x in v.tolist() if x is not None and str(x) != "nan"]
     except ImportError:
         pass
-    if isinstance(v, (list, tuple)):
+    if isinstance(v, list | tuple):
         return [str(x) for x in v if x is not None and str(x) != "nan"]
     s = _coerce_str(v)
     if not s:

@@ -11,7 +11,7 @@ import torch
 from torch import nn
 
 if TYPE_CHECKING:
-    from torch_measure.datasets._long_form import LongFormData
+    pass
 
 
 class NetworkModel(nn.Module):
@@ -109,12 +109,9 @@ class NetworkModel(nn.Module):
             n_subjects = len(fit_inputs["subject_ids"])
             n_items = len(fit_inputs["item_ids"])
 
-            matrix = torch.zeros((n_subjects, n_items), dtype=torch.float32,
-                                 device=self._device)
-            counts = torch.zeros((n_subjects, n_items), dtype=torch.float32,
-                                 device=self._device)
-            matrix.index_put_((subject_idx, item_idx), response.float(),
-                              accumulate=True)
+            matrix = torch.zeros((n_subjects, n_items), dtype=torch.float32, device=self._device)
+            counts = torch.zeros((n_subjects, n_items), dtype=torch.float32, device=self._device)
+            matrix.index_put_((subject_idx, item_idx), response.float(), accumulate=True)
             counts.index_put_(
                 (subject_idx, item_idx),
                 torch.ones_like(response, dtype=torch.float32),
@@ -125,9 +122,7 @@ class NetworkModel(nn.Module):
             return matrix, built_mask
 
         if not isinstance(data, torch.Tensor):
-            raise TypeError(
-                f"fit() expected LongFormData or torch.Tensor, got {type(data).__name__}"
-            )
+            raise TypeError(f"fit() expected LongFormData or torch.Tensor, got {type(data).__name__}")
 
         response_matrix = data.to(self._device)
         if mask is None:

@@ -8,9 +8,7 @@ try:
     from torch_measure.viz.response_heatmap import plot_response_heatmap
     from torch_measure.viz.style import set_academic_style
 except ImportError as err:
-    raise ImportError(
-        "Visualization requires matplotlib. Install with: pip install torch_measure[viz]"
-    ) from err
+    raise ImportError("Visualization requires matplotlib. Install with: pip install torch_measure[viz]") from err
 
 __all__ = [
     "plot_response_heatmap",

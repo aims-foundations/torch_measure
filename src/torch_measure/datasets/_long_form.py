@@ -45,13 +45,13 @@ class LongFormData:
     """
 
     name: str
-    responses: "pd.DataFrame"
-    items: "pd.DataFrame"
-    subjects: "pd.DataFrame"
-    traces: "pd.DataFrame | None"
+    responses: pd.DataFrame
+    items: pd.DataFrame
+    subjects: pd.DataFrame
+    traces: pd.DataFrame | None
     info: dict
 
-    def to_response_matrix(self) -> "ResponseMatrix":
+    def to_response_matrix(self) -> ResponseMatrix:
         """Opt-in pivot to the legacy wide-form :class:`ResponseMatrix`."""
         from torch_measure.data.response_matrix import ResponseMatrix
 

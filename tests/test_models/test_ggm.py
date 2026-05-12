@@ -1,7 +1,6 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
 import torch
-import pytest
 
 from torch_measure.models import GaussianGraphicalModel
 

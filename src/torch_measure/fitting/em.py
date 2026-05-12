@@ -97,9 +97,7 @@ def em_fit(
     device = response.device
     history = {"losses_item": [], "losses_ability": []}
 
-    response_matrix, mask = _pivot_long_to_matrix(
-        model.n_subjects, model.n_items, subject_idx, item_idx, response
-    )
+    response_matrix, mask = _pivot_long_to_matrix(model.n_subjects, model.n_items, subject_idx, item_idx, response)
 
     # Phase 1: Estimate item parameters by marginalizing over abilities
     theta_nodes, weights = np.polynomial.hermite_e.hermegauss(n_quadrature)
