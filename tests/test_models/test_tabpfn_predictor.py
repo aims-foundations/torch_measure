@@ -3,8 +3,6 @@
 import pytest
 import torch
 
-pytest.importorskip("tabpfn")
-
 from torch_measure.models import TabPFNPredictor
 
 

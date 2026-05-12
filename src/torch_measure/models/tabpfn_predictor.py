@@ -15,16 +15,9 @@ from typing import Any
 
 import numpy as np
 import torch
+from tabpfn import TabPFNClassifier
 
 from torch_measure.models._base import IRTModel
-
-try:
-    from tabpfn import TabPFNClassifier
-
-    _TABPFN_AVAILABLE = True
-except ImportError:  # pragma: no cover
-    _TABPFN_AVAILABLE = False
-    TabPFNClassifier = None  # type: ignore[assignment]
 
 
 class TabPFNPredictor(IRTModel):
@@ -72,10 +65,6 @@ class TabPFNPredictor(IRTModel):
 
     Notes
     -----
-    Requires the optional ``tabpfn`` extra::
-
-        pip install "torch_measure[tabpfn]"
-
     The model is non-factorized; ``.ability`` and ``.difficulty`` return
     ``None``.
 
@@ -107,11 +96,6 @@ class TabPFNPredictor(IRTModel):
         random_state: int = 0,
         device: str = "cpu",
     ) -> None:
-        if not _TABPFN_AVAILABLE:
-            raise ImportError(
-                "TabPFNPredictor requires the optional 'tabpfn' extra. "
-                "Install with: pip install 'torch_measure[tabpfn]'"
-            )
         super().__init__(n_subjects, n_items, device)
         self.n_features = n_features
         self.max_train = max_train

@@ -23,7 +23,7 @@ where:
 
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 import torch
 from torch import nn
@@ -122,14 +122,10 @@ class MultiFacet2PL(IRTModel):
             fl = int(facet_indices.item())
             difficulty_l = self.difficulty + gamma[fl] + tau[:, fl]
             ability_l = self.ability + delta[:, fl]
-            logit = self.discrimination.unsqueeze(0) * (
-                ability_l.unsqueeze(1) - difficulty_l.unsqueeze(0)
-            )
+            logit = self.discrimination.unsqueeze(0) * (ability_l.unsqueeze(1) - difficulty_l.unsqueeze(0))
             return torch.sigmoid(logit)
 
-        raise NotImplementedError(
-            "Batch facet indices not yet supported. Pass a single facet level."
-        )
+        raise NotImplementedError("Batch facet indices not yet supported. Pass a single facet level.")
 
     def fit(
         self,
@@ -192,8 +188,7 @@ class MultiFacet2PL(IRTModel):
             from pyro.optim import ClippedAdam
         except ImportError as err:
             raise ImportError(
-                "Bayesian SVI fitting requires pyro-ppl. "
-                "Install with: pip install torch_measure[bayesian]"
+                "Bayesian SVI fitting requires pyro-ppl. Install with: pip install torch_measure[bayesian]"
             ) from err
 
         device = self._device
@@ -254,9 +249,7 @@ class MultiFacet2PL(IRTModel):
 
             delta_raw = pyro.sample(
                 "delta_raw",
-                dist.Normal(
-                    torch.zeros(n_subjects, n_facets, device=device), 0.5
-                ).to_event(2),
+                dist.Normal(torch.zeros(n_subjects, n_facets, device=device), 0.5).to_event(2),
             )
             delta_mask = gamma_mask.unsqueeze(0).expand(n_subjects, -1)
             delta = pyro.deterministic("delta", delta_raw * delta_mask)
@@ -268,9 +261,7 @@ class MultiFacet2PL(IRTModel):
                 pyro.sample("response", dist.Bernoulli(logits=logit), obs=obs)
 
         pyro.clear_param_store()
-        guide = AutoNormal(
-            pyro.poutine.block(pyro_model, hide=["response", "tau", "gamma", "delta"])
-        )
+        guide = AutoNormal(pyro.poutine.block(pyro_model, hide=["response", "tau", "gamma", "delta"]))
         optimizer = ClippedAdam({"lr": lr, "clip_norm": clip_norm})
         svi = SVI(pyro_model, guide, optimizer, loss=Trace_ELBO())
 
