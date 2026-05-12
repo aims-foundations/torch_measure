@@ -16,11 +16,15 @@ from torch_measure.models.logistic_fm import LogisticFM
 from torch_measure.models.multifacet import MultiFacetRasch
 from torch_measure.models.multifacet_twopl import MultiFacet2PL
 from torch_measure.models.rasch import Rasch
-from torch_measure.models.rotation import bifactor_rotation, promax_rotation, varimax_rotation
-from torch_measure.models.tabpfn_predictor import TabPFNPredictor
+from torch_measure.models.rotation import (
+    bifactor_rotation,
+    promax_rotation,
+    varimax_rotation,
+)
 from torch_measure.models.testlet import TestletRasch, build_testlet_map
 from torch_measure.models.threepl import ThreePL
 from torch_measure.models.twopl import TwoPL
+from torch_measure.models.ncf import NCF, NCFHead
 
 __all__ = [
     "Predictor",
