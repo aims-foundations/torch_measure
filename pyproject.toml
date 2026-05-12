@@ -50,6 +50,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+bayesian = ["pyro-ppl>=1.8"]
+data = ["huggingface_hub>=0.16", "datasets>=2.10"]
+viz = ["matplotlib>=3.7", "seaborn>=0.12", "tueplots>=0.0.14"]
 dev = [
     "torch_measure[test,docs]",
     "pre-commit",
