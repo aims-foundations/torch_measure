@@ -60,7 +60,7 @@ class TestTestletRasch:
         tmap = torch.zeros(10, dtype=torch.long)  # wrong size
         try:
             TestletRasch(n_subjects=5, n_items=30, testlet_map=tmap)
-            assert False, "Should have raised ValueError"
+            raise AssertionError("Should have raised ValueError")
         except ValueError:
             pass
 

@@ -23,7 +23,7 @@ class TestResponseMatrix:
     def test_rejects_1d(self):
         try:
             ResponseMatrix(torch.randn(10))
-            assert False, "Should have raised ValueError"
+            raise AssertionError("Should have raised ValueError")
         except ValueError:
             pass
 

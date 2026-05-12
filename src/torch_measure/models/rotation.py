@@ -10,7 +10,9 @@ from __future__ import annotations
 import torch
 
 
-def varimax_rotation(loadings: torch.Tensor, max_iter: int = 100, tol: float = 1e-6) -> tuple[torch.Tensor, torch.Tensor]:
+def varimax_rotation(
+    loadings: torch.Tensor, max_iter: int = 100, tol: float = 1e-6
+) -> tuple[torch.Tensor, torch.Tensor]:
     """Apply Varimax rotation to factor loadings.
 
     Varimax maximizes the variance of squared loadings within each factor,
@@ -32,6 +34,14 @@ def varimax_rotation(loadings: torch.Tensor, max_iter: int = 100, tol: float = 1
     rotation_matrix : torch.Tensor
         Rotation matrix (n_factors, n_factors).
     """
+    n_factors = loadings.shape[1]
+    if n_factors < 2:
+        # factor_analyzer's Rotator crashes on single-factor input: its _varimax
+        # returns 1 value when n_factors < 2 but fit_transform unpacks 2.
+        # Single-factor rotation is the identity, so short-circuit here.
+        identity = torch.eye(n_factors, dtype=loadings.dtype, device=loadings.device)
+        return loadings.clone(), identity
+
     try:
         from factor_analyzer.rotator import Rotator
 
@@ -87,9 +97,7 @@ def _varimax_torch(loadings: torch.Tensor, max_iter: int = 100, tol: float = 1e-
     return rotated, rotation
 
 
-def promax_rotation(
-    loadings: torch.Tensor, power: int = 4, **kwargs
-) -> tuple[torch.Tensor, torch.Tensor]:
+def promax_rotation(loadings: torch.Tensor, power: int = 4, **kwargs) -> tuple[torch.Tensor, torch.Tensor]:
     """Apply Promax (oblique) rotation to factor loadings.
 
     Promax starts with Varimax and then applies a power transformation
@@ -109,6 +117,13 @@ def promax_rotation(
     rotation_matrix : torch.Tensor
         Rotation matrix.
     """
+    n_factors = loadings.shape[1]
+    if n_factors < 2:
+        # factor_analyzer's _promax inherits the same single-factor unpacking
+        # bug as _varimax (returns 1 value when n_factors < 2). Short-circuit.
+        identity = torch.eye(n_factors, dtype=loadings.dtype, device=loadings.device)
+        return loadings.clone(), identity
+
     try:
         from factor_analyzer.rotator import Rotator
 

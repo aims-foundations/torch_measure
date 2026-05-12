@@ -109,9 +109,7 @@ class TestletRasch(IRTModel):
 
         self.ability = nn.Parameter(torch.randn(n_subjects, device=self._device))
         self.difficulty = nn.Parameter(torch.randn(n_items, device=self._device))
-        self.testlet_effect = nn.Parameter(
-            torch.zeros(n_subjects, self.n_testlets, device=self._device)
-        )
+        self.testlet_effect = nn.Parameter(torch.zeros(n_subjects, self.n_testlets, device=self._device))
 
     @property
     def testlet_scale(self) -> torch.Tensor:

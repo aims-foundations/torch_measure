@@ -1,14 +1,15 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
-"""Stochastic Variational Inference fitting via Pyro (optional dependency).
-
-Consolidated from safety-irt/model/irt.py.
-Requires: pip install torch_measure[bayesian]
-"""
+"""Stochastic Variational Inference fitting via Pyro."""
 
 from __future__ import annotations
 
+import pyro
+import pyro.distributions as dist
 import torch
+from pyro.infer import SVI, Trace_ELBO
+from pyro.infer.autoguide import AutoNormal
+from pyro.optim import ClippedAdam
 
 
 def _detect_model_type(model):
@@ -96,17 +97,6 @@ def svi_fit(
         Scales are obtained by applying ``softplus`` to AutoNormal's unconstrained
         scale parameters.
     """
-    try:
-        import pyro
-        import pyro.distributions as dist
-        from pyro.infer import SVI, Trace_ELBO
-        from pyro.infer.autoguide import AutoNormal
-        from pyro.optim import ClippedAdam
-    except ImportError as err:
-        raise ImportError(
-            "Bayesian SVI fitting requires pyro-ppl. "
-            "Install with: pip install torch_measure[bayesian]"
-        ) from err
 
     device = response.device
     observed_responses = response.float()

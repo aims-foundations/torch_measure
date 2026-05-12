@@ -1,12 +1,14 @@
 # Copyright (c) 2026 AIMS Foundations. MIT License.
 
-"""Data loaders for common benchmark datasets (requires huggingface_hub)."""
+"""Data loaders for common benchmark datasets."""
 
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import pandas as pd
 import torch
+from huggingface_hub import hf_hub_download
 
 if TYPE_CHECKING:
     from torch_measure.data.response_matrix import ResponseMatrix
@@ -25,11 +27,6 @@ def from_csv(path: str, **kwargs) -> ResponseMatrix:
     -------
     ResponseMatrix
     """
-    try:
-        import pandas as pd
-    except ImportError as err:
-        raise ImportError("Loading from CSV requires pandas. Install with: pip install pandas") from err
-
     from torch_measure.data.response_matrix import ResponseMatrix
 
     df = pd.read_csv(path, index_col=0, **kwargs)
@@ -50,11 +47,6 @@ def from_huggingface(repo_id: str, filename: str | None = None, **kwargs) -> Res
     -------
     ResponseMatrix
     """
-    try:
-        from huggingface_hub import hf_hub_download
-    except ImportError as err:
-        raise ImportError("Loading from HuggingFace requires huggingface_hub. Install with: pip install torch_measure[data]") from err
-
     from torch_measure.data.response_matrix import ResponseMatrix
 
     if filename is not None:
@@ -79,7 +71,4 @@ def from_huggingface(repo_id: str, filename: str | None = None, **kwargs) -> Res
         except Exception:
             continue
 
-    raise FileNotFoundError(
-        f"Could not find a response matrix in {repo_id}. "
-        f"Specify the filename explicitly."
-    )
+    raise FileNotFoundError(f"Could not find a response matrix in {repo_id}. Specify the filename explicitly.")

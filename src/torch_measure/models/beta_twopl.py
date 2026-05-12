@@ -35,9 +35,7 @@ class BetaTwoPL(TwoPL):
     .. [1] Item Response Scaling Laws (ICML 2026).
     """
 
-    def __init__(
-        self, n_subjects: int, n_items: int, phi: float = 10.0, device: str = "cpu"
-    ) -> None:
+    def __init__(self, n_subjects: int, n_items: int, phi: float = 10.0, device: str = "cpu") -> None:
         super().__init__(n_subjects, n_items, device)
         self.phi = phi
 

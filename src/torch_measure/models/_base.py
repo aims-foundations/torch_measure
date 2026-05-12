@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import TYPE_CHECKING, Union
+from typing import TYPE_CHECKING
 
 import torch
 from torch import nn
@@ -81,7 +81,7 @@ class IRTModel(nn.Module):
 
     def fit(
         self,
-        data: "Union[LongFormData, torch.Tensor]",
+        data: LongFormData | torch.Tensor,
         mask: torch.Tensor | None = None,
         method: str = "mle",
         max_epochs: int = 1000,
@@ -122,23 +122,27 @@ class IRTModel(nn.Module):
         if method == "mle":
             from torch_measure.fitting.mle import mle_fit
 
-            return mle_fit(self, subject_idx, item_idx, response,
-                           max_epochs=max_epochs, lr=lr, verbose=verbose, **kwargs)
+            return mle_fit(
+                self, subject_idx, item_idx, response, max_epochs=max_epochs, lr=lr, verbose=verbose, **kwargs
+            )
         elif method == "em":
             from torch_measure.fitting.em import em_fit
 
-            return em_fit(self, subject_idx, item_idx, response,
-                          max_epochs=max_epochs, lr=lr, verbose=verbose, **kwargs)
+            return em_fit(
+                self, subject_idx, item_idx, response, max_epochs=max_epochs, lr=lr, verbose=verbose, **kwargs
+            )
         elif method == "jml":
             from torch_measure.fitting.jml import jml_fit
 
-            return jml_fit(self, subject_idx, item_idx, response,
-                           max_epochs=max_epochs, lr=lr, verbose=verbose, **kwargs)
+            return jml_fit(
+                self, subject_idx, item_idx, response, max_epochs=max_epochs, lr=lr, verbose=verbose, **kwargs
+            )
         elif method == "svi":
             from torch_measure.fitting.svi import svi_fit
 
-            return svi_fit(self, subject_idx, item_idx, response,
-                           max_epochs=max_epochs, lr=lr, verbose=verbose, **kwargs)
+            return svi_fit(
+                self, subject_idx, item_idx, response, max_epochs=max_epochs, lr=lr, verbose=verbose, **kwargs
+            )
         else:
             raise ValueError(f"Unknown fitting method: {method!r}. Use 'mle', 'em', 'jml', or 'svi'.")
 
@@ -162,9 +166,7 @@ class IRTModel(nn.Module):
             )
 
         if not isinstance(data, torch.Tensor):
-            raise TypeError(
-                f"fit() expected LongFormData or torch.Tensor, got {type(data).__name__}"
-            )
+            raise TypeError(f"fit() expected LongFormData or torch.Tensor, got {type(data).__name__}")
 
         response_matrix = data.to(self._device)
         if mask is None:

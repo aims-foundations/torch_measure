@@ -74,9 +74,9 @@ class Bifactor(IRTModel):
             items_in_group = self.item_groups == k
             if items_in_group.any():
                 # (N,) * (sum_items,) -> (N, sum_items)
-                group[:, items_in_group] = (
-                    self.group_ability[:, k].unsqueeze(1) * self.group_loading[items_in_group].unsqueeze(0)
-                )
+                group[:, items_in_group] = self.group_ability[:, k].unsqueeze(1) * self.group_loading[
+                    items_in_group
+                ].unsqueeze(0)
 
         logit = general + group + self.Z.unsqueeze(0)
         return torch.sigmoid(logit)

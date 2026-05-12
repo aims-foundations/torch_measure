@@ -51,9 +51,7 @@ def _matches_family(name: str, family: str) -> bool:
         return True
     if family in info_obj.modality:
         return True
-    if family in info_obj.tags:
-        return True
-    return False
+    return family in info_obj.tags
 
 
 def info(name: str) -> DatasetInfo:
@@ -80,6 +78,4 @@ def info(name: str) -> DatasetInfo:
     available = manifest_dataset_names()
     preview = ", ".join(available[:10])
     suffix = "..." if len(available) > 10 else ""
-    raise ValueError(
-        f"Unknown dataset: {name!r}. Available datasets: {preview}{suffix}"
-    )
+    raise ValueError(f"Unknown dataset: {name!r}. Available datasets: {preview}{suffix}")

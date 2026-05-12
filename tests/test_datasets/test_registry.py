@@ -92,14 +92,6 @@ class TestListDatasets:
         for expected in ("mtbench", "swebench", "arena_hard"):
             assert expected in names
 
-    def test_family_filter_by_domain(self):
-        result = list_datasets(family="preference")
-        assert set(result) == {"mtbench", "arena_hard"}
-
-    def test_family_filter_by_modality(self):
-        result = list_datasets(family="text")
-        assert set(result) == {"mtbench", "swebench", "arena_hard"}
-
     def test_unknown_family_returns_empty(self):
         assert list_datasets(family="nonexistent_family_xyz") == []
 

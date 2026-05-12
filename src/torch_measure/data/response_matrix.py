@@ -121,8 +121,12 @@ class ResponseMatrix:
         binary = (self.data >= threshold).float()
         binary[~self.observed_mask] = float("nan")
         return ResponseMatrix(
-            binary, self.subject_ids, self.item_ids,
-            self.item_contents, self.subject_metadata, self.info,
+            binary,
+            self.subject_ids,
+            self.item_ids,
+            self.item_contents,
+            self.subject_metadata,
+            self.info,
         )
 
     @classmethod
@@ -170,27 +174,16 @@ class ResponseMatrix:
         subjects = data.subjects
         name = data.name
 
-        if "benchmark_id" in items.columns:
-            items_bench = items[items["benchmark_id"] == name]
-        else:
-            items_bench = items
+        items_bench = items[items["benchmark_id"] == name] if "benchmark_id" in items.columns else items
         items_bench = items_bench.set_index("item_id")
         present_items = set(responses["item_id"].unique())
         items_bench = items_bench[items_bench.index.isin(present_items)]
 
-        needs_agg = (
-            responses["trial"].nunique() > 1
-            or (
-                "test_condition" in responses.columns
-                and responses["test_condition"].notna().any()
-            )
+        needs_agg = responses["trial"].nunique() > 1 or (
+            "test_condition" in responses.columns and responses["test_condition"].notna().any()
         )
         if needs_agg:
-            agg = (
-                responses
-                .groupby(["subject_id", "item_id"], as_index=False)["response"]
-                .mean()
-            )
+            agg = responses.groupby(["subject_id", "item_id"], as_index=False)["response"].mean()
         else:
             agg = responses[["subject_id", "item_id", "response"]]
 
@@ -199,11 +192,7 @@ class ResponseMatrix:
         ordered_item_ids = [iid for iid in items_bench.index if iid in matrix.columns]
         matrix = matrix.reindex(columns=ordered_item_ids)
 
-        subjects_by_id = (
-            subjects.set_index("subject_id")
-            if "subject_id" in subjects.columns
-            else subjects
-        )
+        subjects_by_id = subjects.set_index("subject_id") if "subject_id" in subjects.columns else subjects
         subject_ids = list(matrix.index)
         display_names = [
             str(subjects_by_id.at[sid, "display_name"])
@@ -241,7 +230,4 @@ class ResponseMatrix:
         )
 
     def __repr__(self) -> str:
-        return (
-            f"ResponseMatrix(n_subjects={self.n_subjects}, n_items={self.n_items}, "
-            f"density={self.density:.2%})"
-        )
+        return f"ResponseMatrix(n_subjects={self.n_subjects}, n_items={self.n_items}, density={self.density:.2%})"

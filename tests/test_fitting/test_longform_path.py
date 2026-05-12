@@ -11,7 +11,6 @@ verify numerical equivalence against the wide-form path.
 from __future__ import annotations
 
 import pandas as pd
-import pytest
 import torch
 
 from torch_measure.datasets._long_form import LongFormData
@@ -29,23 +28,21 @@ def _synth_longform(n_subjects: int = 20, n_items: int = 30, seed: int = 42) -> 
     rows = []
     for s in range(n_subjects):
         for i in range(n_items):
-            rows.append({
-                "subject_id": f"s{s:02d}",
-                "item_id": f"i{i:02d}",
-                "benchmark_id": "synthetic",
-                "trial": 0,
-                "test_condition": None,
-                "response": float(responses[s, i].item()),
-                "correct_answer": None,
-                "trace": None,
-            })
+            rows.append(
+                {
+                    "subject_id": f"s{s:02d}",
+                    "item_id": f"i{i:02d}",
+                    "benchmark_id": "synthetic",
+                    "trial": 0,
+                    "test_condition": None,
+                    "response": float(responses[s, i].item()),
+                    "correct_answer": None,
+                    "trace": None,
+                }
+            )
     df = pd.DataFrame(rows)
-    items = pd.DataFrame([
-        {"item_id": f"i{i:02d}", "benchmark_id": "synthetic"} for i in range(n_items)
-    ])
-    subjects = pd.DataFrame([
-        {"subject_id": f"s{s:02d}"} for s in range(n_subjects)
-    ])
+    items = pd.DataFrame([{"item_id": f"i{i:02d}", "benchmark_id": "synthetic"} for i in range(n_items)])
+    subjects = pd.DataFrame([{"subject_id": f"s{s:02d}"} for s in range(n_subjects)])
     return LongFormData(
         name="synthetic",
         responses=df,
@@ -111,7 +108,6 @@ class TestLongFormFit:
 
 class TestLongFormFitPyro:
     def test_svi_long_form(self):
-        pytest.importorskip("pyro", reason="pyro-ppl required for SVI tests")
         data = _synth_longform()
         model = Rasch(n_subjects=20, n_items=30)
         history = model.fit(data, method="svi", max_epochs=50, verbose=False)
