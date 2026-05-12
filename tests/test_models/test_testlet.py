@@ -4,6 +4,7 @@
 
 import torch
 
+from torch_measure.models._predictor import predict_dense
 from torch_measure.models.testlet import TestletRasch, build_testlet_map
 
 
@@ -67,7 +68,7 @@ class TestTestletRasch:
     def test_predict_shape(self):
         tmap = _make_testlet_map()
         model = TestletRasch(n_subjects=20, n_items=30, testlet_map=tmap)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (20, 30)
         assert (probs >= 0).all()
         assert (probs <= 1).all()
@@ -79,7 +80,7 @@ class TestTestletRasch:
             model.ability.copy_(torch.tensor([2.0, -2.0]))
             model.difficulty.copy_(torch.tensor([0.0, 0.0, 0.0]))
             model.testlet_effect.zero_()
-        probs = model.predict()
+        probs = predict_dense(model)
         # With zero testlet effects, matches standard Rasch
         assert probs[0, 0].item() > 0.8
         assert probs[1, 0].item() < 0.2
@@ -92,11 +93,11 @@ class TestTestletRasch:
             model.ability.zero_()
             model.difficulty.zero_()
             model.testlet_effect.zero_()
-        probs_zero = model.predict().clone()
+        probs_zero = predict_dense(model).clone()
 
         with torch.no_grad():
             model.testlet_effect[0, 0] = 2.0
-        probs_effect = model.predict()
+        probs_effect = predict_dense(model)
         # Items in testlet 0 for subject 0 should have higher probability
         assert probs_effect[0, 0] > probs_zero[0, 0]
         assert probs_effect[0, 1] > probs_zero[0, 1]
@@ -115,9 +116,12 @@ class TestTestletRasch:
         assert torch.allclose(scale, torch.zeros(6))
 
     def test_forward_equals_predict(self):
+        from torch_measure.models._predictor import cartesian_query
+
         tmap = _make_testlet_map()
         model = TestletRasch(n_subjects=10, n_items=30, testlet_map=tmap)
-        assert torch.allclose(model.forward(), model.predict())
+        query = cartesian_query(10, 30)
+        assert torch.allclose(model(query), model.predict(query))
 
     def test_fit_reduces_loss(self, small_testlet_response_matrix):
         responses, tmap = small_testlet_response_matrix

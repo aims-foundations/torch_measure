@@ -3,6 +3,7 @@
 import torch
 
 from torch_measure.models import AmortizedIRT
+from torch_measure.models._predictor import predict_dense
 
 
 class TestAmortizedIRT:
@@ -33,7 +34,7 @@ class TestAmortizedIRT:
         model = AmortizedIRT(n_subjects=5, n_items=10, embedding_dim=32, pl=2)
         embeddings = torch.randn(10, 32)
         model.set_embeddings(embeddings)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (5, 10)
         assert (probs >= 0).all()
         assert (probs <= 1).all()
@@ -41,7 +42,7 @@ class TestAmortizedIRT:
     def test_predict_requires_embeddings(self):
         model = AmortizedIRT(n_subjects=5, n_items=10, embedding_dim=32)
         try:
-            model.predict()
+            predict_dense(model)
             raise AssertionError("Should have raised RuntimeError")
         except RuntimeError:
             pass
@@ -52,7 +53,7 @@ class TestAmortizedIRT:
         for pl in [1, 2, 3]:
             model = AmortizedIRT(n_subjects=5, n_items=10, embedding_dim=32, pl=pl)
             model.set_embeddings(embeddings)
-            probs = model.predict()
+            probs = predict_dense(model)
             assert probs.shape == (5, 10)
 
             if pl >= 2:

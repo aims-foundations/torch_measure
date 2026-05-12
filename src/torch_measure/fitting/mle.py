@@ -32,7 +32,7 @@ def mle_fit(
     Parameters
     ----------
     model : IRTModel
-        The IRT model to fit. Must expose ``predict_at(s_idx, i_idx)``.
+        The IRT model to fit. Must expose ``predict(query)`` (see :class:`Predictor`).
     subject_idx : torch.LongTensor
         Integer subject indices, shape ``(n_obs,)``.
     item_idx : torch.LongTensor
@@ -84,7 +84,7 @@ def mle_fit(
 
             def closure():
                 optimizer.zero_grad()
-                probs = model.predict_at(subject_idx, item_idx).clamp(1e-7, 1 - 1e-7)
+                probs = model.predict({"subject_idx": subject_idx, "item_idx": item_idx}).clamp(1e-7, 1 - 1e-7)
                 loss = loss_fn(probs, response)
                 loss.backward()
                 return loss
@@ -93,7 +93,7 @@ def mle_fit(
             loss_val = loss.item()
         else:
             optimizer.zero_grad()
-            probs = model.predict_at(subject_idx, item_idx).clamp(1e-7, 1 - 1e-7)
+            probs = model.predict({"subject_idx": subject_idx, "item_idx": item_idx}).clamp(1e-7, 1 - 1e-7)
             loss = loss_fn(probs, response)
             loss.backward()
             optimizer.step()

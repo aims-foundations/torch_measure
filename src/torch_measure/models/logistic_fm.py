@@ -58,12 +58,10 @@ class LogisticFM(IRTModel):
         """Item factor loadings (n_items, K)."""
         return self.V.detach()
 
-    def predict(self) -> torch.Tensor:
-        """Compute P(correct) = sigmoid(U @ V^T + Z^T).
-
-        Returns
-        -------
-        torch.Tensor
-            Probability matrix of shape (n_subjects, n_items).
-        """
-        return torch.sigmoid(self.U @ self.V.T + self.Z.unsqueeze(0))
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(correct) = sigmoid(U_s · V_i + Z_i) at query rows."""
+        s = query["subject_idx"]
+        i = query["item_idx"]
+        # (N, K) · (N, K) → (N,)
+        logit = (self.U[s] * self.V[i]).sum(dim=-1) + self.Z[i]
+        return torch.sigmoid(logit)

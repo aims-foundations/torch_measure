@@ -2,6 +2,7 @@
 
 
 from torch_measure.models import LogisticFM
+from torch_measure.models._predictor import predict_dense
 
 
 class TestLogisticFM:
@@ -16,7 +17,7 @@ class TestLogisticFM:
 
     def test_predict_shape(self):
         model = LogisticFM(n_subjects=10, n_items=20, n_factors=2)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (10, 20)
         assert (probs >= 0).all()
         assert (probs <= 1).all()
@@ -30,7 +31,7 @@ class TestLogisticFM:
     def test_single_factor_like_rasch(self):
         """With K=1, LogisticFM should behave similarly to Rasch."""
         model = LogisticFM(n_subjects=5, n_items=10, n_factors=1)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (5, 10)
 
     def test_fit_reduces_loss(self, small_response_matrix):

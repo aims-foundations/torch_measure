@@ -3,6 +3,7 @@
 import torch
 
 from torch_measure.models import ThreePL
+from torch_measure.models._predictor import predict_dense
 
 
 class TestThreePL:
@@ -15,11 +16,11 @@ class TestThreePL:
     def test_predict_lower_bound(self):
         """3PL probabilities should never go below guessing parameter."""
         model = ThreePL(n_subjects=5, n_items=10)
-        probs = model.predict()
+        probs = predict_dense(model)
         # With very low ability, prob should approach guessing (not 0)
         with torch.no_grad():
             model.ability.fill_(-100.0)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert (probs >= model.guessing.unsqueeze(0) - 0.01).all()
 
     def test_fit_reduces_loss(self, small_response_matrix):

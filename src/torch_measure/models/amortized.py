@@ -118,16 +118,17 @@ class AmortizedIRT(IRTModel):
         _, _, c = self._compute_item_params()
         return c.detach() if c is not None else None
 
-    def predict(self) -> torch.Tensor:
-        """Compute response probabilities using amortized item parameters.
-
-        Returns
-        -------
-        torch.Tensor
-            Probability matrix of shape (n_subjects, n_items).
-        """
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(correct) at query rows using amortized item parameters."""
+        s = query["subject_idx"]
+        i = query["item_idx"]
         difficulty, discrimination, guessing = self._compute_item_params()
-        return self._irt_probability(self.ability, difficulty, discrimination, guessing)
+        return self._irt_probability(
+            self.ability[s],
+            difficulty[i],
+            discrimination=discrimination[i] if discrimination is not None else None,
+            guessing=guessing[i] if guessing is not None else None,
+        )
 
     def fit(
         self,

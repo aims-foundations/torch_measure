@@ -3,6 +3,7 @@
 import torch
 
 from torch_measure.models import Rasch
+from torch_measure.models._predictor import predict_dense
 
 
 class TestRasch:
@@ -15,7 +16,7 @@ class TestRasch:
 
     def test_predict_shape(self):
         model = Rasch(n_subjects=10, n_items=20)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (10, 20)
         assert (probs >= 0).all()
         assert (probs <= 1).all()
@@ -25,7 +26,7 @@ class TestRasch:
         with torch.no_grad():
             model.ability.copy_(torch.tensor([2.0, -2.0]))
             model.difficulty.copy_(torch.tensor([0.0, 0.0, 0.0]))
-        probs = model.predict()
+        probs = predict_dense(model)
         # High ability -> high probability
         assert probs[0, 0] > 0.8
         # Low ability -> low probability
@@ -45,5 +46,8 @@ class TestRasch:
         assert len(history["losses"]) > 0
 
     def test_forward_equals_predict(self):
+        from torch_measure.models._predictor import cartesian_query
+
         model = Rasch(n_subjects=10, n_items=20)
-        assert torch.allclose(model.forward(), model.predict())
+        query = cartesian_query(10, 20)
+        assert torch.allclose(model(query), model.predict(query))

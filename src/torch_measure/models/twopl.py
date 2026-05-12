@@ -39,12 +39,8 @@ class TwoPL(IRTModel):
         """Item discrimination parameters (constrained to be positive)."""
         return torch.exp(self._discrimination_raw)
 
-    def predict(self) -> torch.Tensor:
-        """Compute P(correct) = sigmoid(a * (theta - b)).
-
-        Returns
-        -------
-        torch.Tensor
-            Probability matrix of shape (n_subjects, n_items).
-        """
-        return self._irt_probability(self.ability, self.difficulty, discrimination=self.discrimination)
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(correct) = sigmoid(a * (theta - b)) at query rows."""
+        s = query["subject_idx"]
+        i = query["item_idx"]
+        return self._irt_probability(self.ability[s], self.difficulty[i], discrimination=self.discrimination[i])

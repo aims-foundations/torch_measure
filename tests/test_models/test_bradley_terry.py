@@ -6,6 +6,7 @@ import pytest
 import torch
 
 from torch_measure.data.pairwise import PairwiseComparisons
+from torch_measure.models._predictor import cartesian_query, predict_dense
 from torch_measure.models.bradley_terry import BradleyTerry
 
 
@@ -31,14 +32,14 @@ class TestInit:
 class TestPredict:
     def test_shape(self):
         model = BradleyTerry(n_subjects=5)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (5, 5)
 
     def test_diagonal_is_half(self):
         model = BradleyTerry(n_subjects=5)
         with torch.no_grad():
             model.ability.copy_(torch.randn(5))
-        probs = model.predict()
+        probs = predict_dense(model)
         assert torch.allclose(probs.diag(), torch.full((5,), 0.5))
 
     def test_symmetry(self):
@@ -46,7 +47,7 @@ class TestPredict:
         model = BradleyTerry(n_subjects=5)
         with torch.no_grad():
             model.ability.copy_(torch.randn(5))
-        probs = model.predict()
+        probs = predict_dense(model)
         assert torch.allclose(probs + probs.T, torch.ones(5, 5), atol=1e-6)
 
     def test_higher_ability_higher_prob(self):
@@ -54,7 +55,7 @@ class TestPredict:
         model = BradleyTerry(n_subjects=2)
         with torch.no_grad():
             model.ability.copy_(torch.tensor([2.0, -1.0]))
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs[0, 1].item() > 0.5  # subject 0 beats subject 1
         assert probs[1, 0].item() < 0.5  # subject 1 loses to subject 0
 
@@ -62,7 +63,7 @@ class TestPredict:
         model = BradleyTerry(n_subjects=3)
         with torch.no_grad():
             model.ability.copy_(torch.tensor([1.0, 1.0, 1.0]))
-        probs = model.predict()
+        probs = predict_dense(model)
         assert torch.allclose(probs, torch.full((3, 3), 0.5))
 
 
@@ -82,7 +83,7 @@ class TestPredictPairwise:
         a = torch.tensor([0, 1, 2, 0])
         b = torch.tensor([1, 2, 3, 3])
         pairwise_probs = model.predict_pairwise(a, b)
-        matrix_probs = model.predict()
+        matrix_probs = predict_dense(model)
         for k in range(4):
             assert pairwise_probs[k].item() == pytest.approx(matrix_probs[a[k], b[k]].item(), abs=1e-6)
 
@@ -92,7 +93,8 @@ class TestForward:
         model = BradleyTerry(n_subjects=5)
         with torch.no_grad():
             model.ability.copy_(torch.randn(5))
-        assert torch.allclose(model.forward(), model.predict())
+        query = cartesian_query(5, 5)
+        assert torch.allclose(model(query), model.predict(query))
 
 
 class TestFitMLE:

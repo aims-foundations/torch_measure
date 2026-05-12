@@ -4,80 +4,28 @@
 
 from __future__ import annotations
 
-from abc import abstractmethod
 from typing import TYPE_CHECKING
 
 import torch
-from torch import nn
+
+from torch_measure.models._predictor import Predictor
 
 if TYPE_CHECKING:
     from torch_measure.datasets._long_form import LongFormData
 
 
-class IRTModel(nn.Module):
-    """Abstract base class for Item Response Theory models.
+class IRTModel(Predictor):
+    """Abstract base for factor-based Item Response Theory models.
 
-    All IRT models share the interface:
+    Specialises :class:`Predictor` for models with explicit ``ability`` and
+    ``difficulty`` parameters that compose into a per-cell probability via
+    a logistic link. Subclasses implement :meth:`predict` (inherited from
+    :class:`Predictor`) by gathering parameters at the query indices and
+    applying the IRT formula — see :meth:`_irt_probability`.
 
-    - ``.fit(data, ...)`` to estimate parameters from a
-      :class:`~torch_measure.datasets.LongFormData` (preferred) or a
-      wide-form response tensor.
-    - ``.predict()`` to compute the full ``(n_subjects, n_items)`` probability
-      matrix; ``.predict_at(s_idx, i_idx)`` for sparse evaluation.
-    - ``.ability`` to access subject ability parameters.
-    - ``.difficulty`` to access item difficulty parameters.
+    For non-factor predictors (TabPFN-style, neural baselines), inherit
+    :class:`Predictor` directly instead.
     """
-
-    def __init__(self, n_subjects: int, n_items: int, device: str | torch.device = "cpu") -> None:
-        super().__init__()
-        self._n_subjects = n_subjects
-        self._n_items = n_items
-        self._device = torch.device(device)
-
-    @property
-    def n_subjects(self) -> int:
-        return self._n_subjects
-
-    @property
-    def n_items(self) -> int:
-        return self._n_items
-
-    @abstractmethod
-    def predict(self) -> torch.Tensor:
-        """Compute predicted response probabilities.
-
-        Returns
-        -------
-        torch.Tensor
-            Probability matrix of shape (n_subjects, n_items).
-        """
-        ...
-
-    def predict_at(self, subject_idx: torch.Tensor, item_idx: torch.Tensor) -> torch.Tensor:
-        """Predict response probabilities at specified ``(subject, item)`` cells.
-
-        Default implementation materialises the full ``(n_subjects, n_items)``
-        probability matrix via :meth:`predict` and indexes into it. Subclasses
-        should override this when the full matrix is expensive to compute
-        (e.g., :class:`AmortizedIRT` with many items).
-
-        Parameters
-        ----------
-        subject_idx : torch.LongTensor
-            Integer subject indices, shape ``(n_obs,)``.
-        item_idx : torch.LongTensor
-            Integer item indices, shape ``(n_obs,)``.
-
-        Returns
-        -------
-        torch.Tensor
-            Probabilities at the requested cells, shape ``(n_obs,)``.
-        """
-        return self.predict()[subject_idx, item_idx]
-
-    def forward(self) -> torch.Tensor:
-        """Forward pass returns predicted probabilities."""
-        return self.predict()
 
     def fit(
         self,
@@ -103,8 +51,7 @@ class IRTModel(nn.Module):
             entries to use for fitting. Inferred from NaN/-1 when ``None``.
             Ignored for long-form input (absent rows are absent observations).
         method : str
-            Fitting method: ``"mle"``, ``"em"``, ``"jml"``, or ``"svi"``
-            (requires pyro-ppl).
+            Fitting method: ``"mle"``, ``"em"``, ``"jml"``, or ``"svi"``.
         max_epochs : int
             Maximum number of optimization epochs.
         lr : float
@@ -186,43 +133,36 @@ class IRTModel(nn.Module):
         discrimination: torch.Tensor | None = None,
         guessing: torch.Tensor | None = None,
     ) -> torch.Tensor:
-        """Compute IRT probability P(correct | ability, item_params).
+        """Element-wise IRT probability ``P(correct | params)``.
 
-        Implements the general IRT formula:
+        All inputs must be 1-D tensors of equal length ``N`` (already
+        gathered at the query indices). Implements::
+
             P = c + (1 - c) * sigmoid(a * (theta - b))
 
-        where theta=ability, b=difficulty, a=discrimination, c=guessing.
+        where ``theta=ability``, ``b=difficulty``, ``a=discrimination``,
+        ``c=guessing``.
 
         Parameters
         ----------
         ability : torch.Tensor
-            Subject abilities of shape (N,) or (N, D).
+            Subject abilities at query rows, shape ``(N,)``.
         difficulty : torch.Tensor
-            Item difficulties of shape (M,).
+            Item difficulties at query rows, shape ``(N,)``.
         discrimination : torch.Tensor | None
-            Item discriminations of shape (M,). Defaults to 1.
+            Item discriminations at query rows, shape ``(N,)``. Defaults to 1.
         guessing : torch.Tensor | None
-            Item guessing parameters of shape (M,). Defaults to 0.
+            Item guessing parameters at query rows, shape ``(N,)``. Defaults to 0.
 
         Returns
         -------
         torch.Tensor
-            Probability matrix of shape (N, M).
+            Probabilities, shape ``(N,)``.
         """
-        # ability: (N,) or (N, D) -> (N, 1)
-        if ability.ndim == 1:
-            ability = ability.unsqueeze(1)
-        # difficulty: (M,) -> (1, M)
-        difficulty = difficulty.unsqueeze(0)
-
-        logit = ability - difficulty  # (N, M)
-
+        logit = ability - difficulty
         if discrimination is not None:
-            logit = discrimination.unsqueeze(0) * logit
-
+            logit = discrimination * logit
         prob = torch.sigmoid(logit)
-
         if guessing is not None:
-            prob = guessing.unsqueeze(0) + (1 - guessing.unsqueeze(0)) * prob
-
+            prob = guessing + (1 - guessing) * prob
         return prob

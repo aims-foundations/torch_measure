@@ -64,19 +64,12 @@ class Bifactor(IRTModel):
     def difficulty(self) -> torch.Tensor:
         return -self.Z.detach()
 
-    def predict(self) -> torch.Tensor:
-        # General component: (N,) @ (M,) -> (N, M)
-        general = self.general_ability.unsqueeze(1) * self.general_loading.unsqueeze(0)
-
-        # Group-specific component
-        group = torch.zeros(self.n_subjects, self.n_items, device=self._device)
-        for k in range(self.n_groups):
-            items_in_group = self.item_groups == k
-            if items_in_group.any():
-                # (N,) * (sum_items,) -> (N, sum_items)
-                group[:, items_in_group] = self.group_ability[:, k].unsqueeze(1) * self.group_loading[
-                    items_in_group
-                ].unsqueeze(0)
-
-        logit = general + group + self.Z.unsqueeze(0)
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(correct) at query rows using general + group factors."""
+        s = query["subject_idx"]
+        i = query["item_idx"]
+        g_per_item = self.item_groups[i]  # (N,) — group index of each query item
+        general = self.general_ability[s] * self.general_loading[i]
+        group = self.group_ability[s, g_per_item] * self.group_loading[i]
+        logit = general + group + self.Z[i]
         return torch.sigmoid(logit)

@@ -2,6 +2,7 @@
 
 
 from torch_measure.models import TwoPL
+from torch_measure.models._predictor import predict_dense
 
 
 class TestTwoPL:
@@ -14,7 +15,7 @@ class TestTwoPL:
 
     def test_predict_shape(self):
         model = TwoPL(n_subjects=10, n_items=20)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (10, 20)
         assert (probs >= 0).all()
         assert (probs <= 1).all()

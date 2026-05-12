@@ -46,17 +46,13 @@ class ThreePL(IRTModel):
         """Item guessing parameters (constrained to [0, 1])."""
         return torch.sigmoid(self._guessing_raw)
 
-    def predict(self) -> torch.Tensor:
-        """Compute P(correct) = c + (1-c) * sigmoid(a * (theta - b)).
-
-        Returns
-        -------
-        torch.Tensor
-            Probability matrix of shape (n_subjects, n_items).
-        """
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(correct) = c + (1-c) * sigmoid(a * (theta - b)) at query rows."""
+        s = query["subject_idx"]
+        i = query["item_idx"]
         return self._irt_probability(
-            self.ability,
-            self.difficulty,
-            discrimination=self.discrimination,
-            guessing=self.guessing,
+            self.ability[s],
+            self.difficulty[i],
+            discrimination=self.discrimination[i],
+            guessing=self.guessing[i],
         )

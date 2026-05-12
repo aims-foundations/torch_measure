@@ -10,12 +10,13 @@ import torch
 from torch import nn
 
 from torch_measure.fitting._losses import bernoulli_nll
+from torch_measure.models._predictor import Predictor
 
 if TYPE_CHECKING:
     from torch_measure.data.pairwise import PairwiseComparisons
 
 
-class BradleyTerry(nn.Module):
+class BradleyTerry(Predictor):
     """Bradley-Terry model for pairwise comparison data.
 
     Models the probability that subject *a* beats subject *b* as:
@@ -24,8 +25,9 @@ class BradleyTerry(nn.Module):
 
         P(a > b) = \\sigma(\\theta_a - \\theta_b)
 
-    This is mathematically equivalent to the Rasch IRT model, but applied
-    to paired comparisons rather than subject × item responses.
+    Mathematically equivalent to Rasch, but the "item" axis is itself a
+    subject — so ``predict(query)`` consumes ``subject_idx`` (the A-side)
+    and ``item_idx`` (the B-side).
 
     Parameters
     ----------
@@ -37,54 +39,32 @@ class BradleyTerry(nn.Module):
     Examples
     --------
     >>> from torch_measure.models import BradleyTerry
-    >>> from torch_measure.data import PairwiseComparisons
+    >>> from torch_measure.models._predictor import predict_dense
     >>> model = BradleyTerry(n_subjects=3)
-    >>> model.predict()  # (3, 3) win probability matrix
+    >>> predict_dense(model)  # (3, 3) win probability matrix
     """
 
     def __init__(self, n_subjects: int, device: str = "cpu") -> None:
-        super().__init__()
-        self._n_subjects = n_subjects
-        self._device = torch.device(device)
+        # Both axes of the prediction are subjects; pass n_subjects twice.
+        super().__init__(n_subjects, n_subjects, device)
         self.ability = nn.Parameter(torch.zeros(n_subjects, device=self._device))
 
-    @property
-    def n_subjects(self) -> int:
-        """Number of subjects."""
-        return self._n_subjects
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(a beats b) at query rows.
 
-    def predict(self) -> torch.Tensor:
-        """Compute full pairwise win probability matrix.
-
-        Returns
-        -------
-        torch.Tensor
-            Matrix of shape ``(n_subjects, n_subjects)`` where entry ``(i, j)``
-            is ``P(i beats j) = σ(θ_i - θ_j)``. The diagonal is 0.5.
+        ``query["subject_idx"]`` is the A-side; ``query["item_idx"]`` is
+        the B-side (also a subject index).
         """
-        diff = self.ability.unsqueeze(1) - self.ability.unsqueeze(0)
-        return torch.sigmoid(diff)
+        a = query["subject_idx"]
+        b = query["item_idx"]
+        return torch.sigmoid(self.ability[a] - self.ability[b])
 
     def predict_pairwise(self, subject_a: torch.Tensor, subject_b: torch.Tensor) -> torch.Tensor:
-        """Compute win probabilities for specific pairs.
+        """Domain-named convenience: ``P(a beats b)`` for explicit pair tensors.
 
-        Parameters
-        ----------
-        subject_a : torch.LongTensor
-            Indices of the first subject in each pair, shape ``(n_pairs,)``.
-        subject_b : torch.LongTensor
-            Indices of the second subject in each pair, shape ``(n_pairs,)``.
-
-        Returns
-        -------
-        torch.Tensor
-            ``P(a beats b)`` for each pair, shape ``(n_pairs,)``.
+        Equivalent to ``self.predict({"subject_idx": subject_a, "item_idx": subject_b})``.
         """
-        return torch.sigmoid(self.ability[subject_a] - self.ability[subject_b])
-
-    def forward(self) -> torch.Tensor:
-        """Forward pass returns the full win probability matrix."""
-        return self.predict()
+        return self.predict({"subject_idx": subject_a, "item_idx": subject_b})
 
     def fit(
         self,

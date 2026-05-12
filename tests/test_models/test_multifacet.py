@@ -3,6 +3,13 @@
 import torch
 
 from torch_measure.models import MultiFacetRasch
+from torch_measure.models._predictor import predict_dense
+
+
+def _facet_dense(model: MultiFacetRasch, facet_level: int) -> torch.Tensor:
+    """Helper: dense (n_subjects, n_items) prediction at a single facet level."""
+    extra = {"facet_idx": torch.full((model.n_subjects * model.n_items,), facet_level, dtype=torch.long)}
+    return predict_dense(model, **extra)
 
 
 class TestMultiFacetRasch:
@@ -17,15 +24,15 @@ class TestMultiFacetRasch:
 
     def test_predict_shape(self):
         model = MultiFacetRasch(n_subjects=5, n_items=10, n_facet_levels=3)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (5, 10)
         assert (probs >= 0).all()
         assert (probs <= 1).all()
 
     def test_predict_with_facet_index(self):
         model = MultiFacetRasch(n_subjects=5, n_items=10, n_facet_levels=3)
-        probs_0 = model.predict(facet_indices=torch.tensor([0]))
-        probs_1 = model.predict(facet_indices=torch.tensor([1]))
+        probs_0 = _facet_dense(model, 0)
+        probs_1 = _facet_dense(model, 1)
         assert probs_0.shape == (5, 10)
         assert probs_1.shape == (5, 10)
 
@@ -43,7 +50,7 @@ class TestMultiFacetRasch:
         # Gamma for level 0 should have no effect
         with torch.no_grad():
             model.gamma.fill_(5.0)
-        probs_ref = model.predict(facet_indices=torch.tensor([0]))
+        probs_ref = _facet_dense(model, 0)
         # The gamma contribution for level 0 should be masked out
         gamma_eff = model.gamma * model.gamma_mask
         assert gamma_eff[0] == 0.0

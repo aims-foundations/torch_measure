@@ -6,6 +6,7 @@ import torch
 
 from torch_measure.models import BetaTwoPL, TwoPL
 from torch_measure.models._base import IRTModel
+from torch_measure.models._predictor import predict_dense
 
 
 class TestBetaTwoPL:
@@ -23,7 +24,7 @@ class TestBetaTwoPL:
 
     def test_predict_shape(self):
         model = BetaTwoPL(n_subjects=10, n_items=20)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (10, 20)
         assert (probs >= 0).all()
         assert (probs <= 1).all()
@@ -36,7 +37,7 @@ class TestBetaTwoPL:
             beta_twopl.ability.copy_(twopl.ability)
             beta_twopl.difficulty.copy_(twopl.difficulty)
             beta_twopl._discrimination_raw.copy_(twopl._discrimination_raw)
-        assert torch.allclose(twopl.predict(), beta_twopl.predict())
+        assert torch.allclose(predict_dense(twopl), predict_dense(beta_twopl))
 
     def test_fit_reduces_loss(self, small_beta_response_matrix):
         model = BetaTwoPL(n_subjects=20, n_items=30)

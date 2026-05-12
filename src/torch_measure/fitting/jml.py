@@ -31,7 +31,7 @@ def jml_fit(
     Parameters
     ----------
     model : IRTModel or LogisticFM
-        Model to fit. Must expose ``predict_at(s_idx, i_idx)``.
+        Model to fit. Must expose ``predict(query)`` (see :class:`Predictor`).
     subject_idx : torch.LongTensor
         Integer subject indices, shape ``(n_obs,)``.
     item_idx : torch.LongTensor
@@ -75,7 +75,7 @@ def jml_fit(
 
         def closure():
             optimizer.zero_grad()
-            probs = model.predict_at(subject_idx, item_idx).clamp(1e-7, 1 - 1e-7)
+            probs = model.predict({"subject_idx": subject_idx, "item_idx": item_idx}).clamp(1e-7, 1 - 1e-7)
             nll = loss_fn(probs, response)
 
             # L2 regularization on all parameters

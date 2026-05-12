@@ -77,34 +77,29 @@ class MultiFacetRasch(IRTModel):
         self.gamma_mask[level_idx] = 0.0
         self.tau_mask[:, level_idx] = 0.0
 
-    def predict(self, facet_indices: torch.Tensor | None = None) -> torch.Tensor:
-        """Compute response probabilities for a specific facet level.
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(correct) at query rows for the given facet level(s).
 
-        Parameters
-        ----------
-        facet_indices : torch.Tensor | None
-            Facet level index for each observation. If None, uses level 0.
-
-        Returns
-        -------
-        torch.Tensor
-            Probability matrix of shape (n_subjects, n_items).
+        Query must contain ``subject_idx`` and ``item_idx`` (1-D, length N).
+        Optionally ``facet_idx`` (1-D, length N or scalar). When omitted,
+        defaults to facet level 0 — matches the prior behavior where
+        fitting did not surface facet information.
         """
-        if facet_indices is None:
-            facet_indices = torch.zeros(1, dtype=torch.long, device=self._device)
+        s = query["subject_idx"]
+        i = query["item_idx"]
+        f = query.get("facet_idx")
+        if f is None:
+            f = torch.zeros_like(s)
+        elif f.ndim == 0 or f.numel() == 1:
+            f = torch.full_like(s, int(f.item()))
 
         gamma = self.gamma * self.gamma_mask
         tau = self.tau * self.tau_mask
 
-        # For a single facet level
-        if facet_indices.numel() == 1:
-            fl = facet_indices.item()
-            total_difficulty = self.difficulty + gamma[fl] + tau[:, fl]
-            subject_offset = self.delta[:, fl]
-            logit = (self.ability - subject_offset).unsqueeze(1) - total_difficulty.unsqueeze(0)
-            return torch.sigmoid(logit)
-
-        raise NotImplementedError("Batch facet indices not yet supported. Pass a single facet level.")
+        total_difficulty = self.difficulty[i] + gamma[f] + tau[i, f]
+        subject_offset = self.delta[s, f]
+        logit = (self.ability[s] - subject_offset) - total_difficulty
+        return torch.sigmoid(logit)
 
     def fit(self, response_matrix, mask=None, method="mle", **kwargs):
         """Fit the model.

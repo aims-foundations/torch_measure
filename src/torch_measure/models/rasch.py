@@ -34,12 +34,8 @@ class Rasch(IRTModel):
         self.ability = nn.Parameter(torch.randn(n_subjects, device=self._device))
         self.difficulty = nn.Parameter(torch.randn(n_items, device=self._device))
 
-    def predict(self) -> torch.Tensor:
-        """Compute P(correct) = sigmoid(ability - difficulty).
-
-        Returns
-        -------
-        torch.Tensor
-            Probability matrix of shape (n_subjects, n_items).
-        """
-        return self._irt_probability(self.ability, self.difficulty)
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(correct) = sigmoid(ability - difficulty) at query rows."""
+        s = query["subject_idx"]
+        i = query["item_idx"]
+        return self._irt_probability(self.ability[s], self.difficulty[i])

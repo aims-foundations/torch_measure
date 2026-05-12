@@ -115,3 +115,27 @@ class LongFormData:
             "subject_ids": subject_ids,
             "item_ids": item_ids,
         }
+
+    def to_query(self, device: str = "cpu") -> dict:
+        """Long-form query tensors ready for :meth:`Predictor.predict`.
+
+        Returns the (subject, item) index tensors for every observation in
+        :attr:`responses`, on ``device``. Intended use::
+
+            probs = model.predict(data.to_query(device=str(model.device)))
+
+        Parameters
+        ----------
+        device : str
+            Target device for the returned tensors.
+
+        Returns
+        -------
+        dict
+            ``{"subject_idx": LongTensor (n_obs,), "item_idx": LongTensor (n_obs,)}``.
+        """
+        fit_inputs = self.to_fit_tensors(device=device)
+        return {
+            "subject_idx": fit_inputs["subject_idx"],
+            "item_idx": fit_inputs["item_idx"],
+        }

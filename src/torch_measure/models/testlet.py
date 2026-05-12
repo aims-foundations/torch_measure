@@ -122,14 +122,10 @@ class TestletRasch(IRTModel):
         """
         return self.testlet_effect.std(dim=0)
 
-    def predict(self) -> torch.Tensor:
-        """Compute response probabilities including testlet effects.
-
-        Returns
-        -------
-        torch.Tensor
-            Probability matrix of shape ``(n_subjects, n_items)``.
-        """
-        logit = self.ability.unsqueeze(1) - self.difficulty.unsqueeze(0)
-        logit = logit + self.testlet_effect[:, self.testlet_map]
+    def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:
+        """Compute P(correct) at query rows, including testlet random effects."""
+        s = query["subject_idx"]
+        i = query["item_idx"]
+        t = self.testlet_map[i]  # (N,) — testlet index for each query item
+        logit = self.ability[s] - self.difficulty[i] + self.testlet_effect[s, t]
         return torch.sigmoid(logit)

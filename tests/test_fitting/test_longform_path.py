@@ -15,6 +15,7 @@ import torch
 
 from torch_measure.datasets._long_form import LongFormData
 from torch_measure.models import Rasch, ThreePL, TwoPL
+from torch_measure.models._predictor import predict_dense
 
 
 def _synth_longform(n_subjects: int = 20, n_items: int = 30, seed: int = 42) -> LongFormData:
@@ -132,17 +133,17 @@ class TestPredictAt:
         with torch.no_grad():
             model.ability.normal_()
             model.difficulty.normal_()
-        probs_full = model.predict()
+        probs_full = predict_dense(model)
 
         s_idx = torch.tensor([0, 5, 19, 10], dtype=torch.long)
         i_idx = torch.tensor([0, 12, 29, 7], dtype=torch.long)
-        probs_at = model.predict_at(s_idx, i_idx)
+        probs_at = model.predict({"subject_idx": s_idx, "item_idx": i_idx})
 
         assert torch.allclose(probs_at, probs_full[s_idx, i_idx])
 
     def test_predict_at_threepl(self):
         model = ThreePL(n_subjects=10, n_items=15)
-        probs_full = model.predict()
+        probs_full = predict_dense(model)
         s_idx = torch.tensor([0, 3, 9], dtype=torch.long)
         i_idx = torch.tensor([0, 7, 14], dtype=torch.long)
-        assert torch.allclose(model.predict_at(s_idx, i_idx), probs_full[s_idx, i_idx])
+        assert torch.allclose(model.predict({"subject_idx": s_idx, "item_idx": i_idx}), probs_full[s_idx, i_idx])

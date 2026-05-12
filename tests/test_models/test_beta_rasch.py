@@ -6,6 +6,7 @@ import torch
 
 from torch_measure.models import BetaRasch, Rasch
 from torch_measure.models._base import IRTModel
+from torch_measure.models._predictor import predict_dense
 
 
 class TestBetaRasch:
@@ -23,7 +24,7 @@ class TestBetaRasch:
 
     def test_predict_shape(self):
         model = BetaRasch(n_subjects=10, n_items=20)
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs.shape == (10, 20)
         assert (probs >= 0).all()
         assert (probs <= 1).all()
@@ -33,7 +34,7 @@ class TestBetaRasch:
         with torch.no_grad():
             model.ability.copy_(torch.tensor([2.0, -2.0]))
             model.difficulty.copy_(torch.tensor([0.0, 0.0, 0.0]))
-        probs = model.predict()
+        probs = predict_dense(model)
         assert probs[0, 0] > 0.8
         assert probs[1, 0] < 0.2
 
@@ -44,7 +45,7 @@ class TestBetaRasch:
         with torch.no_grad():
             beta_rasch.ability.copy_(rasch.ability)
             beta_rasch.difficulty.copy_(rasch.difficulty)
-        assert torch.allclose(rasch.predict(), beta_rasch.predict())
+        assert torch.allclose(predict_dense(rasch), predict_dense(beta_rasch))
 
     def test_fit_reduces_loss(self, small_beta_response_matrix):
         model = BetaRasch(n_subjects=20, n_items=30)
@@ -60,8 +61,11 @@ class TestBetaRasch:
         assert len(history["losses"]) > 0
 
     def test_forward_equals_predict(self):
+        from torch_measure.models._predictor import cartesian_query
+
         model = BetaRasch(n_subjects=10, n_items=20)
-        assert torch.allclose(model.forward(), model.predict())
+        query = cartesian_query(10, 20)
+        assert torch.allclose(model(query), model.predict(query))
 
     def test_isinstance_hierarchy(self):
         """BetaRasch should be a subclass of Rasch and IRTModel."""
