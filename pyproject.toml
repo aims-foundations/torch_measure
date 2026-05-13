@@ -74,6 +74,15 @@ Documentation = "https://torch-measure.readthedocs.io"
 Repository = "https://github.com/aims-foundations/torch_measure"
 Issues = "https://github.com/aims-foundations/torch_measure/issues"
 
+[tool.hatch.publish]
+default = "pypi"
+
+[tool.hatch.publish.pypi]
+index = "pypi"
+
+[tool.hatch.publish.testpypi]
+index = "testpypi"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/torch_measure"]
 
