@@ -102,22 +102,16 @@ if __name__ == "__main__":
     trial_files = [
         f
         for f in glob.glob(os.path.join(snapshot_path, "*.parquet"))
-        if not os.path.basename(f).endswith("_traces.parquet")
-        and os.path.basename(f) not in skip
+        if not os.path.basename(f).endswith("_traces.parquet") and os.path.basename(f) not in skip
     ]
     print(f"\nLoading {len(trial_files)} trial files")
     trials = pd.concat(
-        [
-            pd.read_parquet(f, columns=["subject_id", "item_id", "response"])
-            for f in trial_files
-        ],
+        [pd.read_parquet(f, columns=["subject_id", "item_id", "response"]) for f in trial_files],
         ignore_index=True,
     ).dropna(subset=["response"])
     # Keep only binary pass/fail labels
     trials = trials[trials["response"].isin([0.0, 1.0])]
-    trials = trials.merge(subjects_df, on="subject_id", how="inner").merge(
-        items_df, on="item_id", how="inner"
-    )
+    trials = trials.merge(subjects_df, on="subject_id", how="inner").merge(items_df, on="item_id", how="inner")
     print(f"Total training samples: {len(trials)}")
 
     labels = torch.tensor(trials["response"].values, dtype=torch.float32)
@@ -152,9 +146,7 @@ if __name__ == "__main__":
         dataset = TensorDataset(X, labels)
         loader = DataLoader(dataset, batch_size=args.batch_size, shuffle=True)
 
-        optimizer = AdamW(
-            model.net.parameters(), lr=args.lr, weight_decay=args.weight_decay
-        )
+        optimizer = AdamW(model.net.parameters(), lr=args.lr, weight_decay=args.weight_decay)
         criterion = nn.BCEWithLogitsLoss()
 
         print("Training NCF head")
@@ -169,9 +161,7 @@ if __name__ == "__main__":
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item() * len(yb)
-            print(
-                f"Epoch {epoch+1}/{args.epochs} | Loss: {total_loss / len(dataset):.4f}"
-            )
+            print(f"Epoch {epoch + 1}/{args.epochs} | Loss: {total_loss / len(dataset):.4f}")
 
         torch.save(model.net.state_dict(), args.output)
         print(f"Saved {args.output}")

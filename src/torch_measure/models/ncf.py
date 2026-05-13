@@ -76,9 +76,7 @@ class NCF(nn.Module):
             logit = self.net(x).squeeze(-1).item()
         return float(1.0 / (1.0 + math.exp(-logit)))
 
-    def encode_batch(
-        self, subjects: list[str], items: list[str]
-    ) -> tuple[torch.Tensor, torch.Tensor]:
+    def encode_batch(self, subjects: list[str], items: list[str]) -> tuple[torch.Tensor, torch.Tensor]:
         """Encode a batch of subject-item pairs."""
         u = self.encoder.encode(
             subjects,
