@@ -7,6 +7,8 @@ import math
 import numpy as np
 import torch
 import torch.nn as nn
+from scipy.optimize import minimize
+from scipy.special import expit as sigmoid
 from sentence_transformers import SentenceTransformer
 
 from torch_measure.models._network import MLP
@@ -62,6 +64,11 @@ class NCF(nn.Module):
             dropout=dropout,
         ).to(self._device)
 
+        # Calibration
+        self._platt_a = 1.0
+        self._platt_b = 0.0
+        self._round_calibrated = False  # reset each round
+
     def _encode_single(self, subject: str, item: str) -> torch.Tensor:
         """Encode a subject-item pair."""
         u = self.encoder.encode(subject, convert_to_tensor=True, device=self._device)
@@ -75,6 +82,37 @@ class NCF(nn.Module):
             x = torch.cat([u, v], dim=-1).unsqueeze(0)
             logit = self.net(x).squeeze(-1).item()
         return float(1.0 / (1.0 + math.exp(-logit)))
+
+    def _fit_platt(self, labeled: list[dict]) -> None:
+        """
+        Fit a one-parameter Platt scaler on revealed labels.
+        Uses scipy to optimise log-loss of:
+            p_calibrated = sigmoid(a * logit + b)
+        where logit = logit(_raw_prob(...)).
+        """
+        if not labeled:
+            return
+
+        logits, ys = [], []
+        for ex in labeled:
+            p = self._raw_prob(ex["subject_content"], ex["item_content"])
+            p = float(np.clip(p, 1e-7, 1 - 1e-7))
+            logits.append(math.log(p / (1 - p)))
+            ys.append(float(ex["label"]))
+        logits = np.array(logits)
+        ys = np.array(ys)
+
+        def neg_log_loss(params):
+            a, b = params
+            probs = sigmoid(a * logits + b)
+            probs = np.clip(probs, 1e-7, 1 - 1e-7)
+            return -np.mean(ys * np.log(probs) + (1 - ys) * np.log(1 - probs))
+
+        result = minimize(neg_log_loss, x0=[1.0, 0.0], method="L-BFGS-B")
+        if result.success:
+            self._platt_a, self._platt_b = result.x
+        self._round_calibrated = True
+
 
     def encode_batch(self, subjects: list[str], items: list[str]) -> tuple[torch.Tensor, torch.Tensor]:
         """Encode a batch of subject-item pairs."""
@@ -119,6 +157,10 @@ class NCF(nn.Module):
     def predict(self, data: dict, labeled: list[dict]) -> float:
         """Compute response probability P(subject passes item).
 
+        1. Compute raw NCF probability.
+        2. On first call of a round with labels available, fit Platt scaler.
+        3. Apply calibrated scaling and return.
+
         Parameters
         ----------
         data : dict
@@ -126,8 +168,7 @@ class NCF(nn.Module):
             ``"item_content"`` (str) containing the raw text for the subject
             and item to score.
         labeled : list[dict]
-            Previously observed subject-item-response records. Not used by
-            this model; included for interface compatibility.
+            Previously observed subject-item-response records.
 
         Returns
         -------
@@ -135,9 +176,20 @@ class NCF(nn.Module):
             Predicted probability that the subject passes the item, clipped to
             ``[1e-7, 1 - 1e-7]``.
         """
-        probs = self._raw_prob(data["subject_content"], data["item_content"])
-        probs = float(np.clip(probs, 1e-7, 1 - 1e-7))
-        return probs
+        # Fit Platt scaler once per round (on first call with labeled data)
+        if labeled and not self._round_calibrated:
+            self._fit_platt(labeled)
+
+        raw_p = self._raw_prob(data["subject_content"], data["item_content"])
+        raw_p = float(np.clip(raw_p, 1e-7, 1 - 1e-7))
+
+        if not self._round_calibrated:
+            return raw_p
+
+        # Apply Platt calibration in log-odds space
+        raw_logit = math.log(raw_p / (1 - raw_p))
+        cal_logit = self._platt_a * raw_logit + self._platt_b
+        return float(1.0 / (1.0 + math.exp(-cal_logit)))
 
 
 class NCFHead(nn.Module):
