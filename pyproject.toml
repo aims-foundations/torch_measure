@@ -80,6 +80,7 @@ where = ["src"]
 
 [tool.setuptools_scm]
 write_to = "src/torch_measure/_version.py"
+local_scheme = "no-local-version"
 
 [tool.pytest.ini_options]
 minversion = "7"
