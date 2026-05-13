@@ -10,7 +10,9 @@ from torch_measure.models.beta_rasch import BetaRasch
 from torch_measure.models.beta_twopl import BetaTwoPL
 from torch_measure.models.bifactor import Bifactor
 from torch_measure.models.bradley_terry import BradleyTerry
+from torch_measure.models.cold_start_lookup import ColdStartLookupPredictor
 from torch_measure.models.ggm import GaussianGraphicalModel
+from torch_measure.models.llm_judge_irt import LLMJudgeIRT, build_difficulty_prompt
 from torch_measure.models.ising import IsingModel
 from torch_measure.models.logistic_fm import LogisticFM
 from torch_measure.models.multifacet import MultiFacetRasch
@@ -31,6 +33,9 @@ __all__ = [
     "IsingModel",
     "GaussianGraphicalModel",
     "BradleyTerry",
+    "ColdStartLookupPredictor",
+    "LLMJudgeIRT",
+    "build_difficulty_prompt",
     "Rasch",
     "TwoPL",
     "ThreePL",
