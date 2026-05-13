@@ -14,9 +14,32 @@ from __future__ import annotations
 
 import numpy as np
 import torch
+from torch import nn
 
 from torch_measure.fitting._losses import bernoulli_nll
 from torch_measure.models._predictor import predict_dense
+
+
+def _resolve_ability(model: nn.Module) -> tuple[nn.Parameter, str]:
+    """Return the ``nn.Parameter`` that holds subject abilities and its name.
+
+    Standard IRT models register ``ability`` as a direct ``nn.Parameter``.
+    Models like ``LogisticFM`` store abilities under a different attribute
+    (``U``) and declare ``_ability_param_name`` so this helper can find it.
+    """
+    if isinstance(getattr(model, "ability", None), nn.Parameter):
+        return model.ability, "ability"
+
+    attr = getattr(model, "_ability_param_name", None)
+    if attr is not None:
+        param = getattr(model, attr, None)
+        if isinstance(param, nn.Parameter):
+            return param, attr
+
+    raise TypeError(
+        f"{type(model).__name__} has no 'ability' nn.Parameter and does not "
+        f"declare '_ability_param_name'. Cannot use em_fit."
+    )
 
 
 def _pivot_long_to_matrix(
@@ -111,8 +134,17 @@ def em_fit(
     weights = weights / weights.sum()
     log_weights = torch.log(weights)
 
+    # Resolve the actual nn.Parameter for abilities
+    ability_param, ability_name = _resolve_ability(model)
+    if ability_param.dim() > 1 and ability_param.shape[-1] > 1:
+        raise ValueError(
+            f"em_fit requires 1-dimensional abilities but {type(model).__name__} "
+            f"has ability parameter '{ability_name}' with shape "
+            f"{tuple(ability_param.shape)}. Use n_factors=1 or method='mle'."
+        )
+
     # Freeze ability, optimize item params
-    item_params = [p for name, p in model.named_parameters() if "ability" not in name]
+    item_params = [p for name, p in model.named_parameters() if name != ability_name]
     if item_params:
         optimizer_item = torch.optim.Adam(item_params, lr=lr)
 
@@ -132,7 +164,7 @@ def em_fit(
             for q in range(n_quadrature):
                 # Set all abilities to this quadrature point
                 with torch.no_grad():
-                    model.ability.fill_(theta_nodes[q].item())
+                    ability_param.fill_(theta_nodes[q].item())
 
                 probs = predict_dense(model)
                 masked_probs = probs[mask].clamp(1e-7, 1 - 1e-7)
@@ -154,13 +186,13 @@ def em_fit(
     # Phase 2: Estimate abilities given fixed item parameters
     for p in item_params:
         p.requires_grad_(False)
-    model.ability.requires_grad_(True)
+    ability_param.requires_grad_(True)
 
     # Re-initialize abilities
     with torch.no_grad():
-        model.ability.zero_()
+        ability_param.zero_()
 
-    optimizer_ability = torch.optim.Adam([model.ability], lr=lr)
+    optimizer_ability = torch.optim.Adam([ability_param], lr=lr)
 
     iterator2 = range(max_epochs)
     if verbose:
@@ -178,7 +210,7 @@ def em_fit(
         loss = loss_fn(masked_probs, response_matrix[mask].float())
 
         # Regularize abilities toward N(0,1)
-        loss = loss + 0.01 * (model.ability.mean().abs() + (model.ability.std() - 1).abs())
+        loss = loss + 0.01 * (ability_param.mean().abs() + (ability_param.std() - 1).abs())
 
         loss.backward()
         optimizer_ability.step()

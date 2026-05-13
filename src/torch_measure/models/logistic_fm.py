@@ -7,6 +7,8 @@ Consolidated from factor-model/calibration/model.py LogisticFM.
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import torch
 from torch import nn
 
@@ -34,6 +36,8 @@ class LogisticFM(IRTModel):
     device : str
         Device to place parameters on.
     """
+
+    _ability_param_name: ClassVar[str] = "U"
 
     def __init__(self, n_subjects: int, n_items: int, n_factors: int = 2, device: str = "cpu") -> None:
         super().__init__(n_subjects, n_items, device)
