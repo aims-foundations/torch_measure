@@ -1,0 +1,36 @@
+name: Publish to TestPyPI
+
+# Manual rehearsal of the real publish flow against test.pypi.org. Use this
+# to verify metadata, README rendering, and install-from-index work end to
+# end before tagging a real release.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: testpypi
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install build tools
+        run: pip install build setuptools_scm
+
+      - name: Build package
+        run: python -m build
+
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
