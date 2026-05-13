@@ -204,7 +204,6 @@ if __name__ == "__main__":
         torch.save(model.net.state_dict(), args.output)
         print(f"Saved {args.output}")
 
-
     # Sample calibration set from test trials
     assert args.cal_size < len(test_trials), (
         f"--cal-size ({args.cal_size}) must be smaller than the test set ({len(test_trials)})"
@@ -214,7 +213,7 @@ if __name__ == "__main__":
     cal_trials = test_trials[cal_mask].reset_index(drop=True)
     eval_trials = test_trials[~cal_mask].reset_index(drop=True)
     if args.eval_size > 0:
-        eval_trials = eval_trials[:args.eval_size]
+        eval_trials = eval_trials[: args.eval_size]
 
     cal_labeled = [
         {
@@ -250,8 +249,5 @@ if __name__ == "__main__":
     print(f"NLL after calibration: {nll_after:.4f}")
     print(f"Platt params — a={model._platt_a:.4f}  b={model._platt_b:.4f}")
 
-    assert nll_after < nll_before, (
-        f"Calibration did not improve NLL: {nll_before:.4f} → {nll_after:.4f}"
-    )
+    assert nll_after < nll_before, f"Calibration did not improve NLL: {nll_before:.4f} → {nll_after:.4f}"
     print("\nCalibration test passed: NLL improved after Platt scaling.")
-

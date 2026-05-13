@@ -113,7 +113,6 @@ class NCF(nn.Module):
             self._platt_a, self._platt_b = result.x
         self._round_calibrated = True
 
-
     def encode_batch(self, subjects: list[str], items: list[str]) -> tuple[torch.Tensor, torch.Tensor]:
         """Encode a batch of subject-item pairs."""
         u = self.encoder.encode(
