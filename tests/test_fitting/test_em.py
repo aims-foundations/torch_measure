@@ -29,6 +29,16 @@ class TestEMFit:
         assert history["losses_ability"][-1] < history["losses_ability"][0]
 
 
+class TestEMFitContinuous:
+    def test_rasch_continuous_em(self, small_continuous_response_matrix):
+        """Rasch EM should accept continuous [0,1] data."""
+        model = Rasch(n_subjects=20, n_items=30)
+        s_idx, i_idx, r = to_long_triple(small_continuous_response_matrix)
+        history = em_fit(model, s_idx, i_idx, r, max_epochs=30, verbose=False)
+        assert len(history["losses_item"]) > 0
+        assert len(history["losses_ability"]) > 0
+
+
 class TestEMFitBeta:
     def test_beta_returns_both_phases(self, small_beta_response_matrix):
         model = BetaRasch(n_subjects=20, n_items=30)

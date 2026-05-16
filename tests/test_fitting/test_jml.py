@@ -20,6 +20,16 @@ class TestJMLFit:
         assert len(history["losses"]) > 0
 
 
+class TestJMLFitContinuous:
+    def test_rasch_continuous_reduces_loss(self, small_continuous_response_matrix):
+        """Rasch JML should fit continuous [0,1] data."""
+        model = Rasch(n_subjects=20, n_items=30)
+        s_idx, i_idx, r = to_long_triple(small_continuous_response_matrix)
+        history = jml_fit(model, s_idx, i_idx, r, max_epochs=50, verbose=False)
+        assert len(history["losses"]) > 0
+        assert history["losses"][-1] < history["losses"][0]
+
+
 class TestJMLFitBeta:
     def test_beta_reduces_loss(self, small_beta_response_matrix):
         model = BetaRasch(n_subjects=20, n_items=30)

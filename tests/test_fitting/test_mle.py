@@ -37,6 +37,19 @@ class TestMLEFit:
         assert len(history["losses"]) > 0
 
 
+class TestMLEFitContinuous:
+    def test_rasch_continuous_reduces_loss(self, small_continuous_response_matrix):
+        """Rasch should fit continuous [0,1] data via auto-selected cross-entropy."""
+        model = Rasch(n_subjects=20, n_items=30)
+        history = model.fit(small_continuous_response_matrix, max_epochs=100, verbose=False)
+        assert history["losses"][-1] < history["losses"][0]
+
+    def test_rasch_continuous_lbfgs(self, small_continuous_response_matrix):
+        model = Rasch(n_subjects=20, n_items=30)
+        history = model.fit(small_continuous_response_matrix, max_epochs=50, verbose=False, optimizer_cls="lbfgs")
+        assert len(history["losses"]) > 0
+
+
 class TestMLEFitBeta:
     def test_beta_reduces_loss(self, small_beta_response_matrix):
         model = BetaRasch(n_subjects=20, n_items=30)

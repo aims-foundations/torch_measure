@@ -2,9 +2,10 @@
 
 """Tests for loss functions."""
 
+import pytest
 import torch
 
-from torch_measure.fitting._losses import bernoulli_nll, beta_nll
+from torch_measure.fitting._losses import bernoulli_nll, beta_nll, cross_entropy_nll
 
 
 class TestBernoulliNLL:
@@ -34,6 +35,38 @@ class TestBernoulliNLL:
         obs = torch.tensor([1.0, 0.0, 1.0])
         loss = bernoulli_nll(probs, obs)
         assert loss.ndim == 0
+
+
+class TestCrossEntropyNLL:
+    def test_accepts_continuous_targets(self):
+        """cross_entropy_nll must not raise on [0,1] targets."""
+        probs = torch.tensor([0.7, 0.3, 0.5])
+        obs = torch.tensor([0.6, 0.2, 0.9])
+        loss = cross_entropy_nll(probs, obs)
+        assert loss.ndim == 0
+        assert loss.item() > 0
+
+    def test_matches_bernoulli_on_binary(self):
+        """On binary targets the two losses should agree."""
+        probs = torch.tensor([0.8, 0.2, 0.6])
+        obs = torch.tensor([1.0, 0.0, 1.0])
+        bce = cross_entropy_nll(probs, obs).item()
+        bnl = bernoulli_nll(probs, obs).item()
+        assert abs(bce - bnl) < 1e-5
+
+    def test_bernoulli_rejects_continuous(self):
+        """bernoulli_nll must raise on non-{0,1} targets."""
+        probs = torch.tensor([0.7])
+        obs = torch.tensor([0.5])
+        with pytest.raises(ValueError, match="support"):
+            bernoulli_nll(probs, obs)
+
+    def test_gradient_flows(self):
+        probs = torch.tensor([0.5, 0.5], requires_grad=True)
+        obs = torch.tensor([0.8, 0.2])
+        loss = cross_entropy_nll(probs, obs)
+        loss.backward()
+        assert probs.grad is not None
 
 
 class TestBetaNLL:

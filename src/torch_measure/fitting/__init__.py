@@ -2,7 +2,7 @@
 
 """Parameter estimation backends for IRT and factor models."""
 
-from torch_measure.fitting._losses import bernoulli_nll, beta_nll
+from torch_measure.fitting._losses import bernoulli_nll, beta_nll, cross_entropy_nll
 from torch_measure.fitting.em import em_fit
 from torch_measure.fitting.jml import jml_fit
 from torch_measure.fitting.mle import mle_fit
@@ -13,4 +13,5 @@ __all__ = [
     "em_fit",
     "bernoulli_nll",
     "beta_nll",
+    "cross_entropy_nll",
 ]

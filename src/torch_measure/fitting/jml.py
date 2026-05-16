@@ -6,7 +6,8 @@ from __future__ import annotations
 
 import torch
 
-from torch_measure.fitting._losses import bernoulli_nll
+from torch_measure.fitting._losses import bernoulli_nll, cross_entropy_nll
+from torch_measure.fitting.mle import _is_continuous
 
 
 def jml_fit(
@@ -25,8 +26,12 @@ def jml_fit(
     """Fit a model via Joint Maximum Likelihood with LBFGS.
 
     Jointly estimates all parameters (abilities and item params) by
-    minimizing the Bernoulli NLL plus an L2 regularization term scaled
-    by the parameter count.
+    minimizing the NLL plus an L2 regularization term scaled by the
+    parameter count.
+
+    Supports both binary ``{0, 1}`` and continuous ``[0, 1]`` responses.
+    When ``loss_fn`` is ``None`` the function auto-selects between
+    :func:`bernoulli_nll` and :func:`cross_entropy_nll`.
 
     Parameters
     ----------
@@ -37,7 +42,8 @@ def jml_fit(
     item_idx : torch.LongTensor
         Integer item indices, shape ``(n_obs,)``.
     response : torch.Tensor
-        Observed responses, shape ``(n_obs,)``, dtype float.
+        Observed responses, shape ``(n_obs,)``, dtype float. Values may be
+        binary ``{0, 1}`` or continuous ``[0, 1]``.
     max_epochs : int
         Maximum LBFGS iterations.
     lr : float
@@ -48,6 +54,9 @@ def jml_fit(
         Stop when loss change is below this.
     verbose : bool
         Show progress.
+    loss_fn : callable | None
+        Loss function ``(predicted, observed) -> scalar``.
+        ``None`` (default) auto-selects based on the response values.
 
     Returns
     -------
@@ -55,7 +64,7 @@ def jml_fit(
         Training history with ``"losses"`` key.
     """
     if loss_fn is None:
-        loss_fn = bernoulli_nll
+        loss_fn = cross_entropy_nll if _is_continuous(response) else bernoulli_nll
 
     optimizer = torch.optim.LBFGS(model.parameters(), lr=lr, max_iter=20)
     response = response.float()
