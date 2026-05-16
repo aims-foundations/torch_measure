@@ -26,6 +26,29 @@ def bernoulli_nll(predicted_probs: torch.Tensor, observed: torch.Tensor) -> torc
     return -Bernoulli(probs=predicted_probs).log_prob(observed).mean()
 
 
+def cross_entropy_nll(predicted_probs: torch.Tensor, observed: torch.Tensor) -> torch.Tensor:
+    """Binary cross-entropy loss supporting continuous [0, 1] targets.
+
+    Computes the same formula as :func:`bernoulli_nll` but bypasses
+    ``torch.distributions.Bernoulli``, whose domain validation rejects
+    non-integer values. This allows standard IRT models (Rasch, 2PL, etc.)
+    to be fit on continuous response data without switching to BetaRasch.
+
+    Parameters
+    ----------
+    predicted_probs : torch.Tensor
+        Model-predicted probabilities, should be in (0, 1).
+    observed : torch.Tensor
+        Observed responses in [0, 1] (binary or continuous).
+
+    Returns
+    -------
+    torch.Tensor
+        Scalar mean NLL.
+    """
+    return torch.nn.functional.binary_cross_entropy(predicted_probs, observed)
+
+
 def beta_nll(predicted_probs: torch.Tensor, observed: torch.Tensor, phi: float = 10.0) -> torch.Tensor:
     """Beta negative log-likelihood for continuous (0, 1) responses.
 

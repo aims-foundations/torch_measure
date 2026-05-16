@@ -15,7 +15,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from torch_measure.fitting._losses import bernoulli_nll
+from torch_measure.fitting._losses import bernoulli_nll, cross_entropy_nll
 from torch_measure.models._predictor import predict_dense
 
 
@@ -93,7 +93,8 @@ def em_fit(
         Training history with 'losses_item' and 'losses_ability' keys.
     """
     if loss_fn is None:
-        loss_fn = bernoulli_nll
+        is_continuous = not torch.all((response == 0) | (response == 1))
+        loss_fn = cross_entropy_nll if is_continuous else bernoulli_nll
 
     device = response.device
     history = {"losses_item": [], "losses_ability": []}

@@ -94,6 +94,22 @@ def medium_beta_response_matrix(seed):
 
 
 @pytest.fixture
+def small_continuous_response_matrix(seed):
+    """A small synthetic continuous [0, 1] response matrix (20 subjects x 30 items).
+
+    Simulates partial-credit or soft-label scoring where responses are not
+    strictly binary.
+    """
+    n_subjects, n_items = 20, 30
+    ability = torch.randn(n_subjects)
+    difficulty = torch.randn(n_items)
+    logit = ability.unsqueeze(1) - difficulty.unsqueeze(0)
+    mu = torch.sigmoid(logit)
+    responses = mu + 0.1 * torch.randn_like(mu)
+    return responses.clamp(0.0, 1.0)
+
+
+@pytest.fixture
 def known_irt_params(seed):
     """Known IRT parameters for validation."""
     n_subjects, n_items = 30, 50
