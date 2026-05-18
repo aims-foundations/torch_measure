@@ -12,11 +12,11 @@ from torch_measure.models.bifactor import Bifactor
 from torch_measure.models.bradley_terry import BradleyTerry
 from torch_measure.models.ggm import GaussianGraphicalModel
 from torch_measure.models.ising import IsingModel
+from torch_measure.models.llm_judge import LLMJudge
 from torch_measure.models.logistic_fm import LogisticFM
 from torch_measure.models.multifacet import MultiFacetRasch
 from torch_measure.models.multifacet_twopl import MultiFacet2PL
 from torch_measure.models.ncf import NCF
-from torch_measure.models.llm_judge import LLMJudge
 from torch_measure.models.rasch import Rasch
 from torch_measure.models.rotation import bifactor_rotation, promax_rotation, varimax_rotation
 from torch_measure.models.testlet import TestletRasch, build_testlet_map
