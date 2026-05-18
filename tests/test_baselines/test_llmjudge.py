@@ -85,11 +85,7 @@ if __name__ == "__main__":
     ).dropna(subset=["response"])
     # Keep only binary pass/fail labels
     trials = trials[trials["response"].isin([0.0, 1.0])]
-    trials = (
-        trials
-        .merge(subjects_df, on="subject_id", how="inner")
-        .merge(items_df, on="item_id", how="inner")
-    )
+    trials = trials.merge(subjects_df, on="subject_id", how="inner").merge(items_df, on="item_id", how="inner")
     print(f"Total samples: {len(trials)}")
 
     trials = trials.sample(frac=args.size).reset_index(drop=True)
@@ -120,6 +116,7 @@ if __name__ == "__main__":
     top_k = None
     try:
         from labeling import select_top_k
+
         print(f"\nRunning acquisition on {len(candidates)} test candidates...")
         top_k = select_top_k(candidates, k=args.k)
         print("\nTop 5 acquisition-selected entries:")
@@ -142,12 +139,14 @@ if __name__ == "__main__":
 
         inps, ys = [], []
         for _, row in held_out_df.iterrows():
-            inps.append({
-                "subject_content": row["display_name"],
-                "item_content": row["content"],
-                "benchmark": row.get("benchmark", ""),
-                "condition": row.get("condition", ""),
-            })
+            inps.append(
+                {
+                    "subject_content": row["display_name"],
+                    "item_content": row["content"],
+                    "benchmark": row.get("benchmark", ""),
+                    "condition": row.get("condition", ""),
+                }
+            )
             ys.append(float(row["response"]))
 
         prompts = [model._build_prompt(inp, labeled) for inp in inps]
@@ -164,7 +163,7 @@ if __name__ == "__main__":
                 pbar.update(len(batch))
 
         preds = [None] * len(prompts)
-        for orig_i, pred in zip(order, preds_sorted):
+        for orig_i, pred in zip(order, preds_sorted, strict=False):
             preds[orig_i] = pred
 
         preds_t = torch.tensor(preds).clamp(1e-7, 1 - 1e-7)

@@ -67,10 +67,7 @@ class LLMJudge:
     def _build_prompt(self, data: dict, labeled: list[dict] | None = None) -> str:
         """Build the judge prompt, optionally with same-subject ICL examples."""
         if labeled:
-            same_subj = [
-                ex for ex in labeled
-                if ex["subject_content"] == data["subject_content"]
-            ][-self.max_icl:]
+            same_subj = [ex for ex in labeled if ex["subject_content"] == data["subject_content"]][-self.max_icl :]
             if same_subj:
                 icl = "\n\n".join(
                     _JUDGE_TEMPLATE.format(
@@ -78,7 +75,8 @@ class LLMJudge:
                         condition=ex.get("condition", ""),
                         subject_content=ex["subject_content"],
                         item_content=ex["item_content"],
-                    ) + (" yes" if ex["label"] >= 0.5 else " no")
+                    )
+                    + (" yes" if ex["label"] >= 0.5 else " no")
                     for ex in same_subj
                 )
                 return icl + "\n\n" + _JUDGE_TEMPLATE.format(**data)
