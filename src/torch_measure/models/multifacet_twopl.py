@@ -10,6 +10,7 @@ anchor items whose tau is forced near zero — useful for cross-lingual safety
 analysis where a set of "ground truth" items have known invariant difficulty
 across languages.
 
+Example used in code:
 P(correct) = sigmoid(alpha_i * ((theta_n + delta_nl) - (beta_i + gamma_l + tau_il)))
 
 where:
