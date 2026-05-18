@@ -45,4 +45,3 @@ data/cache/
 
 # Jupyter
 .ipynb_checkpoints/
-myenv/
