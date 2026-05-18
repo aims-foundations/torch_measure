@@ -5,7 +5,7 @@
 from torch_measure.models._base import IRTModel
 from torch_measure.models._network_base import NetworkModel
 from torch_measure.models._predictor import Predictor, cartesian_query, predict_dense
-from torch_measure.models.amortized import AmortizedIRT
+from torch_measure.models.amortized import ARAF, AmortizedIRT
 from torch_measure.models.beta_rasch import BetaRasch
 from torch_measure.models.beta_twopl import BetaTwoPL
 from torch_measure.models.bifactor import Bifactor
@@ -37,6 +37,7 @@ __all__ = [
     "BetaRasch",
     "BetaTwoPL",
     "AmortizedIRT",
+    "ARAF",
     "TabPFNPredictor",
     "MultiFacetRasch",
     "MultiFacet2PL",
