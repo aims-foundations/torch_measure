@@ -3,8 +3,8 @@
 import pytest
 import torch
 
-from torch_measure.models import TabPFNPredictor
 from torch_measure.models._predictor import cartesian_query, predict_dense
+from torch_measure.models.tabpfn_predictor import TabPFNPredictor
 
 
 @pytest.mark.slow
