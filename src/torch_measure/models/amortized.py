@@ -322,12 +322,7 @@ class ARAF(Predictor):
             a_j = F.dropout(a_j, p=self.dropout)
 
         diff = self.difficulty_proj(x_j).squeeze(-1)
-        logits = (
-            self.theta @ a_j.T
-            + diff.unsqueeze(0)
-            + self.theta_bias.unsqueeze(1)
-            + self.global_bias
-        )
+        logits = self.theta @ a_j.T + diff.unsqueeze(0) + self.theta_bias.unsqueeze(1) + self.global_bias
         return torch.sigmoid(logits)
 
     def predict(self, query: dict[str, torch.Tensor]) -> torch.Tensor:

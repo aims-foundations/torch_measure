@@ -87,9 +87,7 @@ class TestARAFForward:
 class TestARAFFit:
     def test_bernoulli_fit_reduces_loss(self):
         n_subjects, n_items, d, true_rank = 20, 25, 8, 3
-        emb, y, mask, _ = _synthetic_low_rank_dataset(
-            n_subjects, n_items, d, true_rank, binary=True, seed=0
-        )
+        emb, y, mask, _ = _synthetic_low_rank_dataset(n_subjects, n_items, d, true_rank, binary=True, seed=0)
 
         m = ARAF(n_subjects=n_subjects, n_items=n_items, embedding_dim=d, latent_dim=10, dropout=0.0)
         history = m.fit(
@@ -105,9 +103,7 @@ class TestARAFFit:
 
     def test_beta_fit_reduces_loss(self):
         n_subjects, n_items, d, true_rank = 20, 25, 8, 3
-        emb, y, mask, _ = _synthetic_low_rank_dataset(
-            n_subjects, n_items, d, true_rank, binary=False, seed=1
-        )
+        emb, y, mask, _ = _synthetic_low_rank_dataset(n_subjects, n_items, d, true_rank, binary=False, seed=1)
 
         m = ARAF(n_subjects=n_subjects, n_items=n_items, embedding_dim=d, latent_dim=10, dropout=0.0)
         history = m.fit(
@@ -134,9 +130,7 @@ class TestARAFFit:
 class TestARAFArd:
     def test_ard_prunes_inactive_dims(self):
         n_subjects, n_items, d, true_rank = 30, 40, 8, 2
-        emb, y, mask, _ = _synthetic_low_rank_dataset(
-            n_subjects, n_items, d, true_rank, binary=True, seed=2
-        )
+        emb, y, mask, _ = _synthetic_low_rank_dataset(n_subjects, n_items, d, true_rank, binary=True, seed=2)
 
         m = ARAF(
             n_subjects=n_subjects,
@@ -172,9 +166,7 @@ class TestARAFArd:
 class TestARAFAdapt:
     def test_adapt_freezes_item_params(self):
         n_subjects, n_items, d = 12, 15, 6
-        emb, y, mask, _ = _synthetic_low_rank_dataset(
-            n_subjects, n_items, d, true_rank=2, binary=True, seed=3
-        )
+        emb, y, mask, _ = _synthetic_low_rank_dataset(n_subjects, n_items, d, true_rank=2, binary=True, seed=3)
 
         m = ARAF(n_subjects=n_subjects, n_items=n_items, embedding_dim=d, latent_dim=4, dropout=0.0)
         m.fit(y, embeddings=emb, mask=mask, likelihood="bernoulli", epochs=80, verbose=False)
