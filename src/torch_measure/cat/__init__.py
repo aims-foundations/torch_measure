@@ -2,12 +2,14 @@
 
 """Computerized Adaptive Testing."""
 
+from torch_measure.cat.calibration import AnchorCalibrator
 from torch_measure.cat.fisher import fisher_information
 from torch_measure.cat.runner import AdaptiveTester
 from torch_measure.cat.strategies import MaxInfoStrategy, RandomStrategy, SpanningStrategy
 
 __all__ = [
     "AdaptiveTester",
+    "AnchorCalibrator",
     "fisher_information",
     "MaxInfoStrategy",
     "RandomStrategy",

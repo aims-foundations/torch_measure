@@ -18,3 +18,6 @@ Computerized Adaptive Testing
 
 .. autoclass:: torch_measure.cat.RandomStrategy
    :members:
+
+.. autoclass:: torch_measure.cat.AnchorCalibrator
+   :members:
