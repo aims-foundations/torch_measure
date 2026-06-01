@@ -14,6 +14,7 @@ from torch_measure.models.cold_start_lookup import ColdStartLookupPredictor
 from torch_measure.models.ggm import GaussianGraphicalModel
 from torch_measure.models.llm_judge_irt import LLMJudgeIRT, build_difficulty_prompt
 from torch_measure.models.ising import IsingModel
+from torch_measure.models.llm_judge import LLMJudge
 from torch_measure.models.logistic_fm import LogisticFM
 from torch_measure.models.multifacet import MultiFacetRasch
 from torch_measure.models.multifacet_twopl import MultiFacet2PL
@@ -53,4 +54,5 @@ __all__ = [
     "promax_rotation",
     "bifactor_rotation",
     "NCF",
+    "LLMJudge",
 ]

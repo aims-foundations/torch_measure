@@ -22,6 +22,19 @@ Reliability
 
 .. autofunction:: torch_measure.metrics.cronbach_alpha
 
+Generalizability
+----------------
+
+.. autofunction:: torch_measure.metrics.variance_components
+
+.. autofunction:: torch_measure.metrics.g_coefficient
+
+.. autofunction:: torch_measure.metrics.intraclass_correlation
+
+.. autofunction:: torch_measure.metrics.d_study
+
+.. autofunction:: torch_measure.metrics.bootstrap_variance_components
+
 Calibration
 -----------
 
