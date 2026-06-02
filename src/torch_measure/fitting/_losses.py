@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 import torch
-from torch.distributions import Bernoulli
+import torch.nn.functional as F
 
 
 def bernoulli_nll(predicted_probs: torch.Tensor, observed: torch.Tensor) -> torch.Tensor:
@@ -23,7 +23,7 @@ def bernoulli_nll(predicted_probs: torch.Tensor, observed: torch.Tensor) -> torc
     torch.Tensor
         Scalar mean NLL.
     """
-    return -Bernoulli(probs=predicted_probs).log_prob(observed).mean()
+    return F.binary_cross_entropy(predicted_probs, observed.to(dtype=predicted_probs.dtype))
 
 
 def beta_nll(predicted_probs: torch.Tensor, observed: torch.Tensor, phi: float = 10.0) -> torch.Tensor:
