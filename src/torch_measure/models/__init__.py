@@ -9,6 +9,7 @@ from torch_measure.models.amortized import AmortizedIRT
 from torch_measure.models.beta_rasch import BetaRasch
 from torch_measure.models.beta_twopl import BetaTwoPL
 from torch_measure.models.bifactor import Bifactor
+from torch_measure.models.doubly_robust import DoublyRobustModel
 from torch_measure.models.bradley_terry import BradleyTerry
 from torch_measure.models.ggm import GaussianGraphicalModel
 from torch_measure.models.ising import IsingModel
@@ -50,4 +51,5 @@ __all__ = [
     "bifactor_rotation",
     "NCF",
     "LLMJudge",
+    "DoublyRobustModel",
 ]
