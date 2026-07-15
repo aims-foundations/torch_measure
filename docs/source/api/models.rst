@@ -53,6 +53,13 @@ Factor Models
    :members:
    :undoc-members:
 
+Demand-Based Models
+-------------------
+
+.. autoclass:: torch_measure.models.DemandAssessor
+   :members:
+   :undoc-members:
+
 Rotation Utilities
 ------------------
 

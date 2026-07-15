@@ -1,0 +1,32 @@
+# Knowledge in Applied Sciences and Professions
+The following rubric is designed to annotate the conceptual sophistication level of tasks based entirely on the depth of knowledge or conceptual understanding required in the fields of applied sciences and professions (e.g., medicine, law, education, business, agriculture, engineering except software and data engineering). Noteworthy, this rubric only focuses on applied knowledge and practical implementations rather than purely theoretical frameworks or abstract concepts from natural sciences, formal sciences, social sciences and humanities. For instance, understanding chemical reactions is only part of natural sciences, but applying this knowledge in pharmaceutical manufacturing would fall under applied sciences. Similarly, economic theory belongs only to social sciences, but practical business management and operations fall under applied sciences and professions. The focus is exclusively on the level of domain-specific knowledge needed, disregarding other cognitive demands such as reasoning or metacognition. This reflects only the depth of applied sciences and professional knowledge required.
+
+Level 0: None. Tasks requiring no knowledge or understanding of applied sciences or professional fields. Examples:
+* "Let $\\triangle A B C$ be an acute triangle, with $M$ being the midpoint of $\\overline{B C}$, such that $A M=B C$. Let $D$ and $E$ be the intersection of the internal angle bisectors of $\\angle A M B$ and $\\angle A M C$ with $A B$ and $A C$, respectively. Find the ratio of the area of $\\triangle D M E$ to the area of $\\triangle A B C$."
+* "In a chemical reaction at pH 1, an unknown substance was added that changed the pH to 4 and slowed down the reaction. What could have caused this?"
+* "If a star 20 light-years away explodes, would gravitational waves reach Earth faster than light?""
+
+Level 1: Very low. Tasks that require knowledge in applied sciences and professions typically acquired through elementary school education. Examples:
+* Basic personal hygiene and hand washing procedures.
+* Common road signs and traffic signals.
+* Basic safety rules at home and school.
+
+Level 2: Low. Tasks that require knowledge in applied sciences and professions typically acquired through middle school education. Examples:
+* The use of basic measurement tools (thermometer, ruler, scale).
+* Basic principles of personal finance and saving.
+* Simple first aid for minor injuries.
+
+Level 3: Intermediate. Tasks that require knowledge in applied sciences and professions typically acquired through high school education. Examples:
+* Common legal terms (plaintiff, defendant, contract).
+* Basic business concepts (budget, profit, loss).
+* Fundamental principles of agricultural science.
+
+Level 4: High. Tasks that require knowledge in applied sciences and professions typically acquired through undergraduate education. Examples:
+* Basic principles of bridge design in civil engineering.
+* Core concepts of supply chain management.
+* Fundamentals of clinical assessment in healthcare.
+
+Level 5: Very high. Tasks that require knowledge in applied sciences and professions typically acquired through graduate education or beyond. Examples:
+* Gene therapy techniques in precision medicine.
+* Engineering principles of nuclear fusion reactor design.
+* Legal frameworks for regulating artificial intelligence systems.

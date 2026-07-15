@@ -1,0 +1,38 @@
+# Critical Thinking Processes
+This rubric assesses the difficulty level of metacognitive engagement required by the question. More concretely, the level represents the extent to which the question requires the respondent to monitor or regulate multiple thought processes to answer the question effectively, ranging from simple recall to high-level critical thinking.
+
+Level 0: None. No critical thinking or analysis is needed.
+Examples:
+* Clapping one's hands with another entity.
+* Simple recall of facts without further processing.
+* Recognizing a familiar face from a photograph.
+
+Level 1: Very Low. The task requires recall or recognition of facts, with a low level information processing required. The respondent needs to retrieve information directly from memory or identify very obvious relationships. There is no need for critical thinking or analysis beyond the most elementary level.
+Examples:
+* Selecting the correct meaning of a common word from multiple clearly distinct definitions.
+* Matching simple synonyms, such as "big" and "large".
+* Question: What was the time 5 years and 6 months before Jan, 1956?.
+
+Level 2: Low. The task involves mostly straightforward comprehension or application of known concepts, with some information processing. The respondent may need to demonstrate understanding by explaining ideas, making simple comparisons, or applying concepts in familiar contexts. A low-level of critical thinking is required, such as recognizing generally obvious patterns or making simple categorizations.
+Examples:
+* Answering the question: 'What happens in Cinderella when the clock approaches midnight?' The answer requires explaining that Cinderella must flee because her magical transformation will end.
+* Giving the smallest amount of coins as change from a purchase.
+* Answering the question: "How many solid $1 \times 1 \times 1$ cubes are required to make a solid $2 \times 2 \times 2$ cube?".
+
+Level 3: Intermediate. The task necessitates a considerable amount of analysis or synthesis of information. The respondent needs to engage in moderate critical thinking, such as identifying patterns, making inferences, or applying concepts to new situations.
+Examples:
+* Analyzing the symbolism in a poem and explaining how it contributes to the overall theme.
+* Identifying potential biases in a news article and explaining their impact on the information presented.
+* Explaining how a price reduction could lead to increased overall revenue through its effect on sales volume.
+
+Level 4: High. The task demands advanced critical thinking skills, including evaluation of complex ideas, analysis of multiple perspectives and assumptions, or creation of new concepts. The respondent must maintain consistent awareness of thinking processes and potential biases.
+Examples:
+* Evaluating a school's proposal to extend the lunch period by examining the evidence for improved student focus, considering impacts on different stakeholders like teachers and students, and analyzing how personal preferences might affect one's assessment of the policy.
+* Designing a study to compare two teaching methods for basic math by identifying potential sources of bias, developing fair assessment criteria, and planning how to control for differences in student ability levels.
+* Analyzing the role of bread prices in the French Revolution by examining economic data from different regions, comparing its major impact between urban and rural areas, and evaluating how food scarcity combined with tax burdens and wage stagnation influenced public unrest.
+
+Level 5: Very High. The task demands the highest level of critical thinking, requiring sophisticated metacognitive strategies focused on examining reasoning processes, identifying logical fallacies, evaluating competing arguments, and reaching well-reasoned conclusions. The respondent must reflect on their own thinking processes, assumptions, and biases while engaging with complex ideas.
+Examples:
+* Analyzing a proposed economic study that claims to prove racial discrimination in hiring by examining the researchers' unstated assumptions about causality, identifying potential confounding variables they haven't controlled for, evaluating whether their statistical methods actually support their conclusions, examining your own potential biases about the topic, and determining what can and cannot be legitimately concluded from their methodology - all while maintaining awareness of how your own socioeconomic background might influence your analysis.
+* Evaluating a complex court case by dissecting the logical structure of competing arguments from prosecution and defense, identifying unstated assumptions in witness testimony, examining how your own biases about the defendant might affect your judgment, analyzing the credibility and limitations of different pieces of evidence, and reaching a conclusion while explicitly acknowledging areas of reasonable doubt and uncertainty.
+* Breaking down a philosophical argument about consciousness by identifying circular reasoning and unstated premises, examining how different definitions of key terms affect the argument's validity, evaluating the credibility of thought experiments used as evidence, testing the argument's logical consistency, recognizing your own presuppositions about the nature of mind and reality, and determining which conclusions are truly warranted by the premises.

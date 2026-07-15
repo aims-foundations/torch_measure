@@ -4,7 +4,6 @@
 
 import numpy as np
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
 
 _JUDGE_TEMPLATE = (
     "You will see a description of an AI subject and an"
@@ -45,6 +44,8 @@ class LLMJudge:
         batch_size: int = 32,
         device: str = "auto",
     ) -> None:
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+
         self.max_icl = max_icl
         self.batch_size = batch_size
 

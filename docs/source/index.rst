@@ -16,6 +16,7 @@ Computerized Adaptive Testing, psychometric metrics, and factor models.
    :caption: API Reference
 
    api/models
+   api/annotation
    api/cat
    api/metrics
    api/data

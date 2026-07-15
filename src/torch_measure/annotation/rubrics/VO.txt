@@ -1,0 +1,39 @@
+# Volume
+This rubric defines a scale that evaluates the task purely based on its *volume*, i.e., the time a fully competent, experienced and motivated human would need to both read and complete the task in ideal conditions, not counting breaks or interruptions, regardless of the difficulty or cognitive demands of the task. The scale ranges from tasks requiring less than a second to those requiring more than 16 hours (1,000 minutes), focusing purely on volume of work rather than cognitive complexity or skill requirements. Time estimates assume the task performer has all necessary information, tools, and skills readily available, but works autonomously without the assistance of other humans or AI tools.
+
+Level 0: None. Volume: Negligible, requiring less than 1 second.
+Examples:
+* Checking the status of an indicator (e.g., a light on a machine).
+* Selecting a checkbox to confirm agreement.
+* Opening a pre-configured app or program.
+
+Level 1: Very Low. Requiring between 1 second and 1 minute.
+Examples:
+* Read a short online comment about merchandise to identify whether it has positive, neutral, or negative emotion.
+* Saving and uploading a single document to a pre-arranged folder.
+* Reading a short email and writing a brief confirmation email (e.g., confirming attendance to a meeting).
+
+Level 2: Low. Requiring between 1 minute and 10 minutes.
+Examples:
+* Writing a simple summary in half a page of the main points from a short memo or meeting.
+* Listening to an audio recording of one minute from a high-school level history class and answering a list of ten short factual questions.
+* Reading an inquiry and writing a few paragraphs long personalized email in response to an inquiry.
+
+Level 3: Intermediate. Requiring between 10 minutes and 100 minutes.
+Examples:
+* Proofreading and lightly editing a 4-page research article to improve flow and clarity.
+* Organizing and cataloging a personal collection of 50 books by genre, year, and author.
+* Reading a set of instructions and data based on a small experiment, and then writing a 500-word report based on .
+
+Level 4: High. Requiring between 100 minutes (roughly 1.5 hours) and 1,000 minutes (about 16 hours).
+Examples:
+* Creating a 10-page technical manual including screenshots, step-by-step procedures, and troubleshooting guides for a specific software application.
+* Configuring 25 workstations with standardized software (5 applications per machine), security settings, and network access protocols.
+* Reading a 12-page position paper on language models' impact on education and verbally summarizing the paper's key insights for colleagues.
+
+Level 5: Very High. Requiring more than 1,000 minutes (roughly 16 hours).
+Examples:
+* Planning and executing a 3-day workshop for 100 attendees, including scheduling 15 speakers and arranging catering for 6 meals.
+* Writing a high-quality 10-page research paper on the field of data science, requiring analysis of 50+ academic sources, including data visualization and statistical analysis of 3 datasets.
+* Reviewing the correctness of 2000+ simple geography exercises written by high-school students.
+* Conducting a financial audit covering 12 months of transactions (approximately 5,000 entries) across 5 department budgets, including reconciliation and variance analysis.

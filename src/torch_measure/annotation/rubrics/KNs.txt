@@ -1,0 +1,32 @@
+# Knowledge in Social Sciences and Humanities
+The following rubric is designed to annotate the conceptual sophistication level of tasks based exclusively on the depth of knowledge or conceptual understanding required in the fields of social sciences and humanities (e.g., history, psychology, sociology, anthropology, literature, art, philosophy, linguistics). This does not include natural sciences (e.g., physics, chemistry, biology, astronomy, earth sciences, ecology) and formal sciences (e.g., mathematics, logic, computer science, statistics). It's important to note that this rubric focuses exclusively on the  domain-specific knowledge needed, not considering other cognitive demands such as reasoning or metacognition. This reflects purely the depth of social sciences and humanities knowledge required.
+
+Level 0: None. Tasks do not require any knowledge or understanding of social sciences or humanities. Examples:
+* "Calculating the area of a rectangle with length 5 cm and width 3 cm."
+* "Explaining the process of photosynthesis in plants."
+* "Explaining the mathematical principles behind differential calculus."
+
+Level 1: Very low. Tasks that require knowledge in social sciences and humanities typically acquired through elementary school education. Examples:
+* Basic concepts of past, present, and future in history.
+* Different types of communities (family, school, neighborhood).
+* Traditional holidays and their basic meanings.
+
+Level 2: Low. Tasks that require knowledge in social sciences and humanities typically acquired through middle school education. Examples:
+* Basic historical periods like "ancient" vs "modern" times.
+* Different types of government (democracy, monarchy).
+* Major world religions and their basic beliefs.
+
+Level 3: Intermediate. Tasks that require knowledge in social sciences and humanities typically acquired through high school education. Examples:
+* The role of the Silk Road in cultural exchange.
+* Basic principles of cognitive psychology.
+* Major literary movements (Romanticism, Realism).
+
+Level 4: High. Tasks that require knowledge in social sciences and humanities typically acquired through undergraduate education. Examples:
+* The socio-economic factors that led to the Industrial Revolution.
+* Major sociological theories of social stratification.
+* The main theoretical approaches in anthropology.
+
+Level 5: Very high. Tasks that require knowledge in social sciences and humanities typically acquired through graduate education or beyond. Examples:
+* The major schools of Sanskrit poetics.
+* The primary theoretical frameworks in phenomenology.
+* Advanced theories in historical linguistics and their implications.

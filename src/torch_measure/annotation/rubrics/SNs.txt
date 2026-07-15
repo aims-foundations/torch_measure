@@ -1,0 +1,39 @@
+# Spatial-physical Reasoning
+This rubric assesses the complexity of spatial and physical understanding and reasoning required by a task. More specifically, the level represents the extent to which the task requires understanding spatial relationships between objects and predicting physical interactions, ranging from simple recognition of static relationships to complex mental manipulations involving multiple objects, transformations, and physical predictions across different dimensions. Notably, this should focus on the minimum way of solving the task since many tasks do not actually require spatio-physical reasoning to be successfully solved, even though spatio-physical reasoning may help.
+
+Level 0: None. Tasks at this level do not require spatial reasoning or physical intuition. There is no need to manipulate or visualize spatial relationships.
+Examples:
+* Copying text from one document to another without considering the layout.
+* Transcribing a sentence such as "The book is on the table" from an audio recording without needing to interpret or visualize the spatial reference.
+* Reciting a previously memorized sequence of numbers without spatial meaning.
+
+Level 1: Very low. Tasks involve simple recognition of spatial relationships but no mental manipulation is required for a successful task completion. Objects and their relationships are static and visible.
+Examples:
+* Identifying which shape matches a given template without rotating or manipulating it.
+* Recognizing whether a flat plate on the top of a book is stable or likely to remain balanced in its current position.
+* A convex 2019-gon \(A_{1}A_{2}\ldots A_{2019}\) is cut into smaller pieces along its 2019 diagonals of the form \(A_{i}A_{i+3}\) for \(1 \leq i \leq 2019\), where \(A_{2020}=A_{1}, A_{2021}=A_{2}\), and \(A_{2022}=A_{3}\). What is the least possible number of resulting pieces?
+
+Level 2: Low. Tasks require basic common-sense predictions about physical interactions, or combined with simple spatial manipulations. The transformations are straightforward and involve only one or two objects.
+Examples:
+* Estimating whether a box will fit through a door based on a visual comparison of dimensions, where the difference in size between the box and the door is fairly noticeable.
+* Predicting the outcome of a very light ball (e.g., a table tennis ball) rolling into a much heavier, stationary object (e.g., a bowling ball). The task requires estimating the motion of the stationary heavy object, which will hardly move due to the significant difference in mass between the two objects.
+* Predicting whether a piece of soft clay will flatten when being pushed.
+
+Level 3: Intermediate. Tasks require coordinating multiple spatial relationships and performing sequential transformations. Mental models need to be constructed, involving intermediate levels of both physical prediction and spatial reasoning (3D reasoning or multiple steps in a 2D space), but focussing on the spatial.
+Examples:
+* Given a scenario where a glass vase is knocked off a table, hits the edge of a wooden chair, and then falls to the floor, predict the outcome in terms of break or survive.
+* Mentally visualize the trajectory of a thrown ball that arcs in the air and predict where it will land, accounting for a simple curve and the presence of a mild wind.
+* Interpreting a sequence of spatial instructions (e.g., "Walk past the bridge, turn right after the post office, then take the second left") and constructing a mental model of the path based on multiple spatial references.
+
+Level 4: High. Tasks involve complex spatial transformations and integration of multiple spatial operations. Requires construction and manipulation of mental models, often involving prediction of outcomes of non-trivial spatial transformations.
+Examples:
+* Predicting how shadows will change as the position of a light source moves around a 3D object, requiring an understanding of light, geometry, and perspective.
+* A passage describes a football game where multiple players are moving relative to one another: "John passed the ball to Mark, who was standing to the left of him, but then Sarah ran past both of them, taking the ball from the right side." The model must maintain spatial continuity by updating the players' relative positions and summarizing their final locations after each described action.
+* In a detective novel, a room's layout is described as follows: "The safe is hidden behind the large painting on the wall, to the right of the door. Opposite the painting is a window, and next to the window is a desk." The subject must interpret and visualize the spatial arrangement of objects within the room and answer questions about their relative positions (e.g., "Where is the safe in relation to the desk?").
+
+Level 5: Very High. Tasks require very advanced spatial reasoning involving multiple simultaneous transformations and the prediction of highly complex spatial outcomes.
+These tasks involve predicting intricate chains of physical interactions and visualizing sophisticated spatial relationships that evolve over time or through multiple steps.
+Examples:
+* Writing or interpreting technical instructions for assembling a complex mechanical device, requiring precise descriptions of spatial relationships and the correct sequence of assembly steps, often involving 3D reasoning about how parts fit together.
+* A passage describes a complex laser setup: "The initial laser beam enters horizontally through a beam splitter that divides it into two identical beams. The first beam reflects off three mirrors - one at 30 degrees on the wall, another mounted 15 degrees from the ceiling, and a third on the floor at 45 degrees. The second beam reflects off two mirrors - one perpendicular to the ground and another at 60 degrees on the opposite wall." The subject must trace both beams' paths, predict their final directions and positions after all the reflections, and determine whether the beams will intersect at any point in their paths.
+* A scientific article describes the structure of a protein: "The alpha-helix folds back on itself, forming hydrogen bonds with the beta-sheet that runs parallel, while the N-terminal aligns perpendicularly to the hydrophobic core." The task requires visualizing the 3D configuration of the protein and explaining the spatial relationships between the molecular elements described.

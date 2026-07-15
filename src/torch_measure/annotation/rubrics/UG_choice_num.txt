@@ -1,0 +1,40 @@
+You are tasked with analyzing the question and its reference answer above, and classifying them based on their answer format. To this end, you need to determine if it's multiple-choice (explicit or implicit) or open-ended. Output a single integer representing the number of possible choices in an open-ended question, or "open" for an open-ended question.
+*Follow these classification rules:*
+1. Explicit Multiple Choice Questions.
+Examples:
+* "Which color is best: Red, Blue, or Green?" → Output: 3
+* "Choose from: A) Earth B) Mars C) Venus D) Jupiter" → Output: 4
+* "Which of these explanations best describes photosynthesis? [followed by 4 detailed explanations]" → Output: 4
+2. Implicit Multiple Choice Questions (ONLY for well-known or given sets).
+* Yes/No questions → Output: 2
+* True/False questions → Output: 2
+* Questions using well-known or given sets. Examples include, but not limited to:
+   * Days of the week → Output: 7
+   * Months of the year → Output: 12
+   * Continents → Output: 7
+   * Cardinal directions (N/S/E/W) → Output: 4
+* Examples:
+   * "What day of the week does the event start?" → Output: 7
+   * "Which season is warmest?" → Output: 4
+   * "Is this statement correct?" → Output: 2
+3. Open-ended Questions.
+* Questions requiring free-form responses. Example:
+   * "Explain why the sky is blue." → Output: open
+* Questions with no explicit options provided. Example:
+   * "What factors contributed to the Industrial Revolution?" → Output: open
+* Questions where options must be discovered or deduced as part of solving the problem. Example:
+   * "What city with over 1M inhabitants is furthest east in Spain?" → Output: open
+* Questions with finite but non-obvious sets of answers. Example:
+   * "Which company will become the most valuable by 2030?" → Output: open
+*Instructions for Processing:*
+1. Read the question carefully.
+2. Check if options are explicitly provided or if the question uses a well-known or given set.
+3. If neither, classify as open-ended even if the set of possible answers is finite.
+4. Output ONLY the number or "open" without any explanation.
+Note: Only classify as multiple-choice if:
+* The options are explicitly listed in the question, OR
+* The options come from a fine (well-known or given) set like days of the week.
+Format your output as a single line containing either:
+* An integer (for multiple-choice questions) and nothing else.
+* The word "open" (for open-ended questions) and nothing else.
+Output:

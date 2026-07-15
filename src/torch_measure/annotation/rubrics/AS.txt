@@ -1,0 +1,39 @@
+# Attention and Search
+This criterion assesses the level of attention and scan required to focus on or locate specific elements within a given stream of information or environment in the whole process of solving a task. During this process, there is the need to actively scan for or retrieve elements that meet predetermined criteria. The level represents the extent to which the task requires locating and focusing on specific target information, ranging from situations where the target is immediately obvious to those requiring sustained tracking of multiple targets among numerous distractors—any elements that are irrelevant to solve the task, such as visual objects, sounds, pieces of text, noise, or other stimuli, but compete for attention with the target information—in complex, dynamic environments. The challenge is not on determining what to look for but focusing the attention to find it within a larger context. This differs from tasks where there's a need to identify which pieces of information are relevant from a set already under consideration. While both processes may overlap in complex tasks like reading comprehension or image understanding, "attention and scan" specifically focuses on the deployment of attention during scan processes when solving the task, rather than the selection or evaluation of information.
+
+Level 0: None. No attention or scan is required. The target information is immediately obvious or is the only information present.
+Examples:
+* "Given a single word input, determine if it starts with a capital letter."
+* "Look at the only object in the centre of the white page and tell what colour it is."
+* "Is Madrid the capital of Spain?"
+
+Level 1: Very low. Minimal attention or scanning is required. The target information is easily distinguishable with little to almost no distraction.
+Examples:
+* "Find the only blue car in a car park full of red cars."
+* "Find the letter 'X' among a row of 'O's"
+* "Spot the tall tree in a row of short bushes."
+
+Level 2: Low. Some attention or basic scanning is required. The target information is visible among a few distractors or in a small scan area.
+Examples:
+* "Find all the vowels in the following sentence: 'The quick brown fox jumps over the lazy dog.'"
+* "Find who's wearing glasses in this photo of students at commencement, with 2 rows of 5 students each, all facing forward, taken by a professional photographer."
+* "Who authored the Queensberry rules, which were published in 1867 for the sport of boxing? Choices: A. John Douglas  (in his late twenties)\nB. John Graham Chambers (in his mid-twenties)\nC. Marquess of Queensberry (in his early thirties)\nD. James Figg (in his forties)."
+
+Level 3: Intermediate. Moderate attention and scan are required. The target information is mixed with several distractors or spread over a fairly large scan area.
+Examples:
+* "Find everyone wearing glasses in this casual BBQ photo where 15 people are gathered around a table. Some are sitting, some standing, some looking at the camera while others are in conversation."
+* "In a 5-page technical document about basic geometry, locate all explicit references to the Pythagorean theorem (a² + b² = c²), where the equation appears 5 times mixed among references to 15 other geometric formulas, with occasional inconsistent equation numbering but standard mathematical notation.
+* "While reading a podcast interview, keep track of how many times the guest explicitly discusses content about their new book."
+* "As we all know, the Queensberry Rules are a set of rules for boxing that govern both amateur and professional matches. Who authored the Queensberry rules, which were published in 1867 for the sport of boxing? Choices: A. John Douglas  (in his late twenties)\nB. John Graham Chambers (in his mid-twenties)\nC. Marquess of Queensberry (in his early thirties)\nD. James Figg (in his forties)\nE. James Zou (in his fifties)\nF. Lucy Grande (in her late twenties)\nG. Xiaoxiao Li (in her early forties)\nH. Enrique Garcia (in his late thirties)."
+
+Level 4: High. Sustained tracking of one or various targets is required. The target information is in an environment mixed with numerous distractors and changing conditions. requires some continuous monitoring amid competing signals.
+Examples:
+* "Listening to a symphony, identify all instances where the clarinet plays in a minor key, even when it's not playing the main melody.
+* "Track three orange spheres among twenty red spheres as they move randomly across a black screen (40 cm × 30 cm) at varying speeds (1-3 cm/s), with spheres frequently intersecting paths and maintaining a minimum separation distance of 2 cm. Each sphere is 1 cm in diameter."
+* "In a real-time video feed of a busy airport, finding the locations of ten blue suitcases."
+
+Level 5: Very high. Requires sustained attention and scan for simultaneous tracking of multiple targets across different domains or contexts, with continuous adaptation to fast-changing conditions. The target information is extremely difficult to distinguish from distractors or is hidden in a vast or constantly changing environment.
+Examples:
+* "While seated courtside at a professional basketball game, track two specific players throughout the entire game as they move at speeds up to 8m/s, frequently cluster with other players during rebounds, and weave through screens and defensive formations."
+* "Monitor four simultaneous video feeds of a crowded airport terminal from different angles, detecting subtle security-relevant changes (e.g. brief interactions < 2 seconds, crowd flow changes, small object exchanges) across feeds."
+* "While monitoring multiple simultaneous customer service chat conversations in different languages, identify instances where customers are expressing the same underlying technical issue, even though they're describing it using different metaphors, technical terms, or cultural references specific to their region."

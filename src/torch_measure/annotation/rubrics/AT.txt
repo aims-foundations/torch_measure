@@ -1,0 +1,30 @@
+# Atypicality
+Level 0: None. The task is a staple one. Exactly the same instance of the task appears many times on the Internet, textbooks or common psychological or achievement tests, and the solution is generally well-known and memorized. Examples:
+* "What is 2 + 2?"
+* "Name the capital of France."
+* "What gets wetter and wetter the more it dries?"
+
+Level 1: Very Low. The task is very common and the specific task instance is likely to frequently appear on the Internet, textbooks or common psychological or achievement tests, so the chance that the solution is well-known and memorized is high. Examples:
+* "What is the derivative of sin(x)?"
+* "Define opportunity cost."
+* "Name the seven continents."
+
+Level 2: Low. The task is moderately common and the specific task instance varies somewhat from other common examples or is unlikely to have seen it before in exactly the same form, but possibly in variations. Examples:
+* "What is 21251 + 2835?"
+* "Given the molecular SMILES: COC[C@H]1OC(=O)c2coc3c2[C@@]1(C)C1=C(C3=O)[C@@H]2CCC(=O)[C@@]2(C)C[C@H]1OC(C)=O, your task is to provide the detailed description of the molecule using your experienced chemical Molecular knowledge."
+* "Solve the following Math Olympiad question: Determine the greatest real number $ C $, such that for every positive integer $ n\ge 2 $, there exists $ x_1, x_2,..., x_n \in [-1,1]$, so that $$\prod_{1\le i<j\le n}(x_i-x_j) \ge C^{\frac{n(n-1)}{2}}$$."
+
+Level 3: Intermediate. The task is somewhat common but the specific task instance is quite rare, and it is unlikely to appear in common sources (Internet, textbooks or common psychological or achievement tests). Examples:
+* "What is 5205175017521571 + 68270867426872052?"
+* "Among the following exoplanets, which one has the lowest density? a) An Earth-mass and Earth-radius planet. b) A planet with 3 Earth masses and a density of approximately 4.6 g/cm^3. c) A planet with the same composition as Earth but 1.5 times more massive than Earth. d) A planet with the same composition as Earth but half the mass of Earth."
+* Get answers for the question based on the context, where answers derived from substrings in the context or categorized as [unanswerable]. Context: ['On May 1 , 2015 , Quentin announced his retirement .Quentin signed a minor league deal with the Seattle Mariners on April 22 , 2015 , and was assigned to the Tacoma Rainiers .On April 5 , 2015 , Quentin was traded to the Atlanta Braves along with Cameron Maybin , Matt Wisler , and Jordan Paroubeck , for Craig Kimbrel and Melvin Upton Jr . The Braves designated him for assignment later that day , and released him on April 14 .', 'On July 22 , 2012 , Quentin agreed to a three-year , $27 million contract extension through 2015 with a $10 million mutual option for 2016 , including a no-trade clause . This is an amazing opportunity to stay and play in the city I grew up in . said Quentin .'] Question: Who did Carlos Quentin work for in April 2016?
+
+Level 4: High. The task is not extremely uncommon and the specific task instance is infrequent or presented in notably different ways from standard formulations. Examples:
+* "Create a measurement system where accuracy is expressed through different shapes rather than decimal places."
+* "Assume that there exist only two types of people: knights and knaves. Knights always tell the truth, while knaves always lie.\nYou are given the statements from 5 characters. Based on their statements, infer who is a knight and who is a knave.\nA: B is a liar and D is a truth-teller.\nB: D is a truth-teller.\nC: If A is a truth-teller, then E is a liar.\nD: B is a truth-teller and A is a truth-teller.\nE: A is a liar."
+* "In the context of neurolinguistic processing models examining the interface between phonological working memory and syntactic parsing during real-time sentence comprehension, what is the primary anatomical structure that shows increased metabolic activity during novel word acquisition in fMRI studies?" [This is a very sophisticated way of asking "which part of the brain lights up when we learn new words?"]
+
+Level 5: Very High. The task is fundamentally different from those typically appearing on the Internet, textbooks or psychological or achievement tests, or, the specific task instance is very unlikely to have close analogues in those sources. Noteworthy, any tasks (simple or elaborate) that can be found in standard tests or benchmarks should be considered less than level 5. Examples:
+* "Take 20 major sky constellations and design 20 Formula1 race circuits that follow the FIA regulations but mimic the shapes of the constellations."
+* "Write a poem in fifty African languages, with each line in one language, with the number of letters e in the line being proportional to the speakers of those languages"
+* "List mathematical terms that are also dancing terms (like 'step function' or 'rotation'), then write dance instructions using only mathematical language. However, the dance must stem from an Asian country since I'm teaching a creative Asian dance course today to one student who happens to be a mathematician."

@@ -1,0 +1,32 @@
+# Customary Everyday Knowledge
+The following rubric is designed to annotate the conceptual sophistication level of tasks based solely on the depth of common everyday knowledge required. This knowledge encompasses information that most people in a given society typically acquire through daily life experiences, social interactions, and exposure to popular media, rather than through formal education or specialized training. This does not include specialized knowledge from the natural sciences, social sciences, humanities, formal sciences, or applied sciences and professions. This reflects only the depth of common everyday knowledge required.
+
+Level 0: None. Tasks do not require any common everyday knowledge. Examples:
+* Looking in a mirror and checking if there's any dirt in your face.
+* Recognizing that two objects are of the same color.
+* Basic arithmetic calculations.
+
+Level 1: Very low. Tasks that require basic knowledge universally shared within a society. Examples:
+* The fact that the sky appears blue during daytime.
+* The fact that food and water are necessary for survival.
+* Common objects in daily life (chairs, tables, cars).
+
+Level 2: Low. Tasks that require common knowledge typically possessed by most adults in a society. Examples:
+* Basic kitchen tools and their uses.
+* Common traffic signs and their meanings.
+* Major holidays in one's culture.
+
+Level 3: Intermediate. Tasks that require general knowledge typically possessed by socially engaged members of society. Examples:
+* Different types of payment methods (cash, credit cards, digital wallets).
+* Common technology features (touch screens, wireless connectivity, cloud storage).
+* Standard retail practices (return policies, warranties, seasonal sales).
+
+Level 4: High. Tasks that require extensive everyday knowledge gained through active engagement in society. Examples:
+* Major generational trends in technology adoption (from landlines to smartphones).
+* Common real estate concepts (mortgages, leases, property taxes).
+* Dietary restrictions across different groups (religious, health-based, ethical).
+
+Level 5: Very high. Tasks that require comprehensive everyday knowledge across diverse cultural and social contexts. Examples:
+* Gift-giving customs and taboos across different cultures.
+* Business etiquette variations in major world regions.
+* Dining customs and table manners in different societies.

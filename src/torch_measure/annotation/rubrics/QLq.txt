@@ -1,0 +1,38 @@
+# Quantitative Reasoning
+This criterion assesses the difficulty level of a task in requiring working with and reasoning about quantities, numbers, and numerical relationships. More specifically, the level represents the complexity of numerical operations and quantitative concepts needed to solve the task, ranging from simple counting and arithmetic to sophisticated analysis involving multiple quantitative variables, relationships, and transformations. The scale's difficulty increases based on factors such as the number of quantities involved, the complexity of numerical relationships, and how much quantitative information must be derived.
+
+Level 0: None. The task does not require quantitative reasoning.
+Examples:
+* "Describe the color of the sky on a clear day."
+* "Name a type of pet commonly found in households."
+* "What is the capital city of Japan?"
+
+Level 1: Very low. The task involves only basic or rudimentary quantitative concepts (e.g., simple counting, basic comparisons). Requires only simple recall of basic quantitative facts. Requires minimal quantitative reasoning.
+Examples:
+* "Count the number of eggs in a small basket."
+* "If your friend has 7 apples and you have 5, who has more apples?"
+* "Given this molecular requirements description, design a new molecule: The molecule is trianion of xanthosine 5'-triphosphate arising from deprotonation of three of the four free triphosphate OH groups. It is a conjugate base of a XTP."
+
+Level 2: Low. The task requires relatively simple quantitative operations and concepts. Involves generally straightforward application of low-level mathematical principles. Some explicit quantitative reasoning is required.
+Examples:
+* "Calculate the average rainfall for a week if it rained 2 litres per square meter on Monday, 1 litres per square meter on Wednesday, and 4 litres per square meter on Friday."
+* "If a recipe calls for 2 cups of flour to make 12 cookies, how much flour is needed to make 18 cookies?"
+* "A store is offering a 20% discount on a $50 shirt. What is the final price of the shirt?"
+
+Level 3: Intermediate. Involves moderately complex quantitative concepts and relationships. Requires application of non-trivial mathematical principles. Some necessary quantitative information may need to be inferred or calculated. Requires active engagement in quantitative reasoning processes.
+Examples:
+* "If bacteria double every 30 minutes and you start with 100 bacteria, how long will it take to reach 10,000 bacteria? Show your reasoning process."
+* "Calculate the future value of a $1000 investment over 5 years at an annual rate of 5%, compounded quarterly, if $200 is added to the investment at the end of each year. Show the impact of these additional contributions."
+* "A car travels at 60 kph for 2 hours, then at 45 kph for 1.5 hours, and finally at 30 kph for 1 hour over varied terrain. What is the average speed of the car and what is the total distance traveled?"
+
+Level 4: High. Requires complex quantitative operations. Involves the application of advanced mathematical concepts. Uses sophisticated numerical representations and relationships. Much necessary quantitative information may need to be inferred or generated. Requires an advanced level of quantitative reasoning processes.
+Examples:
+* "Using calculus, find the volume of the solid formed when the region bounded by the curves y = x² and y = 4 - x² is rotated around the y-axis."
+* "Determine the stability of a system of differential equations by finding the eigenvalues and eigenvectors of its matrix representation, and then analyze whether the system converges to an equilibrium and discuss the implications of different eigenvalue scenarios on system stability."
+* "Solve the second-order differential equation d²y/dx² + 4dy/dx + 4y = 0, and analyze the stability of its solutions."
+
+Level 5: Very high. Involves extremely complex quantitative reasoning and mastery of mathematical insight. Requires the very complex integration of mathematical concepts. Uses abstract mathematical representations and theoretical quantitative concepts. Most necessary quantitative information may need to be inferred or generated through complex reasoning. Requires constant engagement and adjustment of quantitative reasoning at the expert level.
+Examples:
+* "Create a stochastic model for predicting future stock market trends using simulations and accounting for variables such as economic indicators, investor sentiment, and geopolitical events."
+* "Using advanced statistical methods, design an experiment to test the efficacy of a new drug while accounting for multiple confounding variables and potential interaction effects."
+* "Formulate a non-linear optimisation model for maximizing renewable energy output in a smart grid system, incorporating constraints such as energy storage capacity, variable supply and demand, and government regulations."

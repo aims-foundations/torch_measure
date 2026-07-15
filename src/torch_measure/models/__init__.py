@@ -10,6 +10,7 @@ from torch_measure.models.beta_rasch import BetaRasch
 from torch_measure.models.beta_twopl import BetaTwoPL
 from torch_measure.models.bifactor import Bifactor
 from torch_measure.models.bradley_terry import BradleyTerry
+from torch_measure.models.demand_assessor import DemandAssessor
 from torch_measure.models.ggm import GaussianGraphicalModel
 from torch_measure.models.ising import IsingModel
 from torch_measure.models.llm_judge import LLMJudge
@@ -38,6 +39,7 @@ __all__ = [
     "BetaRasch",
     "BetaTwoPL",
     "AmortizedIRT",
+    "DemandAssessor",
     "TabPFNPredictor",
     "MultiFacetRasch",
     "MultiFacet2PL",

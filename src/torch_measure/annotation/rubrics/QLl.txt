@@ -1,0 +1,38 @@
+# Logical Reasoning
+This rubric evaluates the logical reasoning demands of tasks across six levels of difficulty, focusing exclusively on deductive reasoning, which is required whenever a task involves matching and applying rules, procedures, or algorithms to solve problems, making structured decisions based on given premises, or deriving conclusions through systematic steps. This includes tasks ranging from basic arithmetic operations to sophisticated multi-step problem solving that requires careful chaining of logical relationships. Each level increases in complexity based on the intricacy of logical constructs, the depth of reasoning required, the number of premises involved, and the abstraction of concepts.
+
+Level 0: None. Tasks at this level do not require any logical reasoning. They involve simple identification or recalling memorized facts without the application of rules or relationships, as no logical constructs or premises are present.
+Examples:
+* Naming the capital city of a country without considering any relationships (e.g., "What is the capital of Austria?").
+* A pure knowledge question like "Which country won the football world cup in 2008?"
+* "Match this circle to another circle."
+
+Level 1: Very low. Tasks require recognition of basic logical relationships and straightforward deductions from clearly stated premises. They may involve matching objects based on a single criterion or recognizing a direct implication without any complex logical operators, quantifiers, or negations.
+Examples:
+* Simple sequential logic without requiring complex reasoning (e.g., "If today is Monday, what day will it be tomorrow?")
+* "When the light is red, stop. The light is red. What should you do?"
+* "Compute the sample standard deviation of ${-12, 51, 21, -9, -8, -7}$."
+
+Level 2: Low. Tasks involve simple sequential reasoning or basic syllogistic reasoning with clear premises. Logical statements may include basic quantifiers such as "all" or "some" but involve direct relationships without complex integration of multiple premises.
+Examples:
+* Identifying characteristics within a biological classification  (e.g., "If all mammals are warm-blooded and all whales are mammals, then all whales are warm-blooded.")
+* Evaluating logical inferences from categorical statements (e.g., "If some books are fiction and all fiction books are interesting, can we conclude that some books are interesting?")
+* $$\begin{aligned}& b=2.35+0.25 x \\& c=1.75+0.40 x\end{aligned}$$In the equations above, $b$ and $c$ represent the price per pound, in dollars, of beef and chicken, respectively, $x$ weeks after July 1 during last summer. What was the price per pound of beef when it was equal to the price per pound of chicken?
+
+Level 3: Intermediate. Tasks involve multi-step logical deductions that require integrating multiple statements and the use of simple negations and varied quantifiers. Tasks may include combinations of different types of logical statements, necessitating the linking of several ideas to reach a conclusion.
+Examples:
+* "If no reptiles have fur, all snakes are reptiles, and some pets are snakes, then some pets do not have fur."
+* "Solve this puzzle that requires linking multiple premises: In a group of people, if everyone wearing red shirts is older than 30 and no one older than 30 likes ice cream, can a person wearing a red shirt like ice cream?"
+* ​​Find the characteristic polynomial of the following matrix:\n$\left(\n\begin{array}{ccc}\n -\frac{61}{7} & -\frac{41}{7} & -\frac{87}{7} \\\n -\frac{83}{7} & \frac{93}{7} & -6 \\\n \frac{23}{7} & -\frac{26}{7} & \frac{95}{7} \\\n\end{array}\n\right)$
+
+Level 4: High. Tasks involve complex chains of logical deductions, using advanced logical constructs such as conditionals ("if-then"), biconditionals ("if and only if"), and multiple quantifiers. They require synthesizing numerous premises with intricate relationships to navigate through the task and reach a valid conclusion.
+Examples:
+* "If all A are B, some B are C, no C are D, and all D are E, what can be inferred about the relationship between A and E?"
+* "If all people at the party are over 18, some party attendees are graduate students, all graduate students have completed college, some college students are under 18, and no one under 21 can serve on the party planning committee, what can we determine about whether all graduate students at the party are eligible to be planners?"
+* "A music producer is recording 7 albums one after another? F, G, H, J, K, L and M, but it is not necessary to record them in this order. When arranging the sequence of recording these 7 albums, the following conditions must be met? (l) F must be ranked second.(2) J cannot be ranked seventh.(3) G can neither be directly in front of H nor immediately after H.(4) H must be somewhere in front of L.(5) L must be somewhere before M.\nQuestion: Which of the following can be the order of recording these 7 records from 1 to 7?\nChoices:\nA. F, K, G, L, H, J, M.\nB. G, F, H, K, L, J, M.\nC. G, F, H, K, L, M, J.\nD. K, F, G, H, J, L, M."
+
+Level 5: Very high. Tasks require abstract and complex logical reasoning involving intricate deductive chains and advanced logical structures, such as nested conditionals and multiple levels of negation. They require deep analytical thinking and the ability to handle multiple premises with subtle interactions in order to evaluate sophisticated hypotheses or identify inconsistencies and fallacies.
+Examples:
+* "Solving this advanced logic puzzle involving the manipulation of several interrelated statements: In a group of five people, if each person knows exactly two others and no one knows the same two people, how can the relationships be arranged?"
+* "In a voting system with three committees (A, B, C), where each committee must have at least four members, a proposition is valid if and only if it satisfies one of these two conditions: either (1) it receives support from all members of at least two committees — except when there exists a member who serves on all three committees and chooses to abstain, in which case validity requires support from every member of exactly two committees, none of whom has ever voted the same way as any currently abstaining member on any past proposition — or (2) for any committee that unanimously opposes the proposition, there must exist exactly two members from each of the other committees who both (a) currently support the proposition and (b) have cast different votes from each other on every past proposition they both voted on, with the additional requirement that no supporting member has ever voted the same way as any current abstaining member on any proposition that achieved supermajority approval. Given a specific set of committee memberships, their complete voting histories, and their votes on a current proposition, determine whether the proposition is valid according to these rules."
+* "A convex 2019-gon \(A_{1}A_{2}\ldots A_{2019}\) is cut into smaller pieces along its 2019 diagonals of the form \(A_{i}A_{i+3}\) for \(1 \leq i \leq 2019\), where \(A_{2020}=A_{1}, A_{2021}=A_{2}\), and \(A_{2022}=A_{3}\). What is the least possible number of resulting pieces?"

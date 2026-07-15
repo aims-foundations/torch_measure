@@ -1,0 +1,38 @@
+# Calibrating Knowns and Unknowns
+This rubric assesses how difficult it is for the respondent to accurately evaluate whether they know or don't know something. It focuses on metacognitive assessment - the ability to recognize the boundaries of one's knowledge and confidently identify what one knows they know, knows they don't know, or is uncertain about.
+
+Level 0: None. The respondent can immediately and unambiguously determine whether they know something or know they don't know it. No metacognitive effort is required.
+Examples:
+* "Tell me the typical colour of the sky on Earth during the day?"
+* "Can it snow when the environmental temperature goes up to 40 degree celsius?"
+*  "What's the name of Taylor Swift's maternal grandmother?"
+
+Level 1: Very low. Minimal metacognitive effort is needed to determine whether one has the knowledge to answer. The boundaries between knowing and not knowing are very clear.
+Examples:
+* "Calculate 164942+26250737, tell me if you think you have done it well." (the score is good if the sum is right and says correct, or sum is wrong and says incorrect)
+* "How many hairs did Barack Obama have exactly when he woke up on the morning of March 1, 2024?" (the score is good if the answer given or chosen is that it can't be known)
+* "Given $2w+4t=14$ and $4w+5t=25$, calculate the value of $2w+3t$ and tell me if you think you have done it well." (the score is good if the answer is right and says correct, or the answer is wrong and says incorrect)
+
+Level 2: Low. Some metacognitive effort is required to assess the boundaries of one's knowledge, but the assessment is still relatively straightforward.
+Examples:
+* "Given the new breakthroughs in chemistry this year, explain how to synthesise gold out of boiling both blonde hair and metals made of bronze" (the score is good if the task is refused, as it is clearly not possible).
+* "Say something that indicates your level of Estonian" (assuming you know a bit of Estonian).
+* Determine for some simple arithmetic operations with logarithms of base 2 when you can do it yourself or require a calculator".
+
+Level 3: Medium. Moderate metacognitive effort is required to determine the boundaries of one's knowledge. There may be some uncertainty about whether one truly knows something or just thinks they might know it.
+Examples:
+* "Solve a simple 9x9 Sudoku puzzle" (since it requires tracking which numbers are certain about in each 3x3 box versus numbers that have only been partially eliminated).
+* "Given a detailed passage about the American Civil War mentioning several battles and dates, identify which specific facts you're confident enough to verify versus those you'd need to research".
+* "When presented with a system of three linear equations, determine whether you know enough about elimination and substitution methods to solve it completely or if you might be missing key steps."
+
+Level 4: High. Significant metacognitive effort is needed to determine whether one truly knows something or just has partial knowledge. The line between knowing and not knowing becomes blurry.
+Examples:
+* "Given a dataset of 100 observations with 20% missing values randomly appearing across different variables of interest and potential sampling bias, assess whether you can confidently identify which statistical conclusions are reliable versus which might be affected by unknown factors in the data collection process.""
+* "Given a patient with symptoms of fever, fatigue, and joint pain, determine which potential diagnoses you can confidently rule out versus which require additional information or testing."
+* "When analyzing a legal document with multiple clauses and cross-references, identify those parts you can interpret with certainty versus those that require expert consultation."
+
+Level 5: Very high. Extremely challenging to determine the boundaries between what one knows and doesn't know. Requires sophisticated metacognitive assessment to avoid overconfidence or underconfidence.
+Examples:
+* "Predict how much a machine learning model's accuracy will drop (if any) over the next 6 months for a system that classifies which emergency room patients are at high risk of developing complications within the next 24 hours, given evolving disease patterns, changes in hospital protocols, potential new variants, seasonal effects, varying patient demographics, and changing physician response patterns. "
+* "In a Texas Hold'em poker hand, after the flop, determine your winning probability with J♠K♠, three low hearts on the board, and five opponents you've been playing with for some time."
+* "During an ongoing international crisis (e.g., a major conflict or global financial crisis), determine whether to invest a significant portion of your portfolio in seemingly undervalued stocks, considering factors such as market psychology, geopolitical developments, supply chain disruptions, currency fluctuations, central bank responses, and potential long-term structural changes to affected industries.."

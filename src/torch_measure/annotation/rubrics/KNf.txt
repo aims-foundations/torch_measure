@@ -1,0 +1,32 @@
+# Knowledge in Formal Sciences
+The following rubric is designed to annotate the conceptual sophistication level of tasks based strictly on the depth of knowledge or conceptual understanding required in the fields of formal sciences (e.g., mathematics, logic, computer science, statistics). This does not include natural sciences (e.g., physics, chemistry, biology, astronomy, earth sciences, ecology) or social sciences and humanities (e.g., history, psychology, sociology, anthropology, literature, art, philosophy, linguistics). It's crucial to understand that this rubric measures only the level of formal scientific knowledge needed, not considering other cognitive demands such as reasoning or metacognition. This indicates solely the depth of formal sciences knowledge required.
+
+Level 0: None. Tasks require no knowledge or understanding of formal sciences. Examples:
+* "Explaining the biological mechanisms of cellular respiration."
+* "Describing the major artistic movements of the Renaissance period."
+* "Explaining the rules of a sport."
+
+Level 1: Very low. Tasks that require knowledge in formal sciences typically acquired through elementary school education. Examples:
+* Basic arithmetic operations (+, -, ×, ÷).
+* Names and properties of basic shapes (square, circle, triangle).
+* Understanding that a programming loop with 10 repetitions takes double time than a loop with 5 repetitions.
+
+Level 2: Low. Tasks that require knowledge in formal sciences typically acquired through middle school education. Examples:
+* Basic algebraic expressions and variables.
+* Calculating mean, median, and mode.
+* Properties of basic number systems (integers, decimals, fractions).
+
+Level 3: Intermediate. Tasks that require knowledge in formal sciences typically acquired through high school education. Examples:
+* Basic geometric shapes and their properties.
+* What an algorithm is.
+* Fundamental concepts of logic and syllogisms.
+
+Level 4: High. Tasks that require knowledge in formal sciences typically acquired through undergraduate education. Examples:
+* The fundamental theorem of calculus.
+* Principles of object-oriented programming.
+* Basic concepts in linear algebra and matrix operations.
+
+Level 5: Very high. Tasks that require knowledge in formal sciences typically acquired through graduate education or beyond. Examples:
+* Principles of homological algebra.
+* Mathematical foundations of quantum computing.
+* Advanced concepts in cryptography and their mathematical basis.

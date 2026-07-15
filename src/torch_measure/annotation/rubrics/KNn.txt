@@ -1,0 +1,32 @@
+# Knowledge in Natural Sciences
+This rubric assesses the conceptual sophistication level of tasks based solely on the depth of knowledge or conceptual understanding required in the fields of natural sciences (e.g., physics, chemistry, biology, astronomy, earth sciences, ecology). This does not include social sciences and humanities (e.g., history, psychology, sociology, anthropology, literature, art, philosophy, linguistics) or formal sciences (e.g., mathematics, logic, computer science, statistics). It's important to note that this rubric focuses exclusively on the domain-specific knowledge needed, not considering other cognitive demands such as reasoning or metacognition. This reflects the conceptual depth and specificity of the knowledge in natural sciences required, rather than the mere presence of scientific content.
+
+Level 0: None. Tasks do not require any knowledge of natural sciences. Examples:
+* "Write a python script to train a machine learning classifier for fake news detection."
+* "Analyze the symbolism in Shakespeare's Hamlet".
+* "Calculate the cost of groceries."
+
+Level 1: Very low. Tasks that require knowledge in natural sciences typically acquired through elementary school education. Examples:
+* Living things need food, water, and air to survive.
+* Basic parts of a plant (roots, stem, leaves).
+* Day and night cycle and seasons.
+
+Level 2: Low. Tasks that require knowledge in natural sciences typically acquired through middle school education. Examples:
+* The water cycle (evaporation, condensation, precipitation).
+* Basic cellular structure (nucleus, membrane, cytoplasm).
+* Simple food chains and ecosystems.
+
+Level 3: Intermediate. Tasks that require knowledge in natural sciences typically acquired through high school education. Examples:
+* Mendel's laws of inheritance and basic genetics.
+* The ideal gas law (PV = nRT).
+* Newton's three laws of motion.
+
+Level 4: High. Tasks that require knowledge in natural sciences typically acquired through undergraduate education. Examples:
+* Hardy-Weinberg equilibrium and population genetics.
+* Molecular orbital theory.
+* The process of cellular respiration and its relationship to photosynthesis.
+
+Level 5: Very high. Tasks that require knowledge in natural sciences typically acquired through graduate education or beyond. Examples:
+* The theoretical frameworks of string theory and its implications.
+* The six forms of quark flavors in particle physics.
+* The role of quantum entanglement in biological systems.
