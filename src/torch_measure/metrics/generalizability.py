@@ -457,6 +457,205 @@ def d_study(
     return pd.DataFrame(rows)
 
 
+def bayesian_variance_components(
+    response_matrix: pd.DataFrame,
+    subject_col: str = "subject_id",
+    item_col: str = "item_id",
+    trial_col: str = "trial",
+    response_col: str = "response",
+    n_warmup: int = 200,
+    n_samples: int = 500,
+    seed: int | None = None,
+    verbose: bool = True,
+) -> dict:
+    """Full-Bayes variance components via Hamiltonian Monte Carlo (textbook Ch 5).
+
+    Fits the hierarchical Bernoulli model
+        logit P(Y_ij=1) = mu + theta_i - beta_j + gamma_ij
+    where theta_i ~ N(0, sigma_p), beta_j ~ N(0, sigma_i), gamma_ij ~ N(0, sigma_pi),
+    and sigma_p, sigma_i, sigma_pi ~ HalfNormal(1) using NUTS (No-U-Turn Sampler).
+
+    Returns the same top-level keys as variance_components() so all downstream
+    functions (g_coefficient, d_study, intraclass_correlation) work unchanged.
+    Unlike variance_components(), residual is always 0.0 and unidentifiable:
+    the Bernoulli likelihood has no separate additive noise term, so there is
+    nothing analogous to observation-level residual variance to estimate,
+    regardless of how many replications per cell are present.
+
+    Parameters
+    ----------
+    response_matrix : pandas.DataFrame
+        Long-form responses with columns subject_col, item_col, trial_col, response_col.
+    subject_col, item_col, trial_col, response_col : str
+        Column names; defaults match measurement-db long-form schema.
+    n_warmup : int
+        NUTS warmup (adaptation) steps. 200 is the minimum; 500+ is safer for
+        large datasets.
+    n_samples : int
+        Post-warmup samples to draw. 500 gives stable posterior means; 1000+ for
+        accurate credible intervals.
+    seed : int | None
+        Pyro RNG seed for reproducibility.
+    verbose : bool
+        Show NUTS progress bar.
+
+    Returns
+    -------
+    dict
+        Top-level keys match variance_components() for drop-in compatibility:
+        subject, item, subject_item, residual, n_subjects, n_items,
+        n_reps_harmonic, identifiable, method.
+        Additional keys: posterior_samples, credible_intervals, diagnostics,
+        n_warmup, n_samples, ci_level.
+    """
+    import pandas as pd
+    import pyro
+    import pyro.distributions as dist
+    import torch
+    from pyro.infer import MCMC, NUTS
+
+    # Non-centered hierarchical Bayesian G-theory model (textbook Ch 5, logit link).
+    # Non-centered form: theta_i = sigma_p * z_p[i] instead of theta_i ~ N(0, sigma_p).
+    # Required for NUTS to avoid funnel geometry when sigma_pi is near zero.
+    def _gtheory_model(s_idx, i_idx, n_s, n_i, obs=None):
+        mu = pyro.sample("mu", dist.Normal(0.0, 2.0))
+        sigma_p = pyro.sample("sigma_p", dist.HalfNormal(1.0))
+        sigma_i = pyro.sample("sigma_i", dist.HalfNormal(1.0))
+        sigma_pi = pyro.sample("sigma_pi", dist.HalfNormal(1.0))
+        z_p = pyro.sample("z_p", dist.Normal(0.0, 1.0).expand([n_s]).to_event(1))
+        z_i = pyro.sample("z_i", dist.Normal(0.0, 1.0).expand([n_i]).to_event(1))
+        z_pi = pyro.sample("z_pi", dist.Normal(0.0, 1.0).expand([n_s, n_i]).to_event(2))
+        # Textbook formula: logit P(Y_ij=1) = mu + theta_i - beta_j + gamma_ij
+        logit = mu + sigma_p * z_p[s_idx] - sigma_i * z_i[i_idx] + sigma_pi * z_pi[s_idx, i_idx]
+        with pyro.plate("obs", s_idx.shape[0]):
+            pyro.sample("response", dist.Bernoulli(logits=logit), obs=obs)
+
+    # -- Input validation (mirrors variance_components()) --------------------
+    required = {subject_col, item_col, trial_col, response_col}
+    missing = required - set(response_matrix.columns)
+    if missing:
+        raise ValueError(f"Missing required columns: {sorted(missing)}.")
+
+    df = response_matrix[[subject_col, item_col, trial_col, response_col]].dropna(subset=[response_col])
+    if not pd.api.types.is_numeric_dtype(df[response_col]):
+        raise ValueError(f"{response_col!r} column must be numeric.")
+
+    n_p = int(df[subject_col].nunique())
+    n_i = int(df[item_col].nunique())
+    if n_p < 2 or n_i < 2:
+        raise ValueError(f"Need at least 2 subjects and 2 items; got n_subjects={n_p}, n_items={n_i}.")
+
+    n_obs_per_cell = df.groupby([subject_col, item_col])[response_col].count()
+    if len(n_obs_per_cell) < n_p * n_i:
+        raise ValueError(
+            f"Unbalanced design: {len(n_obs_per_cell)}/{n_p * n_i} cells observed. "
+            f"Every (subject, item) cell must have at least one observation."
+        )
+
+    counts = n_obs_per_cell.to_numpy(dtype=float)
+    n_r = float(len(counts) / np.sum(1.0 / counts))  # harmonic mean of cell counts
+
+    # -- Index encoding -------------------------------------------------------
+    subject_ids = sorted(df[subject_col].unique())
+    item_ids = sorted(df[item_col].unique())
+    s_to_idx = {s: k for k, s in enumerate(subject_ids)}
+    i_to_idx = {it: k for k, it in enumerate(item_ids)}
+
+    subject_idx = torch.tensor([s_to_idx[s] for s in df[subject_col]], dtype=torch.long)
+    item_idx = torch.tensor([i_to_idx[it] for it in df[item_col]], dtype=torch.long)
+    response = torch.tensor(df[response_col].to_numpy(dtype="float32"), dtype=torch.float32)
+
+    # -- NUTS sampling -------------------------------------------------------
+    if seed is not None:
+        pyro.set_rng_seed(seed)
+
+    kernel = NUTS(_gtheory_model, target_accept_prob=0.9)
+    mcmc = MCMC(
+        kernel,
+        num_samples=n_samples,
+        warmup_steps=n_warmup,
+        disable_progbar=not verbose,
+    )
+    mcmc.run(subject_idx, item_idx, n_p, n_i, obs=response)
+
+    # -- Extract posterior samples -------------------------------------------
+    raw = mcmc.get_samples()
+    sigma_p_samp = raw["sigma_p"].numpy()
+    sigma_i_samp = raw["sigma_i"].numpy()
+    sigma_pi_samp = raw["sigma_pi"].numpy()
+
+    sigma2_p_samp = sigma_p_samp**2
+    sigma2_i_samp = sigma_i_samp**2
+    sigma2_pi_samp = sigma_pi_samp**2
+
+    alpha = 0.025
+    ci_p = (float(np.quantile(sigma2_p_samp, alpha)), float(np.quantile(sigma2_p_samp, 1 - alpha)))
+    ci_i = (float(np.quantile(sigma2_i_samp, alpha)), float(np.quantile(sigma2_i_samp, 1 - alpha)))
+    ci_pi = (float(np.quantile(sigma2_pi_samp, alpha)), float(np.quantile(sigma2_pi_samp, 1 - alpha)))
+
+    # -- Diagnostics ---------------------------------------------------------
+    diag = mcmc.diagnostics()
+
+    def _stat(site: str, key: str) -> float:
+        if site not in diag:
+            return float("nan")
+        v = diag[site][key]
+        return float(torch.as_tensor(v).float().mean().item())
+
+    # diag["divergences"] maps each chain to the list of sample indices where
+    # NUTS reported a divergent transition. (Pyro's MCMC has no
+    # get_extra_fields() -- that is a NumPyro-only API.)
+    n_divergences = sum(len(steps) for steps in diag.get("divergences", {}).values())
+
+    return {
+        # Drop-in compatible keys (same as variance_components() output)
+        "subject": float(sigma2_p_samp.mean()),
+        "item": float(sigma2_i_samp.mean()),
+        "subject_item": float(sigma2_pi_samp.mean()),
+        "residual": 0.0,
+        "n_subjects": n_p,
+        "n_items": n_i,
+        "n_reps_harmonic": n_r,
+        "identifiable": {
+            "subject": True,
+            "item": True,
+            "subject_item": True,
+            "residual": False,
+        },
+        "method": "hmc",
+        # Bayesian-specific keys
+        "posterior_samples": {
+            "sigma_p": sigma_p_samp,
+            "sigma_i": sigma_i_samp,
+            "sigma_pi": sigma_pi_samp,
+            "sigma2_p": sigma2_p_samp,
+            "sigma2_i": sigma2_i_samp,
+            "sigma2_pi": sigma2_pi_samp,
+        },
+        "credible_intervals": {
+            "subject": ci_p,
+            "item": ci_i,
+            "subject_item": ci_pi,
+        },
+        "diagnostics": {
+            "r_hat": {
+                "sigma_p": _stat("sigma_p", "r_hat"),
+                "sigma_i": _stat("sigma_i", "r_hat"),
+                "sigma_pi": _stat("sigma_pi", "r_hat"),
+            },
+            "n_eff": {
+                "sigma_p": _stat("sigma_p", "n_eff"),
+                "sigma_i": _stat("sigma_i", "n_eff"),
+                "sigma_pi": _stat("sigma_pi", "n_eff"),
+            },
+            "divergences": n_divergences,
+        },
+        "n_warmup": n_warmup,
+        "n_samples": n_samples,
+        "ci_level": 0.95,
+    }
+
+
 def bootstrap_variance_components(
     response_matrix: pd.DataFrame,
     subject_col: str = "subject_id",

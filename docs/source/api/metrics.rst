@@ -35,6 +35,8 @@ Generalizability
 
 .. autofunction:: torch_measure.metrics.bootstrap_variance_components
 
+.. autofunction:: torch_measure.metrics.bayesian_variance_components
+
 Assumption checks
 -----------------
 

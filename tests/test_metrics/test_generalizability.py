@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 from torch_measure.metrics.generalizability import (
+    bayesian_variance_components,
     bootstrap_variance_components,
     d_study,
     g_coefficient,
@@ -372,6 +373,109 @@ class TestBootstrapVarianceComponents:
         )
         g_lo, g_hi = np.quantile(g_samples, [0.025, 0.975])
         assert 0.0 <= g_lo <= g_hi <= 1.0
+
+
+class TestBayesianVarianceComponents:
+    def _df(self, n_p: int = 10, n_i: int = 8, seed: int = 0) -> pd.DataFrame:
+        """Small binary crossed design generated from a logit-link model."""
+        rng = np.random.default_rng(seed)
+        theta = rng.normal(0.0, 0.5, n_p)
+        beta = rng.normal(0.0, 0.3, n_i)
+        gamma = rng.normal(0.0, 0.4, (n_p, n_i))
+        logit = theta[:, None] - beta[None, :] + gamma
+        prob = 1.0 / (1.0 + np.exp(-logit))
+        x = (rng.uniform(size=(n_p, n_i)) < prob).astype(int)
+        rows = [(f"s{i}", f"i{j}", 1, int(x[i, j])) for i in range(n_p) for j in range(n_i)]
+        return pd.DataFrame(rows, columns=["subject_id", "item_id", "trial", "response"])
+
+    @pytest.mark.slow
+    def test_returns_expected_keys(self):
+        out = bayesian_variance_components(self._df(), n_warmup=50, n_samples=50, seed=0, verbose=False)
+        for key in (
+            "subject",
+            "item",
+            "subject_item",
+            "residual",
+            "n_subjects",
+            "n_items",
+            "n_reps_harmonic",
+            "identifiable",
+            "method",
+            "posterior_samples",
+            "credible_intervals",
+            "diagnostics",
+            "n_warmup",
+            "n_samples",
+            "ci_level",
+        ):
+            assert key in out
+        assert out["method"] == "hmc"
+        assert out["n_subjects"] == 10
+        assert out["n_items"] == 8
+        assert out["residual"] == 0.0
+        assert out["identifiable"]["residual"] is False
+
+    @pytest.mark.slow
+    def test_posterior_sample_shapes(self):
+        out = bayesian_variance_components(self._df(), n_warmup=50, n_samples=40, seed=1, verbose=False)
+        for key in ("sigma_p", "sigma_i", "sigma_pi", "sigma2_p", "sigma2_i", "sigma2_pi"):
+            assert out["posterior_samples"][key].shape == (40,)
+
+    @pytest.mark.slow
+    def test_credible_intervals_bracket_point_estimate(self):
+        out = bayesian_variance_components(self._df(), n_warmup=50, n_samples=50, seed=2, verbose=False)
+        for k in ("subject", "item", "subject_item"):
+            lo, hi = out["credible_intervals"][k]
+            assert lo <= out[k] <= hi
+
+    @pytest.mark.slow
+    def test_diagnostics_well_formed(self):
+        out = bayesian_variance_components(self._df(), n_warmup=50, n_samples=50, seed=3, verbose=False)
+        diag = out["diagnostics"]
+        assert isinstance(diag["divergences"], int)
+        assert diag["divergences"] >= 0
+        for site in ("sigma_p", "sigma_i", "sigma_pi"):
+            assert site in diag["r_hat"]
+            assert site in diag["n_eff"]
+
+    @pytest.mark.slow
+    def test_reproducible_under_seed(self):
+        df = self._df()
+        a = bayesian_variance_components(df, n_warmup=30, n_samples=30, seed=42, verbose=False)
+        b = bayesian_variance_components(df, n_warmup=30, n_samples=30, seed=42, verbose=False)
+        assert a["subject"] == pytest.approx(b["subject"])
+        assert a["item"] == pytest.approx(b["item"])
+        assert a["subject_item"] == pytest.approx(b["subject_item"])
+
+    @pytest.mark.slow
+    def test_drop_in_compatible_with_g_coefficient_and_d_study(self):
+        out = bayesian_variance_components(self._df(), n_warmup=50, n_samples=50, seed=4, verbose=False)
+        g = g_coefficient(out, n_items=8, n_reps=1, type="absolute")
+        assert 0.0 <= g <= 1.0
+        proj = d_study(out, n_items_grid=[8, 16], n_reps_grid=[1])
+        assert len(proj) == 2
+
+    def test_missing_columns_raises(self):
+        df = self._df().drop(columns=["item_id"])
+        with pytest.raises(ValueError, match="Missing required columns"):
+            bayesian_variance_components(df, n_warmup=1, n_samples=1, verbose=False)
+
+    def test_too_few_subjects_or_items_raises(self):
+        df = self._df(n_p=1, n_i=8)
+        with pytest.raises(ValueError, match="at least 2 subjects and 2 items"):
+            bayesian_variance_components(df, n_warmup=1, n_samples=1, verbose=False)
+
+    def test_non_numeric_response_raises(self):
+        df = self._df()
+        df["response"] = df["response"].astype(str)
+        with pytest.raises(ValueError, match="must be numeric"):
+            bayesian_variance_components(df, n_warmup=1, n_samples=1, verbose=False)
+
+    def test_unbalanced_raises_on_missing_cell(self):
+        df = self._df()
+        df = df[~((df["subject_id"] == "s0") & (df["item_id"] == "i0"))]
+        with pytest.raises(ValueError, match="Unbalanced design"):
+            bayesian_variance_components(df, n_warmup=1, n_samples=1, verbose=False)
 
 
 def test_end_to_end_pipeline():
